@@ -19,7 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   })
   .then(data => {
     if (data.success) {
-      messageDiv.textContent = "Успішний вхід!";
+      messageDiv.textContent = 'Увійшов ${data.firstName}';
       // Тут логіка переходу або інша
     } else {
       messageDiv.textContent = "Помилка: " + data.message;
