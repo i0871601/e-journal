@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   .then(data => {
     if (data.success) {
       messageDiv.textContent = "Успішний вхід!";
-      // Тут можна додати логіку для переходу в систему
+      // Тут логіка переходу або інша
     } else {
       messageDiv.textContent = "Помилка: " + data.message;
     }
