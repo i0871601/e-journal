@@ -90,6 +90,13 @@ document.addEventListener("DOMContentLoaded", function() {
         resultContainer.innerHTML = '<p>Сталася помилка при завантаженні розкладу.</p>';
       });
   });
+  function handleResponse(data) {
+  console.log('Отримані дані:', data);
+}
+
+// Динамічно додаємо script для JSONP
+const script = document.createElement('script');
+script.src = 'https://script.google.com/macros/s/ТВОЄ_ID_СКРИПТУ/exec?role=student&class=9-A&callback=handleResponse';
+document.body.appendChild(script);
 
 });
-
