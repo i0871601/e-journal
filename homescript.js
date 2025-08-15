@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Обробник кліку по кнопці "Показати розклад"
   scheduleButton.addEventListener('click', function () {
-    let url = 'https://script.google.com/macros/s/AKfycbwyj5zXNvWiDQugL9gPl5QpwEvlUy4h4AylkQtjGMGxdz6bKYcC7ttJi__RCY5w7ajgWQ/exec?';
+    let url = 'https://worker-home.i0871601.workers.dev/?';
+
  // Формуємо базовий URL для запиту до Google Apps Script
     // Додаємо параметри до URL в залежності від ролі
     if (role === 'teacher') {
