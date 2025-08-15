@@ -61,9 +61,13 @@ form.addEventListener('submit', function(event) {
 // Оновлене для кнопки "Розклад" на сторінці учня або вчителя
 document.getElementById('viewSchudule').addEventListener('click', function() {
   fetchScheduleData().then(data => {
+    console.log("Отримані дані розкладу:", data); // Логування даних
     displaySchedule(data);
+  }).catch(error => {
+    console.log("Помилка при отриманні розкладу:", error);
   });
 });
+
 
 // Функція для отримання даних розкладу з API
 function fetchScheduleData() {
