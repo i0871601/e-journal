@@ -4,7 +4,7 @@ const form = document.getElementById('loginForm');
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
-const messageDiv = document.getElementById('message');
+//const messageDiv = document.getElementById('message');
 
 
 form.addEventListener('submit', function(event){
@@ -18,7 +18,7 @@ form.addEventListener('submit', function(event){
   dots.classList.remove('hidden');
   button.disabled = true;
 
-  messageDiv.textContent = "Завантаження...";
+  //messageDiv.textContent = "Завантаження...";
   
   fetch(`${apiURL}?lastName=${encodeURIComponent(lastName)}&password=${encodeURIComponent(password)}`, {
     method: 'GET',
@@ -30,14 +30,14 @@ form.addEventListener('submit', function(event){
   })
   .then(data => {
     if (data.success) {
-      messageDiv.textContent = `Увійшов ${data.firstName}!`;
+      //messageDiv.textContent = `Увійшов ${data.firstName}!`;
       // Тут логіка переходу або інша
     } else {
-      messageDiv.textContent = "Помилка: " + data.message;
+      //messageDiv.textContent = "Помилка: " + data.message;
     }
   })
   .catch(error => {
-    messageDiv.textContent = "Помилка: " + error.message;
+    //messageDiv.textContent = "Помилка: " + error.message;
   })
   .finally(() => {
     //Повернути кнопку до звичайного вигляду
@@ -48,6 +48,7 @@ form.addEventListener('submit', function(event){
     button.disabled = false;
   });
 });
+
 
 
 
