@@ -14,8 +14,8 @@ form.addEventListener('submit', function(event){
   const password = document.getElementById('password').value.trim();
 
   //Показ кружків(анімація)
-  defaultText.style.display = 'none';
-  dots.style.display = 'inline-block';
+  defaultText.classList.add('none');
+  dots.classList.remove('hidden');
   button.disabled = true;
 
   messageDiv.textContent = "Завантаження...";
@@ -46,6 +46,7 @@ form.addEventListener('submit', function(event){
     button.disabled = false;
   });
 });
+
 
 
 
