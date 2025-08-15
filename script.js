@@ -6,6 +6,21 @@ const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
 const errorMessage = document.getElementById('errorMessage');
 
+//Функція авторизації
+function authorizeUser(lastName, password){
+  return fetch(`${apiURL}?lastName=${encodeURIComponent(lastName)}&password=${encodeURIComponent(password)}`, {
+    method: 'GET',
+    mode: 'cors'
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      return data; //Повертає результат з інформацією про роль
+    } else {
+      throw new Error(data.message);
+    }
+  });
+}
 
 form.addEventListener('submit', function(event){
   event.preventDefault();
@@ -21,21 +36,15 @@ form.addEventListener('submit', function(event){
   dots.classList.remove('hidden');
   button.disabled = true;
   
-  fetch(`${apiURL}?lastName=${encodeURIComponent(lastName)}&password=${encodeURIComponent(password)}`, {
-    method: 'GET',
-    mode: 'cors'
-  })
-  .then(response => {
-    if (!response.ok) throw new Error("Помилка мережі");
-    return response.json();
-  })
-  .then(data => {
-    if (data.success) {
-      errorMessage.textContent = ''; //Очищає помилку якщо все добре
-      // Тут логіка переходу або інша
-    } else {
-      errorMessage.textContent = "Помилка: " + data.message;
+  authorizeUser(lastName, password)
+  .then(data =>{
+    if(data.role === 'student'){
+      window.location.href = "Home-student.html";
+    } 
+    else if(data.role === 'teacher'){
+      window.location.href = "Home-teacher.html";
     }
+    
   })
   .catch(error => {
     errorMessage.textContent = "Помилка: " + error.message;
