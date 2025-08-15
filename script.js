@@ -15,6 +15,7 @@ function authorizeUser(lastName, password) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
+      console.log("Авторизація успішна:", data); // Логування результату авторизації
       return data; // Повертає результат з інформацією про роль
     } else {
       throw new Error(data.message);
@@ -68,17 +69,24 @@ document.getElementById('viewSchudule').addEventListener('click', function() {
   });
 });
 
-
 // Функція для отримання даних розкладу з API
 function fetchScheduleData() {
   return fetch(apiURL)  // Використовуємо той самий API для отримання розкладу
     .then(response => response.json())
-    .then(data => data);  // Повертаємо дані розкладу
+    .then(data => {
+      console.log("Отримані дані розкладу:", data);  // Логування розкладу
+      return data.schedule || [];  // Повертаємо дані розкладу
+    });
 }
 
 // Функція для відображення таблиці розкладу
 function displaySchedule(data) {
   const content = document.getElementById('scheduleContent');
+  if (data.length === 0) {
+    content.innerHTML = "Не вдалося завантажити розклад.";
+    return;
+  }
+  
   let html = `<table>
     <thead>
       <tr>
@@ -92,15 +100,14 @@ function displaySchedule(data) {
     </thead>
     <tbody>`;
 
-  data.forEach((row) => {
-    // Перевіряємо, чи ми на сторінці учня чи вчителя
+  data.forEach(row => {
     if (isStudentPage()) {
       html += `
         <tr>
           <td>${row.lessonNumber}</td>
           <td>${row.day}</td>
           <td>${row.time}</td>
-          <td>${row.subject}</td>
+          <td>${row.classOrSubject}</td>
           <td>${row.teacherLastName}</td>
           <td><a href="${row.link}" target="_blank">${row.link ? 'Join' : 'N/A'}</a></td>
         </tr>`;
@@ -110,7 +117,7 @@ function displaySchedule(data) {
           <td>${row.lessonNumber}</td>
           <td>${row.day}</td>
           <td>${row.time}</td>
-          <td>${row.class}</td>
+          <td>${row.classOrSubject}</td>
           <td>-</td>
           <td><a href="${row.link}" target="_blank">${row.link ? 'Join' : 'N/A'}</a></td>
         </tr>`;
@@ -125,6 +132,7 @@ function displaySchedule(data) {
 function isStudentPage() {
   return window.location.pathname.includes('studentPage.html');
 }
+
 
 
 
