@@ -44,6 +44,7 @@ th, td {
 }
 /* Контейнер для блоку розкладу */
 #results-container {
+    display: none;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -69,4 +70,27 @@ th, td {
 
 #results a:hover {
     text-decoration: underline;
+}
+#dayButtons {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.day-btn {
+  margin: 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+}
+
+.day-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.day-btn:active {
+  background-color: #d0d0d0;
 }

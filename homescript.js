@@ -9,10 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
   viewButton.textContent = buttonText;
   
   const scheduleButton = document.getElementById('viewSchudule'); // Отримуємо кнопку для показу розкладу
+  const resultsContainerWrapper = document.getElementById('results-container');
   const resultContainer = document.getElementById('results'); // Отримуємо контейнер, в який будемо вставляти розклад
 
   // Обробник кліку по кнопці "Показати розклад"
   scheduleButton.addEventListener('click', function () {
+    resultsContainerWrapper.style.display = 'block';
     let url = 'https://worker-home.i0871601.workers.dev/?';
 
  // Формуємо базовий URL для запиту до Google Apps Script
@@ -64,68 +66,74 @@ document.addEventListener("DOMContentLoaded", function() {
           groupedByDay[day].push(row);
         });
 
-        const lessonCount = 8;
-
-        Object.keys(dayOrder)
-          .sort((a, b) => dayOrder[a] - dayOrder[b])
-          .forEach(day => {
-            const lessons = groupedByDay[day];
-            if (!lessons || lessons.length === 0) return;
-
-            // Вставляємо заголовок дня
+        // 🔸 Обробка натискання кнопок
+        document.querySelectorAll('.day-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            const selectedDay = button.getAttribute('data-day');
+            const lessons = groupedByDay[selectedDay] || [];
+          
+            resultContainer.innerHTML = '';
+            
             const dayTitle = document.createElement('h3');
-            dayTitle.textContent = day;
+            dayTitle.textContent = selectedDay;
             resultContainer.appendChild(dayTitle);
-
-            // Мапа уроків цього дня
+            
+            if (lessons.length === 0) {
+              const noLessonText = document.createElement('p');
+              noLessonText.textContent = 'День без уроків';
+              resultContainer.appendChild(noLessonText);
+              return;
+            }
+            
             const lessonMap = {};
             lessons.forEach(row => {
               const lessonNum = row[0];
               if (!lessonMap[lessonNum]) lessonMap[lessonNum] = [];
               lessonMap[lessonNum].push(row);
             });
-
-            // Вивід уроків від 1 до 8
+            
+            const lessonCount = 8;
+            
             for (let i = 1; i <= lessonCount; i++) {
               const rows = lessonMap[i];
               if (rows) {
                 rows.forEach(row => {
-                  const lessonNumber = row[0];
                   const time = row[1];
                   const className = row[3];
                   const subject = row[4];
                   const teacherLastName = row[5];
                   const link = row[6];
-
+                  
                   let text = '';
+                  
                   if (role === 'student') {
-                    text = `${lessonNumber}. ${time}, ${day}, ${className}, ${subject}, ${teacherLastName}`;
-                  } else if (role === 'teacher') {
-                    text = `${lessonNumber}. ${time}, ${day}, ${className}`;
+                    text = `${i}. ${time}, ${selectedDay}, ${className}, ${subject}, ${teacherLastName}`;
+                  } else {
+                    text = `${i}. ${time}, ${selectedDay}, ${className}`;
                   }
-
+                  
                   const p = document.createElement('p');
                   p.textContent = text;
-
+                  
                   if (link && link.trim() !== '') {
                     const a = document.createElement('a');
                     a.href = link;
-                    a.textContent = ' [Посилання]';
+                    a.textContent = 'Посилання на урок';
                     a.target = '_blank';
                     p.appendChild(a);
                   }
-
+                  
                   resultContainer.appendChild(p);
                 });
               } else {
-                // Виводимо відсутній урок
                 const p = document.createElement('p');
                 p.textContent = `${i}. Немає урока...`;
-                p.style.color = '#888';
                 resultContainer.appendChild(p);
               }
             }
           });
+        });
+      // (можна автоматично відкрити розклад на сьогодні тут, якщо хочеш)
       })
       .catch(error => {
         // Якщо сталася помилка при запиті — повідомляємо
