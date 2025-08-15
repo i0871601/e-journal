@@ -14,7 +14,7 @@ form.addEventListener('submit', function(event){
   const password = document.getElementById('password').value.trim();
 
   //Показ кружків(анімація)
-  defaultText.classList.add('none');
+  defaultText.classList.add('hidden');
   dots.classList.remove('hidden');
   button.disabled = true;
 
@@ -43,9 +43,12 @@ form.addEventListener('submit', function(event){
     //Повернути кнопку до звичайного вигляду
     defaultText.classList.remove('hidden');
     dots.classList.add('hidden');
+    //defaultText.classList.remove('hidden');
+    //dots.classList.add('hidden');
     button.disabled = false;
   });
 });
+
 
 
 
