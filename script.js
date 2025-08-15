@@ -1,14 +1,25 @@
 const apiURL = "https://script.google.com/macros/s/AKfycbzIRByiKc4nfm87GG2vXION_g86xfWem7nA-zf-bDo1EcEiY1WfIoZbUCQQkTKlVFd5fw/exec";
 
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+const form = document.getElementById('loginForm');
+const button = document.getElementById('loginButton');
+const defaultText = button.querySelector('.default-text');
+const dots = button.querySelector('.dots');
+const messageDiv = document.getElementById('message');
+
+
+form.addEventListener('submit', function(event){
   event.preventDefault();
 
   const lastName = document.getElementById('lastName').value.trim();
   const password = document.getElementById('password').value.trim();
-  const messageDiv = document.getElementById('message');
+
+  //Показ кружків(анімація)
+  defaultText.style.display = 'none';
+  dots.style.display = 'inline-block';
+  button.disabled = true;
 
   messageDiv.textContent = "Завантаження...";
-
+  
   fetch(`${apiURL}?lastName=${encodeURIComponent(lastName)}&password=${encodeURIComponent(password)}`, {
     method: 'GET',
     mode: 'cors'
@@ -27,8 +38,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   })
   .catch(error => {
     messageDiv.textContent = "Помилка: " + error.message;
+  })
+  .finally(() => {
+    //Повернути кнопку до звичайного вигляду
+    defaultText.classList.remove('hidden');
+    dots.classList.add('hidden');
+    button.disabled = false;
   });
 });
+
 
 
 
