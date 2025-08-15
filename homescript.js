@@ -1,7 +1,11 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const viewButton = document.getElementById('view');
+document.addEventListener("DOMContentLoaded", function() {
+  const role = localStorage.getItem('role');
   const buttonText = localStorage.getItem('buttonText');
-  if (viewButton && buttonText) {
-    viewButton.textContent = buttonText; // Встановлюємо текст кнопки
-  }
+  const firstName = localStorage.getItem('firstName');
+  const lastName = localStorage.getItem('lastName');
+  const classOrSubject = role === 'student' ? localStorage.getItem('class') : localStorage.getItem('subject');
+  
+  const viewButton = document.getElementById('view');
+  viewButton.textContent = buttonText;
+
 });

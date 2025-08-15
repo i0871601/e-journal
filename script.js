@@ -36,19 +36,22 @@ form.addEventListener('submit', function(event){
   defaultText.classList.add('hidden');
   dots.classList.remove('hidden');
   button.disabled = true;
+  
   authorizeUser(lastName, password)
   .then(data =>{
     if(data.role === 'student'){
       localStorage.setItem('role', 'student');
       localStorage.setItem('buttonText', 'Grade');
-      window.location.href = "Home.html";
+      localStorage.setItem('class', data.class);
     } 
     else if(data.role === 'teacher'){
       localStorage.setItem('role', 'teacher');
       localStorage.setItem('buttonText', 'Journal');
-      window.location.href = "Home.html";
+      localStorage.setItem('subject', data.subject);
     }
-    
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('firstName', data.firstName);
+    window.location.href = "Home.html";
   })
   .catch(error => {
     errorMessage.textContent = "Помилка: " + error.message;
