@@ -14,8 +14,10 @@ form.addEventListener('submit', function(event){
   const password = document.getElementById('password').value.trim();
 
   //Показ кружків(анімація)
-  defaultText.classList.add('none');
-  dots.classList.remove('hidden');
+  defaultText.style.display = 'none';
+  dots.style.display = 'inline-block';
+  //defaultText.classList.add('none');
+  //dots.classList.remove('hidden');
   button.disabled = true;
 
   messageDiv.textContent = "Завантаження...";
@@ -41,11 +43,14 @@ form.addEventListener('submit', function(event){
   })
   .finally(() => {
     //Повернути кнопку до звичайного вигляду
-    defaultText.classList.remove('hidden');
-    dots.classList.add('hidden');
+    defaultText.classList.add('none');
+    dots.classList.remove('hidden');
+    //defaultText.classList.remove('hidden');
+    //dots.classList.add('hidden');
     button.disabled = false;
   });
 });
+
 
 
 
