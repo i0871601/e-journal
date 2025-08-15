@@ -90,4 +90,5 @@ document.addEventListener("DOMContentLoaded", function() {
         resultContainer.innerHTML = '<p>Сталася помилка при завантаженні розкладу.</p>';
       });
   });
+
 });
