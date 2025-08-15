@@ -1,4 +1,4 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbxFXlGCwZSkaYwwymxlp-sRdzxV8XU7HwxVPgDH3bgyURpnRLwM34zfEctm7Ga8mm-CEA/exec";
+const apiURL = "https://script.google.com/macros/s/AKfycby6DuvxwdrUaV4GzHALozAEThoHvGXJBirYnNQF8gVFcjANohxyY2Ebei5CDK6bOhQHZw/exec";
 
 const form = document.getElementById('loginForm');
 const button = document.getElementById('loginButton');
