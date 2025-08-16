@@ -7,24 +7,20 @@
 </head>
 <body>
     <div class="sidebar">
-        <button id="viewSchudule">Schudule</button>
+        <button id="scheduleButton">Schedule</button>
         <button id="view"></button>
     </div>
     
     <div class="content" id="content">
-        <div id="results-container">
+        <p id="quote">"Життя — це філософія, в якій ми повинні знайти свою мету. Хто не шукає, той не знайшов нічого." - Леонардо да Вінчі</p>
+    
+        <div class="contentSchedule" id="hiddenContainer">
             <h2>Розклад</h2>
-            <div id="dayButtons">
-                <button class="day-btn" data-day="Понеділок">ПН</button>
-                <button class="day-btn" data-day="Вівторок">ВТ</button>
-                <button class="day-btn" data-day="Середа">СР</button>
-                <button class="day-btn" data-day="Четверг">ЧТ</button>
-                <button class="day-btn" data-day="П'ятниця">ПТ</button>
-            </div>
-            <div id="results"></div>
+            <div id="scheduleText"></div>
         </div>
     </div>
     
-    <script src="homescript.js"></script>
+    <script src="anim.js"></script>
+    <script src="schedule_script.js"></script>
 </body>
 </html>

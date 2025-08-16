@@ -1,4 +1,5 @@
-const apiURL = "https://script.google.com/macros/s/AKfycbwEXL70A83mBJURBkqKPUPrP5JXBPtPVNsksno1_I80mcw7RaGZSMK0ndIXfQqDC2w6/exec";
+const apiURL = "https://worker-home.i0871601.workers.dev/";  // сюди встав свій worker URL
+
 
 const form = document.getElementById('loginForm');
 const button = document.getElementById('loginButton');
@@ -40,18 +41,24 @@ form.addEventListener('submit', function(event){
   authorizeUser(lastName, password)
   .then(data =>{
     if(data.role === 'student'){
-      localStorage.setItem('role', 'student');
+      localStorage.setItem('role', data.role);
       localStorage.setItem('buttonText', 'Grade');
       localStorage.setItem('class', data.class);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('firstName', data.firstName);
+      window.location.href = "Home.html";
     } 
     else if(data.role === 'teacher'){
-      localStorage.setItem('role', 'teacher');
+      localStorage.setItem('role', data.role);
       localStorage.setItem('buttonText', 'Journal');
       localStorage.setItem('subject', data.subject);
+      localStorage.setItem('lastName', lastName);
+      localStorage.setItem('firstName', data.firstName);
+      window.location.href = "Home.html";
     }
-    localStorage.setItem('lastName', lastName);
-    localStorage.setItem('firstName', data.firstName);
-    window.location.href = "Home.html";
+    else if(data.role === 'admin'){
+      localStorage.setItem('role', data.role);
+    }
   })
   .catch(error => {
     errorMessage.textContent = "Помилка: " + error.message;
