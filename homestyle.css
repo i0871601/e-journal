@@ -1,0 +1,131 @@
+/* Заборона горизонтальної прокрутки на всій сторінці */
+html, body {
+    overflow-x: hidden;  /* Це прибирає горизонтальну прокрутку на всій сторінці */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Стиль для бічної панелі */
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 10px;
+    position: fixed;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+}
+
+.sidebar .button:hover {
+    background-color: #ddd;
+}
+
+/* Стиль для основного контенту */
+.content {
+    position: relative;
+    width: calc(100% - 20%);
+    margin-left: 25%;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Новий контейнер, який буде з'являтись/ховатись */
+.contentSchedule {
+    position: absolute;  /* Абсолютне позиціонування */
+    top: 50%;  /* Встановлюємо на середину */
+    left: 50%;  /* Встановлюємо на середину */
+    transform: translate(-50%, -50%);  /* Точно центрируємо за допомогою translate */
+    width: calc(100% - 10%);
+    height: 90%;
+    /*background-color: #f0f0f0;*/
+    margin-bottom: 20px;
+    display: block;  /* є */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.contentSchedule h2{
+    font-size: 21px;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.contentGradeOrJournal {
+    position: absolute;  /* Абсолютне позиціонування */
+    top: 50%;  /* Встановлюємо на середину */
+    left: 50%;  /* Встановлюємо на середину */
+    transform: translate(-50%, -50%);  /* Точно центрируємо за допомогою translate */
+    width: calc(100% - 10%);
+    height: 90%;
+    /*background-color: #f0f0f0;*/
+    margin-bottom: 20px;
+    display: none;  /* є */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.Grade {
+    display: none;
+}
+.Journal {
+    display: none;
+}
+.contentLesson{
+    display: none;
+}
+.journal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.journal-table th, .journal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.journal-table th {
+    background-color: #f2f2f2;
+}
+#add-lesson-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#add-lesson-form input, #add-lesson-form button {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

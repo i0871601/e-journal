@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <button id="logoutButton">Вийти</button>
+    </div>
+
+    <div class="content">
+        <h1>Вітаємо, Адмін!</h1>
+        <p>Ваш розклад завантажується...</p>
+        
+        <div class="filters-container">
+            <label for="dayInput">Фільтр за днем:</label>
+            <input type="text" id="dayInput" placeholder="Наприклад: Понеділок">
+            
+            <label for="classInput">Фільтр за класом:</label>
+            <input type="text" id="classInput" placeholder="Наприклад: 9-А">
+            
+            <button id="filterButton">Застосувати фільтр</button>
+        </div>
+        
+        <div class="add-container">
+            <h2>Додати новий запис до розкладу</h2>
+            <form id="addScheduleForm">
+                <input type="text" id="addDay" placeholder="День" required>
+                <input type="text" id="addLessonNumber" placeholder="Номер уроку" required>
+                <input type="text" id="addTime" placeholder="Час" required>
+                <input type="text" id="addClass" placeholder="Клас" required>
+                <input type="text" id="addSubject" placeholder="Предмет" required>
+                <input type="text" id="addTeacher" placeholder="Прізвище вчителя" required>
+                <input type="text" id="addLink" placeholder="Посилання (необов'язково)">
+                <button type="submit">Додати</button>
+            </form>
+            <p id="addMessage"></p>
+        </div>
+        
+        <div id="scheduleOutput"></div>
+        
+        <div id="editFormContainer" style="display: none;">
+            <h2>Редагувати запис</h2>
+            <form id="editScheduleForm">
+                <input type="hidden" id="editRowid">
+                <label for="editDay">День:</label><br>
+                <input type="text" id="editDay"><br>
+                <label for="editLessonNumber">Номер уроку:</label><br>
+                <input type="number" id="editLessonNumber"><br>
+                <label for="editTime">Час:</label><br>
+                <input type="text" id="editTime"><br>
+                <label for="editClass">Клас:</label><br>
+                <input type="text" id="editClass"><br>
+                <label for="editSubject">Предмет:</label><br>
+                <input type="text" id="editSubject"><br>
+                <label for="editTeacher">Прізвище вчителя:</label><br>
+                <input type="text" id="editTeacher"><br>
+                <label for="editLink">Посилання:</label><br>
+                <input type="text" id="editLink"><br><br>
+                <button type="submit">Зберегти зміни</button>
+                <button type="button" id="cancelEdit">Скасувати</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="homestyle.css">
+</head>
+<body>
+    <div class="sidebar">
+        <button id="scheduleButton">Schedule</button>
+        <button id="view"></button>
+        <button id="Lesson">Матеріал</button>
+        <button id="Exit">Вийти</button>
+    </div>
+    
+    <div class="content" id="content">
+        <div class="contentSchedule" id="hiddenContainer">
+            <h2>Розклад</h2>
+            <div id="scheduleText"></div>
+        </div>
+        <div class="contentGradeOrJournal" id="GradeOrJournal">
+            <div class="Grade" id="Grade">
+                <select id="subject"></select>
+                <div id="grades-content"></div>
+            </div>
+            <div class="Journal" id="Journal">
+                <h2>Журнал</h2>
+                <select id="class"></select>
+                <div id="add-lesson-form" style="display: none;">
+                    <h3>Додати новий урок</h3>
+                    <input type="number" id="lessonNumberInput" placeholder="Номер уроку" required>
+                    <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
+                    <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
+                    <label for="lessonTypeInput">Тип уроку:</label>
+                    <select id="lessonTypeInput" required>
+                        <option value="Normal">Звичайний</option>
+                        <option value="Thematic">Тематична</option>
+                        <option value="Semester">Семестрова</option>
+                        <option value="Final">Річна</option>
+                    </select>
+                    <button id="saveLessonButton">Зберегти урок</button>
+                </div>
+                <div id="class-content"></div>
+            </div>
+        </div>
+        <div class="contentLesson" id="contentLesson">
+            <p>Тут уроки</p>
+        </div>
+    </div>
+    <script src="anim.js"></script>
+    <script src="schedule_script.js"></script>
+</body>
+</html>
