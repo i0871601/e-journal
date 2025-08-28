@@ -1,0 +1,44 @@
+<!--Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.!-->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style-home.css">
+</head>
+<body>
+    <input type="checkbox" id="toggle-schedule" class="toggle-checkbox">
+    <input type="checkbox" id="toggle-journal" class="toggle-checkbox">
+    <div class="Body">    
+        <div class="Menu" id="Menu">
+            <div class="button-container">
+                <label for="toggle-schedule" class="button" id="button-schedule"></label>
+                <label for="toggle-journal" class="button" id="button-journal"></label>
+            </div>
+        </div>
+        
+        <div class="Schedule" id="container-schedule">
+            <div class="contentSchedule" id="hiddenContainer">
+                <h2>Розклад</h2>
+                <select id="Days"></select>
+                <div id="scheduleText"></div>
+            </div>
+        </div>
+        <div class="Journal" id="container-journal">
+            <h3>Журнал</h3>
+            <div class="GradeOfJournal" id="GradeOfJournal">
+                <select id="classOfjournal"></select>
+                <div class="TabletJournal"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--<button class="profile-button" id="profileButton">
+        <p class="profile-text">Привіт</p>
+        <img src="profile.png" alt="Profile" class="profile-image">
+    </button>!-->
+
+    <script src="script-home.js"></script>
+</body>
+</html>
