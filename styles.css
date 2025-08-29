@@ -18,7 +18,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 2vh;
+  gap: 1.5vh;
 }
 #newPasswordFields{
   width: 100%;
@@ -38,10 +38,10 @@ body {
   width: 100%;
   box-sizing: border-box;
   background-color: transparent;
-  border: 0.5vh solid #878787;
+  border: 0.1vh solid #878787;
   border-radius: 25vh;
   color: #878787;
-  padding: 10% 5%;
+  padding: 1.5vh 5%;
   font-size: 16px;
   transition: all 0.3s ease;
   outline: none;
@@ -49,7 +49,7 @@ body {
 
 .loginForm input:hover,
 .loginForm input:focus{
-  border: 0.5vh solid #f56e0f;
+  border: 0.1vh solid #f56e0f;
   color: #f56e0f;
 }
 
@@ -67,7 +67,7 @@ body {
   border: 0;
   transition: all 0.3s ease;
   font-size: 16px;
-  padding: 10% 5%;
+  padding: 1.5vh 5%;
 }
 .loginForm button:hover{
   transform: scale(1.03);
@@ -120,4 +120,3 @@ body {
     opacity: 1;
   }
 }
-
