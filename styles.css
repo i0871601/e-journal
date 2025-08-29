@@ -19,11 +19,13 @@ body {
   justify-content: space-between;
   align-items: center
 }
-
 #newPasswordFields{
-  display: none !important;
   width: clamp(197px, 17%, 500px);
   min-height: clamp(180px, 25%, 450px);
+}
+
+.hidden{
+  display: none !important;
 }
 
 .loginForm {
