@@ -22,6 +22,8 @@ body {
 
 .hidden{
   display: none !important;
+  width: clamp(197px, 17%, 500px);
+  min-height: clamp(180px, 25%, 450px);
 }
 
 .loginForm {
