@@ -109,7 +109,7 @@ body {
 }
 @media (orientation: portrait){
   .loginForm {
-    width: 75%;
+    width: 60dvw;
   }
 }
 @keyframes blink{
