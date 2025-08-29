@@ -18,7 +18,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 2vh;
 }
 
 .hidden{
@@ -27,7 +27,7 @@ body {
 
 .loginForm {
   width: clamp(197px, 17%, 500px);
-  padding: 20px; /* Додаємо внутрішній відступ */
+  /*padding: 20px;  Додаємо внутрішній відступ */
   box-sizing: border-box;
 }
 
@@ -35,10 +35,10 @@ body {
   width: 100%;
   box-sizing: border-box;
   background-color: transparent;
-  border: 1px solid #878787;
-  border-radius: 25px;
+  border: 0.5vh solid #878787;
+  border-radius: 25vh;
   color: #878787;
-  padding: 10px 5%;
+  padding: 10% 5%;
   font-size: 16px;
   transition: all 0.3s ease;
   outline: none;
@@ -46,7 +46,7 @@ body {
 
 .loginForm input:hover,
 .loginForm input:focus{
-  border: 1px solid #f56e0f;
+  border: 0.5vh solid #f56e0f;
   color: #f56e0f;
 }
 
@@ -58,13 +58,13 @@ body {
 .loginForm button{
   width: 100%;
   box-sizing: border-box;
-  border-radius: 25px;
+  border-radius: 25vh;
   background-color: #878787;
   color: #151419;
   border: 0;
   transition: all 0.3s ease;
   font-size: 16px;
-  padding: 10px 5%;
+  padding: 10% 5%;
 }
 .loginForm button:hover{
   transform: scale(1.03);
