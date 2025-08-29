@@ -20,6 +20,9 @@ body {
   align-items: center;
   gap: 2vh;
 }
+#newPasswordFields{
+  width: 100%;
+}
 
 .hidden{
   display: none !important;
