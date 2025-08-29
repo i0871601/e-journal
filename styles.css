@@ -20,8 +20,8 @@ body {
   align-items: center
 }
 #newPasswordFields{
-  width: clamp(197px, 17%, 500px);
-  min-height: clamp(180px, 25%, 450px);
+  width: 0%;
+  min-height: 0%;
 }
 
 .hidden{
@@ -30,7 +30,7 @@ body {
 
 .loginForm {
   width: clamp(197px, 17%, 500px);
-  min-height: clamp(180px, 25%, 450px);
+  min-height: 25%;
 }
 
 .loginForm input {
