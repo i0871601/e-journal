@@ -20,10 +20,6 @@ body {
   align-items: center;
   gap: 15px;
 }
-#newPasswordFields{
-  width: 0%;
-  min-height: 0%;
-}
 
 .hidden{
   display: none !important;
@@ -31,16 +27,18 @@ body {
 
 .loginForm {
   width: clamp(197px, 17%, 500px);
+  padding: 20px; /* Додаємо внутрішній відступ */
+  box-sizing: border-box;
 }
 
 .loginForm input {
-  width: 95%;
-  /*height: 25%;*/
+  width: 100%;
+  box-sizing: border-box;
   background-color: transparent;
   border: 1px solid #878787;
   border-radius: 25px;
   color: #878787;
-  padding: 10px 0 10px 5%;
+  padding: 10px 15px;
   font-size: 16px;
   transition: all 0.3s ease;
   outline: none;
@@ -59,6 +57,7 @@ body {
 
 .loginForm button{
   width: 100%;
+  box-sizing: border-box;
   border-radius: 25px;
   background-color: #878787;
   color: #151419;
@@ -107,7 +106,7 @@ body {
 }
 @media (orientation: portrait){
   .loginForm {
-    width: 50%;
+    width: 85%;
   }
 }
 @keyframes blink{
