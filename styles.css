@@ -38,7 +38,7 @@ body {
   border: 1px solid #878787;
   border-radius: 25px;
   color: #878787;
-  padding: 10px 15px;
+  padding: 10px 5%;
   font-size: 16px;
   transition: all 0.3s ease;
   outline: none;
@@ -64,7 +64,7 @@ body {
   border: 0;
   transition: all 0.3s ease;
   font-size: 16px;
-  padding: 10px 0;
+  padding: 10px 5%;
 }
 .loginForm button:hover{
   transform: scale(1.03);
@@ -106,7 +106,7 @@ body {
 }
 @media (orientation: portrait){
   .loginForm {
-    width: 85%;
+    width: 75%;
   }
 }
 @keyframes blink{
