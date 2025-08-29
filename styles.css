@@ -69,15 +69,12 @@ body {
   font-size: 16px;
   padding: 1.5vh 5%;
 }
-.loginForm button:hover{
+.loginForm button:hover,
+.loginForm button:active,
+.loginForm button:focus {
   transform: scale(1.03);
   background-color: #f56e0f;
 }
-.loginForm button:active,
-.loginForm button:focus{
-  background-color: #f56e0f;
-}
-
 /*Error*/
 .errorMessage{
   color: #f5332c;
