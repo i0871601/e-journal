@@ -5,7 +5,6 @@ body {
     font-family: sans-serif;
     overflow: hidden;
     height: 100dvh;
-    background-color: #151419;
 }
 
 .toggle-checkbox {
@@ -20,6 +19,7 @@ body {
 }
 
 .Menu {
+    background-color: #151419;
     width: 100%;
     height: 100%;
     display: flex;
@@ -27,8 +27,7 @@ body {
     align-items: center;
     transition: width 0.5s ease-in-out;
     flex-shrink: 0;
-    -webkit-animation: fadeOldUp 2s ease-in-out forwards;
-    animation: fadeUp 2s ease-in-out forwards;
+    
 }
 
 .button-container {
@@ -40,6 +39,8 @@ body {
     flex-direction: row;
     gap: 21%;
     transition: all 0.5s ease-in-out;
+    -webkit-animation: fadeOldUp 2s ease-in-out forwards;
+    animation: fadeUp 2s ease-in-out forwards; 
 }
 
 .button {
@@ -140,11 +141,15 @@ body {
         gap: 15%;
     }
 }
-@-webkit-keyframes fadeOldUp {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
 @keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+@keyframes blink{
+  0%, 80%, 100%{
+    opacity: 0.2;
+  }
+  40%{
+    opacity: 1;
+  }
 }
