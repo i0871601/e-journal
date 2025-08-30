@@ -55,11 +55,13 @@ h1{
 .loginForm input:focus{
   border: 0.22vmin solid #f56e0f;
   color: #f56e0f;
+  box-shadow: 0 0 3px #f56e0f;
 }
 
 .loginForm input:not(:placeholder-shown):not(:focus){
   border-color: #878787;
   color: #878787;
+  box-shadow: none;
 }
 
 .loginForm button{
@@ -79,7 +81,8 @@ h1{
 .loginForm button:active {
   transform: scale(1.03);
   background-color: #f56e0f;
-  font-size: clamp(20px, 2.6vh, 40px);
+  font-size: clamp(16px, 2.37vh, 40px);
+  box-shadow: 0 0 3px #f56e0f;
 }
 /*Error*/
 .errorMessage{
