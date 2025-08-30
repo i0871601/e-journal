@@ -7,10 +7,10 @@
   --color2: #262626;
   --text-color: #878787;
 }
+/*Roboto*/
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   /*overflow: hidden;*/
   height: 100dvh;
   background-color: var(--fon-color);
@@ -22,6 +22,8 @@ body {
 }
 
 h1{
+  font-family: 'Aristotelica';
+  font-weight: 400;
   font-size: clamp(25px, 7vh, 100px);
   -webkit-animation: fadeIn 2s ease-in-out forwards;
   animation: fadeInSlideUp 2s ease-in-out forwards; 
@@ -40,7 +42,7 @@ h1{
   /*padding: 20px;  внутрішній відступ */
   box-sizing: border-box;
   -webkit-animation: fadeIn 2s ease-in-out forwards;
-  animation: fadeInSlideUp 2s ease-in-out forwards; 
+  animation: fadeInSlideUp 2s ease-in-out forwards;
 }
 
 #newPasswordFields{
@@ -58,7 +60,9 @@ h1{
   border-radius: 25vmin;
   font-size: clamp(16px, 2.35vh, 40px);
   transition: all 0.3s ease-in-out;
-  padding: 1.5vmin 5%;
+  padding: 1.25vmin 5%;
+  font-family: 'SourceSans3';
+  font-weight: 400;
 }
 
 .loginForm input {
@@ -76,9 +80,9 @@ h1{
 
 .loginForm input:hover
 /*, .loginForm input:focus*/{
-  border: 0.22vmin solid #f56e0f;
-  color: #f56e0f;
-  box-shadow: 0 0 0.5vmin #f56e0f;
+  border: 0.22vmin solid var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(-color-accent);
 }
 .loginForm input:focus{
   color: var(--color-accent-shadow);
@@ -142,4 +146,17 @@ h1{
   40%{
     opacity: 1;
   }
+}
+@font-face{
+  font-family: 'Aristotelica';
+  src: url('fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'SourceSans3';
+  src: url('fonts/SourceSans3-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
