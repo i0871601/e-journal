@@ -2,7 +2,8 @@
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         sessionStorage.clear();
-        console.log(event.persisted);
+        const form = document.getElementById('loginForm');
+        form.reset();
     }
 });
 

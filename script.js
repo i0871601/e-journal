@@ -2,13 +2,11 @@
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         sessionStorage.clear();
-        console.log(event.persisted);
+        const form = document.getElementById('loginForm');
+        form.reset();
     }
 });
-if (document.referrer !== '') {
-    // Очищаємо sessionStorage, якщо ми прийшли з іншої сторінки
-    sessionStorage.clear();
-}
+
 const apiURL = "https://worker-home.i0871601.workers.dev/";
 
 const form = document.getElementById('loginForm');
