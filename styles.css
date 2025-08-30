@@ -12,13 +12,16 @@ body {
   align-items: center;
   flex-direction: column;
 }
+h1{
+  font-size: clamp(25px, 7vh, 100px);
+}
 
 .loginForm, #newPasswordFields {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5vh;
+  gap: 1.5vmin;
 }
 #newPasswordFields{
   width: 100%;
@@ -29,7 +32,8 @@ body {
 }
 
 .loginForm {
-  width: clamp(197px, 17%, 500px);
+  width: 30vmin;
+  /*width: clamp(197px, 17%, 500px);*/
   /*padding: 20px;  Додаємо внутрішній відступ */
   box-sizing: border-box;
 }
@@ -38,18 +42,18 @@ body {
   width: 100%;
   box-sizing: border-box;
   background-color: transparent;
-  border: 0.1vh solid #878787;
-  border-radius: 25vh;
+  border: 0.2vmin solid #878787;
+  border-radius: 25vmin;
   color: #878787;
-  padding: 1.5vh 5%;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  padding: 1.5vmin 5%;
+  font-size: clamp(20px, 3vh, 40px);
+  transition: all 0.3s ease-in-out;
   outline: none;
 }
 
 .loginForm input:hover,
 .loginForm input:focus{
-  border: 0.1vh solid #f56e0f;
+  border: 0.2vmin solid #f56e0f;
   color: #f56e0f;
 }
 
@@ -61,24 +65,26 @@ body {
 .loginForm button{
   width: 100%;
   box-sizing: border-box;
-  border-radius: 25vh;
+  border-radius: 25vmin;
   background-color: #878787;
   color: #151419;
   border: 0;
-  transition: all 0.3s ease;
-  font-size: 16px;
-  padding: 1.5vh 5%;
+  transition: all 0.3s ease-in-out;
+  font-size: clamp(20px, 3vh, 40px);
+  padding: 1.5vmin 5%;
 }
+
 .loginForm button:hover,
-.loginForm button:active,
-.loginForm button:focus {
+.loginForm button:focus,
+.loginForm button:active {
   transform: scale(1.03);
   background-color: #f56e0f;
+  font-size: clamp(20px, 3.1vh, 40px);
 }
 /*Error*/
 .errorMessage{
   color: #f5332c;
-  font-size: 10px;
+  font-size: clamp(8px, 1.5vh, 15px);
 }
 /*Загрузка*/
 .dots{
@@ -106,7 +112,7 @@ body {
 }
 @media (orientation: portrait){
   .loginForm {
-    width: 60dvw;
+    width: 50vmin;
   }
 }
 @keyframes blink{
