@@ -25,8 +25,8 @@ h1{
   font-family: 'Aristotelica';
   font-weight: 400;
   font-size: clamp(25px, 7vh, 100px);
-  -webkit-animation: fadeIn 2s ease-in-out forwards;
-  animation: fadeInSlideUp 2s ease-in-out forwards; 
+  -webkit-animation: fadeOldUp 2s ease-in-out forwards;
+  animation: fadeUp 2s ease-in-out forwards; 
 }
 
 .loginForm, #newPasswordFields {
@@ -41,8 +41,8 @@ h1{
   width: 30vmin;
   /*padding: 20px;  внутрішній відступ */
   box-sizing: border-box;
-  -webkit-animation: fadeIn 2s ease-in-out forwards;
-  animation: fadeInSlideUp 2s ease-in-out forwards;
+  -webkit-animation: fadeOldUp 2s ease-in-out forwards;
+  animation: fadeUp 2s ease-in-out forwards;
 }
 
 #newPasswordFields{
@@ -131,11 +131,11 @@ h1{
     width: 50vmin;
   }
 }
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes fadeOldUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes fadeInSlideUp {
+@keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
