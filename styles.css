@@ -14,6 +14,10 @@ body {
 }
 h1{
   font-size: clamp(25px, 7vh, 100px);
+  animation-name: fadeInSlideUp;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .loginForm, #newPasswordFields {
@@ -33,9 +37,12 @@ h1{
 
 .loginForm {
   width: 30vmin;
-  /*width: clamp(197px, 17%, 500px);*/
   /*padding: 20px;  Додаємо внутрішній відступ */
   box-sizing: border-box;
+  animation-name: fadeInSlideUp;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards; 
 }
 
 .loginForm input {
@@ -55,7 +62,7 @@ h1{
 .loginForm input:focus{
   border: 0.22vmin solid #f56e0f;
   color: #f56e0f;
-  box-shadow: 0 0 3px #f56e0f;
+  box-shadow: 0 0 0.5vmin #f56e0f;
 }
 
 .loginForm input:not(:placeholder-shown):not(:focus){
@@ -82,7 +89,7 @@ h1{
   transform: scale(1.03);
   background-color: #f56e0f;
   font-size: clamp(16px, 2.37vh, 40px);
-  box-shadow: 0 0 3px #f56e0f;
+  box-shadow: 0 0 0.5vmin #f56e0f;
 }
 /*Error*/
 .errorMessage{
@@ -116,6 +123,14 @@ h1{
 @media (orientation: portrait){
   .loginForm {
     width: 50vmin;
+  }
+}
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @keyframes blink{
