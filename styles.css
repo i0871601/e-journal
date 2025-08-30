@@ -14,10 +14,8 @@ body {
 }
 h1{
   font-size: clamp(25px, 7vh, 100px);
-  animation-name: fadeInSlideUp;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
+  -webkit-animation: fadeIn 2s ease-in-out forwards;
+  animation: fadeInSlideUp 2s ease-in-out forwards; 
 }
 
 .loginForm, #newPasswordFields {
@@ -39,10 +37,8 @@ h1{
   width: 30vmin;
   /*padding: 20px;  Додаємо внутрішній відступ */
   box-sizing: border-box;
-  animation-name: fadeInSlideUp;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards; 
+  -webkit-animation: fadeIn 2s ease-in-out forwards;
+  animation: fadeInSlideUp 2s ease-in-out forwards; 
 }
 
 .loginForm input {
@@ -125,13 +121,13 @@ h1{
     width: 50vmin;
   }
 }
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 @keyframes fadeInSlideUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 @keyframes blink{
   0%, 80%, 100%{
