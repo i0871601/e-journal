@@ -42,7 +42,7 @@ h1{
   width: 100%;
   box-sizing: border-box;
   background-color: transparent;
-  border: 0.25vmin solid #878787;
+  border: 0.22vmin solid #878787;
   border-radius: 25vmin;
   color: #878787;
   padding: 1.5vmin 5%;
@@ -53,7 +53,7 @@ h1{
 
 .loginForm input:hover,
 .loginForm input:focus{
-  border: 0.25vmin solid #f56e0f;
+  border: 0.22vmin solid #f56e0f;
   color: #f56e0f;
 }
 
