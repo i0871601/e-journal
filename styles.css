@@ -1,17 +1,26 @@
 /*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
+:root{
+  --fon-color: #151419;
+  --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.7);
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   /*overflow: hidden;*/
   height: 100dvh;
-  background-color: #151419;
-  color: #f56e0f;
+  background-color: var(--fon-color);
+  color: var(--color-accent);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
 h1{
   font-size: clamp(25px, 7vh, 100px);
   -webkit-animation: fadeIn 2s ease-in-out forwards;
@@ -25,6 +34,15 @@ h1{
   align-items: center;
   gap: 1.5vmin;
 }
+
+.loginForm {
+  width: 30vmin;
+  /*padding: 20px;  внутрішній відступ */
+  box-sizing: border-box;
+  -webkit-animation: fadeIn 2s ease-in-out forwards;
+  animation: fadeInSlideUp 2s ease-in-out forwards; 
+}
+
 #newPasswordFields{
   width: 100%;
 }
@@ -33,59 +51,47 @@ h1{
   display: none !important;
 }
 
-.loginForm {
-  width: 30vmin;
-  /*padding: 20px;  Додаємо внутрішній відступ */
-  box-sizing: border-box;
-  -webkit-animation: fadeIn 2s ease-in-out forwards;
-  animation: fadeInSlideUp 2s ease-in-out forwards; 
-}
-
-.loginForm input {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: transparent;
-  border: 0.22vmin solid #878787;
-  border-radius: 25vmin;
-  color: #878787;
-  padding: 1.5vmin 5%;
-  font-size: clamp(16px, 2.35vh, 40px);
-  transition: all 0.3s ease-in-out;
-  outline: none;
-}
-
-.loginForm input:hover,
-.loginForm input:focus{
-  border: 0.22vmin solid #f56e0f;
-  color: #f56e0f;
-  box-shadow: 0 0 0.5vmin #f56e0f;
-}
-
-.loginForm input:not(:placeholder-shown):not(:focus){
-  border-color: #878787;
-  color: #878787;
-  box-shadow: none;
-}
-
+.loginForm input, 
 .loginForm button{
   width: 100%;
   box-sizing: border-box;
   border-radius: 25vmin;
-  background-color: #878787;
-  color: #151419;
-  border: 0;
-  transition: all 0.3s ease-in-out;
   font-size: clamp(16px, 2.35vh, 40px);
+  transition: all 0.3s ease-in-out;
   padding: 1.5vmin 5%;
+}
+
+.loginForm input {
+  border: 0.22vmin solid var(--color1);
+  background-color: var(--color2);
+  color: var(--text-color);
+  outline: none;
+}
+
+.loginForm button{
+  background-color: var(--text-color);
+  color: var(--color2);
+  border: 0;
+}
+
+.loginForm input:hover
+/*, .loginForm input:focus*/{
+  border: 0.22vmin solid #f56e0f;
+  color: #f56e0f;
+  box-shadow: 0 0 0.5vmin #f56e0f;
+}
+.loginForm input:focus{
+  color: var(--color-accent-shadow);
+  caret-color: var(--color-accent);
 }
 
 .loginForm button:hover,
 .loginForm button:focus,
 .loginForm button:active {
   transform: scale(1.03);
-  background-color: #f56e0f;
+  background-color: var(--color-accent);
   font-size: clamp(16px, 2.37vh, 40px);
-  box-shadow: 0 0 0.5vmin #f56e0f;
+  box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 /*Error*/
 .errorMessage{
@@ -106,7 +112,7 @@ h1{
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #151419;
+  background-color: var(--fon-color);
   opacity: 0.2;
   animation: blink 1.4s infinite;
 }
