@@ -1,3 +1,6 @@
+if (sessionStorage.length === 0) {
+    window.location.href = 'index.html'; 
+}
 //Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
