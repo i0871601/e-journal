@@ -2,8 +2,10 @@
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         sessionStorage.clear();
+        console.log(event.persisted);
     }
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     
