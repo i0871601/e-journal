@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let scriptSrc;
 
             if (event.target.id === 'toggle-schedule') {
-                scriptSrc = 'schedule_script.js';
+                scriptSrc = 'script/schedule_script.js';
             } else {
                 scriptSrc = sessionStorage.getItem('scriptName');
             }
@@ -44,4 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
 });
