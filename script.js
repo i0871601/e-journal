@@ -1,4 +1,9 @@
 //Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        sessionStorage.clear();
+    }
+});
 const apiURL = "https://worker-home.i0871601.workers.dev/";
 
 const form = document.getElementById('loginForm');
