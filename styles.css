@@ -97,7 +97,9 @@ h1{
 }
 
 .loginForm button.active-animation{
-  background-color: var(--color-accent);
+  transform: none;
+  background-color: var(--text-color);
+  font-size: clamp(16px, 2.35vh, 40px);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 /*Error*/
@@ -130,19 +132,11 @@ h1{
   animation-delay: 0.4s;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .loginForm button:hover,
-  .loginForm button:active{
-    transform: none;
-    background-color: var(--text-color);
-    font-size: clamp(16px, 2.35vh, 40px);
-    box-shadow: 0 0 0.5vmin var(--color-accent);
-  }
-}
 @media (orientation: portrait){
   .loginForm {
     width: 50vmin;
   }
+  
 }
 
 @-webkit-keyframes fadeOldUp {
