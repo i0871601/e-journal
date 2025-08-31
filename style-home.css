@@ -1,10 +1,20 @@
 /*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
+:root{
+  --fon-color: #151419;
+  --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.7);
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
+}
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     overflow: hidden;
     height: 100dvh;
+    display: flex;
+    justify-content: center;
 }
 
 .toggle-checkbox {
@@ -96,7 +106,7 @@ body {
 }
 #copyright{
   width: auto;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
