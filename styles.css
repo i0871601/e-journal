@@ -140,7 +140,7 @@ h1{
     transform: none;
     background-color: var(--text-color);
     font-size: clamp(16px, 2.35vh, 40px);
-    box-shadow: none;
+    box-shadow: 0 0 0.5vmin var(--color-accent);
   }
 }
 
