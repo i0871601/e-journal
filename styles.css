@@ -11,7 +11,6 @@
 body {
   margin: 0;
   padding: 0;
-  /*overflow: hidden;*/
   height: 100dvh;
   background-color: var(--fon-color);
   color: var(--color-accent);
@@ -98,7 +97,7 @@ h1{
 
 .loginForm button.active-animation{
   transform: none;
-  background-color: var(--text-color);
+  background-color: var(--color-accent);
   font-size: clamp(16px, 2.35vh, 40px);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
@@ -109,10 +108,10 @@ h1{
 }
 body p:last-child{
   width: auto;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 10px;
-  font-size: clamp(8px, 1.5vh, 15px);
+  font-size: clamp(5px, 1.5vh, 13px);
   color: var(--text-color);
 }
 /*Загрузка*/
@@ -146,7 +145,7 @@ body p:last-child{
   }
   .loginForm button:hover{
     transform: none;
-    background-color: var(--text-color);
+    background-color: var(--color-accent);
     font-size: clamp(16px, 2.35vh, 40px);
     box-shadow: 0 0 0.5vmin var(--color-accent);
   }
