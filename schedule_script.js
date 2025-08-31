@@ -119,3 +119,14 @@ const loadSchedule = async () => {
 
 // Ініціалізація
 loadSchedule();
+
+document.addEventListener('click', (event) => {
+    const isClickInsideSelect = document.getElementById('Select').contains(event.target);
+    const dayList = document.getElementById('Days');
+    
+    const isClickOutside = !selectContainer.contains(event.target);
+
+    if (!isClickInsideSelect && dayList.classList.contains('visible')) {
+        dayList.classList.remove('visible');
+    }
+});
