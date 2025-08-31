@@ -1,0 +1,91 @@
+:root{
+  --fon-color: #151419;
+  --fon-color-2: #fbfbfb;
+  --color-accent: #f56e0f;
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
+}
+.Schedule{
+    overflow-y: scroll;/*auto;*/
+}
+.Schedule::-webkit-scrollbar{
+    background-color: var(--fon-color);
+}
+.Schedule::-webkit-scrollbar-thumb{
+    background-color: var(--text-color);
+    border-radius: 25px;
+    border: 3px solid var(--fon-color);
+}
+.Schedule::-webkit-scrollbar-thumb:active{
+    background-color: var(--color-accent);
+}
+.contentSchedule{
+    display: flex;
+    flex-direction: column;
+    gap: 3vmin;
+    width: 95%;
+    height: 100%;
+    padding-left: 3%;
+    font-family: 'SourceSans3';
+}
+#Select{
+    width: clamp(300px, 30vmin, 300px);
+    border: 0;
+    border-radius: 15vmin /*від шрифта*/;
+    box-shadow: 0 0 0.5vmin var(--color1);
+    padding: 0.3vmin;
+    padding-left: 0.9vmin;
+    font-family: 'SourceSans3';
+    position: relative;
+}
+.first-option{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    cursor: pointer;
+}
+.first-option p{
+    margin: 0;
+    padding: 0;
+}
+.first-option div{
+    width: 5vmin;
+    background-image: url('image/down.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#Days{
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    display: none;
+    background-color: var(--fon-color-2);
+    list-style-type: none;
+    border-radius: 1.5vmin /*від шрифта*/;
+    box-shadow: 0 0 0.5vmin var(--color1);
+    position: absolute;
+}
+#Days.visible {
+    display: block; /* Показати, коли додається клас visible */
+}
+
+#Days li {
+    padding: 1vmin;
+    cursor: pointer;
+}
+
+#Days li:hover {
+    border-radius: 1.5vmin;
+    background-color: var(--text-color);
+}
+
+@font-face{
+  font-family: 'SourceSans3';
+  src: url('fonts/SourceSans3-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

@@ -35,28 +35,31 @@ const displaySchedule = (groupedByDay, role, selectedDay) => {
 };
 
 const setupDaySelector = (groupedByDay, role) => {
-    const daysSelect = document.getElementById('Days');
-    daysSelect.innerHTML = '';
+    const selectedTextContainer = document.querySelector('.first-option p');
+    const dayList = document.querySelector('Days');
+    const firstOptionDiv = document.querySelector('.first-option');
     
-    // Додаємо опцію за замовчуванням
-    const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Виберіть день';
-    defaultOption.value = '';
-    daysSelect.appendChild(defaultOption);
+    dayList.innerHTML = '';
 
     for (const day in groupedByDay) {
-        const option = document.createElement('option');
-        option.value = day;
-        option.textContent = day;
-        daysSelect.appendChild(option);
+        const listItem = document.createElement('li');
+        listItem.textContent = day;
+        listItem.dataset.day = day;
+        dayList.appendChild(listItem);
     }
-
-    daysSelect.addEventListener('change', (event) => {
-        const selectedDay = event.target.value;
+    
+    selectedTextContainer.textContent = 'Виберіть день уроків';
+    
+    firstOptionDiv.addEventListener('click', () => {
+        dayList.classList.toggle('visible');
+    });
+    
+    dayList.addEventListener('click', (event) => {
+        const selectedDay = event.target.dataset.day;
         if (selectedDay) {
+            selectedTextContainer.textContent = selectedDay;
+            dayList.classList.remove('visible');
             displaySchedule(groupedByDay, role, selectedDay);
-        } else {
-            document.getElementById('scheduleText').innerHTML = '';
         }
     });
 };
@@ -78,10 +81,10 @@ const loadSchedule = async () => {
         const lastName = sessionStorage.getItem('lastName');
         const firstName = sessionStorage.getItem('firstName');
 
-        if (!role || !classOrSubject || !lastName || !firstName) {
-            window.location.href = 'index.html';
-            return;
-        }
+        //if (!role || !classOrSubject || !lastName || !firstName) {
+          //  window.location.href = 'index.html';
+            //return;
+        //}
 
         const params = new URLSearchParams();
         params.append('role', role);
@@ -116,5 +119,3 @@ const loadSchedule = async () => {
 
 // Ініціалізація
 loadSchedule();
-
-
