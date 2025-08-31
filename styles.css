@@ -107,6 +107,14 @@ h1{
   color: #f5332c;
   font-size: clamp(8px, 1.5vh, 15px);
 }
+body p:last-child{
+  width: auto;
+  position: fixed;
+  bottom: 0;
+  left: 10px;
+  font-size: clamp(8px, 1.5vh, 15px);
+  color: var(--text-color);
+}
 /*Загрузка*/
 .dots{
   display: inline-flex;
