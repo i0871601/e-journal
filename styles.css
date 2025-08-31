@@ -96,8 +96,7 @@ h1{
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
-.loginForm button:active,
-.loginForm button:focus{
+.loginForm button:active{
   background-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
