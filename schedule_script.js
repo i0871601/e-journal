@@ -36,7 +36,7 @@ const displaySchedule = (groupedByDay, role, selectedDay) => {
 
 const setupDaySelector = (groupedByDay, role) => {
     const selectedTextContainer = document.querySelector('.first-option p');
-    const dayList = document.querySelector('Days');
+    const dayList = document.getElementById('Days');
     const firstOptionDiv = document.querySelector('.first-option');
     
     dayList.innerHTML = '';
