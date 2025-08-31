@@ -121,12 +121,17 @@ const loadSchedule = async () => {
 loadSchedule();
 
 document.addEventListener('click', (event) => {
-    const isClickInsideSelect = document.getElementById('Select').contains(event.target);
+    const selectContainer = document.getElementById('Select');
     const dayList = document.getElementById('Days');
     
-    const isClickOutside = !selectContainer.contains(event.target);
+    // Перевірка, щоб уникнути помилок, якщо елементи не знайдено
+    if (!selectContainer || !dayList) {
+        return;
+    }
 
-    if (!isClickInsideSelect && dayList.classList.contains('visible')) {
+    const isClickOutside = !selectContainer.contains(event.target);
+    
+    if (isClickOutside && dayList.classList.contains('visible')) {
         dayList.classList.remove('visible');
     }
 });
