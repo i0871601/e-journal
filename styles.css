@@ -108,7 +108,7 @@ h1{
   cursor: default;
   font-size: clamp(8px, 1.5vh, 15px);
 }
-body p:last-child{
+#copyright{
   width: auto;
   position: absolute;
   bottom: 0;

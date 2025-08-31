@@ -39,8 +39,8 @@ body {
     flex-direction: row;
     gap: 21%;
     transition: all 0.5s ease-in-out;
-    -webkit-animation: fadeOldUp 2s ease-in-out forwards;
-    animation: fadeUp 2s ease-in-out forwards; 
+    -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+    animation: fadeUp 1.7s ease-in-out forwards; 
 }
 
 .button {
@@ -77,13 +77,6 @@ body {
     opacity: 0;
     visibility: hidden;
 }
-.Schedule {
-    overflow-y: scroll;
-}
-
-.Journal {
-    overflow: auto;
-}
 
 #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
     width: 35%;
@@ -100,6 +93,16 @@ body {
     height: 35%;
     flex-direction: column;
     gap: 15%;
+}
+#copyright{
+  width: auto;
+  position: absolute;
+  bottom: 0;
+  font-size: clamp(5px, 1.3vh, 13px);
+  color: var(--text-color);
+  cursor: default;
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards;
 }
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
