@@ -39,6 +39,16 @@ body {
     flex-shrink: 0;
     
 }
+#copyright{
+    width: auto;
+    position: fixed;
+    bottom: 0;
+    font-size: clamp(5px, 1.3vh, 13px);
+    color: var(--text-color);
+    cursor: default;
+    -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+    animation: fadeUp 1.7s ease-in-out forwards;
+}
 
 .button-container {
     width: 25%;
@@ -104,16 +114,7 @@ body {
     flex-direction: column;
     gap: 15%;
 }
-#copyright{
-  width: auto;
-  position: fixed;
-  bottom: 0;
-  font-size: clamp(5px, 1.3vh, 13px);
-  color: var(--text-color);
-  cursor: default;
-  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
-  animation: fadeUp 1.7s ease-in-out forwards;
-}
+
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
     .Body {
