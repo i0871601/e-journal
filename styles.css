@@ -129,19 +129,21 @@ h1{
 .dot:nth-child(3){
   animation-delay: 0.4s;
 }
-@media (orientation: portrait){
-  .loginForm {
-    width: 50vmin;
-  }
-}
+
 @media (hover: none) and (pointer: coarse) {
   .loginForm button:hover {
     transform: none;
     background-color: var(--text-color);
     font-size: clamp(16px, 2.35vh, 40px);
-    box-shadow: none;
+    box-shadow: 0 0 0.5vmin var(--color-accent);
   }
 }
+@media (orientation: portrait){
+  .loginForm {
+    width: 50vmin;
+  }
+}
+
 @-webkit-keyframes fadeOldUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
