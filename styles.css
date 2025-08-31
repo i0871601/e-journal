@@ -112,6 +112,8 @@ body p:last-child{
   bottom: 0;
   font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards;
 }
 /*Загрузка*/
 .dots{
