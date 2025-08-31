@@ -26,11 +26,13 @@ function setButtonState(isLoading, text = "Увійти") {
         defaultText.classList.add('hidden');
         dots.classList.remove('hidden');
         button.disabled = true;
+        button.classList.add('active-animation');
     } else {
         defaultText.classList.remove('hidden');
         dots.classList.add('hidden');
         button.disabled = false;
         defaultText.textContent = text;
+        button.classList.remove('active-animation');
     }
 }
 

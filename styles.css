@@ -25,8 +25,8 @@ h1{
   font-family: 'Aristotelica';
   font-weight: 400;
   font-size: clamp(25px, 7vh, 100px);
-  -webkit-animation: fadeOldUp 2s ease-in-out forwards;
-  animation: fadeUp 2s ease-in-out forwards; 
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards; 
 }
 
 .loginForm, #newPasswordFields {
@@ -41,8 +41,8 @@ h1{
   width: 30vmin;
   /*padding: 20px;  внутрішній відступ */
   box-sizing: border-box;
-  -webkit-animation: fadeOldUp 2s ease-in-out forwards;
-  animation: fadeUp 2s ease-in-out forwards;
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards;
 }
 
 #newPasswordFields{
@@ -82,19 +82,28 @@ h1{
 /*, .loginForm input:focus*/{
   border: 0.22vmin solid var(--color-accent);
   color: var(--color-accent);
-  box-shadow: 0 0 0.5vmin var(-color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 .loginForm input:focus{
   color: var(--color-accent-shadow);
   caret-color: var(--color-accent);
 }
 
-.loginForm button:hover,
-.loginForm button:focus,
-.loginForm button:active {
+.loginForm button:hover{
   transform: scale(1.03);
   background-color: var(--color-accent);
   font-size: clamp(16px, 2.37vh, 40px);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
+
+.loginForm button:active,
+.loginForm button:focus{
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
+
+.loginForm button.active-animation{
+  background-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 /*Error*/
