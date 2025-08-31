@@ -1,14 +1,14 @@
 //Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-//if (sessionStorage.length === 0) {
-  //  window.location.href = 'index.html'; 
-//}
-//window.addEventListener('pageshow', (event) => {
-    //if (event.persisted) {
-      //  sessionStorage.clear();
-        //const form = document.getElementById('loginForm');
-        //form.reset();
-    //}
-//});
+if (sessionStorage.length === 0) {
+    window.location.href = 'index.html'; 
+}
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        sessionStorage.clear();
+        const form = document.getElementById('loginForm');
+        form.reset();
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
