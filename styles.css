@@ -24,6 +24,7 @@ h1{
   font-family: 'Aristotelica';
   font-weight: 400;
   font-size: clamp(25px, 7vh, 100px);
+  cursor: default;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards; 
 }
@@ -104,6 +105,7 @@ h1{
 /*Error*/
 .errorMessage{
   color: #f5332c;
+  cursor: default;
   font-size: clamp(8px, 1.5vh, 15px);
 }
 body p:last-child{
@@ -112,6 +114,7 @@ body p:last-child{
   bottom: 0;
   font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
+  cursor: default;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
 }
