@@ -110,8 +110,7 @@ body p:last-child{
   width: auto;
   position: absolute;
   bottom: 0;
-  left: 10px;
-  font-size: clamp(5px, 1.5vh, 13px);
+  font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
 }
 /*Загрузка*/
