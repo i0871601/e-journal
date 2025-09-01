@@ -14,6 +14,7 @@ const subjectList = document.getElementById('Subject');
 const classList = document.getElementById('Class');
 const subjectDiv = document.getElementById('subjectTeacher');
 const classDiv = document.getElementById('classOfjournal');
+const tabletJournalContainer = document.querySelector('.TabletJournal');
 
 // Обробники подій для відкриття меню
 if (subjectDropdownButton) {
@@ -28,17 +29,7 @@ if (classDropdownButton) {
         subjectList.classList.remove('visible');
     });
 }
-// Обробник для закриття меню при кліку поза його межами
-document.addEventListener('click', (event) => {
-    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
-    const isClickInsideClassMenu = classDiv.contains(event.target);
-    if (!isClickInsideSubjectMenu) {
-        subjectList.classList.remove('visible');
-    }
-    if (!isClickInsideClassMenu) {
-        classList.classList.remove('visible');
-    }
-});
+
 // Обробник для закриття меню при кліку поза його межами
 document.addEventListener('click', (event) => {
     const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
@@ -52,8 +43,8 @@ document.addEventListener('click', (event) => {
 });
 
 async function init() {
-    if (!subjectList || !classList) {
-        console.error('Елементи для списків предметів або класів не знайдено.');
+    if (!subjectList || !classList || !tabletJournalContainer) {
+        console.error('Елементи для списків предметів, класів або контейнер журналу не знайдено.');
         return;
     }
     try {
@@ -72,7 +63,7 @@ async function init() {
                     li.dataset.subject = item.subject;
                     subjectList.appendChild(li);
                 });
-                // Обробник кліку на елементи списку
+
                 subjectList.addEventListener('click', (event) => {
                     if (event.target.tagName === 'LI') {
                         const selectedSubject = event.target.dataset.subject;
@@ -80,10 +71,11 @@ async function init() {
                         populateClassList(selectedData.classes);
                         updateSelectedState(subjectList, event.target);
                         subjectList.classList.remove('visible');
+                        
+                        tabletJournalContainer.innerHTML = 'Будь ласка, виберіть клас для перегляду журналу.';
+                        updateSelectedState(classList, null);
                     }
                 });
-
-                populateClassList(allTeacherSubjectsAndClasses[0].classes);
             } else {
                 subjectDiv.style.display = 'none';
                 populateClassList(allTeacherSubjectsAndClasses[0].classes);
@@ -103,12 +95,15 @@ async function init() {
         } else if (data.type === 'student_subjects') {
             console.error('Неправильний тип даних для вчителя.');
         }
+        
+        tabletJournalContainer.innerHTML = 'Будь ласка, виберіть предмет та клас для перегляду журналу.';
 
     } catch (error) {
         console.error('Сталася помилка при завантаженні даних:', error);
     }
 }
 
+// Функції, що не залежать від init()
 const updateOrAddGrade = async (gradeData) => {
     const url = `https://worker-update-grade.i0871601.workers.dev/`;
     try {
@@ -233,6 +228,10 @@ const loadFullJournal = async (className) => {
         return;
     }
     const teacherSubject = getSelectedSubject();
+    if (!teacherSubject) {
+        container.innerHTML = 'Будь ласка, спочатку виберіть предмет.';
+        return;
+    }
     const url = `https://worker-full-journal.i0871601.workers.dev/?class=${className}&teacherLastName=${lastName}&teacherSubject=${teacherSubject}`;
     try {
         const res = await fetch(url);
@@ -337,7 +336,21 @@ function updateSelectedState(ulElement, selectedLi) {
     Array.from(ulElement.children).forEach(li => {
         li.classList.remove('selected');
     });
-    selectedLi.classList.add('selected');
+    if (selectedLi) {
+        selectedLi.classList.add('selected');
+        // Додатково оновлюємо текст кнопки
+        const buttonText = ulElement.previousElementSibling.querySelector('p');
+        if (buttonText) {
+            buttonText.textContent = selectedLi.textContent;
+        }
+    } else {
+        // Якщо вибір знято, відновлюємо початковий текст
+        if (ulElement.id === 'Subject') {
+            ulElement.previousElementSibling.querySelector('p').textContent = 'Виберіть предмет';
+        } else if (ulElement.id === 'Class') {
+            ulElement.previousElementSibling.querySelector('p').textContent = 'Виберіть клас';
+        }
+    }
 }
 
 function getSelectedSubject() {
