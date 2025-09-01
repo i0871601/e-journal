@@ -126,6 +126,7 @@ const displayFullJournal = (journalData) => {
 const loadStudentJournal = async (subject, teacherLastName) => {
     const container = document.querySelector('.TabletJournal');
     container.innerHTML = 'Завантаження журналу...';
+    console.log("Завантаження журналу...");
 
     const studentLastName = sessionStorage.getItem('lastName');
     const studentFirstName = sessionStorage.getItem('firstName');
