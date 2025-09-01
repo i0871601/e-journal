@@ -28,7 +28,17 @@ if (classDropdownButton) {
         subjectList.classList.remove('visible');
     });
 }
-
+// Обробник для закриття меню при кліку поза його межами
+document.addEventListener('click', (event) => {
+    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
+    const isClickInsideClassMenu = classDiv.contains(event.target);
+    if (!isClickInsideSubjectMenu) {
+        subjectList.classList.remove('visible');
+    }
+    if (!isClickInsideClassMenu) {
+        classList.classList.remove('visible');
+    }
+});
 // Обробник для закриття меню при кліку поза його межами
 document.addEventListener('click', (event) => {
     const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
@@ -62,7 +72,7 @@ async function init() {
                     li.dataset.subject = item.subject;
                     subjectList.appendChild(li);
                 });
-
+                // Обробник кліку на елементи списку
                 subjectList.addEventListener('click', (event) => {
                     if (event.target.tagName === 'LI') {
                         const selectedSubject = event.target.dataset.subject;
