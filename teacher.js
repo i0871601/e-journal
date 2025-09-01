@@ -35,6 +35,7 @@ const updateOrAddGrade = async (gradeData) => {
 
 const displayFullJournal = (journalData) => {
     const container = document.querySelector('.TabletJournal');
+    const subjectTeacherSelect = document.getElementById('subjectTeacher');
     if (!container) return;
     container.innerHTML = '';
     const table = document.createElement('table');
@@ -111,7 +112,7 @@ const displayFullJournal = (journalData) => {
                         studentFirstName: studentFirstName,
                         studentLastName: studentLastName,
                         teacherLastName: lastName,
-                        subject: classOrSubject,
+                        subject: subjectTeacherSelect.value,
                         grade: updatedGrade,
                         lessonType: 'Normal'
                     };
