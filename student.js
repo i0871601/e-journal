@@ -126,7 +126,6 @@ const displayFullJournal = (journalData) => {
 const loadStudentJournal = async (subject, teacherLastName) => {
     const container = document.querySelector('.TabletJournal');
     container.innerHTML = 'Завантаження журналу...';
-    console.log("Завантаження журналу...");
 
     const studentLastName = sessionStorage.getItem('lastName');
     const studentFirstName = sessionStorage.getItem('firstName');
@@ -134,6 +133,7 @@ const loadStudentJournal = async (subject, teacherLastName) => {
 
     if (!subject || !studentLastName || !studentFirstName || !studentClass || !teacherLastName) {
         container.textContent = 'Необхідні дані для завантаження журналу відсутні.';
+        console.log("Тут");
         return;
     }
 
