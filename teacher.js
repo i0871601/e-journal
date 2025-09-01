@@ -25,6 +25,16 @@ async function init() {
         if (data.type === 'teacher_subjects_and_classes') {
             allTeacherSubjectsAndClasses = data.data;
 
+            document.querySelector('#subjectTeacher .first-option').addEventListener('click', () => {
+                subjectList.classList.toggle('visible');
+                classList.classList.remove('visible'); 
+            });
+
+            document.querySelector('#classOfjournal .first-option').addEventListener('click', () => {
+                classList.classList.toggle('visible');
+                subjectList.classList.remove('visible');
+            });
+
             if (allTeacherSubjectsAndClasses.length > 1) {
                 subjectDiv.style.display = 'block';
                 allTeacherSubjectsAndClasses.forEach(item => {
@@ -40,6 +50,7 @@ async function init() {
                         const selectedData = allTeacherSubjectsAndClasses.find(item => item.subject === selectedSubject);
                         populateClassList(selectedData.classes);
                         updateSelectedState(subjectList, event.target);
+                        subjectList.classList.remove('visible');
                     }
                 });
 
@@ -54,6 +65,7 @@ async function init() {
                     const selectedClass = event.target.dataset.class;
                     loadFullJournal(selectedClass);
                     updateSelectedState(classList, event.target);
+                    classList.classList.remove('visible');
                 }
             });
 
@@ -322,5 +334,19 @@ function populateClassList(classes) {
         classList.appendChild(li);
     });
 }
+
+document.addEventListener('click', (event) => {
+    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
+    const isClickInsideClassMenu = classDiv.contains(event.target);
+
+    if (!isClickInsideSubjectMenu) {
+        subjectList.classList.remove('visible');
+    }
+
+    if (!isClickInsideClassMenu) {
+        classList.classList.remove('visible');
+    }
+});
+
 
 init();

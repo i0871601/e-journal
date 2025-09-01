@@ -12,12 +12,20 @@ async function init() {
         console.error('Елемент для списку предметів не знайдено.');
         return;
     }
+
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${studentClass}`;
         const response = await fetch(url);
         const data = await response.json();
+
         if (data.type === 'student_subjects') {
             allStudentSubjects = data.data;
+
+            // Обробник кліків для "кнопки" випадаючого списку предметів
+            document.querySelector('#subjectTeacher .first-option').addEventListener('click', () => {
+                subjectList.classList.toggle('visible');
+            });
+
             if (allStudentSubjects.length > 0) {
                 subjectDiv.style.display = 'block';
                 allStudentSubjects.forEach(item => {
@@ -26,19 +34,32 @@ async function init() {
                     li.dataset.subject = item.subject;
                     subjectList.appendChild(li);
                 });
+
                 subjectList.addEventListener('click', (event) => {
                     if (event.target.tagName === 'LI') {
                         const selectedSubject = event.target.dataset.subject;
                         loadStudentJournal(selectedSubject);
                         updateSelectedState(subjectList, event.target);
+                        subjectList.classList.remove('visible'); // Закриваємо меню після вибору
                     }
                 });
+
+                // Додаємо обробник кліків для закриття меню при кліку за його межами
+                document.addEventListener('click', (event) => {
+                    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
+                    if (!isClickInsideSubjectMenu) {
+                        subjectList.classList.remove('visible');
+                    }
+                });
+
             } else {
                 subjectDiv.style.display = 'none';
             }
+
         } else if (data.type === 'teacher_subjects_and_classes') {
             console.error('Неправильний тип даних для учня.');
         }
+
     } catch (error) {
         console.error('Сталася помилка при завантаженні даних:', error);
     }
