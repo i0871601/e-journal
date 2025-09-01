@@ -7,6 +7,10 @@
   --text-color: #878787;
 }
 
+#subjectTeacher {
+    display: none;
+}
+
 #Subject, #Class{
     width: 100%;
     top: 100%;
