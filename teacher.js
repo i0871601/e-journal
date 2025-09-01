@@ -6,17 +6,46 @@ let journalCache = {};
 const lastName = sessionStorage.getItem('lastName');
 const firstName = sessionStorage.getItem('firstName');
 const classOrSubject = sessionStorage.getItem('classOrsubject');
+
+// Оголошення змінних для кнопок та списків
+const subjectDropdownButton = document.getElementById('subject-button');
+const classDropdownButton = document.getElementById('class-button');
 const subjectList = document.getElementById('Subject');
 const classList = document.getElementById('Class');
 const subjectDiv = document.getElementById('subjectTeacher');
 const classDiv = document.getElementById('classOfjournal');
+
+// Обробники подій для відкриття меню
+if (subjectDropdownButton) {
+    subjectDropdownButton.addEventListener('click', () => {
+        subjectList.classList.toggle('visible');
+        classList.classList.remove('visible');
+    });
+}
+if (classDropdownButton) {
+    classDropdownButton.addEventListener('click', () => {
+        classList.classList.toggle('visible');
+        subjectList.classList.remove('visible');
+    });
+}
+
+// Обробник для закриття меню при кліку поза його межами
+document.addEventListener('click', (event) => {
+    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
+    const isClickInsideClassMenu = classDiv.contains(event.target);
+    if (!isClickInsideSubjectMenu) {
+        subjectList.classList.remove('visible');
+    }
+    if (!isClickInsideClassMenu) {
+        classList.classList.remove('visible');
+    }
+});
 
 async function init() {
     if (!subjectList || !classList) {
         console.error('Елементи для списків предметів або класів не знайдено.');
         return;
     }
-
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
         const response = await fetch(url);
@@ -24,16 +53,6 @@ async function init() {
 
         if (data.type === 'teacher_subjects_and_classes') {
             allTeacherSubjectsAndClasses = data.data;
-
-            document.querySelector('#subjectTeacher .first-option').addEventListener('click', () => {
-                subjectList.classList.toggle('visible');
-                classList.classList.remove('visible'); 
-            });
-
-            document.querySelector('#classOfjournal .first-option').addEventListener('click', () => {
-                classList.classList.toggle('visible');
-                subjectList.classList.remove('visible');
-            });
 
             if (allTeacherSubjectsAndClasses.length > 1) {
                 subjectDiv.style.display = 'block';
@@ -198,13 +217,11 @@ const loadFullJournal = async (className) => {
     const container = document.querySelector('.TabletJournal');
     container.innerHTML = 'Завантаження журналу...';
     if (!className) return container.innerHTML = '';
-
     if (journalCache[className]) {
         console.log('Дані завантажено з кешу для класу:', className);
         displayFullJournal(journalCache[className]);
         return;
     }
-
     const teacherSubject = getSelectedSubject();
     const url = `https://worker-full-journal.i0871601.workers.dev/?class=${className}&teacherLastName=${lastName}&teacherSubject=${teacherSubject}`;
     try {
@@ -215,9 +232,7 @@ const loadFullJournal = async (className) => {
             return;
         }
         const journal = await res.json();
-        
         journalCache[className] = journal;
-        
         displayFullJournal(journal);
     } catch (err) {
         console.error('Помилка запиту:', err);
@@ -237,7 +252,7 @@ const addLesson = async (lessonData) => {
             alert('Урок успішно додано!');
             const currentClass = getSelectedClass();
             delete journalCache[currentClass];
-            await loadFullJournal(currentClass); 
+            await loadFullJournal(currentClass);
             return true;
         } else {
             alert('Помилка при додаванні уроку.');
@@ -334,19 +349,5 @@ function populateClassList(classes) {
         classList.appendChild(li);
     });
 }
-
-document.addEventListener('click', (event) => {
-    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
-    const isClickInsideClassMenu = classDiv.contains(event.target);
-
-    if (!isClickInsideSubjectMenu) {
-        subjectList.classList.remove('visible');
-    }
-
-    if (!isClickInsideClassMenu) {
-        classList.classList.remove('visible');
-    }
-});
-
 
 init();

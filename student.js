@@ -4,15 +4,31 @@ let allStudentSubjects = [];
 const lastName = sessionStorage.getItem('lastName');
 const firstName = sessionStorage.getItem('firstName');
 const studentClass = sessionStorage.getItem('classOrsubject');
+
+// Оголошення змінних для кнопки та списку
+const subjectDropdownButton = document.getElementById('subject-button');
 const subjectList = document.getElementById('Subject');
 const subjectDiv = document.getElementById('subjectTeacher');
+
+// Обробники подій для відкриття меню
+if (subjectDropdownButton) {
+    subjectDropdownButton.addEventListener('click', () => {
+        subjectList.classList.toggle('visible');
+    });
+}
+// Обробник для закриття меню при кліку поза його межами
+document.addEventListener('click', (event) => {
+    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
+    if (!isClickInsideSubjectMenu) {
+        subjectList.classList.remove('visible');
+    }
+});
 
 async function init() {
     if (!subjectList) {
         console.error('Елемент для списку предметів не знайдено.');
         return;
     }
-
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${studentClass}`;
         const response = await fetch(url);
@@ -20,11 +36,6 @@ async function init() {
 
         if (data.type === 'student_subjects') {
             allStudentSubjects = data.data;
-
-            // Обробник кліків для "кнопки" випадаючого списку предметів
-            document.querySelector('#subjectTeacher .first-option').addEventListener('click', () => {
-                subjectList.classList.toggle('visible');
-            });
 
             if (allStudentSubjects.length > 0) {
                 subjectDiv.style.display = 'block';
@@ -40,14 +51,6 @@ async function init() {
                         const selectedSubject = event.target.dataset.subject;
                         loadStudentJournal(selectedSubject);
                         updateSelectedState(subjectList, event.target);
-                        subjectList.classList.remove('visible'); // Закриваємо меню після вибору
-                    }
-                });
-
-                // Додаємо обробник кліків для закриття меню при кліку за його межами
-                document.addEventListener('click', (event) => {
-                    const isClickInsideSubjectMenu = subjectDiv.contains(event.target);
-                    if (!isClickInsideSubjectMenu) {
                         subjectList.classList.remove('visible');
                     }
                 });
