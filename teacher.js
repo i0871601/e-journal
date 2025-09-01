@@ -1,5 +1,4 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-const role = 'teacher';
 const contentContainer = document.getElementById('GradeOfJournal');
 let allTeacherSubjectsAndClasses = [];
 let currentStudents = [];
