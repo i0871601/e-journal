@@ -130,10 +130,14 @@ const loadStudentJournal = async (subject, teacherLastName) => {
     const studentLastName = sessionStorage.getItem('lastName');
     const studentFirstName = sessionStorage.getItem('firstName');
     const studentClass = sessionStorage.getItem('classOrSubject');
+    console.log(studentLastName);
+    console.log(studentFirstName);
+    console.log(studentClass);
+    console.log(subject);
+    console.log(teacherLastName);
 
     if (!subject || !studentLastName || !studentFirstName || !studentClass || !teacherLastName) {
         container.textContent = 'Необхідні дані для завантаження журналу відсутні.';
-        console.log("Тут");
         return;
     }
 
