@@ -3,6 +3,8 @@ const contentContainer = document.getElementById('GradeOfJournal');
 let allTeacherSubjectsAndClasses = [];
 let currentStudents = [];
 
+let journalCache = {};
+
 const lastName = sessionStorage.getItem('lastName');
 const firstName = sessionStorage.getItem('firstName');
 const classOrSubject = sessionStorage.getItem('classOrsubject');
@@ -17,6 +19,9 @@ const updateOrAddGrade = async (gradeData) => {
         });
         if (res.ok) {
             console.log('Оцінку успішно збережено!');
+            // Інвалідація кешу для поточного класу
+            const currentClass = document.getElementById('classOfjournal').value;
+            delete journalCache[currentClass];
         } else if (res.status === 403) {
             alert('Зміни можна вносити лише в останній урок.');
             loadFullJournal(document.getElementById('classOfjournal').value);
@@ -123,6 +128,13 @@ const loadFullJournal = async (className) => {
     const container = document.querySelector('.TabletJournal');
     container.innerHTML = 'Завантаження журналу...';
     if (!className) return container.innerHTML = '';
+
+    if (journalCache[className]) {
+        console.log('Дані завантажено з кешу для класу:', className);
+        displayFullJournal(journalCache[className]);
+        return;
+    }
+    
     const teacherSubject = document.getElementById('subjectTeacher').value;
     const url = `https://worker-full-journal.i0871601.workers.dev/?class=${className}&teacherLastName=${lastName}&teacherSubject=${teacherSubject}`;
     try {
@@ -133,6 +145,9 @@ const loadFullJournal = async (className) => {
             return;
         }
         const journal = await res.json();
+        
+        journalCache[className] = journal;
+        
         displayFullJournal(journal);
     } catch (err) {
         console.error('Помилка запиту:', err);
@@ -150,7 +165,10 @@ const addLesson = async (lessonData) => {
         });
         if (res.ok) {
             alert('Урок успішно додано!');
-            loadFullJournal(document.getElementById('classOfjournal').value);
+            const currentClass = document.getElementById('classOfjournal').value;
+            delete journalCache[currentClass];
+            
+            await loadFullJournal(currentClass); 
             return true;
         } else {
             alert('Помилка при додаванні уроку.');
@@ -262,6 +280,8 @@ async function init() {
             });
             setupAddLessonForm();
 
+        } else if (data.type === 'student_subjects') {
+            console.error('Неправильний тип даних для вчителя.');
         }
 
     } catch (error) {
