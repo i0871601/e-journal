@@ -1,18 +1,20 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+const role = 'teacher';
 const contentContainer = document.getElementById('GradeOfJournal');
 let allTeacherSubjectsAndClasses = [];
 let currentStudents = [];
-
 let journalCache = {};
-
 const lastName = sessionStorage.getItem('lastName');
 const firstName = sessionStorage.getItem('firstName');
 const classOrSubject = sessionStorage.getItem('classOrsubject');
+const subjectList = document.getElementById('Subject');
+const classList = document.getElementById('Class');
+const subjectDiv = document.getElementById('subjectTeacher');
+const classDiv = document.getElementById('classOfjournal');
 
 async function init() {
-    const selectElement = document.getElementById('classOfjournal');
-    if (!selectElement) {
-        console.error('Елемент для випадаючого списку не знайдено.');
+    if (!subjectList || !classList) {
+        console.error('Елементи для списків предметів або класів не знайдено.');
         return;
     }
 
@@ -20,35 +22,42 @@ async function init() {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
         const response = await fetch(url);
         const data = await response.json();
-        
+
         if (data.type === 'teacher_subjects_and_classes') {
             allTeacherSubjectsAndClasses = data.data;
-            const subjectTeacherSelect = document.getElementById('subjectTeacher');
 
             if (allTeacherSubjectsAndClasses.length > 1) {
-                subjectTeacherSelect.style.display = 'block';
+                subjectDiv.style.display = 'block';
                 allTeacherSubjectsAndClasses.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.subject;
-                    option.textContent = item.subject;
-                    subjectTeacherSelect.appendChild(option);
+                    const li = document.createElement('li');
+                    li.textContent = item.subject;
+                    li.dataset.subject = item.subject;
+                    subjectList.appendChild(li);
                 });
 
-                subjectTeacherSelect.addEventListener('change', (event) => {
-                    const selectedSubject = event.target.value;
-                    const selectedData = allTeacherSubjectsAndClasses.find(item => item.subject === selectedSubject);
-                    populateClassSelect(selectedData.classes);
+                subjectList.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'LI') {
+                        const selectedSubject = event.target.dataset.subject;
+                        const selectedData = allTeacherSubjectsAndClasses.find(item => item.subject === selectedSubject);
+                        populateClassList(selectedData.classes);
+                        updateSelectedState(subjectList, event.target);
+                    }
                 });
 
-                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
+                populateClassList(allTeacherSubjectsAndClasses[0].classes);
             } else {
-                subjectTeacherSelect.style.display = 'none';
-                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
+                subjectDiv.style.display = 'none';
+                populateClassList(allTeacherSubjectsAndClasses[0].classes);
             }
 
-            selectElement.addEventListener('change', () => {
-                loadFullJournal(selectElement.value);
+            classList.addEventListener('click', (event) => {
+                if (event.target.tagName === 'LI') {
+                    const selectedClass = event.target.dataset.class;
+                    loadFullJournal(selectedClass);
+                    updateSelectedState(classList, event.target);
+                }
             });
+
             setupAddLessonForm();
 
         } else if (data.type === 'student_subjects') {
@@ -57,7 +66,6 @@ async function init() {
 
     } catch (error) {
         console.error('Сталася помилка при завантаженні даних:', error);
-        selectElement.innerHTML = '<option>Помилка завантаження</option>';
     }
 }
 
@@ -71,11 +79,11 @@ const updateOrAddGrade = async (gradeData) => {
         });
         if (res.ok) {
             console.log('Оцінку успішно збережено!');
-            const currentClass = document.getElementById('classOfjournal').value;
+            const currentClass = getSelectedClass();
             delete journalCache[currentClass];
         } else if (res.status === 403) {
             alert('Зміни можна вносити лише в останній урок.');
-            loadFullJournal(document.getElementById('classOfjournal').value);
+            loadFullJournal(getSelectedClass());
         } else {
             console.error('Помилка при збереженні оцінки.');
         }
@@ -86,7 +94,6 @@ const updateOrAddGrade = async (gradeData) => {
 
 const displayFullJournal = (journalData) => {
     const container = document.querySelector('.TabletJournal');
-    const subjectTeacherSelect = document.getElementById('subjectTeacher');
     if (!container) return;
     container.innerHTML = '';
     const table = document.createElement('table');
@@ -163,7 +170,7 @@ const displayFullJournal = (journalData) => {
                         studentFirstName: studentFirstName,
                         studentLastName: studentLastName,
                         teacherLastName: lastName,
-                        subject: subjectTeacherSelect.value,
+                        subject: getSelectedSubject(),
                         grade: updatedGrade,
                         lessonType: 'Normal'
                     };
@@ -186,8 +193,8 @@ const loadFullJournal = async (className) => {
         displayFullJournal(journalCache[className]);
         return;
     }
-    
-    const teacherSubject = document.getElementById('subjectTeacher').value;
+
+    const teacherSubject = getSelectedSubject();
     const url = `https://worker-full-journal.i0871601.workers.dev/?class=${className}&teacherLastName=${lastName}&teacherSubject=${teacherSubject}`;
     try {
         const res = await fetch(url);
@@ -217,9 +224,8 @@ const addLesson = async (lessonData) => {
         });
         if (res.ok) {
             alert('Урок успішно додано!');
-            const currentClass = document.getElementById('classOfjournal').value;
+            const currentClass = getSelectedClass();
             delete journalCache[currentClass];
-            
             await loadFullJournal(currentClass); 
             return true;
         } else {
@@ -239,7 +245,7 @@ function setupAddLessonForm() {
     const addLessonFormHTML = `
         <div id="add-lesson-form">
             <h3>Додати новий урок</h3>
-            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
+            <input type="number" id="lessonNumberInput" placeholder="Номер уроку" required>
             <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
             <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
             <label for="lessonTypeInput">Тип уроку:</label>
@@ -260,9 +266,8 @@ function setupAddLessonForm() {
             const lessonDateInput = document.getElementById('lessonDateInput');
             const lessonTopicInput = document.getElementById('lessonTopicInput');
             const lessonTypeInput = document.getElementById('lessonTypeInput');
-            const selectedClass = selectElement.value;
-            const teacherSubjectSelect = document.getElementById('subjectTeacher');
-            const selectedSubject = teacherSubjectSelect.value;
+            const selectedClass = getSelectedClass();
+            const selectedSubject = getSelectedSubject();
             const lessonNumber = lessonNumberInput.value;
             const lessonDate = lessonDateInput.value;
             const lessonTopic = lessonTopicInput.value;
@@ -277,12 +282,9 @@ function setupAddLessonForm() {
                 grade: ''
             }));
             const lessonData = {
-                lessonNumber, Date: lessonDate, 
-                Topic: lessonTopic,
-                teacherLastName: lastName, 
-                teacherSubject: selectedSubject,
-                class: selectedClass, lessonType, 
-                grades: gradesData
+                lessonNumber, Date: lessonDate, Topic: lessonTopic,
+                teacherLastName: lastName, teacherSubject: selectedSubject,
+                class: selectedClass, lessonType, grades: gradesData
             };
             const success = await addLesson(lessonData);
             if (success) {
@@ -295,14 +297,30 @@ function setupAddLessonForm() {
     }
 }
 
-function populateClassSelect(classes) {
-    const select = document.getElementById('classOfjournal');
-    select.innerHTML = '<option disabled selected>Оберіть клас</option>';
+function updateSelectedState(ulElement, selectedLi) {
+    Array.from(ulElement.children).forEach(li => {
+        li.classList.remove('selected');
+    });
+    selectedLi.classList.add('selected');
+}
+
+function getSelectedSubject() {
+    const selectedItem = document.querySelector('#Subject li.selected');
+    return selectedItem ? selectedItem.dataset.subject : null;
+}
+
+function getSelectedClass() {
+    const selectedItem = document.querySelector('#Class li.selected');
+    return selectedItem ? selectedItem.dataset.class : null;
+}
+
+function populateClassList(classes) {
+    classList.innerHTML = '';
     classes.forEach(cls => {
-        const option = document.createElement('option');
-        option.value = cls;
-        option.textContent = cls;
-        select.appendChild(option);
+        const li = document.createElement('li');
+        li.textContent = cls;
+        li.dataset.class = cls;
+        classList.appendChild(li);
     });
 }
 
