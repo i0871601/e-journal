@@ -209,6 +209,8 @@ function setupAddLessonForm() {
             const lessonTopicInput = document.getElementById('lessonTopicInput');
             const lessonTypeInput = document.getElementById('lessonTypeInput');
             const selectedClass = selectElement.value;
+            const teacherSubjectSelect = document.getElementById('subjectTeacher');
+            const selectedSubject = teacherSubjectSelect.value;
             const lessonNumber = lessonNumberInput.value;
             const lessonDate = lessonDateInput.value;
             const lessonTopic = lessonTopicInput.value;
@@ -223,9 +225,12 @@ function setupAddLessonForm() {
                 grade: ''
             }));
             const lessonData = {
-                lessonNumber, Date: lessonDate, Topic: lessonTopic,
-                teacherLastName: lastName, teacherSubject: classOrSubject,
-                class: selectedClass, lessonType, grades: gradesData
+                lessonNumber, Date: lessonDate, 
+                Topic: lessonTopic,
+                teacherLastName: lastName, 
+                teacherSubject: selectedSubject,
+                class: selectedClass, lessonType, 
+                grades: gradesData
             };
             const success = await addLesson(lessonData);
             if (success) {
