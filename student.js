@@ -68,86 +68,98 @@ async function init() {
 }
 
 const displayFullJournal = (journalData) => {
-    const container = document.querySelector('.TabletJournal');
-    if (!container) return;
-    container.innerHTML = '';
-    const table = document.createElement('table');
-    table.classList.add('journal-table');
-    const tableHeader = table.createTHead();
-    const headerRow = tableHeader.insertRow();
-    const nameHeader = document.createElement('th');
-    nameHeader.textContent = 'Урок';
-    headerRow.appendChild(nameHeader);
-    const gradeHeader = document.createElement('th');
-    gradeHeader.textContent = 'Оцінка';
-    headerRow.appendChild(gradeHeader);
-    
-    const lessonsMap = new Map();
-    journalData.forEach(grade => {
-        if (!lessonsMap.has(grade.lessonNumber)) {
-            lessonsMap.set(grade.lessonNumber, {
-                lessonNumber: grade.lessonNumber,
-                Date: grade.Date,
-                Topic: grade.Topic,
-                lessonType: grade.lessonType
-            });
-        }
-    });
+    const container = document.querySelector('.TabletJournal');
+    if (!container) return;
+    container.innerHTML = '';
+    const table = document.createElement('table');
+    table.classList.add('journal-table');
+    const tableHeader = table.createTHead();
+    const headerRow = tableHeader.insertRow();
+    
+    // Перевіряємо, чи є дані для відображення
+    if (!journalData || journalData.length === 0) {
+        container.textContent = 'Журнал порожній.';
+        return;
+    }
 
-    const lessons = Array.from(lessonsMap.values()).sort((a, b) => a.lessonNumber - b.lessonNumber);
+    const lessonsMap = new Map();
+    journalData.forEach(grade => {
+        if (!lessonsMap.has(grade.lessonNumber)) {
+            lessonsMap.set(grade.lessonNumber, {
+                lessonNumber: grade.lessonNumber,
+                Date: grade.Date,
+                Topic: grade.Topic,
+                lessonType: grade.lessonType,
+                Grade: grade.Grade // Додано для коректного відображення
+            });
+        }
+    });
 
-    const tableBody = table.createTBody();
-    lessons.forEach(lesson => {
-        const row = tableBody.insertRow();
-        const lessonCell = row.insertCell();
-        lessonCell.textContent = `Урок ${lesson.lessonNumber} (${lesson.Date})`;
+    const lessons = Array.from(lessonsMap.values()).sort((a, b) => a.lessonNumber - b.lessonNumber);
 
-        const gradeCell = row.insertCell();
-        const grade = journalData.find(g => g.lessonNumber === lesson.lessonNumber);
-        const gradeValue = grade ? grade.Grade : '';
-        gradeCell.textContent = gradeValue;
-    });
+    const nameHeader = document.createElement('th');
+    nameHeader.textContent = 'Урок';
+    headerRow.appendChild(nameHeader);
+    const gradeHeader = document.createElement('th');
+    gradeHeader.textContent = 'Оцінка';
+    headerRow.appendChild(gradeHeader);
 
-    container.appendChild(table);
+    const tableBody = table.createTBody();
+    lessons.forEach(lesson => {
+        const row = tableBody.insertRow();
+        const lessonCell = row.insertCell();
+        lessonCell.textContent = `Урок ${lesson.lessonNumber} (${lesson.Date})`;
+
+        const gradeCell = row.insertCell();
+        const grade = journalData.find(g => g.lessonNumber === lesson.lessonNumber);
+        const gradeValue = grade ? grade.Grade : '';
+        const gradeType = grade ? grade.lessonType : 'Normal';
+        const gradeSpan = document.createElement('span');
+        gradeSpan.textContent = gradeValue;
+        if (gradeType !== 'Normal') gradeSpan.classList.add('calculated-grade');
+        gradeCell.appendChild(gradeSpan);
+    });
+
+    container.appendChild(table);
 };
 
 const loadStudentJournal = async (subject, teacherLastName) => {
-    const container = document.querySelector('.TabletJournal');
-    container.innerHTML = 'Завантаження журналу...';
+    const container = document.querySelector('.TabletJournal');
+    container.innerHTML = 'Завантаження журналу...';
 
-    const studentLastName = sessionStorage.getItem('lastName');
-    const studentFirstName = sessionStorage.getItem('firstName');
-    const studentClass = sessionStorage.getItem('classOrSubject');
+    const studentLastName = sessionStorage.getItem('lastName');
+    const studentFirstName = sessionStorage.getItem('firstName');
+    const studentClass = sessionStorage.getItem('classOrSubject');
 
-    if (!subject || !studentLastName || !studentFirstName || !studentClass || !teacherLastName) {
-        container.textContent = 'Необхідні дані для завантаження журналу відсутні.';
-        return;
-    }
+    if (!subject || !studentLastName || !studentFirstName || !studentClass || !teacherLastName) {
+        container.textContent = 'Необхідні дані для завантаження журналу відсутні.';
+        return;
+    }
 
-    const url = `https://worker-student-full-journal.i0871601.workers.dev/?studentLastName=${studentLastName}&studentFirstName=${studentFirstName}&class=${studentClass}&subject=${subject}&teacherLastName=${teacherLastName}`;
+    const url = `https://worker-student-full-journal.i0871601.workers.dev/?studentLastName=${studentLastName}&studentFirstName=${studentFirstName}&class=${studentClass}&subject=${subject}&teacherLastName=${teacherLastName}`;
 
-    try {
-        const res = await fetch(url);
-        if (!res.ok) {
-            console.error(`Помилка мережі: ${res.status}`);
-            container.textContent = 'Не вдалося завантажити журнал. Спробуйте пізніше.';
-            return;
-        }
-        const journal = await res.json();
-        displayFullJournal(journal);
-    } catch (err) {
-        console.error('Помилка запиту:', err);
-        container.textContent = 'Не вдалося завантажити журнал. Спробуйте пізніше.';
-    }
+    try {
+        const res = await fetch(url);
+        if (!res.ok) {
+            console.error(`Помилка мережі: ${res.status}`);
+            container.textContent = 'Не вдалося завантажити журнал. Спробуйте пізніше.';
+            return;
+        }
+        const journal = await res.json();
+        displayFullJournal(journal);
+    } catch (err) {
+        console.error('Помилка запиту:', err);
+        container.textContent = 'Не вдалося завантажити журнал. Спробуйте пізніше.';
+    }
 };
 
 function updateSelectedState(ulElement, selectedLi) {
-    Array.from(ulElement.children).forEach(li => {
-        li.classList.remove('selected');
-    });
-    if (selectedLi) {
-        selectedLi.classList.add('selected');
-    }
+    Array.from(ulElement.children).forEach(li => {
+        li.classList.remove('selected');
+    });
+    if (selectedLi) {
+        selectedLi.classList.add('selected');
+    }
 }
 
 init();
