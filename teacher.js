@@ -9,6 +9,58 @@ const lastName = sessionStorage.getItem('lastName');
 const firstName = sessionStorage.getItem('firstName');
 const classOrSubject = sessionStorage.getItem('classOrsubject');
 
+async function init() {
+    const selectElement = document.getElementById('classOfjournal');
+    if (!selectElement) {
+        console.error('Елемент для випадаючого списку не знайдено.');
+        return;
+    }
+
+    try {
+        const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.type === 'teacher_subjects_and_classes') {
+            allTeacherSubjectsAndClasses = data.data;
+            const subjectTeacherSelect = document.getElementById('subjectTeacher');
+
+            if (allTeacherSubjectsAndClasses.length > 1) {
+                subjectTeacherSelect.style.display = 'block';
+                allTeacherSubjectsAndClasses.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.subject;
+                    option.textContent = item.subject;
+                    subjectTeacherSelect.appendChild(option);
+                });
+
+                subjectTeacherSelect.addEventListener('change', (event) => {
+                    const selectedSubject = event.target.value;
+                    const selectedData = allTeacherSubjectsAndClasses.find(item => item.subject === selectedSubject);
+                    populateClassSelect(selectedData.classes);
+                });
+
+                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
+            } else {
+                subjectTeacherSelect.style.display = 'none';
+                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
+            }
+
+            selectElement.addEventListener('change', () => {
+                loadFullJournal(selectElement.value);
+            });
+            setupAddLessonForm();
+
+        } else if (data.type === 'student_subjects') {
+            console.error('Неправильний тип даних для вчителя.');
+        }
+
+    } catch (error) {
+        console.error('Сталася помилка при завантаженні даних:', error);
+        selectElement.innerHTML = '<option>Помилка завантаження</option>';
+    }
+}
+
 const updateOrAddGrade = async (gradeData) => {
     const url = `https://worker-update-grade.i0871601.workers.dev/`;
     try {
@@ -19,7 +71,6 @@ const updateOrAddGrade = async (gradeData) => {
         });
         if (res.ok) {
             console.log('Оцінку успішно збережено!');
-            // Інвалідація кешу для поточного класу
             const currentClass = document.getElementById('classOfjournal').value;
             delete journalCache[currentClass];
         } else if (res.status === 403) {
@@ -188,7 +239,7 @@ function setupAddLessonForm() {
     const addLessonFormHTML = `
         <div id="add-lesson-form">
             <h3>Додати новий урок</h3>
-            <input type="number" id="lessonNumberInput" placeholder="Номер уроку" required>
+            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
             <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
             <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
             <label for="lessonTypeInput">Тип уроку:</label>
@@ -241,58 +292,6 @@ function setupAddLessonForm() {
                 lessonTypeInput.value = 'Normal';
             }
         });
-    }
-}
-
-async function init() {
-    const selectElement = document.getElementById('classOfjournal');
-    if (!selectElement) {
-        console.error('Елемент для випадаючого списку не знайдено.');
-        return;
-    }
-
-    try {
-        const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.type === 'teacher_subjects_and_classes') {
-            allTeacherSubjectsAndClasses = data.data;
-            const subjectTeacherSelect = document.getElementById('subjectTeacher');
-
-            if (allTeacherSubjectsAndClasses.length > 1) {
-                subjectTeacherSelect.style.display = 'block';
-                allTeacherSubjectsAndClasses.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.subject;
-                    option.textContent = item.subject;
-                    subjectTeacherSelect.appendChild(option);
-                });
-
-                subjectTeacherSelect.addEventListener('change', (event) => {
-                    const selectedSubject = event.target.value;
-                    const selectedData = allTeacherSubjectsAndClasses.find(item => item.subject === selectedSubject);
-                    populateClassSelect(selectedData.classes);
-                });
-
-                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
-            } else {
-                subjectTeacherSelect.style.display = 'none';
-                populateClassSelect(allTeacherSubjectsAndClasses[0].classes);
-            }
-
-            selectElement.addEventListener('change', () => {
-                loadFullJournal(selectElement.value);
-            });
-            setupAddLessonForm();
-
-        } else if (data.type === 'student_subjects') {
-            console.error('Неправильний тип даних для вчителя.');
-        }
-
-    } catch (error) {
-        console.error('Сталася помилка при завантаженні даних:', error);
-        selectElement.innerHTML = '<option>Помилка завантаження</option>';
     }
 }
 
