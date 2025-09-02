@@ -32,8 +32,9 @@ function LogicSubjectMany() {
 }
 
 // Слухач подій для батьківського елемента (<ul>)
-subjectList.addEventListener('click', (event) => {
+subjectTeacherContainer.addEventListener('click', (event) => {
     // Перевіряємо, що клік був саме на елементі <li>
+    subjectList.style.display = "block";
     if (event.target.tagName === 'LI') {
         // Оновлюємо змінну з вмістом натиснутого елемента
         classOrSubject = event.target.textContent; 
@@ -277,6 +278,7 @@ function setupAddLessonForm() {
             }
         });
     }
+    isFormCreated = true;
 }
 // ЛОГІКА ДЛЯ УЧНЯ
 function runStudentGradesLogic() {
