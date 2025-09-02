@@ -14,6 +14,7 @@ let isInitialized = false;
 let isFormCreated = false;
 // Змінні та функції, специфічні для ролі
 let currentStudents = [];
+const dataCache = {};
 
 
 if (subjectButton && subjectList) {
@@ -161,8 +162,15 @@ const displayFullJournal = (journalData) => {
 
 const loadFullJournal = async (className) => {
     const container = document.querySelector(".TabletJournal");
+    const cacheKey = `teacher-${classOrSubject}-${className}`;
     container.innerHTML = "Завантаження журналу...";
     if (!className) return (container.innerHTML = "");
+    
+    if (dataCache[cacheKey]) {
+        console.log("Дані завантажено з кешу для вчителя.");
+        displayFullJournal(dataCache[cacheKey]);
+        return;
+    }
     const url = `https://worker-full-journal.i0871601.workers.dev/?class=${className}&teacherLastName=${lastName}&teacherSubject=${classOrSubject}`;
 
     try {
@@ -173,6 +181,7 @@ const loadFullJournal = async (className) => {
             return;
         }
         const journal = await res.json();
+        dataCache[cacheKey] = journal;
         displayFullJournal(journal);
     } catch (err) {
         console.error("Помилка запиту:", err);
@@ -180,7 +189,7 @@ const loadFullJournal = async (className) => {
     }
 };
 
-const addLesson = async (lessonData) => {
+const addLesson = async (lessonData, selectedClass) => {
     const url = `https://worker-add-lesson.i0871601.workers.dev/`;
 
     try {
@@ -192,6 +201,9 @@ const addLesson = async (lessonData) => {
         if (res.ok) {
             alert("Урок успішно додано!");
             loadFullJournal(document.getElementById("classOfjournal").value);
+            const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
+            delete dataCache[cacheKey];
+            loadFullJournal(selectedClass);
             return true;
         } else {
             alert("Помилка при додаванні уроку.");
@@ -263,7 +275,7 @@ function setupAddLessonForm() {
                 grades: gradesData
             };
 
-            const success = await addLesson(lessonData);
+            const success = await addLesson(lessonData, selectedClass);
             if (success) {
                 lessonNumberInput.value = "";
                 lessonDateInput.value = "";
@@ -327,12 +339,20 @@ function runStudentGradesLogic() {
 
     const loadGradesForSubject = async (subject, teacherLastName) => {
         const containerJournal = document.querySelector(".TabletJournal");
+        const cacheKey = `student-${subject}`;
         if (!containerJournal) return;
         containerJournal.innerHTML = "Завантаження оцінок...";
+
+        if (dataCache[cacheKey]) {
+            console.log("Дані завантажено з кешу для учня.");
+            displayGrades(dataCache[cacheKey], subject);
+            return;
+        }
         try {
             const gradesUrl = `https://worker-student-full-journal.i0871601.workers.dev/?studentLastName=${lastName}&studentFirstName=${firstName}&class=${classOrSubject}&subject=${subject}&teacherLastName=${teacherLastName}`;
             const gradesRes = await fetch(gradesUrl);
             const gradesData = await gradesRes.json();
+            dataCache[cacheKey] = gradesData.grades;
             displayGrades(gradesData.grades, subject);
         } catch (err) {
             console.error("Помилка завантаження даних:", err);
