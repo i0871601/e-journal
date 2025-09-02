@@ -6,6 +6,8 @@ const firstName = sessionStorage.getItem("firstName");
 let classOrSubject = sessionStorage.getItem("classOrsubject");
 
 const subjectTeacherContainer = document.getElementById("subjectTeacher");
+const subjectButton = document.getElementById("subject-button");
+const subjectText = document.querySelector("#subject-button p");
 const subjectList = document.getElementById("Subject");
 
 let isInitialized = false;
@@ -13,39 +15,31 @@ let isFormCreated = false;
 // Змінні та функції, специфічні для ролі
 let currentStudents = [];
 
-function LogicSubjectMany() {
-    if (classOrSubject && classOrSubject.includes(',')) {
-        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
 
-        if (subjectsArray.length > 1) {
-            subjectTeacherContainer.style.display = "block";
-            
-            // Створення елементів без додавання обробників кліків
-            subjectList.innerHTML = '';
-            subjectsArray.forEach(subject => {
-                const listItem = document.createElement('li');
-                listItem.textContent = subject;
-                subjectList.appendChild(listItem);
-            });
-        }
-    }
+if (subjectButton && subjectList) {
+    subjectButton.addEventListener('click', () => {
+        // Показуємо список предметів при кліку на кнопку
+        subjectList.style.display = "block";
+    });
 }
 
 // Слухач подій для батьківського елемента (<ul>)
-subjectTeacherContainer.addEventListener('click', (event) => {
-    // Перевіряємо, що клік був саме на елементі <li>
-    subjectList.style.display = "block";
+subjectList.addEventListener('click', (event) => {
+    // Перевіряємо, чи клік був саме на елементі <li>
     if (event.target.tagName === 'LI') {
         // Оновлюємо змінну з вмістом натиснутого елемента
-        classOrSubject = event.target.textContent; 
-        
+        classOrSubject = event.target.textContent;
+        subjectText.textContent = classOrSubject;
+
         console.log("Нове значення вибраного предмета:", classOrSubject);
-        
+
         // Запускаємо основну логіку
         init();
+        
+        // Ховаємо список після вибору предмета
+        subjectList.style.display = "none";
     }
 });
-
 // ЛОГІКА ДЛЯ ВЧИТЕЛЯ
 const updateOrAddGrade = async (gradeData) => {
     const url = `https://worker-update-grade.i0871601.workers.dev/`;
@@ -365,10 +359,28 @@ function handleDropdownSelection(selectElement, studentLogic) {
 // УНІВЕРСАЛЬНА ФУНКЦІЯ ЗАПУСКУ
 async function init() {
     if (!isInitialized) {
-        LogicSubjectMany();
+        if (classOrSubject){
+            if(classOrSubject.includes(',')){
+                const subjectsArray = classOrSubject.split(',').map(item => item.trim());
+                
+                subjectList.innerHTML = '';
+                subjectsArray.forEach(subject => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = subject;
+                    subjectList.appendChild(listItem);
+                });
+                if (subjectsArray.length > 0) {
+                    classOrSubject = subjectsArray[0];
+                    subjectText.textContent = classOrSubject;
+                }
+                subjectTeacherContainer.style.display = "block";
+            } else {
+               classOrSubject = classOrSubject.trim();
+            }
+        }
         isInitialized = true;
     }
-
+    
     console.log("Поточне значення classOrSubject:", classOrSubject);
     
     const selectElement = document.getElementById("classOfjournal");

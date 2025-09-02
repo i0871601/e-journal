@@ -6,3 +6,9 @@
   --color2: #262626;
   --text-color: #878787;
 }
+#subjectTeacher{
+  display: none;
+}
+#Subject{
+  display: none;
+}
