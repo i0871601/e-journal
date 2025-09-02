@@ -33,8 +33,8 @@ subjectList.addEventListener('click', (event) => {
 
         console.log("Нове значення вибраного предмета:", classOrSubject);
 
-        // Запускаємо основну логіку
-        init();
+        // Запускаємо тільки функцію для оновлення списку
+        loadDropdownOptions();
         
         // Ховаємо список після вибору предмета
         subjectList.style.display = "none";
@@ -356,46 +356,24 @@ function handleDropdownSelection(selectElement, studentLogic) {
         }
     });
 }
-// УНІВЕРСАЛЬНА ФУНКЦІЯ ЗАПУСКУ
-async function init() {
-    if (!isInitialized) {
-        if (classOrSubject){
-            if(classOrSubject.includes(',')){
-                const subjectsArray = classOrSubject.split(',').map(item => item.trim());
-                
-                subjectList.innerHTML = '';
-                subjectsArray.forEach(subject => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = subject;
-                    subjectList.appendChild(listItem);
-                });
-                if (subjectsArray.length > 0) {
-                    classOrSubject = subjectsArray[0];
-                    subjectText.textContent = classOrSubject;
-                }
-                subjectTeacherContainer.style.display = "block";
-            } else {
-               classOrSubject = classOrSubject.trim();
-            }
-        }
-        isInitialized = true;
-    }
-    
-    console.log("Поточне значення classOrSubject:", classOrSubject);
-    
+// Винесено логіку отримання та заповнення списку в окрему функцію
+async function loadDropdownOptions() {
     const selectElement = document.getElementById("classOfjournal");
     if (!selectElement) {
         console.error("Елемент для випадаючого списку не знайдено.");
         return;
     }
+    
     let studentLogic;
     if (role === "student") {
         studentLogic = runStudentGradesLogic();
     }
+    
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
         const response = await fetch(url);
         const data = await response.json();
+        
         selectElement.innerHTML = "";
         const defaultOption = document.createElement("option");
         if (role === "teacher") {
@@ -405,7 +383,7 @@ async function init() {
         }
         defaultOption.disabled = true;
         defaultOption.selected = true;
-        selectElement.appendChild(defaultOption); // Обробка даних залежно від ролі
+        selectElement.appendChild(defaultOption);
 
         if (data.type === "classes") {
             data.data.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
@@ -421,22 +399,64 @@ async function init() {
             );
             data.data.forEach((item) => {
                 const option = document.createElement("option");
-                option.value = item.subject; // Відображаємо лише назву предмета.
+                option.value = item.subject;
                 option.textContent = item.subject;
                 option.dataset.teacherLastName = item.teacherLastName || "";
                 selectElement.appendChild(option);
             });
         }
-        if (role === "teacher") {
-            handleDropdownSelection(selectElement);
-            setupAddLessonForm();
-        } else if (role === "student") {
-            handleDropdownSelection(selectElement, studentLogic);
-        }
     } catch (error) {
         console.error("Сталася помилка при завантаженні даних:", error);
         selectElement.innerHTML = "<option>Помилка завантаження</option>";
     }
+}
+// УНІВЕРСАЛЬНА ФУНКЦІЯ ЗАПУСКУ
+async function init() {
+    if (!isInitialized) {
+        if (classOrSubject){
+            if(classOrSubject.includes(',')){
+                const subjectsArray = classOrSubject.split(',').map(item => item.trim());
+                subjectList.innerHTML = '';
+                subjectsArray.forEach(subject => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = subject;
+                    subjectList.appendChild(listItem);
+                });
+                if (subjectsArray.length > 0) {
+                    classOrSubject = subjectsArray[0];
+                    subjectText.textContent = classOrSubject;
+                }
+                subjectTeacherContainer.style.display = "block";
+            } else {
+                classOrSubject = classOrSubject.trim();
+            }
+        }
+        isInitialized = true;
+    }
+    
+    console.log("Поточне значення classOrSubject:", classOrSubject);
+    
+    const selectElement = document.getElementById("classOfjournal");
+    if (!selectElement) {
+        console.error("Елемент для випадаючого списку не знайдено.");
+        return;
+    }
+    
+    let studentLogic;
+    if (role === "student") {
+        studentLogic = runStudentGradesLogic();
+    }
+    
+    // Додаємо обробники подій тільки один раз при запуску
+    if (role === "teacher") {
+        handleDropdownSelection(selectElement, studentLogic);
+        setupAddLessonForm();
+    } else if (role === "student") {
+        handleDropdownSelection(selectElement, studentLogic);
+    }
+    
+    // Викликаємо нову функцію для завантаження даних
+    await loadDropdownOptions();
 }
 
 init();
