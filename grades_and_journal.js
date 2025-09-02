@@ -9,6 +9,7 @@ const subjectTeacherContainer = document.getElementById("subjectTeacher");
 const subjectList = document.getElementById("Subject");
 
 let isInitialized = false;
+let isFormCreated = false;
 // Змінні та функції, специфічні для ролі
 let currentStudents = [];
 
