@@ -3,9 +3,46 @@ const role = sessionStorage.getItem("role");
 const contentContainer = document.getElementById("GradeOfJournal");
 const lastName = sessionStorage.getItem("lastName");
 const firstName = sessionStorage.getItem("firstName");
-const classOrSubject = sessionStorage.getItem("classOrsubject");
+let classOrSubject = sessionStorage.getItem("classOrsubject");
+
+const subjectTeacherContainer = document.getElementById("subjectTeacher");
+const subjectList = document.getElementById("Subject");
+
+let isInitialized = false;
 // Змінні та функції, специфічні для ролі
 let currentStudents = [];
+
+function LogicSubjectMany() {
+    if (classOrSubject && classOrSubject.includes(',')) {
+        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
+
+        if (subjectsArray.length > 1) {
+            subjectTeacherContainer.style.display = "block";
+            
+            // Створення елементів без додавання обробників кліків
+            subjectList.innerHTML = '';
+            subjectsArray.forEach(subject => {
+                const listItem = document.createElement('li');
+                listItem.textContent = subject;
+                subjectList.appendChild(listItem);
+            });
+        }
+    }
+}
+
+// Слухач подій для батьківського елемента (<ul>)
+subjectList.addEventListener('click', (event) => {
+    // Перевіряємо, що клік був саме на елементі <li>
+    if (event.target.tagName === 'LI') {
+        // Оновлюємо змінну з вмістом натиснутого елемента
+        classOrSubject = event.target.textContent; 
+        
+        console.log("Нове значення вибраного предмета:", classOrSubject);
+        
+        // Запускаємо основну логіку
+        init();
+    }
+});
 
 // ЛОГІКА ДЛЯ ВЧИТЕЛЯ
 const updateOrAddGrade = async (gradeData) => {
@@ -322,6 +359,13 @@ function handleDropdownSelection(selectElement, studentLogic) {
 }
 // УНІВЕРСАЛЬНА ФУНКЦІЯ ЗАПУСКУ
 async function init() {
+    if (!isInitialized) {
+        LogicSubjectMany();
+        isInitialized = true;
+    }
+
+    console.log("Поточне значення classOrSubject:", classOrSubject);
+    
     const selectElement = document.getElementById("classOfjournal");
     if (!selectElement) {
         console.error("Елемент для випадаючого списку не знайдено.");
