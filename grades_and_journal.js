@@ -211,7 +211,9 @@ const addLesson = async (lessonData) => {
 
 function setupAddLessonForm() {
     const selectElement = document.getElementById("classOfjournal");
-
+    if (isFormCreated) {
+        return; // Якщо форма вже створена, виходимо
+    }
     if (!selectElement) return;
     const addLessonFormHTML = `
         <div id="add-lesson-form">
