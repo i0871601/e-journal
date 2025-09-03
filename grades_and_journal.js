@@ -16,12 +16,6 @@ let isFormCreated = false;
 let currentStudents = [];
 const dataCache = {};
 
-if (subjectButton && subjectList) {
-    subjectButton.addEventListener('click', () => {
-        subjectList.style.display = "block";
-    });
-}
-
 subjectList.addEventListener('click', (event) => {
     if (event.target.tagName === 'LI') {
         const selectedSubject = event.target.textContent;
@@ -240,23 +234,6 @@ function setupAddLessonForm() {
         </div>
     `;
     container.insertAdjacentHTML('afterend', addLessonFormHTML);
-    const lessonTypeButton = document.getElementById("lessonType-Button");
-    const lessonTypeList = document.getElementById("lessonTypeList");
-    const lessonTypePara = lessonTypeButton.querySelector("p");
-
-    if (lessonTypeButton && lessonTypeList) {
-        lessonTypeButton.addEventListener('click', () => {
-            lessonTypeList.style.display = lessonTypeList.style.display === "block" ? "none" : "block";
-        });
-
-        lessonTypeList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI') {
-                const selectedType = event.target.textContent;
-                lessonTypePara.textContent = selectedType;
-                lessonTypeList.style.display = "none";
-            }
-        });
-    }
 
     const saveLessonButton = document.getElementById("saveLessonButton");
     if (saveLessonButton) {
@@ -264,24 +241,21 @@ function setupAddLessonForm() {
             const lessonNumberInput = document.getElementById("lessonNumberInput");
             const lessonDateInput = document.getElementById("lessonDateInput");
             const lessonTopicInput = document.getElementById("lessonTopicInput");
-
+            const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
             const lessonNumber = lessonNumberInput.value;
             const lessonDate = lessonDateInput.value;
             const lessonTopic = lessonTopicInput.value;
             const lessonType = lessonTypePara.textContent.trim();
             const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
-
-            if (!lessonNumber || !lessonDate || !lessonTopic || !selectedClass || !lessonType) {
+            if (!lessonNumber || !lessonDate || !lessonTopic || !selectedClass || !lessonType || lessonType === "Виберіть тип уроку") {
                 alert("Будь ласка, заповніть всі поля.");
                 return;
             }
-
             const gradesData = currentStudents.map((student) => ({
                 studentFirstName: student.firstName,
                 studentLastName: student.lastName,
                 grade: ""
             }));
-
             const lessonData = {
                 lessonNumber,
                 Date: lessonDate,
@@ -292,7 +266,6 @@ function setupAddLessonForm() {
                 lessonType: lessonType,
                 grades: gradesData
             };
-
             const success = await addLesson(lessonData, selectedClass);
             if (success) {
                 lessonNumberInput.value = "";
@@ -358,7 +331,6 @@ function runStudentGradesLogic() {
         const cacheKey = `student-${subject}`;
         if (!containerJournal) return;
         containerJournal.innerHTML = "Завантаження оцінок...";
-
         if (dataCache[cacheKey]) {
             console.log("Дані завантажено з кешу для учня.");
             displayGrades(dataCache[cacheKey], subject);
@@ -381,17 +353,12 @@ function runStudentGradesLogic() {
 function handleDropdownSelection() {
     const listElement = document.querySelector("#classOfjournal #subjectClass");
     const buttonElement = document.querySelector("#classOfjournal .first-option");
-    if (buttonElement && listElement) {
-        buttonElement.addEventListener('click', () => {
-            listElement.style.display = listElement.style.display === "block" ? "none" : "block";
-        });
-    }
+
     if (listElement) {
         listElement.addEventListener("click", async (event) => {
             if (event.target.tagName === 'LI') {
                 const selectedValue = event.target.textContent;
                 const teacherLastName = event.target.dataset.teacherLastName;
-
                 buttonElement.querySelector("p").textContent = selectedValue;
                 listElement.style.display = "none";
                 if (role === "teacher") {
@@ -440,14 +407,12 @@ async function loadDropdownOptions() {
         populateDropdown(listElement, dataCache[cacheKey]);
         return;
     }
-
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
         const response = await fetch(url);
         const data = await response.json();
         dataCache[cacheKey] = data;
         populateDropdown(listElement, data);
-
     } catch (error) {
         console.error("Сталася помилка при завантаженні даних:", error);
         listElement.innerHTML = "<li>Помилка завантаження</li>";
@@ -477,7 +442,6 @@ async function init() {
         isInitialized = true;
     }
     const TextElement = document.querySelector("#classOfjournal .first-option p");
-
     handleDropdownSelection();
     if (role === "teacher") {
         setupAddLessonForm();
@@ -487,17 +451,19 @@ async function init() {
     }
     await loadDropdownOptions();
     
-    // ЄДИНИЙ УНІВЕРСАЛЬНИЙ ОБРОБНИК КЛІКІВ ДЛЯ ВСІХ ВИПАДАЮЧИХ СПИСКІВ
     document.addEventListener('click', (event) => {
         const allDropdowns = document.querySelectorAll('.dropdown-list');
         allDropdowns.forEach(list => {
             const parentContainer = list.closest('.container-all');
             if (parentContainer) {
-                const isClickInside = parentContainer.contains(event.target);
-                if (list.style.display === "block" && !isClickInside) {
-                    list.style.display = "none";
-                } else if (parentContainer.querySelector('.first-option, .dropdown-button').contains(event.target)) {
+                const isClickInsideButton = parentContainer.querySelector('.first-option, .dropdown-button').contains(event.target);
+                const isClickInsideList = list.contains(event.target);
+
+                if (isClickInsideButton) {
                     list.style.display = list.style.display === "block" ? "none" : "block";
+                } 
+                else if (list.style.display === "block" && !isClickInsideList) {
+                    list.style.display = "none";
                 }
             }
         });
