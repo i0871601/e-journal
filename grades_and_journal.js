@@ -67,7 +67,7 @@ const displayFullJournal = (journalData) => {
     nameHeader.textContent = "Прізвище та Ім'я";
     headerRow.appendChild(nameHeader);
     currentStudents = journalData;
-    
+
     const lessonsMap = new Map();
     journalData.forEach((student) => {
         student.grades.forEach((grade) => {
@@ -98,7 +98,14 @@ const displayFullJournal = (journalData) => {
     });
 
     const maxNormalLessonNumber = lessons.reduce((max, lesson) => {
-        if (lesson.lessonType === 'Normal' && lesson.lessonNumber > max) {
+        if (lesson.lessonType === "Normal" && lesson.lessonNumber > max) {
+            return lesson.lessonNumber;
+        }
+        return max;
+    }, 0);
+
+    const maxCalculatedLessonNumber = lessons.reduce((max, lesson) => {
+        if (lesson.lessonType !== "Normal" && lesson.lessonNumber > max) {
             return lesson.lessonNumber;
         }
         return max;
@@ -131,19 +138,16 @@ const displayFullJournal = (journalData) => {
 
         lessons.forEach((lesson) => {
             const gradeCell = studentRow.insertCell();
-            
             const grade = student.grades.find((g) => g.lessonNumber === lesson.lessonNumber && g.lessonType === lesson.lessonType);
             const gradeValue = grade ? grade.Grade : "";
 
-            const isNormalLesson = lesson.lessonType === "Normal";
-            const isLastNormalLesson = isNormalLesson && lesson.lessonNumber === maxNormalLessonNumber;
+            const isEditable = (
+                lesson.lessonType === "Normal" &&
+                lesson.lessonNumber === maxNormalLessonNumber &&
+                maxNormalLessonNumber < maxCalculatedLessonNumber
+            );
 
-            if (!isNormalLesson || !isLastNormalLesson) {
-                const gradeSpan = document.createElement("span");
-                gradeSpan.textContent = gradeValue;
-                if (!isNormalLesson) gradeSpan.classList.add("calculated-grade");
-                gradeCell.appendChild(gradeSpan);
-            } else {
+            if (isEditable) {
                 const gradeInput = document.createElement("input");
                 gradeInput.type = "text";
                 gradeInput.value = gradeValue;
@@ -168,6 +172,11 @@ const displayFullJournal = (journalData) => {
                     updateOrAddGrade(gradeData);
                 });
                 gradeCell.appendChild(gradeInput);
+            } else {
+                const gradeSpan = document.createElement("span");
+                gradeSpan.textContent = gradeValue;
+                if (lesson.lessonType !== "Normal") gradeSpan.classList.add("calculated-grade");
+                gradeCell.appendChild(gradeSpan);
             }
         });
     });
