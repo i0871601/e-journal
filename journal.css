@@ -47,6 +47,16 @@
   justify-content: space-between;
   width: 70%;
 }
+#subjectTeacher, classOfjournal{
+  width: clamp(300px, 30vmin, 300px);
+  border: 0;
+  border-radius: 15vmin /*від шрифта*/;
+  box-shadow: 0 0 0.5vmin var(--color1);
+  padding: 0.3vmin;
+  padding-left: 0.9vmin;
+  font-family: 'SourceSans3';
+  position: relative;
+}
 #subjectTeacher{
   display: none;
 }
