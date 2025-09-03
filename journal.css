@@ -6,6 +6,29 @@
   --color2: #262626;
   --text-color: #878787;
 }
+.Journal{
+  overflow: auto;
+}
+.Journal::-webkit-scrollbar{
+    background-color: var(--fon-color);
+}
+.Journal::-webkit-scrollbar-thumb{
+    background-color: var(--text-color);
+    border-radius: 25px;
+    border: 3px solid var(--fon-color);
+}
+.Journal::-webkit-scrollbar-thumb:active{
+    background-color: var(--color-accent);
+}
+.contentJournal{
+    display: flex;
+    flex-direction: column;
+    gap: 3vmin;
+    width: 95%;
+    height: 100%;
+    padding-left: 3%;
+    font-family: 'SourceSans3';
+}
 #subjectTeacher{
   display: none;
 }
