@@ -1,4 +1,4 @@
-//Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+// Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 const role = sessionStorage.getItem("role");
 const contentContainer = document.getElementById("GradeOfJournal");
 const lastName = sessionStorage.getItem("lastName");
@@ -54,7 +54,8 @@ const updateOrAddGrade = async (gradeData) => {
             console.log("Оцінку успішно збережено!");
         } else if (res.status === 403) {
             alert("Зміни можна вносити лише в останній урок.");
-            loadFullJournal(document.getElementById("classOfjournal").value);
+            const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent;
+            loadFullJournal(selectedClass);
         } else {
             console.error("Помилка при збереженні оцінки.");
         }
@@ -200,7 +201,6 @@ const addLesson = async (lessonData, selectedClass) => {
         });
         if (res.ok) {
             alert("Урок успішно додано!");
-            loadFullJournal(document.getElementById("classOfjournal").value);
             const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
             delete dataCache[cacheKey];
             loadFullJournal(selectedClass);
@@ -217,29 +217,29 @@ const addLesson = async (lessonData, selectedClass) => {
 };
 
 function setupAddLessonForm() {
-    const selectElement = document.getElementById("classOfjournal");
+    const container = document.getElementById("classOfjournal");
     if (isFormCreated) {
-        return; // Якщо форма вже створена, виходимо
+        return; 
     }
-    if (!selectElement) return;
+    if (!container) return;
     const addLessonFormHTML = `
-        <div id="add-lesson-form">
-            <h3>Додати новий урок</h3>
-            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
-            <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
-            <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
-            <label for="lessonTypeInput">Тип уроку:</label>
-            <select id="lessonTypeInput" required>
-                <option value="Normal">Звичайний</option>
-                <option value="Thematic">Тематична</option>
-                <option value="Semester">Семестрова</option>
-                <option value="Final">Річна</option>
-            </select>
-            <button id="saveLessonButton">Зберегти урок</button>
-        </div>
-    `;
+        <div id="add-lesson-form">
+            <h3>Додати новий урок</h3>
+            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
+            <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
+            <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
+            <label for="lessonTypeInput">Тип уроку:</label>
+            <select id="lessonTypeInput" required>
+                <option value="Normal">Звичайний</option>
+                <option value="Thematic">Тематична</option>
+                <option value="Semester">Семестрова</option>
+                <option value="Final">Річна</option>
+            </select>
+            <button id="saveLessonButton">Зберегти урок</button>
+        </div>
+    `;
     
-    selectElement.after(document.createRange().createContextualFragment(addLessonFormHTML));
+    container.insertAdjacentHTML('afterend', addLessonFormHTML);
     const saveLessonButton = document.getElementById("saveLessonButton");
     if (saveLessonButton) {
         saveLessonButton.addEventListener("click", async () => {
@@ -247,11 +247,11 @@ function setupAddLessonForm() {
             const lessonDateInput = document.getElementById("lessonDateInput");
             const lessonTopicInput = document.getElementById("lessonTopicInput");
             const lessonTypeInput = document.getElementById("lessonTypeInput");
-            const selectedClass = selectElement.value;
             const lessonNumber = lessonNumberInput.value;
             const lessonDate = lessonDateInput.value;
             const lessonTopic = lessonTopicInput.value;
             const lessonType = lessonTypeInput.value;
+            const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent;
             
             if (!lessonNumber || !lessonDate || !lessonTopic || !selectedClass || !lessonType) {
                 alert("Будь ласка, заповніть всі поля.");
@@ -362,31 +362,45 @@ function runStudentGradesLogic() {
     return { loadGradesForSubject };
 }
 // ЛОГІКА ОБРОБКИ ВИБОРУ З ВИПАДАЮЧОГО МЕНЮ
-function handleDropdownSelection(selectElement, studentLogic) {
-    selectElement.addEventListener("change", async (event) => {
-        const selectedOption = event.target.options[event.target.selectedIndex];
-        const selectedValue = selectedOption.value;
-        if (role === "teacher") {
-            loadFullJournal(selectedValue);
-        } else if (role === "student") {
-            const teacherLastName = selectedOption.dataset.teacherLastName;
-            if (selectedValue) {
-                studentLogic.loadGradesForSubject(selectedValue, teacherLastName);
+function handleDropdownSelection() {
+    const listElement = document.querySelector("#classOfjournal #subjectClass");
+    const buttonElement = document.querySelector("#classOfjournal .first-option");
+    // Обробник для показу/приховування списку
+    if (buttonElement && listElement) {
+        buttonElement.addEventListener('click', () => {
+            listElement.style.display = listElement.style.display === "block" ? "none" : "block";
+        });
+    }
+    // Обробник для вибору елемента зі списку
+    if (listElement) {
+        listElement.addEventListener("click", async (event) => {
+            if (event.target.tagName === 'LI') {
+                const selectedValue = event.target.textContent;
+                const teacherLastName = event.target.dataset.teacherLastName;
+                
+                // Оновлюємо текст на кнопці
+                buttonElement.querySelector("p").textContent = selectedValue;
+                listElement.style.display = "none";
+
+                // Запускаємо логіку завантаження
+                if (role === "teacher") {
+                    loadFullJournal(selectedValue);
+                } else if (role === "student") {
+                    if (selectedValue) {
+                        const studentLogic = runStudentGradesLogic(); // Потрібно отримати екземпляр
+                        studentLogic.loadGradesForSubject(selectedValue, teacherLastName);
+                    }
+                }
             }
-        }
-    });
+        });
+    }
 }
 // Винесено логіку отримання та заповнення списку в окрему функцію
 async function loadDropdownOptions() {
-    const selectElement = document.getElementById("classOfjournal");
-    if (!selectElement) {
+    const listElement = document.querySelector("#classOfjournal #subjectClass");
+    if (!listElement) {
         console.error("Елемент для випадаючого списку не знайдено.");
         return;
-    }
-    
-    let studentLogic;
-    if (role === "student") {
-        studentLogic = runStudentGradesLogic();
     }
     
     try {
@@ -394,40 +408,35 @@ async function loadDropdownOptions() {
         const response = await fetch(url);
         const data = await response.json();
         
-        selectElement.innerHTML = "";
-        const defaultOption = document.createElement("option");
+        listElement.innerHTML = "";
+        
         if (role === "teacher") {
-            defaultOption.textContent = "Оберіть клас";
+            
         } else if (role === "student") {
-            defaultOption.textContent = "Оберіть предмет";
+            
         }
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        selectElement.appendChild(defaultOption);
 
         if (data.type === "classes") {
             data.data.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
             data.data.forEach((item) => {
-                const option = document.createElement("option");
-                option.value = item;
-                option.textContent = item;
-                selectElement.appendChild(option);
+                const listItem = document.createElement("li");
+                listItem.textContent = item;
+                listElement.appendChild(listItem);
             });
         } else if (data.type === "subjects") {
             data.data.sort((a, b) =>
                 a.subject.localeCompare(b.subject, undefined, { numeric: true, sensitivity: "base" })
             );
             data.data.forEach((item) => {
-                const option = document.createElement("option");
-                option.value = item.subject;
-                option.textContent = item.subject;
-                option.dataset.teacherLastName = item.teacherLastName || "";
-                selectElement.appendChild(option);
+                const listItem = document.createElement("li");
+                listItem.textContent = item.subject;
+                listItem.dataset.teacherLastName = item.teacherLastName || "";
+                listElement.appendChild(listItem);
             });
         }
     } catch (error) {
         console.error("Сталася помилка при завантаженні даних:", error);
-        selectElement.innerHTML = "<option>Помилка завантаження</option>";
+        listElement.innerHTML = "<li>Помилка завантаження</li>";
     }
 }
 // УНІВЕРСАЛЬНА ФУНКЦІЯ ЗАПУСКУ
@@ -456,23 +465,10 @@ async function init() {
     
     console.log("Поточне значення classOrSubject:", classOrSubject);
     
-    const selectElement = document.getElementById("classOfjournal");
-    if (!selectElement) {
-        console.error("Елемент для випадаючого списку не знайдено.");
-        return;
-    }
-    
-    let studentLogic;
-    if (role === "student") {
-        studentLogic = runStudentGradesLogic();
-    }
-    
+    handleDropdownSelection();
     // Додаємо обробники подій тільки один раз при запуску
     if (role === "teacher") {
-        handleDropdownSelection(selectElement, studentLogic);
         setupAddLessonForm();
-    } else if (role === "student") {
-        handleDropdownSelection(selectElement, studentLogic);
     }
     
     // Викликаємо нову функцію для завантаження даних
