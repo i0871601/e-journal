@@ -59,6 +59,7 @@
   padding-left: 1.1vmin;
   font-family: 'SourceSans3';
   position: relative;
+  z-index: 1;
 }
 #subject-button, #subjectClass-button,  #lessonType-Button{
   display: flex;
@@ -106,3 +107,7 @@
 #lessonTypeList{
   display: none;
 }
+.container-all:has(.dropdown-list[style*="block"]) {
+  z-index: 100;
+}
+
