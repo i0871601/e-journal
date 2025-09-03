@@ -488,11 +488,14 @@ async function init() {
     await loadDropdownOptions();
     
     document.addEventListener('click', (event) => {
-        const allDropdowns = document.querySelectorAll('.dropdown-list');
-        allDropdowns.forEach(dropdown => {
-            const parentContainer = dropdown.closest('.container-all');
-            if (parentContainer && !parentContainer.contains(event.target) && dropdown.style.display === "block") {
-                dropdown.style.display = "none";
+        const dropdownButtons = document.querySelectorAll('.first-option, .dropdown-button');
+        dropdownButtons.forEach(button => {
+            const list = button.nextElementSibling;
+            if (list && list.classList.contains('dropdown-list') && list.style.display === "block") {
+                const isClickInside = button.contains(event.target) || list.contains(event.target);
+                if (!isClickInside) {
+                    list.style.display = "none";
+                }
             }
         });
     });
