@@ -243,10 +243,10 @@ function setupAddLessonForm() {
         return;
     }
     if (!container) return;
+
     const addLessonFormHTML = `
         <div id="add-lesson-form">
             <h3>Додати новий урок</h3>
-            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
             <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
             <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
             <div id="lessonTypeInput" class="container-all">
@@ -268,42 +268,52 @@ function setupAddLessonForm() {
 
     const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
     const lessonTypeList = document.getElementById("lessonTypeList");
-    
+    const saveLessonButton = document.getElementById("saveLessonButton");
+
     lessonTypeList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const allListItems = lessonTypeList.querySelectorAll('li');
             allListItems.forEach(item => item.classList.remove('selected'));
             event.target.classList.add('selected');
-
             const selectedType = event.target.textContent;
             lessonTypePara.textContent = selectedType;
             lessonTypeList.style.display = "none";
         }
     });
-    
-    const saveLessonButton = document.getElementById("saveLessonButton");
+
     if (saveLessonButton) {
         saveLessonButton.addEventListener("click", async () => {
-            const lessonNumberInput = document.getElementById("lessonNumberInput");
             const lessonDateInput = document.getElementById("lessonDateInput");
             const lessonTopicInput = document.getElementById("lessonTopicInput");
             const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
             const selectedListItem = document.querySelector('#lessonTypeList li.selected');
             const lessonType = selectedListItem ? selectedListItem.dataset.type : 'Normal';
 
-            if (!lessonNumberInput.value || !lessonDateInput.value || !lessonTopicInput.value || !selectedClass || !selectedListItem) {
+            if (!lessonDateInput.value || !lessonTopicInput.value || !selectedClass || !selectedListItem) {
                 alert("Будь ласка, заповніть всі поля.");
                 return;
             }
+
+            let newLessonNumber;
+            const currentJournalData = dataCache[`teacher-${classOrSubject}-${selectedClass}`];
+            const existingLessons = currentJournalData && currentJournalData[0] ? currentJournalData[0].grades : [];
+            const normalLessons = existingLessons.filter(grade => grade.lessonType === "Normal");
+            const maxNormalNumber = normalLessons.length > 0 ? Math.max(...normalLessons.map(g => parseInt(g.lessonNumber, 10))) : 0;
             
+            if (lessonType === "Normal") {
+                newLessonNumber = maxNormalNumber + 1;
+            } else {
+                newLessonNumber = maxNormalNumber;
+            }
+
             const gradesData = currentStudents.map((student) => ({
                 studentFirstName: student.firstName,
                 studentLastName: student.lastName,
                 grade: ""
             }));
-            
+
             const lessonData = {
-                lessonNumber: lessonNumberInput.value,
+                lessonNumber: newLessonNumber,
                 Date: lessonDateInput.value,
                 Topic: lessonTopicInput.value,
                 teacherLastName: lastName,
@@ -312,10 +322,9 @@ function setupAddLessonForm() {
                 lessonType: lessonType,
                 grades: gradesData
             };
-            
+
             const success = await addLesson(lessonData, selectedClass);
             if (success) {
-                lessonNumberInput.value = "";
                 lessonDateInput.value = "";
                 lessonTopicInput.value = "";
                 lessonTypePara.textContent = "Виберіть тип уроку";
