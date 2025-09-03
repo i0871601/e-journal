@@ -488,13 +488,19 @@ async function init() {
     await loadDropdownOptions();
     
     document.addEventListener('click', (event) => {
-        const dropdownButtons = document.querySelectorAll('.first-option, .dropdown-button');
-        dropdownButtons.forEach(button => {
-            const list = button.nextElementSibling;
-            if (list && list.classList.contains('dropdown-list') && list.style.display === "block") {
-                const isClickInside = button.contains(event.target) || list.contains(event.target);
-                if (!isClickInside) {
-                    list.style.display = "none";
+        const allDropdowns = document.querySelectorAll('.dropdown-list');
+        allDropdowns.forEach(list => {
+            const parentContainer = list.closest('.container-all');
+            const button = parentContainer ? parentContainer.querySelector('.first-option, .dropdown-button') : null;
+            
+            if (list && parentContainer) {
+                if (list.style.display === "block") {
+                    const isClickInside = parentContainer.contains(event.target);
+                    if (!isClickInside) {
+                        list.style.display = "none";
+                    }
+                } else if (button && button.contains(event.target)) {
+                    list.style.display = "block";
                 }
             }
         });

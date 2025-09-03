@@ -54,7 +54,7 @@
   border-radius: 15vmin /*від шрифта*/;
   box-shadow: 0 0 0.5vmin var(--color1);
   padding: 0.3vmin;
-  padding-left: 0.9vmin;
+  padding-left: 1.1vmin;
   font-family: 'SourceSans3';
   position: relative;
 }
