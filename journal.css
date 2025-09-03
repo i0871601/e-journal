@@ -109,22 +109,32 @@
 .container-all:has(.dropdown-list[style*="block"]) {
   z-index: 15;
 }
+.journal-table {
+  border-collapse: collapse;
+  width: 100%;
+}
 .journal-table thead {
-  position: sticky; /* Фіксує елемент на місці */
-  top: 0; /* Прилипає до верхнього краю контейнера */
-  background-color: var(--fon-color-2); /* Додайте фон, щоб приховати контент під ним */
-  z-index: 10; /* Забезпечує, що заголовок буде над іншими елементами таблиці */
+  position: sticky;
+  top: 0;
+  background-color: var(--fon-color-2);
+  z-index: 10;
 }
 .journal-table th:first-child,
 .journal-table td:first-child {
-  position: sticky; /* Фіксує елемент на місці */
-  left: 0; /* Прилипає до лівого краю */
-  background-color: var(--fon-color-2); /* Колір фону, щоб приховати контент */
-  z-index: 5; /* Забезпечує, що колонка буде над іншими комірками */
+  position: sticky;
+  left: 0;
+  background-color: var(--fon-color-2);
+  z-index: 5;
+}
+.journal-table th,
+.journal-table td {
+  border: 1px solid var(--text-color);
+  padding: 8px;
+  text-align: center;
 }
 
-/* Комбінація: верхній рядок та перша колонка */
 .journal-table thead th:first-child {
-  z-index: 15; /* Заголовок першої колонки повинен бути над усіма іншими елементами */
+  z-index: 15;
 }
+
 
