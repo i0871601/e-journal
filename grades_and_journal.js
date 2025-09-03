@@ -12,28 +12,23 @@ const subjectList = document.getElementById("Subject");
 
 let isInitialized = false;
 let isFormCreated = false;
-// Змінні та функції, специфічні для ролі
+
 let currentStudents = [];
 const dataCache = {};
 
 
 if (subjectButton && subjectList) {
     subjectButton.addEventListener('click', () => {
-        // Показуємо список предметів при кліку на кнопку
         subjectList.style.display = "block";
     });
 }
 
-// Слухач подій для батьківського елемента (<ul>)
 subjectList.addEventListener('click', (event) => {
     if (event.target.tagName === 'LI') {
         const selectedSubject = event.target.textContent;
-        // Перевіряємо, чи дійсно змінився предмет
         if (classOrSubject !== selectedSubject) {
             classOrSubject = selectedSubject;
             subjectText.textContent = classOrSubject;
-            console.log("Нове значення вибраного предмета:", classOrSubject);
-            // Запускаємо завантаження/кешування класів
             loadDropdownOptions();
         }
         subjectList.style.display = "none";
@@ -49,7 +44,7 @@ const updateOrAddGrade = async (gradeData) => {
             body: JSON.stringify(gradeData)
         });
         if (res.ok) {
-            console.log("Оцінку успішно збережено!");
+            //console.log("Оцінку успішно збережено!");
         } else if (res.status === 403) {
             alert("Зміни можна вносити лише в останній урок.");
             const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent;
@@ -65,6 +60,10 @@ const updateOrAddGrade = async (gradeData) => {
 const displayFullJournal = (journalData) => {
     const container = document.querySelector(".TabletJournal");
     if (!container) return;
+    if (!journalData || journalData.length === 0) {
+        container.innerHTML = "<p>Учні ще не додані до цього класу та бази даних.</p>";
+        return; 
+    }
     container.innerHTML = "";
     const table = document.createElement("table");
     table.classList.add("journal-table");
@@ -166,7 +165,6 @@ const loadFullJournal = async (className) => {
     if (!className) return (container.innerHTML = "");
     
     if (dataCache[cacheKey]) {
-        console.log("Дані завантажено з кешу для вчителя.");
         displayFullJournal(dataCache[cacheKey]);
         return;
     }
@@ -286,8 +284,6 @@ function setupAddLessonForm() {
 }
 // ЛОГІКА ДЛЯ УЧНЯ
 function runStudentGradesLogic() {
-    console.log("Запускається логіка для оцінок учня.");
-
     const displayErrorMessage = (message) => {
         const containerJournal = document.querySelector(".TabletJournal");
         if (containerJournal) containerJournal.innerHTML = `<p>${message}</p>`;
@@ -312,7 +308,6 @@ function runStudentGradesLogic() {
             headerHtml += `<th class="lesson-header">${headerText}<br><span class="lesson-date" data-topic="${lesson.Topic}">${lesson.Date}</span></th>`;
         });
         headerHtml += "</tr>";
-        //let bodyHtml = `<tr><td class="info-cell"><h4 class="subject-title">Предмет: ${subject}</h4><p class="student-name">${lastName} ${firstName}</p></td>`;
         lessons.forEach((lesson) => {
             const grade = gradesData.find((g) => g.lessonNumber === lesson.lessonNumber);
             const gradeValue = grade && grade.Grade !== null && grade.Grade !== "null" ? grade.Grade : "";
@@ -363,29 +358,24 @@ function runStudentGradesLogic() {
 function handleDropdownSelection() {
     const listElement = document.querySelector("#classOfjournal #subjectClass");
     const buttonElement = document.querySelector("#classOfjournal .first-option");
-    // Обробник для показу/приховування списку
     if (buttonElement && listElement) {
         buttonElement.addEventListener('click', () => {
             listElement.style.display = listElement.style.display === "block" ? "none" : "block";
         });
     }
-    // Обробник для вибору елемента зі списку
     if (listElement) {
         listElement.addEventListener("click", async (event) => {
             if (event.target.tagName === 'LI') {
                 const selectedValue = event.target.textContent;
                 const teacherLastName = event.target.dataset.teacherLastName;
                 
-                // Оновлюємо текст на кнопці
                 buttonElement.querySelector("p").textContent = selectedValue;
                 listElement.style.display = "none";
-
-                // Запускаємо логіку завантаження
                 if (role === "teacher") {
                     loadFullJournal(selectedValue);
                 } else if (role === "student") {
                     if (selectedValue) {
-                        const studentLogic = runStudentGradesLogic(); // Потрібно отримати екземпляр
+                        const studentLogic = runStudentGradesLogic();
                         studentLogic.loadGradesForSubject(selectedValue, teacherLastName);
                     }
                 }
@@ -415,7 +405,7 @@ function populateDropdown(listElement, data) {
         });
     }
 }
-// Винесено логіку отримання та заповнення списку в окрему функцію
+
 async function loadDropdownOptions() {
     const listElement = document.querySelector("#classOfjournal #subjectClass");
     if (!listElement) {
@@ -424,8 +414,6 @@ async function loadDropdownOptions() {
     }
     const cacheKey = `classes-${classOrSubject}`;
     if (dataCache[cacheKey]) {
-        console.log("Дані завантажено з кешу для предмету:", classOrSubject);
-        // Якщо дані є, просто заповнюємо список і виходимо
         populateDropdown(listElement, dataCache[cacheKey]);
         return;
     }
@@ -435,8 +423,6 @@ async function loadDropdownOptions() {
         const response = await fetch(url);
         const data = await response.json();
         dataCache[cacheKey] = data;
-
-        // Заповнюємо випадаючий список
         populateDropdown(listElement, data);
         
     } catch (error) {
@@ -468,16 +454,10 @@ async function init() {
         isInitialized = true;
     }
     
-    console.log("Поточне значення classOrSubject:", classOrSubject);
-    
     handleDropdownSelection();
-    // Додаємо обробники подій тільки один раз при запуску
     if (role === "teacher") {
         setupAddLessonForm();
     }
-    
-    // Викликаємо нову функцію для завантаження даних
     await loadDropdownOptions();
 }
-
 init();
