@@ -486,14 +486,16 @@ async function init() {
         TextElement.textContent = "Виберіть предмет";
     }
     await loadDropdownOptions();
-}
-document.addEventListener('click', (event) => {
-    const allDropdowns = document.querySelectorAll('.dropdown-list');
-    allDropdowns.forEach(dropdown => {
-        const parentContainer = dropdown.closest('.dropdown-container-all');
-        if (parentContainer && !parentContainer.contains(event.target) && dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        }
+    
+    document.addEventListener('click', (event) => {
+        const allDropdowns = document.querySelectorAll('.dropdown-list');
+        allDropdowns.forEach(dropdown => {
+            const parentContainer = dropdown.closest('.container-all');
+            if (parentContainer && !parentContainer.contains(event.target) && dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            }
+        });
     });
-});
+}
+
 init();
