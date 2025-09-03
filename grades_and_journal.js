@@ -207,7 +207,7 @@ const addLesson = async (lessonData, selectedClass) => {
 };
 
 function setupAddLessonForm() {
-    const container = document.getElementById("button-ClassOFJournal");
+    const container = document.getElementById("GradeOfJournal");
     if (isFormCreated) {
         return;
     }
