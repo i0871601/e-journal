@@ -41,6 +41,12 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+#button-ClassOFJournal{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+}
 #subjectTeacher{
   display: none;
 }
