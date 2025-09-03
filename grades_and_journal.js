@@ -187,6 +187,7 @@ const loadFullJournal = async (className) => {
     }
 };
 
+
 const addLesson = async (lessonData, selectedClass) => {
     const url = `https://worker-add-lesson.i0871601.workers.dev/`;
     
@@ -217,86 +218,95 @@ const addLesson = async (lessonData, selectedClass) => {
 };
 
 function setupAddLessonForm() {
-    const container = document.getElementById("GradeOfJournal");
-    if (isFormCreated) {
-        return;
-    }
-    if (!container) return;
-    const addLessonFormHTML = `
-        <div id="add-lesson-form">
-            <h3>Додати новий урок</h3>
-            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
-            <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
-            <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
-            <div id="lessonTypeInput" class="container-all">
-                <div id="lessonType-Button" class="dropdown-button">
-                    <p>Виберіть тип уроку</p>
-                    <div class="arrow-down"></div>
-                </div>
-                <ul id="lessonTypeList" class="dropdown-list">
-                    <li value="Normal">Звичайний</li>
-                    <li value="Thematic">Тематична</li>
-                    <li value="Semester">Семестрова</li>
-                    <li value="Final">Річна</li>
-                </ul>
-            </div>
-            <button id="saveLessonButton">Зберегти урок</button>
-        </div>
-    `;
-    container.insertAdjacentHTML('afterend', addLessonFormHTML);
+    const container = document.getElementById("GradeOfJournal");
+    if (isFormCreated) {
+        return;
+    }
+    if (!container) return;
+    const addLessonFormHTML = `
+        <div id="add-lesson-form">
+            <h3>Додати новий урок</h3>
+            <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
+            <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
+            <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
+            <div id="lessonTypeInput" class="container-all">
+                <div id="lessonType-Button" class="dropdown-button">
+                    <p>Виберіть тип уроку</p>
+                    <div class="arrow-down"></div>
+                </div>
+                <ul id="lessonTypeList" class="dropdown-list">
+                    <li data-type="Normal">Звичайний</li>
+                    <li data-type="Thematic">Тематична</li>
+                    <li data-type="Semester">Семестрова</li>
+                    <li data-type="Final">Річна</li>
+                </ul>
+            </div>
+            <button id="saveLessonButton">Зберегти урок</button>
+        </div>
+    `;
+    container.insertAdjacentHTML('afterend', addLessonFormHTML);
 
-    const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
-    const lessonTypeList = document.getElementById("lessonTypeList");
-    
-    lessonTypeList.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            const selectedType = event.target.textContent;
-            lessonTypePara.textContent = selectedType;
-            lessonTypeList.style.display = "none";
-        }
-    });
-    
-    const saveLessonButton = document.getElementById("saveLessonButton");
-    if (saveLessonButton) {
-        saveLessonButton.addEventListener("click", async () => {
-            const lessonNumberInput = document.getElementById("lessonNumberInput");
-            const lessonDateInput = document.getElementById("lessonDateInput");
-            const lessonTopicInput = document.getElementById("lessonTopicInput");
-            const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
-            const lessonNumber = lessonNumberInput.value;
-            const lessonDate = lessonDateInput.value;
-            const lessonTopic = lessonTopicInput.value;
-            const lessonType = lessonTypePara.textContent.trim();
-            const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
-            if (!lessonNumber || !lessonDate || !lessonTopic || !selectedClass || !lessonType || lessonType === "Виберіть тип уроку") {
-                alert("Будь ласка, заповніть всі поля.");
-                return;
-            }
-            const gradesData = currentStudents.map((student) => ({
-                studentFirstName: student.firstName,
-                studentLastName: student.lastName,
-                grade: ""
-            }));
-            const lessonData = {
-                lessonNumber,
-                Date: lessonDate,
-                Topic: lessonTopic,
-                teacherLastName: lastName,
-                teacherSubject: classOrSubject,
-                class: selectedClass,
-                lessonType: lessonType,
-                grades: gradesData
-            };
-            const success = await addLesson(lessonData, selectedClass);
-            if (success) {
-                lessonNumberInput.value = "";
-                lessonDateInput.value = "";
-                lessonTopicInput.value = "";
-                lessonTypePara.textContent = "Виберіть тип уроку";
-            }
-        });
-    }
-    isFormCreated = true;
+    const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
+    const lessonTypeList = document.getElementById("lessonTypeList");
+    
+    lessonTypeList.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const allListItems = lessonTypeList.querySelectorAll('li');
+            allListItems.forEach(item => item.classList.remove('selected'));
+            event.target.classList.add('selected');
+
+            const selectedType = event.target.textContent;
+            lessonTypePara.textContent = selectedType;
+            lessonTypeList.style.display = "none";
+        }
+    });
+    
+    const saveLessonButton = document.getElementById("saveLessonButton");
+    if (saveLessonButton) {
+        saveLessonButton.addEventListener("click", async () => {
+            const lessonNumberInput = document.getElementById("lessonNumberInput");
+            const lessonDateInput = document.getElementById("lessonDateInput");
+            const lessonTopicInput = document.getElementById("lessonTopicInput");
+            const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
+            const selectedListItem = document.querySelector('#lessonTypeList li.selected');
+            const lessonType = selectedListItem ? selectedListItem.dataset.type : 'Normal';
+
+            if (!lessonNumberInput.value || !lessonDateInput.value || !lessonTopicInput.value || !selectedClass || !selectedListItem) {
+                alert("Будь ласка, заповніть всі поля.");
+                return;
+            }
+            
+            const gradesData = currentStudents.map((student) => ({
+                studentFirstName: student.firstName,
+                studentLastName: student.lastName,
+                grade: ""
+            }));
+            
+            const lessonData = {
+                lessonNumber: lessonNumberInput.value,
+                Date: lessonDateInput.value,
+                Topic: lessonTopicInput.value,
+                teacherLastName: lastName,
+                teacherSubject: classOrSubject,
+                class: selectedClass,
+                lessonType: lessonType,
+                grades: gradesData
+            };
+            
+            const success = await addLesson(lessonData, selectedClass);
+            if (success) {
+                lessonNumberInput.value = "";
+                lessonDateInput.value = "";
+                lessonTopicInput.value = "";
+                lessonTypePara.textContent = "Виберіть тип уроку";
+                const selected = document.querySelector('#lessonTypeList li.selected');
+                if (selected) {
+                    selected.classList.remove('selected');
+                }
+            }
+        });
+    }
+    isFormCreated = true;
 }
 // ЛОГІКА ДЛЯ УЧНЯ
 function runStudentGradesLogic() {
@@ -490,5 +500,6 @@ async function init() {
         });
     });
 }
+
 
 init();
