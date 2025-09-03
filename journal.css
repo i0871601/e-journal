@@ -7,7 +7,7 @@
   --text-color: #878787;
 }
 .TabletJournal{
-  overflow-y: scroll;
+  overflow-y: auto;
   flex-grow: 1;
 }
 .TabletJournal::-webkit-scrollbar{
@@ -29,16 +29,12 @@
   height: 100%;
   padding-left: 3%;
   font-family: 'SourceSans3';
-  overflow: auto;
+  flex-grow: 1;
 }
 .contentJournal h3{
   margin-bottom: 0;
 }
-.GradeOfJournal {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+
 .dropdown-button div{
   width: 5vmin;
   background-image: url('image/down.svg');
@@ -50,6 +46,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
   width: clamp(300px, 70%, 370px);
   gap: 5vmin;
 }
