@@ -26,18 +26,16 @@ if (subjectButton && subjectList) {
 
 // Слухач подій для батьківського елемента (<ul>)
 subjectList.addEventListener('click', (event) => {
-    // Перевіряємо, чи клік був саме на елементі <li>
     if (event.target.tagName === 'LI') {
-        // Оновлюємо змінну з вмістом натиснутого елемента
-        classOrSubject = event.target.textContent;
-        subjectText.textContent = classOrSubject;
-
-        console.log("Нове значення вибраного предмета:", classOrSubject);
-
-        // Запускаємо тільки функцію для оновлення списку
-        loadDropdownOptions();
-        
-        // Ховаємо список після вибору предмета
+        const selectedSubject = event.target.textContent;
+        // Перевіряємо, чи дійсно змінився предмет
+        if (classOrSubject !== selectedSubject) {
+            classOrSubject = selectedSubject;
+            subjectText.textContent = classOrSubject;
+            console.log("Нове значення вибраного предмета:", classOrSubject);
+            // Запускаємо завантаження/кешування класів
+            loadDropdownOptions();
+        }
         subjectList.style.display = "none";
     }
 });
@@ -314,7 +312,7 @@ function runStudentGradesLogic() {
             headerHtml += `<th class="lesson-header">${headerText}<br><span class="lesson-date" data-topic="${lesson.Topic}">${lesson.Date}</span></th>`;
         });
         headerHtml += "</tr>";
-        let bodyHtml = `<tr><td class="info-cell"><h4 class="subject-title">Предмет: ${subject}</h4><p class="student-name">${lastName} ${firstName}</p></td>`;
+        //let bodyHtml = `<tr><td class="info-cell"><h4 class="subject-title">Предмет: ${subject}</h4><p class="student-name">${lastName} ${firstName}</p></td>`;
         lessons.forEach((lesson) => {
             const grade = gradesData.find((g) => g.lessonNumber === lesson.lessonNumber);
             const gradeValue = grade && grade.Grade !== null && grade.Grade !== "null" ? grade.Grade : "";
@@ -395,6 +393,28 @@ function handleDropdownSelection() {
         });
     }
 }
+function populateDropdown(listElement, data) {
+    listElement.innerHTML = "";
+    
+    if (data.type === "classes") {
+        data.data.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
+        data.data.forEach((item) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = item;
+            listElement.appendChild(listItem);
+        });
+    } else if (data.type === "subjects") {
+        data.data.sort((a, b) =>
+            a.subject.localeCompare(b.subject, undefined, { numeric: true, sensitivity: "base" })
+        );
+        data.data.forEach((item) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = item.subject;
+            listItem.dataset.teacherLastName = item.teacherLastName || "";
+            listElement.appendChild(listItem);
+        });
+    }
+}
 // Винесено логіку отримання та заповнення списку в окрему функцію
 async function loadDropdownOptions() {
     const listElement = document.querySelector("#classOfjournal #subjectClass");
@@ -402,38 +422,23 @@ async function loadDropdownOptions() {
         console.error("Елемент для випадаючого списку не знайдено.");
         return;
     }
+    const cacheKey = `classes-${classOrSubject}`;
+    if (dataCache[cacheKey]) {
+        console.log("Дані завантажено з кешу для предмету:", classOrSubject);
+        // Якщо дані є, просто заповнюємо список і виходимо
+        populateDropdown(listElement, dataCache[cacheKey]);
+        return;
+    }
     
     try {
         const url = `https://worker-grades-of-journal.i0871601.workers.dev/?lastName=${lastName}&classOrSubject=${classOrSubject}`;
         const response = await fetch(url);
         const data = await response.json();
-        
-        listElement.innerHTML = "";
-        
-        if (role === "teacher") {
-            
-        } else if (role === "student") {
-            
-        }
+        dataCache[cacheKey] = data;
 
-        if (data.type === "classes") {
-            data.data.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
-            data.data.forEach((item) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = item;
-                listElement.appendChild(listItem);
-            });
-        } else if (data.type === "subjects") {
-            data.data.sort((a, b) =>
-                a.subject.localeCompare(b.subject, undefined, { numeric: true, sensitivity: "base" })
-            );
-            data.data.forEach((item) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = item.subject;
-                listItem.dataset.teacherLastName = item.teacherLastName || "";
-                listElement.appendChild(listItem);
-            });
-        }
+        // Заповнюємо випадаючий список
+        populateDropdown(listElement, data);
+        
     } catch (error) {
         console.error("Сталася помилка при завантаженні даних:", error);
         listElement.innerHTML = "<li>Помилка завантаження</li>";
