@@ -224,14 +224,7 @@ function setupAddLessonForm() {
             <input type="text" id="lessonNumberInput" placeholder="Номер уроку" required>
             <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
             <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
-            <div id="classOfjournal" class="dropdown-container">
-                <div id="subjectClass-button" class="first-option dropdown-button">
-                    <p>Виберіть клас</p>
-                    <div class="arrow-down"></div>
-                </div>
-                <ul id="subjectClass" class="dropdown-list"></ul>
-            </div>
-            <div id="lessonTypeInput" class="dropdown-container">
+            <div id="lessonTypeInput" class="container-all">
                 <div id="lessonType-Button" class="dropdown-button">
                     <p>Виберіть тип уроку</p>
                     <div class="arrow-down"></div>
@@ -494,4 +487,13 @@ async function init() {
     }
     await loadDropdownOptions();
 }
+document.addEventListener('click', (event) => {
+    const allDropdowns = document.querySelectorAll('.dropdown-list');
+    allDropdowns.forEach(dropdown => {
+        const parentContainer = dropdown.closest('.dropdown-container-all');
+        if (parentContainer && !parentContainer.contains(event.target) && dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+    });
+});
 init();
