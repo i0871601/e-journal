@@ -487,20 +487,17 @@ async function init() {
     }
     await loadDropdownOptions();
     
+    // ЄДИНИЙ УНІВЕРСАЛЬНИЙ ОБРОБНИК КЛІКІВ ДЛЯ ВСІХ ВИПАДАЮЧИХ СПИСКІВ
     document.addEventListener('click', (event) => {
         const allDropdowns = document.querySelectorAll('.dropdown-list');
         allDropdowns.forEach(list => {
             const parentContainer = list.closest('.container-all');
-            const button = parentContainer ? parentContainer.querySelector('.first-option, .dropdown-button') : null;
-            
-            if (list && parentContainer) {
-                if (list.style.display === "block") {
-                    const isClickInside = parentContainer.contains(event.target);
-                    if (!isClickInside) {
-                        list.style.display = "none";
-                    }
-                } else if (button && button.contains(event.target)) {
-                    list.style.display = "block";
+            if (parentContainer) {
+                const isClickInside = parentContainer.contains(event.target);
+                if (list.style.display === "block" && !isClickInside) {
+                    list.style.display = "none";
+                } else if (parentContainer.querySelector('.first-option, .dropdown-button').contains(event.target)) {
+                    list.style.display = list.style.display === "block" ? "none" : "block";
                 }
             }
         });
