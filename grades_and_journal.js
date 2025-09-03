@@ -235,6 +235,17 @@ function setupAddLessonForm() {
     `;
     container.insertAdjacentHTML('afterend', addLessonFormHTML);
 
+    const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
+    const lessonTypeList = document.getElementById("lessonTypeList");
+    
+    lessonTypeList.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const selectedType = event.target.textContent;
+            lessonTypePara.textContent = selectedType;
+            lessonTypeList.style.display = "none";
+        }
+    });
+    
     const saveLessonButton = document.getElementById("saveLessonButton");
     if (saveLessonButton) {
         saveLessonButton.addEventListener("click", async () => {
