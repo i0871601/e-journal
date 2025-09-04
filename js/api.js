@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { API_URL } from 'js/config.js';
+import { API_URL } from './js/config.js';
 
 export async function hashPassword(password) {
     const encoder = new TextEncoder();
@@ -38,3 +38,4 @@ export async function updatePassword(lastName, newPasswordHash) {
     }
     return data;
 }
+
