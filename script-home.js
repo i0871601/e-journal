@@ -1,44 +1,16 @@
-// Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-
-// Перенаправлення, якщо немає сесії (закоментовано для тестування)
-// if (sessionStorage.length === 0) {
-//     window.location.href = 'index.html';
-// }
-// window.addEventListener('pageshow', (event) => {
-//     if (event.persisted) {
-//         sessionStorage.clear();
-//         const form = document.getElementById('loginForm');
-//         form.reset();
-//     }
-// });
+//Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+//if (sessionStorage.length === 0) {
+    //window.location.href = 'index.html'; 
+//}
+//window.addEventListener('pageshow', (event) => {
+    //if (event.persisted) {
+        //sessionStorage.clear();
+        //const form = document.getElementById('loginForm');
+        //form.reset();
+    //}
+//});
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === ЛОГІКА АНІМАЦІЇ ТА ПЕРЕМИКАННЯ ===
-    const scheduleToggle = document.getElementById('toggle-schedule');
-    const journalToggle = document.getElementById('toggle-journal');
-    const mainContent = document.getElementById('mainContent');
-    const scheduleContent = document.getElementById('schedule');
-    const journalContent = document.getElementById('journal');
-
-    scheduleToggle.addEventListener('click', () => {
-        if (!scheduleToggle.classList.contains('active')) {
-            scheduleToggle.classList.add('active');
-            journalToggle.classList.remove('active');
-            mainContent.classList.add('hide-journal');
-            mainContent.classList.remove('hide-schedule');
-        }
-    });
-
-    journalToggle.addEventListener('click', () => {
-        if (!journalToggle.classList.contains('active')) {
-            journalToggle.classList.add('active');
-            scheduleToggle.classList.remove('active');
-            mainContent.classList.add('hide-schedule');
-            mainContent.classList.remove('hide-journal');
-        }
-    });
-
-    // === ДИНАМІЧНЕ ЗАВАНТАЖЕННЯ МОДУЛІВ ===
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     const loadedModules = {};
 
@@ -71,6 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let modulePath;
             let moduleName;
 
+            // Знімаємо позначку з інших чекбоксів, коли один активовано
+            if (isChecked) {
+                allCheckboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== event.target) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+
             if (event.target.id === 'toggle-schedule') {
                 modulePath = './js/schedule/schedule-logic.js';
                 moduleName = 'schedule';
@@ -90,5 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
