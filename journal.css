@@ -50,7 +50,7 @@
   width: clamp(300px, 70%, 370px);
   gap: 5vmin;
 }
-#subjectTeacher, #classOfjournal, #lessonTypeInput {
+#Select-Subject, #ClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0;
   border-radius: 15vmin /*від шрифта*/;
@@ -60,14 +60,14 @@
   font-family: 'SourceSans3';
   position: relative;
 }
-#subject-button, #subjectClass-button,  #lessonType-Button{
+#subject-button, #Class-button,  #lessonType-Button{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
   cursor: pointer;
 }
-#subject-button p, #subjectClass-button p, #lessonType-Button p{
+#subject-button p, #Class-button p, #lessonType-Button p{
   white-space: nowrap;
   margin: 0;
   padding: 0;
@@ -79,7 +79,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-#Subject, #subjectClass, #lessonTypeList{
+#subject-list, #class-list, #lessonTypeList{
     width: 100%;
     top: 100%;
     left: 0;
@@ -100,7 +100,7 @@
     border-radius: 1.5vmin;
     background-color: var(--text-color);
 }
-#subjectTeacher{
+#Select-Subject{
   display: none;
 }
 #lessonTypeList{
@@ -135,5 +135,6 @@
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
