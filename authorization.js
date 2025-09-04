@@ -8,9 +8,6 @@ const newPasswordField = document.getElementById('newPassword');
 const confirmNewPasswordField = document.getElementById('confirmNewPassword');
 const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
-//if (form) {
-    //form.addEventListener('submit', handleFormSubmission);
-//}
 function handleFormSubmission(event) {
     event.preventDefault();
     clearErrorMessage();
@@ -126,7 +123,8 @@ export function initAuth() {
     form.addEventListener('submit', handleFormSubmission);
 }
 
-document.addEventListener('DOMContentLoaded', initAuth);
+//document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
