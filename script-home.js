@@ -11,6 +11,20 @@
 //});
 
 document.addEventListener('DOMContentLoaded', () => {
+    const toggleJournalUI = (role) => {
+        const classDropdown = document.getElementById('classOfjournal');
+        const subjectDropdown = document.getElementById('subjectTeacher');
+
+        if (classDropdown && subjectDropdown) {
+            if (role === 'teacher') {
+                classDropdown.style.display = 'block';
+                subjectDropdown.style.display = 'block';
+            } else if (role === 'student') {
+                classDropdown.style.display = 'none';
+                subjectDropdown.style.display = 'block';
+            }
+        }
+    };
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     const loadedModules = {};
 
@@ -64,10 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     moduleName = 'student';
                 }
             }
-            
             if (isChecked) {
                 loadModule(modulePath, moduleName);
+                if (moduleName.includes('journal')) {
+                    toggleJournalUI(role);
+                }
+            } else {
+                const classDropdown = document.getElementById('classOfjournal');
+                const subjectDropdown = document.getElementById('subjectTeacher');
+                if (classDropdown) classDropdown.style.display = 'none';
+                if (subjectDropdown) subjectDropdown.style.display = 'none';
             }
         });
     });
+
 });
