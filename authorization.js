@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { setButtonState, displayErrorMessage, clearErrorMessage } from 'js/dom.js';
-import { hashPassword, authorizeUser, updatePassword } from 'js/api.js';
+import { setButtonState, displayErrorMessage, clearErrorMessage } from './dom.js';
+import { hashPassword, authorizeUser, updatePassword } from './api.js';
 
 const form = document.getElementById('loginForm');
 const passwordField = document.getElementById('password');
@@ -121,4 +121,5 @@ export function initAuth() {
     });
 
     form.addEventListener('submit', handleFormSubmission);
+
 }
