@@ -8,6 +8,11 @@ const newPasswordField = document.getElementById('newPassword');
 const confirmNewPasswordField = document.getElementById('confirmNewPassword');
 const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
+if (form) {
+    form.addEventListener('submit', handleFormSubmission);
+} else {
+    console.error("Form element with ID 'loginForm' not found!");
+}
 function handleFormSubmission(event) {
     event.preventDefault();
     clearErrorMessage();
@@ -123,4 +128,5 @@ export function initAuth() {
     form.addEventListener('submit', handleFormSubmission);
 
 }
+
 
