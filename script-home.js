@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let scriptSrc;
 
             if (event.target.id === 'toggle-schedule') {
-                scriptSrc = 'schedule_script.js';
+                scriptSrc = '/js/auth/schedule_logic.js';
             } else {
                 scriptSrc = sessionStorage.getItem('scriptName');
             }
