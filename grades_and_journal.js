@@ -144,7 +144,7 @@ const displayFullJournal = (journalData) => {
             const isEditable = (
                 lesson.lessonType === "Normal" &&
                 lesson.lessonNumber === maxNormalLessonNumber &&
-                maxNormalLessonNumber < maxCalculatedLessonNumber
+                (maxCalculatedLessonNumber ===0 ||  maxNormalLessonNumber < maxCalculatedLessonNumber)
             );
 
             if (isEditable) {
@@ -551,5 +551,6 @@ async function init() {
         });
     });
 }
+
 
 init();
