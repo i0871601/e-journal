@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { API_URL } from './config.js';
+import { API_URL_AUTHORIZATION } from '../config.js';
 
 export async function hashPassword(password) {
     const encoder = new TextEncoder();
@@ -10,7 +10,7 @@ export async function hashPassword(password) {
 }
 
 export async function authorizeUser(lastName, passwordHash) {
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL_AUTHORIZATION, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export async function authorizeUser(lastName, passwordHash) {
 }
 
 export async function updatePassword(lastName, newPasswordHash) {
-    const response = await fetch(apiURL, {
+    const response = await fetch(API_URL_AUTHORIZATION, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -38,6 +38,7 @@ export async function updatePassword(lastName, newPasswordHash) {
     }
     return data;
 }
+
 
 
 
