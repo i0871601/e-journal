@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const loadedModules = {};
 
-    const loadModule = async (moduleName, modulePath) => {
+    const loadModule = async (modulePath, moduleName) => {
         if (loadedModules[modulePath]) {
             return;
         }
@@ -64,3 +64,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
