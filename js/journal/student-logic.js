@@ -20,11 +20,11 @@ const classOrSubject = sessionStorage.getItem("classOrsubject");
 const dataCache = {};
 
 export const initStudentLogic = async () => {
-    const subjectTeacherContainer = document.getElementById("subjectTeacher");
-    const classTeacherContainer = document.getElementById("classOfjournal");
+    const subjectContainer = document.getElementById("Select-Subject");
+    const classTeacherContainer = document.getElementById("ClassTeacher");
 
-    if (subjectTeacherContainer) {
-        subjectTeacherContainer.style.display = "block";
+    if (subjectContainer) {
+        subjectContainer.style.display = "block";
     }
 
     if (classTeacherContainer) {
@@ -60,7 +60,7 @@ export const initStudentLogic = async () => {
 };
 
 const loadDropdownOptions = async () => {
-    const listElement = document.getElementById("Subject");
+    const listElement = document.getElementById("subject-list");
     if (!listElement) {
         console.error("Елемент для випадаючого списку не знайдено.");
         return;
@@ -80,4 +80,3 @@ const loadDropdownOptions = async () => {
     }
 
 };
-
