@@ -21,8 +21,14 @@ const dataCache = {};
 
 export const initStudentLogic = async () => {
     const subjectTeacherContainer = document.getElementById("subjectTeacher");
+    const classTeacherContainer = document.getElementById("classOfjournal");
+
     if (subjectTeacherContainer) {
         subjectTeacherContainer.style.display = "block";
+    }
+
+    if (classTeacherContainer) {
+        classTeacherContainer.style.display = "none";
     }
     setupMainDropdown('student', "Виберіть предмет", async (subject, teacherLastName) => {
         showJournalMessage('Завантаження оцінок...');
@@ -74,3 +80,4 @@ const loadDropdownOptions = async () => {
     }
 
 };
+
