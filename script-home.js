@@ -45,14 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let moduleName;
 
             if (event.target.id === 'toggle-schedule') {
-                modulePath = './schedule/schedule-logic.js';
+                modulePath = './js/schedule/schedule-logic.js';
                 moduleName = 'schedule';
             } else {
                 if (role === 'teacher') {
-                    modulePath = './journal/teacher-logic.js';
+                    modulePath = './js/journal/teacher-logic.js';
                     moduleName = 'teacher';
                 } else {
-                    modulePath = './journal/student-logic.js';
+                    modulePath = './js/journal/student-logic.js';
                     moduleName = 'student';
                 }
             }
