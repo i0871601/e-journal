@@ -20,6 +20,10 @@ const classOrSubject = sessionStorage.getItem("classOrsubject");
 const dataCache = {};
 
 export const initStudentLogic = async () => {
+    const subjectTeacherContainer = document.getElementById("subjectTeacher");
+    if (subjectTeacherContainer) {
+        subjectTeacherContainer.style.display = "block";
+    }
     setupMainDropdown('student', "Виберіть предмет", async (subject, teacherLastName) => {
         showJournalMessage('Завантаження оцінок...');
         const cacheKey = `student-${subject}`;
@@ -45,8 +49,7 @@ export const initStudentLogic = async () => {
         }
     });
 
-    await loadDropdownOptions();
-    toggleSubjectTeacherDropdown(false);
+    await loadDropdownOptions()
     setupGlobalDropdownClose();
 };
 
@@ -69,4 +72,5 @@ const loadDropdownOptions = async () => {
         console.error("Сталася помилка при завантаженні даних:", error);
         listElement.innerHTML = "<li>Помилка завантаження</li>";
     }
+
 };
