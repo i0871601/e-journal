@@ -8,11 +8,9 @@ const newPasswordField = document.getElementById('newPassword');
 const confirmNewPasswordField = document.getElementById('confirmNewPassword');
 const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
-if (form) {
-    form.addEventListener('submit', handleFormSubmission);
-} else {
-    console.error("Form element with ID 'loginForm' not found!");
-}
+//if (form) {
+    //form.addEventListener('submit', handleFormSubmission);
+//}
 function handleFormSubmission(event) {
     event.preventDefault();
     clearErrorMessage();
@@ -116,17 +114,20 @@ function saveSessionData(data) {
 }
 
 // Початкова ініціалізація
-function initAuth() {
-    const form = document.getElementById('loginForm');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmission);
-        console.log("Submit listener added to the form.");
-    } else {
-        console.error("Form element not found!");
-    }
+export function initAuth() {
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            sessionStorage.clear();
+            const form = document.getElementById('loginForm');
+            form.reset();
+        }
+    });
+
+    form.addEventListener('submit', handleFormSubmission);
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
