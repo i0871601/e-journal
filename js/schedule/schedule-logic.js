@@ -24,14 +24,11 @@ export const initScheduleLogic = async () => {
         
         const data = await loadScheduleData(role, classOrSubject, lastName, firstName);
         
-        const groupedByDay = data.reduce((acc, item) => {
-            const day = item.Day;
-            if (!acc[day]) {
-                acc[day] = [];
-            }
-            acc[day].push(item);
-            return acc;
-        }, {});
+        if (!groupedByDay || Object.keys(groupedByDay).length === 0) {
+            displayScheduleError('Розклад відсутній.');
+            setScheduleLoadedState();
+            return;
+        }
 
         setupDaySelector(groupedByDay, role);
         setScheduleLoadedState();
@@ -41,5 +38,3 @@ export const initScheduleLogic = async () => {
         displayScheduleError('Не вдалося завантажити розклад. Спробуйте пізніше.');
     }
 };
-
-initScheduleLogic();
