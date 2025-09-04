@@ -13,45 +13,47 @@
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     
-    // Один гнучкий об'єкт для відстеження завантажених скриптів
-    const loadedScripts = {};
-    
-    // Функція для динамічного завантаження JavaScript-файлів
-    const loadScript = (src) => {
-        if (loadedScripts[src]) {
+    const loadedModules = {};
+
+    const loadModule = async (modulePath) => {
+        if (loadedModules[modulePath]) {
             return;
         }
 
-        const script = document.createElement('script');
-        script.src = src;
-        
-        script.onload = () => {
-            loadedScripts[src] = true;
-        };
-        document.body.appendChild(script);
-    };
+        try {
+            const module = await import(modulePath);
+            loadedModules[modulePath] = true;
+            
+            if (typeof module.initScheduleLogic === 'function') {
+                module.initScheduleLogic();
+            } else if (typeof module.initJournalLogic === 'function') {
+                module.initJournalLogic();
+            }
 
-    // Додаємо обробник події 'change' до кожного чекбокса
+        } catch (error) {
+            console.error("Помилка при динамічному завантаженні модуля:", error);
+        }
+    };
+    
     allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (event) => {
             const isChecked = event.target.checked;
-            let scriptSrc;
+            let modulePath;
 
             if (event.target.id === 'toggle-schedule') {
-                scriptSrc = '/js/schedule/schedule_logic.js';
+                modulePath = './js/schedule/schedule-logic.js';
             } else {
-                scriptSrc = sessionStorage.getItem('scriptName');
+                modulePath = sessionStorage.getItem('scriptName');
             }
             
             if (isChecked) {
-                // Якщо цей чекбокс активовано, знімаємо позначку з інших
                 allCheckboxes.forEach(otherCheckbox => {
                     if (otherCheckbox !== event.target) {
                         otherCheckbox.checked = false;
                     }
                 });
-                // Завантажуємо відповідний скрипт
-                loadScript(scriptSrc);
+                
+                loadModule(modulePath);
             }
         });
     });
