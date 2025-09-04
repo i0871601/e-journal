@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 const button = document.getElementById('loginButton');
-const defaultText = button.querySelector('.default-text');
+const defaultText = button.querySelector('.default-text')
 const dots = button.querySelector('.dots');
 const errorMessage = document.getElementById('errorMessage');
 
@@ -26,3 +26,4 @@ export function displayErrorMessage(message) {
 export function clearErrorMessage() {
     errorMessage.textContent = '';
 }
+
