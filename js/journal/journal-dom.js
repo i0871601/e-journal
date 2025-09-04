@@ -1,11 +1,11 @@
 //Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 const contentContainer = document.getElementById("GradeOfJournal");
 const tabletJournal = document.querySelector(".TabletJournal");
-const classDropdownButton = document.querySelector("#classOfjournal .first-option");
-const classDropdownList = document.getElementById("subjectClass");
+const classDropdownButton = document.querySelector("#ClassTeacher .first-option");
+const classDropdownList = document.getElementById("class-list");
 const subjectDropdownButton = document.querySelector("#subject-button");
-const subjectDropdownList = document.getElementById("Subject");
-const subjectTeacherContainer = document.getElementById("subjectTeacher");
+const subjectDropdownList = document.getElementById("subject-list");
+const subjectContainer = document.getElementById(" Select-Subject");
 
 export const displayFullJournal = (journalData, updateGradeCallback) => {
     if (!tabletJournal) return;
@@ -317,8 +317,8 @@ export const showJournalMessage = (message) => {
 };
 
 export const toggleSubjectTeacherDropdown = (isVisible) => {
-    if (subjectTeacherContainer) {
-        subjectTeacherContainer.style.display = isVisible ? "block" : "none";
+    if (subjectContainer) {
+        subjectContainer.style.display = isVisible ? "block" : "none";
     }
 };
 
@@ -345,4 +345,5 @@ export const setupGlobalDropdownClose = () => {
             }
         });
     });
+
 };
