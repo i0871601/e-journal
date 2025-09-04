@@ -49,7 +49,7 @@ export const initTeacherLogic = async () => {
 
     if (classOrSubject && classOrSubject.includes(',')) {
         const subjectsArray = classOrSubject.split(',').map(item => item.trim());
-        populateDropdown(document.getElementById("Subject"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
+        populateDropdown(document.getElementById("subject-list"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
         setSubjectTeacherButtonText(subjectsArray[0]);
         classOrSubject = subjectsArray[0];
         toggleSubjectTeacherDropdown(true);
@@ -160,3 +160,4 @@ const loadDropdownOptions = async () => {
     }
 
 };
+
