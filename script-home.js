@@ -23,11 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const module = await import(modulePath);
             loadedModules[modulePath] = true;
-            
-            if (typeof module.initScheduleLogic === 'function') {
+        
+            if (moduleName === 'schedule') {
                 module.initScheduleLogic();
-            } else if (typeof module.initJournalLogic === 'function') {
-                module.initJournalLogic();
+            } else if (moduleName === 'teacher') {
+                module.initTeacherLogic();
+            } else if (moduleName === 'student') {
+                module.initStudentLogic();
             }
 
         } catch (error) {
@@ -38,22 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
     allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (event) => {
             const isChecked = event.target.checked;
+            const role = sessionStorage.getItem('role');
             let modulePath;
+            let moduleName;
 
             if (event.target.id === 'toggle-schedule') {
-                modulePath = './js/schedule/schedule-logic.js';
+                modulePath = './schedule/schedule-logic.js';
+                moduleName = 'schedule';
             } else {
-                modulePath = sessionStorage.getItem('scriptName');
+                if (role === 'teacher') {
+                    modulePath = './journal/teacher-logic.js';
+                    moduleName = 'teacher';
+                } else {
+                    modulePath = './journal/student-logic.js';
+                    moduleName = 'student';
+                }
             }
-            
+        
             if (isChecked) {
-                allCheckboxes.forEach(otherCheckbox => {
-                    if (otherCheckbox !== event.target) {
-                        otherCheckbox.checked = false;
-                    }
-                });
-                
-                loadModule(modulePath);
+                loadModule(modulePath, moduleName);
             }
         });
     });
