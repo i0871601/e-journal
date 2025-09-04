@@ -116,17 +116,17 @@ function saveSessionData(data) {
 }
 
 // Початкова ініціалізація
-export function initAuth() {
-    window.addEventListener('pageshow', (event) => {
-        if (event.persisted) {
-            sessionStorage.clear();
-            const form = document.getElementById('loginForm');
-            form.reset();
-        }
-    });
-
-    form.addEventListener('submit', handleFormSubmission);
-
+function initAuth() {
+    const form = document.getElementById('loginForm');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmission);
+        console.log("Submit listener added to the form.");
+    } else {
+        console.error("Form element not found!");
+    }
 }
+
+document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
