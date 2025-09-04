@@ -54,7 +54,7 @@ export const initTeacherLogic = async () => {
         classOrSubject = subjectsArray[0];
         toggleSubjectTeacherDropdown(true);
 
-        const subjectList = document.getElementById("Subject");
+        const subjectList = document.getElementById("subject-list");
         subjectList.addEventListener('click', (event) => {
             if (event.target.tagName === 'LI') {
                 const selectedSubject = event.target.textContent;
@@ -85,7 +85,7 @@ const handleGradeUpdate = async (dataset, gradeValue) => {
     const res = await updateOrAddGrade(updatedGradeData);
     if (res.status === 403) {
         alert("Зміни можна вносити лише в останній урок.");
-        const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
+        const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
         const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
         delete dataCache[cacheKey];
         await loadFullJournalData(selectedClass, lastName, classOrSubject);
@@ -95,7 +95,7 @@ const handleGradeUpdate = async (dataset, gradeValue) => {
 };
 
 const handleLessonAdd = async (lessonData) => {
-    const selectedClass = document.querySelector("#classOfjournal .first-option p").textContent.trim();
+    const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
     const currentJournalData = dataCache[`teacher-${classOrSubject}-${selectedClass}`];
     
     let newLessonNumber;
@@ -140,7 +140,7 @@ const handleLessonAdd = async (lessonData) => {
 };
 
 const loadDropdownOptions = async () => {
-    const listElement = document.getElementById("subjectClass");
+    const listElement = document.getElementById("class-list");
     if (!listElement) {
         console.error("Елемент для випадаючого списку не знайдено.");
         return;
@@ -158,4 +158,5 @@ const loadDropdownOptions = async () => {
         console.error("Сталася помилка при завантаженні даних:", error);
         listElement.innerHTML = "<li>Помилка завантаження</li>";
     }
+
 };
