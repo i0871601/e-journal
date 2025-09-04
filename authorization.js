@@ -122,10 +122,4 @@ export function initAuth() {
 
     form.addEventListener('submit', handleFormSubmission);
 }
-
-//document.addEventListener('DOMContentLoaded', initAuth);
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', initAuth);
