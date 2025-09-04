@@ -22,7 +22,7 @@ export const initScheduleLogic = async () => {
         const lastName = sessionStorage.getItem('lastName');
         const firstName = sessionStorage.getItem('firstName');
         
-        const data = await loadScheduleData(role, classOrSubject, lastName, firstName);
+        const groupedByDay = await loadScheduleData(role, classOrSubject, lastName, firstName);
         
         if (!groupedByDay || Object.keys(groupedByDay).length === 0) {
             displayScheduleError('Розклад відсутній.');
