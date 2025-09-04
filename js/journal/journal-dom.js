@@ -5,7 +5,7 @@ const classDropdownButton = document.querySelector("#ClassTeacher .first-option"
 const classDropdownList = document.getElementById("class-list");
 const subjectDropdownButton = document.querySelector("#subject-button");
 const subjectDropdownList = document.getElementById("subject-list");
-const subjectContainer = document.getElementById(" Select-Subject");
+const subjectContainer = document.getElementById("Select-Subject");
 
 export const displayFullJournal = (journalData, updateGradeCallback) => {
     if (!tabletJournal) return;
@@ -347,3 +347,4 @@ export const setupGlobalDropdownClose = () => {
     });
 
 };
+
