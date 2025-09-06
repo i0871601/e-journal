@@ -46,6 +46,7 @@ export const initTeacherLogic = async () => {
 
         try {
             // ЗМІНА 1: ПЕРЕДАЄМО І КЛАС, І ПРЕДМЕТ
+            console.log("Вчитель Логік Лог Х: Відправка запиту на повний журнал. Клас:", className, "Предмет:", classOrSubject);
             const journal = await loadFullJournalData(className, classOrSubject);
             dataCache[cacheKey] = journal;
             currentStudents = journal;
@@ -106,6 +107,7 @@ const handleGradeUpdate = async (dataset, gradeValue) => {
         const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
         delete dataCache[cacheKey];
         // ЗМІНА 2: ПЕРЕЗАВАНТАЖУЄМО ЖУРНАЛ, ПЕРЕДАЮЧИ І КЛАС, І ПРЕДМЕТ
+        console.log("Вчитель Логік Лог Х: Перезавантаження журналу. Клас:", selectedClass, "Предмет:", classOrSubject);
         await loadFullJournalData(selectedClass, classOrSubject);
     } else if (!res.success) {
         
@@ -150,6 +152,7 @@ const handleLessonAdd = async (lessonData) => {
         const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
         delete dataCache[cacheKey];
         // ЗМІНА 3: ПЕРЕЗАВАНТАЖУЄМО ЖУРНАЛ, ПЕРЕДАЮЧИ І КЛАС, І ПРЕДМЕТ
+        console.log("Вчитель Логік Лог Х: Перезавантаження журналу після додавання уроку. Клас:", selectedClass, "Предмет:", classOrSubject);
         const journal = await loadFullJournalData(selectedClass, classOrSubject);
         dataCache[cacheKey] = journal;
         displayFullJournal(journal, handleGradeUpdate);
