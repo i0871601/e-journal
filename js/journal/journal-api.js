@@ -12,10 +12,11 @@ export const updateOrAddGrade = async (gradeData) => {
     return response;
 };
 
-export const loadFullJournalData = async (className) => {
+export const loadFullJournalData = async (className, subject) => {
     const payload = {
         action: "load_full_journal",
-        className: className
+        className: className,
+        subject: subject
     };
     console.log("Журнал API Лог 3 (Запит): Завантаження повного журналу для класу:", payload);
     const response = await request(API_URL_FULL_JOURNAL, payload);
@@ -63,5 +64,4 @@ export const loadStudentGradesData = async (params) => {
         throw new Error(response.message);
     }
     return response;
-
 };
