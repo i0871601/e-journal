@@ -75,7 +75,7 @@ export const initTeacherLogic = async () => {
                     classOrSubject = selectedSubject;
                     setSubjectTeacherButtonText(classOrSubject);
                     // Викликаємо завантаження класів для нового предмету
-                    loadDropdownOptions();
+                    loadDropdownOptions(selectedSubject); // ПЕРЕДАЄМО ПАРАМЕТР
                 }
                 subjectList.style.display = "none";
             }
@@ -83,7 +83,7 @@ export const initTeacherLogic = async () => {
     }
 
     // Тільки тепер викликаємо loadDropdownOptions() один раз, після того, як classOrSubject вже встановлений
-    await loadDropdownOptions();
+    await loadDropdownOptions(classOrSubject); // ПЕРЕДАЄМО ПАРАМЕТР
     setupGlobalDropdownClose();
 };
 
@@ -158,21 +158,21 @@ const handleLessonAdd = async (lessonData) => {
     }
 };
 
-const loadDropdownOptions = async () => {
+const loadDropdownOptions = async (subjectToLoad) => {
     console.log("Вчитель Логік Лог 10: Завантаження опцій для випадаючого списку.");
-    const listElement = document.getElementById("class-list");
-    if (!listElement) {
-        console.error("Елемент для випадаючого списку не знайдено.");
-        return;
-    }
-    const cacheKey = `options-${role}-${classOrSubject}`;
-    if (dataCache[cacheKey]) {
-        populateDropdown(listElement, dataCache[cacheKey]);
-        return;
-    }
+    const listElement = document.getElementById("class-list");
+    if (!listElement) {
+        console.error("Елемент для випадаючого списку не знайдено.");
+        return;
+    }
+    const cacheKey = `options-${role}-${subjectToLoad}`;
+    if (dataCache[cacheKey]) {
+        populateDropdown(listElement, dataCache[cacheKey]);
+        return;
+    }
     try {
-        console.log("Вчитель Логік Лог 11: Надсилаємо запит для предмета:", classOrSubject);
-        const data = await loadDropdownOptionsData(classOrsubject); 
+        console.log("Вчитель Логік Лог 11: Надсилаємо запит для предмета:", subjectToLoad);
+        const data = await loadDropdownOptionsData(subjectToLoad); 
         dataCache[cacheKey] = data;
         populateDropdown(listElement, data);
     } catch (error) {
