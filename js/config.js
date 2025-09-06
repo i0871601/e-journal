@@ -19,7 +19,8 @@ export function getUserData() {
 
 export async function request(url, payload) {
     const userData = getUserData();
-
+    console.log("Лог 5: Дані користувача:", userData, "Дані для відправки:", payload);
+    
     if (!userData) {
         // Викидаємо помилку замість повернення об'єкта.
         throw new Error("Дані користувача не знайдено в сесії. Відправка запиту неможлива.");
@@ -29,7 +30,8 @@ export async function request(url, payload) {
         ...payload,
         userData: userData
     };
-
+    
+    console.log("Лог 6: Фінальний об'єкт для відправки:", finalPayload);
     try {
         const response = await fetch(url, {
             method: 'POST',
