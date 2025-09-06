@@ -1,163 +1,177 @@
 //Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 import {
-    updateOrAddGrade,
-    loadFullJournalData,
-    addLessonToJournal,
-    loadDropdownOptionsData
+    updateOrAddGrade,
+    loadFullJournalData,
+    addLessonToJournal,
+    loadDropdownOptionsData
 } from './journal-api.js';
 
 import {
-    displayFullJournal,
-    setupAddLessonForm,
-    populateDropdown,
-    showJournalMessage,
-    toggleSubjectTeacherDropdown,
-    setSubjectTeacherButtonText,
-    setupMainDropdown,
-    setupGlobalDropdownClose
+    displayFullJournal,
+    setupAddLessonForm,
+    populateDropdown,
+    showJournalMessage,
+    toggleSubjectTeacherDropdown,
+    setSubjectTeacherButtonText,
+    setupMainDropdown,
+    setupGlobalDropdownClose
 } from './journal-dom.js';
 
-const role = "teacher";
-const lastName = sessionStorage.getItem("lastName");
-const firstName = sessionStorage.getItem("firstName");
-let classOrSubject = sessionStorage.getItem("classOrsubject");
+import { getUserData } from '../config.js';
+
+const userData = getUserData();
+if (!userData) {
+    showJournalMessage("Будь ласка, увійдіть в систему.");
+    console.error("Вчитель Логік Лог 1: Дані користувача не знайдено.");
+    throw new Error("Дані користувача не знайдено.");
+}
+
+const role = userData.role;
+const lastName = userData.lastName;
+const firstName = userData.firstName;
+let classOrSubject = userData.classOrsubject;
 const dataCache = {};
 let currentStudents = [];
 
 export const initTeacherLogic = async () => {
-    setupMainDropdown('teacher', "Виберіть клас", async (className) => {
-        showJournalMessage('Завантаження журналу...');
-        const cacheKey = `teacher-${classOrSubject}-${className}`;
-        
-        if (dataCache[cacheKey]) {
-            displayFullJournal(dataCache[cacheKey], handleGradeUpdate);
-            return;
-        }
+    console.log("Вчитель Логік Лог 2: Ініціалізація логіки для вчителя. Дані: ", { role, lastName, firstName, classOrSubject });
+    setupMainDropdown('teacher', "Виберіть клас", async (className) => {
+        showJournalMessage('Завантаження журналу...');
+        const cacheKey = `teacher-${classOrSubject}-${className}`;
+        
+        if (dataCache[cacheKey]) {
+            displayFullJournal(dataCache[cacheKey], handleGradeUpdate);
+            return;
+        }
 
-        try {
-            const journal = await loadFullJournalData(className, lastName, classOrSubject);
-            dataCache[cacheKey] = journal;
-            currentStudents = journal;
-            displayFullJournal(journal, handleGradeUpdate);
-        } catch (err) {
-            console.error("Помилка завантаження журналу:", err);
-            showJournalMessage("Не вдалося завантажити журнал. Спробуйте пізніше.");
-        }
-    });
+        try {
+            const journal = await loadFullJournalData(className);
+            dataCache[cacheKey] = journal;
+            currentStudents = journal;
+            displayFullJournal(journal, handleGradeUpdate);
+        } catch (err) {
+            console.error("Помилка завантаження журналу:", err);
+            showJournalMessage(err.message || "Не вдалося завантажити журнал. Спробуйте пізніше.");
+        }
+    });
 
-    setupAddLessonForm(handleLessonAdd);
+    setupAddLessonForm(handleLessonAdd);
 
-    if (classOrSubject && classOrSubject.includes(',')) {
-        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
-        populateDropdown(document.getElementById("subject-list"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
-        setSubjectTeacherButtonText(subjectsArray[0]);
-        classOrSubject = subjectsArray[0];
-        toggleSubjectTeacherDropdown(true);
+    if (classOrSubject && classOrSubject.includes(',')) {
+        console.log("Вчитель Логік Лог 3: Вчитель викладає кілька предметів. Завантаження опцій.");
+        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
+        populateDropdown(document.getElementById("subject-list"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
+        setSubjectTeacherButtonText(subjectsArray[0]);
+        classOrSubject = subjectsArray[0];
+        toggleSubjectTeacherDropdown(true);
 
-        const subjectList = document.getElementById("subject-list");
-        subjectList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI') {
-                const selectedSubject = event.target.textContent;
-                if (classOrSubject !== selectedSubject) {
-                    classOrSubject = selectedSubject;
-                    setSubjectTeacherButtonText(classOrSubject);
-                    loadDropdownOptions();
-                }
-                subjectList.style.display = "none";
-            }
-        });
-    }
+        const subjectList = document.getElementById("subject-list");
+        subjectList.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI') {
+                const selectedSubject = event.target.textContent;
+                if (classOrSubject !== selectedSubject) {
+                    classOrSubject = selectedSubject;
+                    setSubjectTeacherButtonText(classOrSubject);
+                    loadDropdownOptions();
+                }
+                subjectList.style.display = "none";
+            }
+        });
+    }
 
-    await loadDropdownOptions();
-    setupGlobalDropdownClose();
+    await loadDropdownOptions();
+    setupGlobalDropdownClose();
 };
 
 const handleGradeUpdate = async (dataset, gradeValue) => {
-    const updatedGradeData = {
-        lessonNumber: dataset.lessonNumber,
-        studentFirstName: dataset.studentFirstName,
-        studentLastName: dataset.studentLastName,
-        teacherLastName: lastName,
-        subject: classOrSubject,
-        grade: gradeValue.trim(),
-        lessonType: "Normal"
-    };
-    const res = await updateOrAddGrade(updatedGradeData);
-    if (res.status === 403) {
-        alert("Зміни можна вносити лише в останній урок.");
-        const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
-        const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
-        delete dataCache[cacheKey];
-        await loadFullJournalData(selectedClass, lastName, classOrSubject);
-    } else if (!res.ok) {
-        alert("Помилка при збереженні оцінки.");
-    }
+    console.log("Вчитель Логік Лог 4: Спроба оновити оцінку. Дані:", { dataset, gradeValue });
+    const updatedGradeData = {
+        lessonNumber: dataset.lessonNumber,
+        studentFirstName: dataset.studentFirstName,
+        studentLastName: dataset.studentLastName,
+        subject: classOrSubject,
+        grade: gradeValue.trim(),
+        lessonType: "Normal"
+    };
+    const res = await updateOrAddGrade(updatedGradeData);
+    if (res.success === false) {
+        console.error("Вчитель Логік Лог 5: Помилка при оновленні оцінки:", res.message);
+        alert("Зміни можна вносити лише в останній урок.");
+        const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
+        const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
+        delete dataCache[cacheKey];
+        await loadFullJournalData(selectedClass, lastName, classOrSubject);
+    } else if (!res.success) {
+        
+        alert("Помилка при збереженні оцінки.");
+    }
 };
 
 const handleLessonAdd = async (lessonData) => {
-    const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
-    const currentJournalData = dataCache[`teacher-${classOrSubject}-${selectedClass}`];
-    
-    let newLessonNumber;
-    if (lessonData.lessonType === "Normal") {
-        const normalLessons = currentJournalData ? currentJournalData[0].grades.filter(g => g.lessonType === "Normal") : [];
-        const maxNormalNumber = normalLessons.length > 0 ? Math.max(...normalLessons.map(g => parseInt(g.lessonNumber, 10))) : 0;
-        newLessonNumber = maxNormalNumber + 1;
-    } else {
-        const allLessons = currentJournalData ? currentJournalData[0].grades : [];
-        const maxLessonNumber = allLessons.length > 0 ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10))) : 0;
-        newLessonNumber = maxLessonNumber;
-    }
-    
-    const gradesData = currentStudents.map((student) => ({
-        studentFirstName: student.firstName,
-        studentLastName: student.lastName,
-        grade: ""
-    }));
+    console.log("Вчитель Логік Лог 7: Спроба додати новий урок. Дані:", lessonData);
+    const selectedClass = document.querySelector("#ClassTeacher .first-option p").textContent.trim();
+    const currentJournalData = dataCache[`teacher-${classOrSubject}-${selectedClass}`];
+    
+    let newLessonNumber;
+    if (lessonData.lessonType === "Normal") {
+        const normalLessons = currentJournalData ? currentJournalData[0].grades.filter(g => g.lessonType === "Normal") : [];
+        const maxNormalNumber = normalLessons.length > 0 ? Math.max(...normalLessons.map(g => parseInt(g.lessonNumber, 10))) : 0;
+        newLessonNumber = maxNormalNumber + 1;
+    } else {
+        const allLessons = currentJournalData ? currentJournalData[0].grades : [];
+        const maxLessonNumber = allLessons.length > 0 ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10))) : 0;
+        newLessonNumber = maxLessonNumber;
+    }
+    
+    const gradesData = currentStudents.map((student) => ({
+        studentFirstName: student.firstName,
+        studentLastName: student.lastName,
+        grade: ""
+    }));
 
-    const fullLessonData = {
-        ...lessonData,
-        lessonNumber: newLessonNumber,
-        teacherLastName: lastName,
-        teacherSubject: classOrSubject,
-        class: selectedClass,
-        grades: gradesData
-    };
+    const fullLessonData = {
+        ...lessonData,
+        lessonNumber: newLessonNumber,
+        teacherSubject: classOrSubject,
+        class: selectedClass,
+        grades: gradesData
+    };
 
-    const res = await addLessonToJournal(fullLessonData);
-    if (res.ok) {
-        alert("Урок успішно додано!");
-        const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
-        delete dataCache[cacheKey];
-        const journal = await loadFullJournalData(selectedClass, lastName, classOrSubject);
-        dataCache[cacheKey] = journal;
-        displayFullJournal(journal, handleGradeUpdate);
-        return true;
-    } else {
-        alert("Помилка при додаванні уроку.");
-        return false;
-    }
+    const res = await addLessonToJournal(fullLessonData);
+    if (res.success) {
+        console.log("Вчитель Логік Лог 8: Урок успішно додано.");
+        alert("Урок успішно додано!");
+        const cacheKey = `teacher-${classOrSubject}-${selectedClass}`;
+        delete dataCache[cacheKey];
+        const journal = await loadFullJournalData(selectedClass);
+        dataCache[cacheKey] = journal;
+        displayFullJournal(journal, handleGradeUpdate);
+        return true;
+    } else {
+        console.error("Вчитель Логік Лог 9: Помилка при додаванні уроку:", res.message);
+        alert("Помилка при додаванні уроку.");
+        return false;
+    }
 };
 
 const loadDropdownOptions = async () => {
-    const listElement = document.getElementById("class-list");
-    if (!listElement) {
-        console.error("Елемент для випадаючого списку не знайдено.");
-        return;
-    }
-    const cacheKey = `options-${role}-${classOrSubject}`;
-    if (dataCache[cacheKey]) {
-        populateDropdown(listElement, dataCache[cacheKey]);
-        return;
-    }
-    try {
-        const data = await loadDropdownOptionsData(lastName, classOrSubject);
-        dataCache[cacheKey] = data;
-        populateDropdown(listElement, data);
-    } catch (error) {
-        console.error("Сталася помилка при завантаженні даних:", error);
-        listElement.innerHTML = "<li>Помилка завантаження</li>";
-    }
-
+    console.log("Вчитель Логік Лог 10: Завантаження опцій для випадаючого списку.");
+    const listElement = document.getElementById("class-list");
+    if (!listElement) {
+        console.error("Елемент для випадаючого списку не знайдено.");
+        return;
+    }
+    const cacheKey = `options-${role}-${classOrSubject}`;
+    if (dataCache[cacheKey]) {
+        populateDropdown(listElement, dataCache[cacheKey]);
+        return;
+    }
+    try {
+        const data = await loadDropdownOptionsData();
+        dataCache[cacheKey] = data;
+        populateDropdown(listElement, data);
+    } catch (error) {
+        console.error("Сталася помилка при завантаженні даних:", error);
+        listElement.innerHTML = "<li>Помилка завантаження</li>";
+    }
 };
-
