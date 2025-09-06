@@ -21,8 +21,8 @@ export async function request(url, payload) {
     const userData = getUserData();
 
     if (!userData) {
-        console.error("Дані користувача не знайдено в сесії. Відправка запиту неможлива.");
-        return { success: false, message: "No user data found" };
+        // Викидаємо помилку замість повернення об'єкта.
+        throw new Error("Дані користувача не знайдено в сесії. Відправка запиту неможлива.");
     }
 
     const finalPayload = {
@@ -40,7 +40,8 @@ export async function request(url, payload) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            const errorData = await response.json();
+            throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
         }
 
         return await response.json();
