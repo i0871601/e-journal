@@ -1,5 +1,4 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// schedule-logic.js
 
 import { loadScheduleData } from './schedule-api.js';
 import { getUserData } from '../config.js'; // Імпортуємо функцію getUserData
@@ -21,6 +20,7 @@ export const initScheduleLogic = async () => {
 
     try {
         const userData = getUserData();
+        console.log("Лог 1: Дані користувача з сесії:", userData);
         if (!userData) {
             displayScheduleError('Помилка: Немає даних користувача.');
             setScheduleLoadedState();
@@ -30,6 +30,7 @@ export const initScheduleLogic = async () => {
         const payload = {
             action: 'get_schedule'
         };
+        console.log("Лог 2: Відправка до API:", payload);
 
         const groupedByDay = await loadScheduleData(payload);
 
