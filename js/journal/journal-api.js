@@ -49,7 +49,7 @@ export async function loadDropdownOptionsData(subject) {
         throw new Error(response.message);
     }
     return response;
-};
+}
 
 export const loadStudentGradesData = async (params) => {
     const payload = {
@@ -63,4 +63,5 @@ export const loadStudentGradesData = async (params) => {
         throw new Error(response.message);
     }
     return response;
+
 };
