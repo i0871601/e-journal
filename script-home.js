@@ -10,6 +10,7 @@
     //}
 //});
 
+import { getUserData } from './js/config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     const loadedModules = {};
@@ -39,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (event) => {
             const isChecked = event.target.checked;
-            const role = sessionStorage.getItem('role');
+            
+            const userData = getUserData();
+            const role = userData ? userData.role : null;
             let modulePath;
             let moduleName;
 

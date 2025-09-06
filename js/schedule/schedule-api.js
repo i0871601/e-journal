@@ -1,23 +1,15 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { API_URL_SCHEDULE } from '../config.js';
+// schedule-api.js
 
-export const loadScheduleData = async (role, classOrSubject, lastName, firstName) => {
-    const params = new URLSearchParams();
-    params.append('role', role);
-    params.append('lastName', lastName);
-    params.append('firstName', firstName);
+import { request, API_URL_SCHEDULE } from '../config.js';
 
-    if (role === 'teacher') {
-        params.append('subject', classOrSubject);
-    } else if (role === 'student') {
-        params.append('class', classOrSubject);
+export const loadScheduleData = async (payload) => {
+    console.log("Лог 3: Дані, отримані в API-скрипті:", payload);
+    const response = await request(API_URL_SCHEDULE, payload);
+    
+    if (response.success === false) {
+        throw new Error(response.message);
     }
-
-    const url = `${API_URL_SCHEDULE}?${params.toString()}`;
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        throw new Error(`Помилка мережі: ${res.status}`);
-    }
-    return res.json();
+    console.log("Лог 4: Дані, які повертаємо:", response.scheduleData);
+    return response.scheduleData;
 };

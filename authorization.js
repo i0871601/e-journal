@@ -99,15 +99,8 @@ function hidePasswordUpdateForm(message) {
 }
 
 function saveSessionData(data) {
-    sessionStorage.setItem('role', data.role);
-    sessionStorage.setItem('firstName', data.firstName);
-    sessionStorage.setItem('lastName', data.lastName);
-    sessionStorage.setItem('Hex', data.Key);
-    if (data.classOrsubject) {
-        sessionStorage.setItem('classOrsubject', data.classOrsubject);
-    }
     const jsonString = JSON.stringify(data);
-    sessionStorage.setItem('userBase', data);
+    sessionStorage.setItem('userBase', jsonString);
 }
 
 // Початкова ініціалізація
@@ -124,7 +117,6 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
-
 
 
 
