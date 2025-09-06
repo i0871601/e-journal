@@ -102,6 +102,7 @@ function saveSessionData(data) {
     sessionStorage.setItem('role', data.role);
     sessionStorage.setItem('firstName', data.firstName);
     sessionStorage.setItem('lastName', data.lastName);
+    sessionStorage.setItem('Hex', data.Key);
     if (data.scriptName) {
         sessionStorage.setItem('scriptName', data.scriptName);
     }
@@ -124,6 +125,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
