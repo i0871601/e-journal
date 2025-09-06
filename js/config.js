@@ -7,7 +7,7 @@ export const API_URL_ADD_LESSON = "https://worker-add-lesson.i0871601.workers.de
 export const API_URL_GRADES_JOURNAL = "https://worker-class-subject.i0871601.workers.dev/";
 export const API_URL_STUDENT_JOURNAL = "https://worker-student-full-journal.i0871601.workers.dev/";
 
-function getUserData() {
+export function getUserData() {
     try {
         const sessionData = sessionStorage.getItem('userBase');
         return sessionData ? JSON.parse(sessionData) : null;
