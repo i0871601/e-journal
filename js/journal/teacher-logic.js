@@ -57,30 +57,34 @@ export const initTeacherLogic = async () => {
 
     setupAddLessonForm(handleLessonAdd);
 
-    if (classOrSubject && classOrSubject.includes(',')) {
+        if (classOrSubject && classOrSubject.includes(',')) {
         console.log("Вчитель Логік Лог 3: Вчитель викладає кілька предметів. Завантаження опцій.");
-        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
-        populateDropdown(document.getElementById("subject-list"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
-        setSubjectTeacherButtonText(subjectsArray[0]);
-        classOrSubject = subjectsArray[0];
-        toggleSubjectTeacherDropdown(true);
+        const subjectsArray = classOrSubject.split(',').map(item => item.trim());
+        populateDropdown(document.getElementById("subject-list"), { type: 'subjects', data: subjectsArray.map(s => ({ subject: s, teacherLastName: lastName })) });
+        
+        // Встановлюємо перший предмет і викликаємо завантаження класів для нього
+        classOrSubject = subjectsArray[0];
+        setSubjectTeacherButtonText(classOrSubject);
+        toggleSubjectTeacherDropdown(true);
 
-        const subjectList = document.getElementById("subject-list");
-        subjectList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI') {
-                const selectedSubject = event.target.textContent;
-                if (classOrSubject !== selectedSubject) {
-                    classOrSubject = selectedSubject;
-                    setSubjectTeacherButtonText(classOrSubject);
-                    loadDropdownOptions();
-                }
-                subjectList.style.display = "none";
-            }
-        });
-    }
+        const subjectList = document.getElementById("subject-list");
+        subjectList.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI') {
+                const selectedSubject = event.target.textContent;
+                if (classOrSubject !== selectedSubject) {
+                    classOrSubject = selectedSubject;
+                    setSubjectTeacherButtonText(classOrSubject);
+                    // Викликаємо завантаження класів для нового предмету
+                    loadDropdownOptions();
+                }
+                subjectList.style.display = "none";
+            }
+        });
+    }
 
-    await loadDropdownOptions();
-    setupGlobalDropdownClose();
+    // Тільки тепер викликаємо loadDropdownOptions() один раз, після того, як classOrSubject вже встановлений
+    await loadDropdownOptions();
+    setupGlobalDropdownClose();
 };
 
 const handleGradeUpdate = async (dataset, gradeValue) => {
