@@ -37,9 +37,10 @@ export const addLessonToJournal = async (lessonData) => {
     return response;
 };
 
-export const loadDropdownOptionsData = async () => {
+export async function loadDropdownOptionsData(subject) {
     const payload = {
-        action: "get_dropdown_options"
+        action: "get_dropdown_options",
+        subject: subject
     };
     console.log("Журнал API Лог 7 (Запит): Завантаження опцій для випадаючого списку:", payload);
     const response = await request(API_URL_GRADES_JOURNAL, payload);

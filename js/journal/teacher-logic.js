@@ -172,11 +172,7 @@ const loadDropdownOptions = async () => {
     }
     try {
         console.log("Вчитель Логік Лог 11: Надсилаємо запит для предмета:", classOrSubject);
-        const dataForRequest = {
-            ...userData,
-            classOrsubject: classOrSubject // classOrSubject вже містить один предмет
-        };
-        const data = await loadDropdownOptionsData(dataForRequest);
+        const data = await loadDropdownOptionsData(classOrsubject); 
         dataCache[cacheKey] = data;
         populateDropdown(listElement, data);
     } catch (error) {
