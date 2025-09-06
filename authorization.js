@@ -99,6 +99,16 @@ function hidePasswordUpdateForm(message) {
 }
 
 function saveSessionData(data) {
+    sessionStorage.setItem('role', data.role);
+    sessionStorage.setItem('firstName', data.firstName);
+    sessionStorage.setItem('lastName', data.lastName);
+    sessionStorage.setItem('Hex', data.Key);
+    if (data.scriptName) {
+        sessionStorage.setItem('scriptName', data.scriptName);
+    }
+    if (data.classOrsubject) {
+        sessionStorage.setItem('classOrsubject', data.classOrsubject);
+    }
     const jsonString = JSON.stringify(data);
     sessionStorage.setItem('userBase', jsonString);
 }
@@ -117,6 +127,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
