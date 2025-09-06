@@ -171,7 +171,7 @@ const loadDropdownOptions = async () => {
         return;
     }
     try {
-        const data = await loadDropdownOptionsData();
+        const data = await loadDropdownOptionsData({ classOrSubject: classOrSubject });
         dataCache[cacheKey] = data;
         populateDropdown(listElement, data);
     } catch (error) {
