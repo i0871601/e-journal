@@ -1,5 +1,8 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+// schedule-logic.js
+
 import { loadScheduleData } from './schedule-api.js';
+import { getUserData } from '../config.js'; // Імпортуємо функцію getUserData
 import { 
     displaySchedule, 
     setupDaySelector, 
@@ -17,24 +20,31 @@ export const initScheduleLogic = async () => {
     setScheduleLoadingState();
 
     try {
-        const role = sessionStorage.getItem('role');
-        const classOrSubject = sessionStorage.getItem('classOrsubject');
-        const lastName = sessionStorage.getItem('lastName');
-        const firstName = sessionStorage.getItem('firstName');
-        
-        const groupedByDay = await loadScheduleData(role, classOrSubject, lastName, firstName);
-        
+        const userData = getUserData();
+        if (!userData) {
+            displayScheduleError('Помилка: Немає даних користувача.');
+            setScheduleLoadedState();
+            return;
+        }
+
+        const payload = {
+            action: 'get_schedule'
+        };
+
+        const groupedByDay = await loadScheduleData(payload);
+
         if (!groupedByDay || Object.keys(groupedByDay).length === 0) {
             displayScheduleError('Розклад відсутній.');
             setScheduleLoadedState();
             return;
         }
 
-        setupDaySelector(groupedByDay, role);
+        // Передаємо role, отриману з об'єкта userData
+        setupDaySelector(groupedByDay, userData.role);
         setScheduleLoadedState();
 
     } catch (err) {
         console.error('Помилка запиту:', err);
-        displayScheduleError('Не вдалося завантажити розклад. Спробуйте пізніше.');
+        displayScheduleError(err.message || 'Не вдалося завантажити розклад. Спробуйте пізніше.');
     }
 };
