@@ -171,7 +171,12 @@ const loadDropdownOptions = async () => {
         return;
     }
     try {
-        const data = await loadDropdownOptionsData({ classOrSubject: classOrSubject });
+        console.log("Вчитель Логік Лог 11: Надсилаємо запит для предмета:", classOrSubject);
+        const dataForRequest = {
+            ...userData,
+            classOrsubject: classOrSubject // classOrSubject вже містить один предмет
+        };
+        const data = await loadDropdownOptionsData(dataForRequest);
         dataCache[cacheKey] = data;
         populateDropdown(listElement, data);
     } catch (error) {
