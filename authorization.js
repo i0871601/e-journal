@@ -107,7 +107,7 @@ function saveSessionData(data) {
         sessionStorage.setItem('classOrsubject', data.classOrsubject);
     }
     const jsonString = JSON.stringify(data);
-    sessionStorage.setItem('userBase', jsonString);
+    sessionStorage.setItem('userBase', data);
 }
 
 // Початкова ініціалізація
@@ -124,6 +124,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
