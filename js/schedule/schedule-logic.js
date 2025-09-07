@@ -28,7 +28,7 @@ export const initScheduleLogic = async () => {
         }
 
         const payload = {
-            action: 'get_schedule'
+            action: 'schedule'
         };
         console.log("Лог 2: Відправка до API:", payload);
 
@@ -48,4 +48,5 @@ export const initScheduleLogic = async () => {
         console.error('Помилка запиту:', err);
         displayScheduleError(err.message || 'Не вдалося завантажити розклад. Спробуйте пізніше.');
     }
+
 };
