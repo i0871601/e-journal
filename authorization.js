@@ -1,7 +1,80 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { setButtonState, displayErrorMessage, clearErrorMessage } from './js/auth/dom.js';
-import { hashPassword, authorizeUser, updatePassword } from './js/auth/api.js';
 
+import { API_URL_AUTHORIZATION } from './js/config.js';
+
+// Частина з dom.js
+const button = document.getElementById('loginButton');
+const defaultText = button.querySelector('.default-text');
+const dots = button.querySelector('.dots');
+const errorMessage = document.getElementById('errorMessage');
+
+export function setButtonState(isLoading, text = "Увійти") {
+    if (isLoading) {
+        defaultText.classList.add('hidden');
+        dots.classList.remove('hidden');
+        button.disabled = true;
+        button.classList.add('active-animation');
+    } else {
+        defaultText.classList.remove('hidden');
+        dots.classList.add('hidden');
+        button.disabled = false;
+        defaultText.textContent = text;
+        button.classList.remove('active-animation');
+    }
+}
+
+export function displayErrorMessage(message) {
+    errorMessage.textContent = message;
+}
+
+export function clearErrorMessage() {
+    errorMessage.textContent = '';
+}
+
+// Частина з api.js
+export async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+export async function authorizeUser(lastName, passwordHash) {
+    const response = await fetch(API_URL_AUTHORIZATION, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lastName, password: passwordHash })
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Помилка авторизації.');
+    }
+    return data;
+}
+
+export async function updatePassword(lastName, newPasswordHash) {
+    const response = await fetch(API_URL_AUTHORIZATION, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            action: 'login',
+            lastName: lastName,
+            password: password
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Помилка оновлення пароля.');
+    }
+    return data;
+}
+
+// Основна частина
 const form = document.getElementById('loginForm');
 const passwordField = document.getElementById('password');
 const newPasswordField = document.getElementById('newPassword');
@@ -117,7 +190,6 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
-
 
 
 
