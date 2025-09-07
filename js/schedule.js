@@ -1,7 +1,7 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 // Цей файл об'єднує логіку API-запитів, маніпуляцій з DOM та основну логіку ініціалізації розкладу.
 
-import { request, API_URL_SCHEDULE, getUserData } from '../config.js';
+import { request, API_URL_SCHEDULE, getUserData } from './config.js';
 
 // === ФУНКЦІЇ ДЛЯ ВЗАЄМОДІЇ З API (з schedule-api.js) ===
 export const loadScheduleData = async (payload) => {
@@ -134,4 +134,5 @@ export const initScheduleLogic = async () => {
         console.error('Помилка запиту:', err);
         displayScheduleError(err.message || 'Не вдалося завантажити розклад. Спробуйте пізніше.');
     }
+
 };
