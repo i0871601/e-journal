@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (event.target.id === 'toggle-schedule') {
-                modulePath = './js/schedule-logic.js';
+                modulePath = './js/schedule.js';
                 moduleName = 'schedule';
             } else {
                 if (role === 'teacher') {
@@ -74,5 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
 
