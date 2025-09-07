@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (event.target.id === 'toggle-schedule') {
-                modulePath = './js/schedule/schedule-logic.js';
+                modulePath = './js/schedule-logic.js';
                 moduleName = 'schedule';
             } else {
                 if (role === 'teacher') {
-                    modulePath = './js/journal/teacher-logic.js';
+                    modulePath = './js/teacher-logic.js';
                     moduleName = 'teacher';
                 } else {
-                    modulePath = './js/journal/student-logic.js';
+                    modulePath = './js/student-logic.js';
                     moduleName = 'student';
                 }
             }
@@ -74,4 +74,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
