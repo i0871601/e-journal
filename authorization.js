@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 
-import { API_URL_AUTHORIZATION } from './js/config.js';
+import { API_URL_AUTHORIZATION } from '../config.js';
 
 // Частина з dom.js
 const button = document.getElementById('loginButton');
@@ -46,7 +46,11 @@ export async function authorizeUser(lastName, passwordHash) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ lastName, password: passwordHash })
+        body: JSON.stringify({
+            action: 'login',
+            lastName: lastName,
+            password: passwordHash
+      })
     });
     const data = await response.json();
     if (!response.ok) {
