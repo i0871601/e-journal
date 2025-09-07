@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 
-import { API_URL_AUTHORIZATION } from '../config.js';
+import { API_URL_AUTHORIZATION } from './js/config.js';
 
 // Частина з dom.js
 const button = document.getElementById('loginButton');
