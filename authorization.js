@@ -116,7 +116,7 @@ async function handleLogin(lastName, password) {
             showPasswordUpdateForm(data.message);
         } else {
             saveSessionData(data);
-            window.location.href = data.redirectUrl;
+            window.location.href = "Home.html";
         }
     } catch (error) {
         displayErrorMessage("Помилка: невірний логін чи пароль.");
