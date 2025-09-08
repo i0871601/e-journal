@@ -49,7 +49,7 @@ export async function authorizeUser(lastName, passwordHash) {
         body: JSON.stringify({
             action: 'login',
             lastName: lastName,
-            newPassword: passwordHash
+            password: passwordHash
       })
     });
     const data = await response.json();
@@ -68,7 +68,7 @@ export async function updatePassword(lastName, newPasswordHash) {
         body: JSON.stringify({
             action: 'login',
             lastName: lastName,
-            password: newPasswordHash
+            newPassword: newPasswordHash
       })
     });
     const data = await response.json();
@@ -194,6 +194,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
