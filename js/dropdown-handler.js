@@ -121,7 +121,7 @@ export function initDropdown(userData) {
         return;
     }
 
-    const { role, data } = userData;
+    const { role, data, classOrsubject } = userData;
 
     if (role === 'student') {
         const listElement = document.getElementById("subject-list");
@@ -135,8 +135,7 @@ export function initDropdown(userData) {
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
-                const classOrSubjectString = data.classOrSubject || "";
-                const firstClassOrSubject = classOrSubjectString.split(',')[0].trim();
+                const firstClassOrSubject = classOrsubject.split(',')[0].trim();
                 console.log(`Перший елемент даних (клас):`, firstClassOrSubject);
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
@@ -170,6 +169,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
