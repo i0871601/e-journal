@@ -97,7 +97,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         
         let classesForSubject = [];
         if (classesData.length > 0 && typeof classesData[0] === 'string') {
-            // Виправлення: Розбиваємо рядок з класами на масив.
             classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
         }
         
@@ -135,8 +134,11 @@ export function initDropdown(userData) {
             buttonTextElement.textContent = "Виберіть предмет";
             populateDropdown(listElement, data.data, "subjects");
             setupToggle(buttonElement, listElement);
+            // ✅ Змінений колбек-функція для учня.
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
+                console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
+                console.log(`Перший елемент даних:`, Object.keys(data.data)[0]);
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
         } else {
@@ -162,4 +164,3 @@ export function initDropdown(userData) {
         }
     }
 }
-
