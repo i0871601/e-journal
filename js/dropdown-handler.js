@@ -135,8 +135,8 @@ export function initDropdown(userData) {
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
-                // ✅ Виправлено: отримуємо перший елемент масиву, а не ключ об'єкта
-                console.log(`Перший предмет у списку:`, data.data[0].subject); 
+                const firstClassOrSubject = data.classOrSubject.split(',')[0].trim();
+                console.log(`Перший елемент даних (клас):`, firstClassOrSubject);
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
         } else {
@@ -169,4 +169,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
