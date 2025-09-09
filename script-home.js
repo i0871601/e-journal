@@ -11,7 +11,7 @@
 //});
 
 import { getUserData } from './js/config.js';
-import { displayUserData } from './js/data-display.js'; // Імпортуємо нову функцію
+import { initDropdown } from './js/dropdown-handler.js'; // Імпортуємо нову функцію
 
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
     if (userData) {
         // Викликаємо нову функцію тут, після отримання даних користувача
-        displayUserData(userData);
+        initDropdown(userData);
     }
 
     allCheckboxes.forEach(checkbox => {
@@ -80,4 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 
