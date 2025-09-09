@@ -11,6 +11,7 @@
 //});
 
 import { getUserData } from './js/config.js';
+import { displayUserData } from './js/data-display';
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
     const loadedModules = {};
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const userData = getUserData();
             const role = userData ? userData.role : null;
+            displayUserData(userData);
             let modulePath;
             let moduleName;
 
@@ -56,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (event.target.id === 'toggle-schedule') {
-                modulePath = './js/schedule.js';
+                modulePath = './js/schedule/schedule-logic.js';
                 moduleName = 'schedule';
             } else {
                 if (role === 'teacher') {
-                    modulePath = './js/teacher-logic.js';
+                    modulePath = './js/journal/teacher-logic.js';
                     moduleName = 'teacher';
                 } else {
-                    modulePath = './js/student-logic.js';
+                    modulePath = './js/journal/student-logic.js';
                     moduleName = 'student';
                 }
             }
@@ -74,6 +76,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
-
-
 
