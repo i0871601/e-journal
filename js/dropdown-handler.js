@@ -25,7 +25,8 @@ function populateDropdown(listElement, data, type) {
             });
         }
     } else if (type === "simpleList") {
-        // ВИПРАВЛЕНО: Тепер обробляємо масив рядків
+        // ВИПРАВЛЕНО: Правильно ітеруємо по масиву та створюємо окремі об'єкти
+        // `data` - це вже масив рядків, наприклад, ["3-А", "3-Б", "4-А", "5-А"]
         items = data.map(item => ({ text: item, dataset: {} }));
     }
 
@@ -103,7 +104,7 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
 
-        // Приховуємо другий список після заповнення, щоб він був невидимим спочатку
+        // Приховуємо другий список після заповнення
         classListElement.style.display = 'none';
         
         setupToggle(document.getElementById("Class-button"), classListElement);
