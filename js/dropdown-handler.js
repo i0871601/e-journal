@@ -95,10 +95,11 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
 
         const classesData = userData.data.data[selectedSubject] || [];
         
-        // ✅ Правильна логіка: використовуємо масив напряму, без split
         let classesForSubject = [];
+        // ✅ ВІДНОВЛЕНО ПОЧАТКОВУ ЛОГІКУ: вона працює для даних сервера
         if (classesData.length > 0 && typeof classesData[0] === 'string') {
             classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
+        }
         
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
@@ -155,7 +156,6 @@ export function initDropdown(userData) {
             const classButtonTextElement = document.querySelector("#Class-button p");
             if (classListElement && classButtonElement && classButtonTextElement) {
                 setupToggle(classButtonElement, classListElement);
-                // ✅ ВИПРАВЛЕНО: Додаємо обробник подій для класів лише один раз тут
                 setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
                     console.log(`Вибраний клас: ${className}`);
                 });
@@ -170,6 +170,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
