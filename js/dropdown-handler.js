@@ -25,9 +25,6 @@ function populateDropdown(listElement, data, type) {
         }
     }
 
-    // Загальне сортування для всіх типів, якщо потрібно. Тут не сортуємо,
-    // щоб зберегти порядок, якщо він важливий. Можна додати сортування, якщо це потрібно.
-
     items.forEach(item => {
         const listItem = document.createElement("li");
         listItem.textContent = item.text;
@@ -35,6 +32,31 @@ function populateDropdown(listElement, data, type) {
             listItem.dataset[key] = item.dataset[key];
         }
         listElement.appendChild(listItem);
+    });
+}
+
+/**
+ * Встановлює обробник подій для перемикання видимості списку.
+ * @param {HTMLElement} buttonElement - Кнопка, яка перемикає список.
+ * @param {HTMLElement} listElement - Елемент списку <ul>.
+ */
+function setupToggle(buttonElement, listElement) {
+    if (!buttonElement || !listElement) {
+        console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
+        return;
+    }
+    
+    // Перемикаємо display списку при кліку на кнопку
+    buttonElement.addEventListener('click', (event) => {
+        event.stopPropagation(); // Зупиняємо розповсюдження події, щоб не закрити список одразу
+        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Закриваємо список при кліку в будь-яке інше місце сторінки
+    document.addEventListener('click', (event) => {
+        if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
+            listElement.style.display = 'none';
+        }
     });
 }
 
@@ -52,27 +74,29 @@ export function initDropdown(userData) {
 
     if (role === 'student') {
         const listElement = document.getElementById("subject-list");
+        const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#subject-button p");
         
-        if (listElement && buttonTextElement) {
+        if (listElement && buttonElement && buttonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
             populateDropdown(listElement, data.data, data.type);
-            console.log("✅ Список предметів для учня заповнено.");
+            setupToggle(buttonElement, listElement);
+            console.log("✅ Список предметів для учня заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списку предметів учня.");
         }
 
     } else if (role === 'teacher') {
         const listElement = document.getElementById("subject-list");
+        const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#subject-button p");
         
-        if (listElement && buttonTextElement) {
+        if (listElement && buttonElement && buttonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
-            // Ми використовуємо classOrsubject для вчителя як список предметів,
-            // а data містить об'єкт з класами. Ми заповнюємо список предметів.
             const subjects = userData.classOrsubject.split(',').map(s => s.trim());
             populateDropdown(listElement, subjects.map(s => ({ subject: s, teacherLastName: userData.lastName })), "subjects");
-            console.log("✅ Список предметів для вчителя заповнено.");
+            setupToggle(buttonElement, listElement);
+            console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
         }
