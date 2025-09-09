@@ -100,7 +100,7 @@
     border-radius: 1.5vmin;
     background-color: var(--text-color);
 }
-#Select-Subject{
+##ClassTeacher{
   display: none;
 }
 #lessonTypeList{
@@ -135,6 +135,7 @@
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
