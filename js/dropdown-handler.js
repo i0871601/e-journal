@@ -104,8 +104,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
         
-        setupToggle(document.getElementById("Class-button"), classListElement);
-        
         setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
             console.log(`Вибраний клас: ${className}`);
         });
@@ -134,7 +132,6 @@ export function initDropdown(userData) {
             buttonTextElement.textContent = "Виберіть предмет";
             populateDropdown(listElement, data.data, "subjects");
             setupToggle(buttonElement, listElement);
-            // ✅ Змінений колбек-функція для учня.
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
@@ -155,6 +152,14 @@ export function initDropdown(userData) {
             const subjects = Object.keys(userData.data.data).map(s => ({ subject: s }));
             populateDropdown(listElement, subjects, "subjects");
             setupToggle(buttonElement, listElement);
+            
+            // ✅ Налаштування для другого списку додається тут, щоб уникнути повторного додавання обробників.
+            const classListElement = document.getElementById("class-list");
+            const classButtonElement = document.getElementById("Class-button");
+            if (classListElement && classButtonElement) {
+                 setupToggle(classButtonElement, classListElement);
+            }
+            
             setupListSelection(listElement, buttonTextElement, (selectedSubject, dataset) => {
                 handleTeacherSubjectSelection(selectedSubject, dataset, userData);
             });
@@ -164,3 +169,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
