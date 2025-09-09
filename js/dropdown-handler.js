@@ -97,9 +97,8 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         
         // ✅ Правильна логіка: використовуємо масив напряму, без split
         let classesForSubject = [];
-        if (Array.isArray(classesData)) {
-            classesForSubject = classesData.map(item => item.trim()).filter(Boolean);
-        }
+        if (classesData.length > 0 && typeof classesData[0] === 'string') {
+            classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
         
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
@@ -171,6 +170,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
