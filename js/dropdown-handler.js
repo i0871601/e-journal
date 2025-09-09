@@ -16,17 +16,10 @@ function populateDropdown(listElement, data, type) {
     if (type === "subjects") {
         items = data.map(item => ({ text: item.subject, dataset: { teacherLastName: item.teacherLastName || "" } }));
     } else if (type === "classesBySubject") {
-        // Тут ми очікуємо об'єкт, де ключ - це предмет, а значення - масив класів.
-        for (const subject in data) {
-            const classes = Array.isArray(data[subject]) ? data[subject] : [];
-            classes.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
-            classes.forEach(className => {
-                items.push({ text: className, dataset: { subject: subject } });
-            });
-        }
+        // Видаліть цей блок або змініть його логіку, оскільки для заповнення класів 
+        // ви використовуєте тип "simpleList" у `handleTeacherSubjectSelection`
+        console.warn("Попередження: Тип 'classesBySubject' не використовується, оскільки класи заповнюються через 'simpleList'.");
     } else if (type === "simpleList") {
-        // ВИПРАВЛЕНО: Правильно ітеруємо по масиву та створюємо окремі об'єкти
-        // `data` - це вже масив рядків, наприклад, ["3-А", "3-Б", "4-А", "5-А"]
         items = data.map(item => ({ text: item, dataset: {} }));
     }
 
@@ -43,46 +36,6 @@ function populateDropdown(listElement, data, type) {
 }
 
 /**
- * Встановлює обробник подій для перемикання видимості списку.
- * @param {HTMLElement} buttonElement - Кнопка, яка перемикає список.
- * @param {HTMLElement} listElement - Елемент списку <ul>.
- */
-function setupToggle(buttonElement, listElement) {
-    if (!buttonElement || !listElement) {
-        console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
-        return;
-    }
-
-    buttonElement.addEventListener('click', (event) => {
-        event.stopPropagation();
-        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
-            listElement.style.display = 'none';
-        }
-    });
-}
-
-/**
- * Встановлює обробник подій для елементів списку.
- * @param {HTMLElement} listElement - Елемент <ul>.
- * @param {HTMLElement} buttonTextElement - Елемент <p> в кнопці.
- * @param {Function} onSelectCallback - Колбек-функція, яка викликається після вибору.
- */
-function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
-    listElement.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            const selectedText = event.target.textContent;
-            buttonTextElement.textContent = selectedText;
-            listElement.style.display = 'none';
-            onSelectCallback(selectedText, event.target.dataset);
-        }
-    });
-}
-
-/**
  * Колбек-функція, що обробляє вибір предмета вчителем.
  * @param {string} selectedSubject - Вибраний предмет.
  * @param {object} dataset - dataset вибраного елемента.
@@ -94,28 +47,23 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
     const classContainer = document.getElementById("ClassTeacher");
 
     if (classListElement && classButtonTextElement && classContainer) {
-        // Робимо контейнер видимим
         classContainer.style.display = 'block';
 
         // Вибираємо масив класів для вибраного предмета
         const classesForSubject = userData.data.data[selectedSubject] || [];
         
-        // Заповнюємо список класів, використовуючи новий тип "simpleList"
+        // Заповнюємо список класів, використовуючи тип "simpleList"
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
-
-        // Приховуємо другий список після заповнення
         classListElement.style.display = 'none';
         
+        // Налаштовуємо перемикач та кліки для другого списку
         setupToggle(document.getElementById("Class-button"), classListElement);
-        
-        // Налаштовуємо кліки для другого списку
         setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
             console.log(`Вибраний клас: ${className}`);
         });
     }
 }
-
 
 /**
  * Ініціалізує та заповнює випадаючі списки на основі ролі користувача.
@@ -127,7 +75,7 @@ export function initDropdown(userData) {
         return;
     }
 
-    const { role, data } = userData;
+    const { role } = userData;
 
     if (role === 'student') {
         const listElement = document.getElementById("subject-list");
@@ -136,7 +84,7 @@ export function initDropdown(userData) {
         
         if (listElement && buttonElement && buttonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
-            populateDropdown(listElement, data.data, "subjects");
+            populateDropdown(listElement, userData.data.data, "subjects");
             setupToggle(buttonElement, listElement);
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
