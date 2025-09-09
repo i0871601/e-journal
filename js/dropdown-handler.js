@@ -135,7 +135,8 @@ export function initDropdown(userData) {
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
-                console.log(`Перший елемент даних:`, Object.keys(data.data)[0]);
+                // ✅ Виправлено: отримуємо перший елемент масиву, а не ключ об'єкта
+                console.log(`Перший предмет у списку:`, data.data[0].subject); 
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
         } else {
@@ -153,7 +154,6 @@ export function initDropdown(userData) {
             populateDropdown(listElement, subjects, "subjects");
             setupToggle(buttonElement, listElement);
             
-            // ✅ Налаштування для другого списку додається тут, щоб уникнути повторного додавання обробників.
             const classListElement = document.getElementById("class-list");
             const classButtonElement = document.getElementById("Class-button");
             if (classListElement && classButtonElement) {
