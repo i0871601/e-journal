@@ -16,11 +16,6 @@ function populateDropdown(listElement, data, type) {
     if (type === "subjects") {
         items = data.map(item => ({ text: item.subject, dataset: { teacherLastName: item.teacherLastName || "" } }));
     } else if (type === "classesBySubject") {
-        // У цьому блоці була помилка: він збирав класи з УСІХ предметів в один список.
-        // Виправлення: Тепер він створює один об'єкт { text: className, dataset: { subject: subject } } для кожного класу,
-        // але це працює лише якщо data - це об'єкт, де ключі - це предмети.
-        // Оскільки ви передаєте вже відфільтрований масив у handleTeacherSubjectSelection, цей блок не використовується.
-        // Я залишив його для повноти, але ваша логіка вже працює з "simpleList".
         for (const subject in data) {
             const classes = Array.isArray(data[subject]) ? data[subject] : [];
             classes.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
@@ -29,8 +24,6 @@ function populateDropdown(listElement, data, type) {
             });
         }
     } else if (type === "simpleList") {
-        // Цей блок є правильним і використовується у вашому коді для заповнення класів.
-        // Він очікує, що `data` - це простий масив рядків.
         items = data.map(item => ({ text: item, dataset: {} }));
     }
 
@@ -100,10 +93,14 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
     if (classListElement && classButtonTextElement && classContainer) {
         classContainer.style.display = 'block';
 
-        const classesForSubject = userData.data.data[selectedSubject] || [];
+        const classesData = userData.data.data[selectedSubject] || [];
         
-        // Тут ми заповнюємо список класів, використовуючи тип "simpleList",
-        // оскільки classesForSubject є простим масивом рядків.
+        let classesForSubject = [];
+        if (classesData.length > 0 && typeof classesData[0] === 'string') {
+            // Виправлення: Розбиваємо рядок з класами на масив.
+            classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
+        }
+        
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
@@ -165,3 +162,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
