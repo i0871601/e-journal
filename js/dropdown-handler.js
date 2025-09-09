@@ -1,333 +1,167 @@
 /**
-
- * Універсальна функція для заповнення випадаючого списку.
-
- * @param {HTMLElement} listElement - Елемент <ul> для заповнення.
-
- * @param {Array|Object} data - Дані для списку.
-
- * @param {string} type - Тип даних ("subjects", "classesBySubject" або "simpleList").
-
- */
-
+ * Універсальна функція для заповнення випадаючого списку.
+ * @param {HTMLElement} listElement - Елемент <ul> для заповнення.
+ * @param {Array|Object} data - Дані для списку.
+ * @param {string} type - Тип даних ("subjects", "classesBySubject" або "simpleList").
+ */
 function populateDropdown(listElement, data, type) {
+    if (!listElement) {
+        console.error("Помилка: Не знайдено елемент списку для заповнення.");
+        return;
+    }
 
-    if (!listElement) {
+    listElement.innerHTML = '';
 
-        console.error("Помилка: Не знайдено елемент списку для заповнення.");
+    let items = [];
+    if (type === "subjects") {
+        items = data.map(item => ({ text: item.subject, dataset: { teacherLastName: item.teacherLastName || "" } }));
+    } else if (type === "classesBySubject") {
+        // У цьому блоці була помилка: він збирав класи з УСІХ предметів в один список.
+        // Виправлення: Тепер він створює один об'єкт { text: className, dataset: { subject: subject } } для кожного класу,
+        // але це працює лише якщо data - це об'єкт, де ключі - це предмети.
+        // Оскільки ви передаєте вже відфільтрований масив у handleTeacherSubjectSelection, цей блок не використовується.
+        // Я залишив його для повноти, але ваша логіка вже працює з "simpleList".
+        for (const subject in data) {
+            const classes = Array.isArray(data[subject]) ? data[subject] : [];
+            classes.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
+            classes.forEach(className => {
+                items.push({ text: className, dataset: { subject: subject } });
+            });
+        }
+    } else if (type === "simpleList") {
+        // Цей блок є правильним і використовується у вашому коді для заповнення класів.
+        // Він очікує, що `data` - це простий масив рядків.
+        items = data.map(item => ({ text: item, dataset: {} }));
+    }
 
-        return;
+    items.sort((a, b) => a.text.localeCompare(b.text, undefined, { numeric: true, sensitivity: "base" }));
 
-    }
-
-
-
-    listElement.innerHTML = '';
-
-
-
-    let items = [];
-
-    if (type === "subjects") {
-
-        items = data.map(item => ({ text: item.subject, dataset: { teacherLastName: item.teacherLastName || "" } }));
-
-    } else if (type === "classesBySubject") {
-
-        // Тут ми очікуємо об'єкт, де ключ - це предмет, а значення - масив класів.
-
-        for (const subject in data) {
-
-            const classes = Array.isArray(data[subject]) ? data[subject] : [];
-
-            classes.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
-
-            classes.forEach(className => {
-
-                items.push({ text: className, dataset: { subject: subject } });
-
-            });
-
-        }
-
-    } else if (type === "simpleList") {
-
-        // ВИПРАВЛЕНО: Правильно ітеруємо по масиву та створюємо окремі об'єкти
-
-        // `data` - це вже масив рядків, наприклад, ["3-А", "3-Б", "4-А", "5-А"]
-
-        items = data.map(item => ({ text: item, dataset: {} }));
-
-    }
-
-
-
-    items.sort((a, b) => a.text.localeCompare(b.text, undefined, { numeric: true, sensitivity: "base" }));
-
-
-
-    items.forEach(item => {
-
-        const listItem = document.createElement("li");
-
-        listItem.textContent = item.text;
-
-        for (const key in item.dataset) {
-
-            listItem.dataset[key] = item.dataset[key];
-
-        }
-
-        listElement.appendChild(listItem);
-
-    });
-
+    items.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.textContent = item.text;
+        for (const key in item.dataset) {
+            listItem.dataset[key] = item.dataset[key];
+        }
+        listElement.appendChild(listItem);
+    });
 }
 
-
-
 /**
-
- * Встановлює обробник подій для перемикання видимості списку.
-
- * @param {HTMLElement} buttonElement - Кнопка, яка перемикає список.
-
- * @param {HTMLElement} listElement - Елемент списку <ul>.
-
- */
-
+ * Встановлює обробник подій для перемикання видимості списку.
+ * @param {HTMLElement} buttonElement - Кнопка, яка перемикає список.
+ * @param {HTMLElement} listElement - Елемент списку <ul>.
+ */
 function setupToggle(buttonElement, listElement) {
+    if (!buttonElement || !listElement) {
+        console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
+        return;
+    }
 
-    if (!buttonElement || !listElement) {
+    buttonElement.addEventListener('click', (event) => {
+        event.stopPropagation();
+        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
+    });
 
-        console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
-
-        return;
-
-    }
-
-
-
-    buttonElement.addEventListener('click', (event) => {
-
-        event.stopPropagation();
-
-        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
-
-    });
-
-
-
-    document.addEventListener('click', (event) => {
-
-        if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
-
-            listElement.style.display = 'none';
-
-        }
-
-    });
-
+    document.addEventListener('click', (event) => {
+        if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
+            listElement.style.display = 'none';
+        }
+    });
 }
 
-
-
 /**
-
- * Встановлює обробник подій для елементів списку.
-
- * @param {HTMLElement} listElement - Елемент <ul>.
-
- * @param {HTMLElement} buttonTextElement - Елемент <p> в кнопці.
-
- * @param {Function} onSelectCallback - Колбек-функція, яка викликається після вибору.
-
- */
-
+ * Встановлює обробник подій для елементів списку.
+ * @param {HTMLElement} listElement - Елемент <ul>.
+ * @param {HTMLElement} buttonTextElement - Елемент <p> в кнопці.
+ * @param {Function} onSelectCallback - Колбек-функція, яка викликається після вибору.
+ */
 function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
-
-    listElement.addEventListener('click', (event) => {
-
-        if (event.target.tagName === 'LI') {
-
-            const selectedText = event.target.textContent;
-
-            buttonTextElement.textContent = selectedText;
-
-            listElement.style.display = 'none';
-
-            onSelectCallback(selectedText, event.target.dataset);
-
-        }
-
-    });
-
+    listElement.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const selectedText = event.target.textContent;
+            buttonTextElement.textContent = selectedText;
+            listElement.style.display = 'none';
+            onSelectCallback(selectedText, event.target.dataset);
+        }
+    });
 }
 
-
-
 /**
-
- * Колбек-функція, що обробляє вибір предмета вчителем.
-
- * @param {string} selectedSubject - Вибраний предмет.
-
- * @param {object} dataset - dataset вибраного елемента.
-
- * @param {object} userData - Дані користувача.
-
- */
-
+ * Колбек-функція, що обробляє вибір предмета вчителем.
+ * @param {string} selectedSubject - Вибраний предмет.
+ * @param {object} dataset - dataset вибраного елемента.
+ * @param {object} userData - Дані користувача.
+ */
 function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
+    const classListElement = document.getElementById("class-list");
+    const classButtonTextElement = document.querySelector("#Class-button p");
+    const classContainer = document.getElementById("ClassTeacher");
 
-    const classListElement = document.getElementById("class-list");
+    if (classListElement && classButtonTextElement && classContainer) {
+        classContainer.style.display = 'block';
 
-    const classButtonTextElement = document.querySelector("#Class-button p");
-
-    const classContainer = document.getElementById("ClassTeacher");
-
-
-
-    if (classListElement && classButtonTextElement && classContainer) {
-
-        // Робимо контейнер видимим
-
-        classContainer.style.display = 'block';
-
-
-
-        // Вибираємо масив класів для вибраного предмета
-
-        const classesForSubject = userData.data.data[selectedSubject] || [];
-
-        
-
-        // Заповнюємо список класів, використовуючи новий тип "simpleList"
-
-        populateDropdown(classListElement, classesForSubject, "simpleList");
-
-        classButtonTextElement.textContent = "Виберіть клас";
-
-
-
-        // Приховуємо другий список після заповнення
-
-        classListElement.style.display = 'none';
-
-        
-
-        setupToggle(document.getElementById("Class-button"), classListElement);
-
-        
-
-        // Налаштовуємо кліки для другого списку
-
-        setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
-
-            console.log(`Вибраний клас: ${className}`);
-
-        });
-
-    }
-
+        const classesForSubject = userData.data.data[selectedSubject] || [];
+        
+        // Тут ми заповнюємо список класів, використовуючи тип "simpleList",
+        // оскільки classesForSubject є простим масивом рядків.
+        populateDropdown(classListElement, classesForSubject, "simpleList");
+        classButtonTextElement.textContent = "Виберіть клас";
+        classListElement.style.display = 'none';
+        
+        setupToggle(document.getElementById("Class-button"), classListElement);
+        
+        setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
+            console.log(`Вибраний клас: ${className}`);
+        });
+    }
 }
 
 
-
-
-
 /**
-
- * Ініціалізує та заповнює випадаючі списки на основі ролі користувача.
-
- * @param {object} userData - Об'єкт даних користувача.
-
- */
-
+ * Ініціалізує та заповнює випадаючі списки на основі ролі користувача.
+ * @param {object} userData - Об'єкт даних користувача.
+ */
 export function initDropdown(userData) {
+    if (!userData || !userData.data) {
+        console.error("Помилка: Неповні дані користувача для ініціалізації випадаючого списку.");
+        return;
+    }
 
-    if (!userData || !userData.data) {
+    const { role, data } = userData;
 
-        console.error("Помилка: Неповні дані користувача для ініціалізації випадаючого списку.");
+    if (role === 'student') {
+        const listElement = document.getElementById("subject-list");
+        const buttonElement = document.getElementById("subject-button");
+        const buttonTextElement = document.querySelector("#subject-button p");
+        
+        if (listElement && buttonElement && buttonTextElement) {
+            buttonTextElement.textContent = "Виберіть предмет";
+            populateDropdown(listElement, data.data, "subjects");
+            setupToggle(buttonElement, listElement);
+            setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
+                console.log(`Вибраний предмет: ${subject}`);
+            });
+            console.log("✅ Список предметів для учня заповнено та налаштовано.");
+        } else {
+            console.error("Помилка: Не знайдено елементи для списку предметів учня.");
+        }
 
-        return;
-
-    }
-
-
-
-    const { role, data } = userData;
-
-
-
-    if (role === 'student') {
-
-        const listElement = document.getElementById("subject-list");
-
-        const buttonElement = document.getElementById("subject-button");
-
-        const buttonTextElement = document.querySelector("#subject-button p");
-
-        
-
-        if (listElement && buttonElement && buttonTextElement) {
-
-            buttonTextElement.textContent = "Виберіть предмет";
-
-            populateDropdown(listElement, data.data, "subjects");
-
-            setupToggle(buttonElement, listElement);
-
-            setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
-
-                console.log(`Вибраний предмет: ${subject}`);
-
-            });
-
-            console.log("✅ Список предметів для учня заповнено та налаштовано.");
-
-        } else {
-
-            console.error("Помилка: Не знайдено елементи для списку предметів учня.");
-
-        }
-
-
-
-    } else if (role === 'teacher') {
-
-        const listElement = document.getElementById("subject-list");
-
-        const buttonElement = document.getElementById("subject-button");
-
-        const buttonTextElement = document.querySelector("#subject-button p");
-
-        
-
-        if (listElement && buttonElement && buttonTextElement) {
-
-            buttonTextElement.textContent = "Виберіть предмет";
-
-            const subjects = Object.keys(userData.data.data).map(s => ({ subject: s }));
-
-            populateDropdown(listElement, subjects, "subjects");
-
-            setupToggle(buttonElement, listElement);
-
-            setupListSelection(listElement, buttonTextElement, (selectedSubject, dataset) => {
-
-                handleTeacherSubjectSelection(selectedSubject, dataset, userData);
-
-            });
-
-            console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
-
-        } else {
-
-            console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
-
-        }
-
-    }
-
+    } else if (role === 'teacher') {
+        const listElement = document.getElementById("subject-list");
+        const buttonElement = document.getElementById("subject-button");
+        const buttonTextElement = document.querySelector("#subject-button p");
+        
+        if (listElement && buttonElement && buttonTextElement) {
+            buttonTextElement.textContent = "Виберіть предмет";
+            const subjects = Object.keys(userData.data.data).map(s => ({ subject: s }));
+            populateDropdown(listElement, subjects, "subjects");
+            setupToggle(buttonElement, listElement);
+            setupListSelection(listElement, buttonTextElement, (selectedSubject, dataset) => {
+                handleTeacherSubjectSelection(selectedSubject, dataset, userData);
+            });
+            console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
+        } else {
+            console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
+        }
+    }
 }
