@@ -25,7 +25,7 @@ function populateDropdown(listElement, data, type) {
             });
         }
     } else if (type === "simpleList") {
-        // Додаємо новий тип для простих масивів, як у випадку класів для вчителя
+        // ВИПРАВЛЕНО: Тепер обробляємо масив рядків
         items = data.map(item => ({ text: item, dataset: {} }));
     }
 
@@ -103,8 +103,9 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
 
-        // Робимо список класів видимим, оскільки він має бути прихованим за замовчуванням
-        classListElement.style.display = 'none'; // Початково приховуємо список
+        // Приховуємо другий список після заповнення, щоб він був невидимим спочатку
+        classListElement.style.display = 'none';
+        
         setupToggle(document.getElementById("Class-button"), classListElement);
         
         // Налаштовуємо кліки для другого списку
