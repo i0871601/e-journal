@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 moduleName = 'schedule';
             } else {
                 if (role === 'teacher') {
-                    modulePath = './js/journal/teacher-logic.js';
-                    moduleName = 'teacher';
+                    //modulePath = './js/journal/teacher-logic.js';
+                    //moduleName = 'teacher';
                 } else {
-                    modulePath = './js/journal/student-logic.js';
-                    moduleName = 'student';
+                    //modulePath = './js/journal/student-logic.js';
+                    //moduleName = 'student';
                 }
             }
             if (isChecked) {
@@ -80,3 +80,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
