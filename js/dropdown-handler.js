@@ -4,6 +4,8 @@
  * @param {Array|Object} data - Дані для списку.
  * @param {string} type - Тип даних ("subjects", "classesBySubject" або "simpleList").
  */
+import {request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL} from './config.js';
+
 function populateDropdown(listElement, data, type) {
     if (!listElement) {
         console.error("Помилка: Не знайдено елемент списку для заповнення.");
@@ -130,9 +132,17 @@ export function initDropdown(userData) {
             populateDropdown(listElement, data.data, "subjects");
             setupToggle(buttonElement, listElement);
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
+                const firstClassOrSubject = classOrsubject.split(',')[0].trim();
+                const payload = {
+                    action: 'journal',
+                    subject: subject,
+                    teacherLastName: dataset.teacherLastName,
+                    className: firstClassOrSubject
+                };
+                const response = await request(API_URL_FULL_JOURNAL, payload);
+                console.log("Відправка до API:", payload);
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
-                const firstClassOrSubject = classOrsubject.split(',')[0].trim();
                 console.log(`Перший елемент даних (клас):`, firstClassOrSubject);
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
@@ -157,6 +167,13 @@ export function initDropdown(userData) {
             if (classListElement && classButtonElement && classButtonTextElement) {
                 setupToggle(classButtonElement, classListElement);
                 setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
+                    const payload = {
+                    action: 'journal',
+                    subject: subject,
+                    className: className
+                };
+                const response = await request(API_URL_STUDENT_JOURNAL, payload);
+                console.log("Відправка до API:", payload);
                     console.log(`Вибраний клас: ${className}`);
                 });
             }
@@ -170,6 +187,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
