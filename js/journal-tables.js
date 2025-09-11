@@ -1,7 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 // Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
-// Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 export function displayGrades(grades, role, name) {
     const tableContainer = document.getElementById("journal-table-container");
@@ -59,25 +57,26 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         return;
     }
 
-    // ⭐️ Видалено рядок `journalContainer.innerHTML = '';`
+    // ⭐️ Видаляємо рядок, який видаляє всі елементи, включаючи випадаючі списки.
+    // journalContainer.innerHTML = '';
+
     const tableContainer = document.getElementById("journal-table-container");
     if (!tableContainer) {
         console.error("Елемент 'journal-table-container' не знайдено.");
         return;
     }
-    // ⭐️ Видалено рядок `tableContainer.innerHTML = '';`
-
-    // Тепер ми будемо додавати таблицю в інший, спеціально створений контейнер
-    let gradeTableWrapper = document.getElementById("grade-table-wrapper");
-    if (!gradeTableWrapper) {
-        gradeTableWrapper = document.createElement('div');
-        gradeTableWrapper.id = "grade-table-wrapper";
-        tableContainer.appendChild(gradeTableWrapper);
+    
+    // ⭐️ Створюємо новий елемент-обгортку для таблиці
+    let tableWrapper = document.getElementById('journal-table-wrapper');
+    if (!tableWrapper) {
+        tableWrapper = document.createElement('div');
+        tableWrapper.id = 'journal-table-wrapper';
+        tableContainer.appendChild(tableWrapper);
     }
-    gradeTableWrapper.innerHTML = ''; // Очищаємо лише обгортку для таблиці
+    tableWrapper.innerHTML = ''; // Очищаємо тільки обгортку з таблицею
 
     if (journalData.length === 0) {
-        journalContainer.innerHTML = '<p>Журнал пустий. Додайте перший урок.</p>';
+        tableWrapper.innerHTML = '<p>Журнал пустий. Додайте перший урок.</p>';
         return;
     }
 
@@ -122,9 +121,9 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     });
     table.appendChild(tableBody);
 
-    gradeTableWrapper.appendChild(table);
+    tableWrapper.appendChild(table);
 
-    // ⭐️ Обробник подій для всіх полів оцінок
+    // Обробник подій для всіх полів оцінок
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
             const newValue = event.target.value;
