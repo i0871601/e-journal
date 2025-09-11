@@ -40,7 +40,6 @@ const setupListSelection = (listElement, buttonTextElement, callback) => {
     });
 };
 
-// ⭐️ Оновлена функція, яка передає предмет та клас
 function createUpdateGradeCallback(subject, className) {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
     return async (grade, lessonNumber, studentFirstName, studentLastName, lessonType) => {
@@ -76,7 +75,7 @@ async function handleTeacherSubjectSelection(selectedSubject, dataset, userData)
     const classButtonTextElement = document.querySelector("#Class-button p");
 
     if (classListElement && classButtonElement && classButtonTextElement) {
-        classListElement.innerHTML = ''; // Очищаємо список класів
+        classListElement.innerHTML = '';
         populateDropdown(classListElement, classes, "classes");
         classButtonTextElement.textContent = "Виберіть клас";
         classButtonElement.style.display = "flex";
@@ -136,6 +135,8 @@ export function initDropdown(data) {
             const classButtonTextElement = document.querySelector("#Class-button p");
             if (classListElement && classButtonElement && classButtonTextElement) {
                 setupToggle(classButtonElement, classListElement);
+                
+                // ⭐️ Оновлений обробник для вибору класу
                 setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
                     const payload = {
                         action: 'journal',
@@ -147,11 +148,9 @@ export function initDropdown(data) {
                     console.log(`Відповідь:`, response);
 
                     if (response && response.journalData && response.journalData.length > 0) {
-                        // ⭐️ Тепер передаємо предмет та клас в колбек
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response.journalData, updateGradeCallback);
                         setupAddLessonForm(selectedSubjectForTeacher, className, response.journalData, async () => {
-                            // Колбек для оновлення журналу після успішного додавання уроку
                             const refreshPayload = {
                                 action: 'journal',
                                 subject: selectedSubjectForTeacher,
@@ -167,9 +166,11 @@ export function initDropdown(data) {
                     }
                 });
                 
+                // ⭐️ Оновлений обробник для вибору предмета
                 setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                     handleTeacherSubjectSelection(selectedSubject, dataset, userData);
                 });
+
                 console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
             } else {
                 console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
