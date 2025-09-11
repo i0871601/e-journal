@@ -192,19 +192,15 @@ export function initDropdown(userData) {
                     } else {
                         console.log("Відповідь від API пуста або не містить даних журналу.");
                     }
-                });   
+                });
+                
                 setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
-                handleTeacherSubjectSelection(selectedSubject, dataset, userData);
-            });
-            console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
-        } else {
-            console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
+                    handleTeacherSubjectSelection(selectedSubject, dataset, userData);
+                });
+                console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
+            } else {
+                console.error("Помилка: Не знайдено елементи для списку предметів вчителя.");
+            }
         }
     }
 }
-}
-
-
-
-
-
