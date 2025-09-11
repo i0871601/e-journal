@@ -146,7 +146,7 @@ export function initDropdown(userData) {
                 const response = await request(payload);
                 console.log("Відправка до API:", payload);
                 console.log(`Відповідь:`, response);
-                if (response && response.journalData && response.journalData.length > 0) {
+                if (response && response.grades && response.grades.length > 0) {
                     displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
                 } else {
                     console.log("Відповідь від API пуста або не містить даних журналу.");
@@ -430,6 +430,7 @@ export function initDropdown(userData) {
         }
     }
 }*/
+
 
 
 
