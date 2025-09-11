@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
+//))) Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 export function displayGrades(grades, role, name) {
     const tableContainer = document.querySelector(".TabletJournal");
@@ -16,7 +16,6 @@ export function displayGrades(grades, role, name) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Предмет</th>`;
 
-    // ⭐ Збір унікальних уроків з усіх оцінок
     const lessons = grades.reduce((acc, current) => {
         if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
             acc.push(current);
@@ -50,8 +49,6 @@ export function displayGrades(grades, role, name) {
     tableContainer.appendChild(table);
 }
 
----
-
 export function displayFullJournal(journalData, updateGradeCallback) {
     const journalContainer = document.getElementById("GradeOfJournal");
     if (!journalContainer) {
@@ -78,10 +75,11 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     }
 
     const students = journalData;
+
+    // ✅ Оновлена логіка: збираємо всі унікальні уроки з усіх студентів
+    const allLessons = students.flatMap(s => s.grades || []); // ⭐️ Використовуємо .flatMap() для отримання всіх уроків з усіх студентів. Додано `|| []` на випадок, якщо grades відсутній.
     
-    // ✅ Виправлена логіка: збираємо всі унікальні уроки з усіх студентів. Це гарантує, що в шапці таблиці будуть усі уроки.
-    const allLessons = students.flatMap(s => s.grades || []);
-    
+    // ✅ Новий підхід для визначення унікальних уроків. Це надійніше, ніж брати уроки лише з першого студента.
     const uniqueLessons = allLessons.reduce((acc, current) => {
         if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
             acc.push(current);
@@ -89,6 +87,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         return acc;
     }, []).sort((a, b) => parseInt(a.lessonNumber) - parseInt(b.lessonNumber));
 
+    // Створення елементів таблиці
     const table = document.createElement('table');
     table.classList.add('journal-table');
 
@@ -106,9 +105,8 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         const studentRow = document.createElement('tr');
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
         
-        // ✅ Оновлена логіка: проходимо по унікальному списку уроків, а не по grades конкретного студента.
+        // ✅ Оновлена логіка: для кожного унікального уроку шукаємо відповідну оцінку студента
         const gradeCells = uniqueLessons.map(lesson => {
-            // Шукаємо оцінку студента для поточного уроку
             const studentGrade = student.grades.find(g => g.lessonNumber === lesson.lessonNumber);
             const gradeValue = studentGrade ? studentGrade.grade : '';
             return `
