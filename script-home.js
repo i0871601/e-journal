@@ -12,6 +12,7 @@
 
 import { getUserData } from './js/config.js';
 import { initDropdown } from './js/dropdown-handler.js'; // Імпортуємо нову функцію
+import { setupAddLessonForm } from './js/journal/grade-client.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
@@ -39,8 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const userData = getUserData();
     if (userData) {
-        // Викликаємо нову функцію тут, після отримання даних користувача
-        initDropdown(userData);
+      // Викликаємо нову функцію тут, після отримання даних користувача
+      initDropdown(userData);
+      if (userData.role === 'teacher') {
+            setupAddLessonForm(); 
+        }
     }
 
     allCheckboxes.forEach(checkbox => {
@@ -63,16 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target.id === 'toggle-schedule') {
                 modulePath = './js/schedule.js';
                 moduleName = 'schedule';
-            } else if (role === 'teacher') {
-              modulePath = './js/grade-client.js'; 
-              moduleName = 'journal';
-            }
+            }
             if (isChecked) {
                 loadModule(modulePath, moduleName);
             } 
         });
     });
 });
+
 
 
 
