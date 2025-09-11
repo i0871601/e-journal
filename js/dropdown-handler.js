@@ -1,10 +1,9 @@
 // dropdown.js
 
 import { request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL } from './config.js';
+import { displayFullJournal, displayGrades } from './journal-tables.js';
 
-// Змінні для збереження вибраних значень
 let selectedSubjectForTeacher = null;
-let selectedClassForTeacher = null;
 
 /**
  * Універсальна функція для заповнення випадаючого списку.
@@ -103,12 +102,12 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         classContainer.style.display = 'block';
 
         const classesData = userData.data.data[selectedSubject] || [];
-        
+
         let classesForSubject = [];
         if (classesData.length > 0 && typeof classesData[0] === 'string') {
             classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
         }
-        
+
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
@@ -132,7 +131,7 @@ export function initDropdown(userData) {
         const listElement = document.getElementById("subject-list");
         const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#subject-button p");
-        
+
         if (listElement && buttonElement && buttonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
             populateDropdown(listElement, data.data, "subjects");
@@ -148,6 +147,7 @@ export function initDropdown(userData) {
                 const response = await request(API_URL_STUDENT_JOURNAL, payload);
                 console.log("Відправка до API:", payload);
                 console.log(`Відповідь:`, response);
+                displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
                 console.log("✅ Запит на отримання журналу учня відправлено.");
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
@@ -159,13 +159,13 @@ export function initDropdown(userData) {
         const listElement = document.getElementById("subject-list");
         const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#subject-button p");
-        
+
         if (listElement && buttonElement && buttonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
             const subjects = Object.keys(userData.data.data).map(s => ({ subject: s }));
             populateDropdown(listElement, subjects, "subjects");
             setupToggle(buttonElement, listElement);
-            
+
             const classListElement = document.getElementById("class-list");
             const classButtonElement = document.getElementById("Class-button");
             const classButtonTextElement = document.querySelector("#Class-button p");
@@ -180,6 +180,15 @@ export function initDropdown(userData) {
                     const response = await request(API_URL_FULL_JOURNAL, payload);
                     console.log("Відправка до API:", payload);
                     console.log(`Відповідь:`, response);
+
+                    // Створення заглушки для колбека, доки функціонал не реалізовано
+                    const updateGradeCallback = (gradeData, newValue) => {
+                        console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
+                        // Тут буде код для відправки запиту на сервер
+                    };
+                    
+                    displayFullJournal(response.journalData);//, updateGradeCallback);
+
                     console.log("✅ Запит на отримання журналу вчителя відправлено.");
                 });
             }
@@ -193,15 +202,3 @@ export function initDropdown(userData) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
