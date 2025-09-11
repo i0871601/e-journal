@@ -1,21 +1,16 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл об'єднує логіку API-запитів, маніпуляцій з DOM та основну логіку ініціалізації розкладу.
 
-import { request, API_URL_SCHEDULE, getUserData } from './config.js';
+import { request, getUserData } from './config.js';
 
-// === ФУНКЦІЇ ДЛЯ ВЗАЄМОДІЇ З API (з schedule-api.js) ===
 export const loadScheduleData = async (payload) => {
-    console.log("Лог 3: Дані, отримані в API-скрипті:", payload);
-    const response = await request(API_URL_SCHEDULE, payload);
+    const response = await request(payload);
     
     if (response.success === false) {
         throw new Error(response.message);
     }
-    console.log("Лог 4: Дані, які повертаємо:", response.scheduleData);
     return response.scheduleData;
 };
 
-// === ФУНКЦІЇ ДЛЯ КЕРУВАННЯ DOM (з schedule-dom.js) ===
 const contentSchedule = document.getElementById('scheduleText');
 const dayList = document.getElementById('Days');
 const selectedTextContainer = document.querySelector('.first-option p');
@@ -94,7 +89,6 @@ export const displayScheduleError = (message) => {
     contentSchedule.textContent = message;
 };
 
-// === ОСНОВНА ЛОГІКА ІНІЦІАЛІЗАЦІЇ (з головного файлу) ===
 export const initScheduleLogic = async () => {
     const contentSchedule = document.getElementById('scheduleText');
     if (contentSchedule.dataset.loaded === 'true') {
@@ -117,7 +111,6 @@ export const initScheduleLogic = async () => {
         };
         console.log("Лог 2: Відправка до API:", payload);
 
-        // Викликаємо функцію, що знаходиться в цьому ж файлі
         const groupedByDay = await loadScheduleData(payload);
 
         if (!groupedByDay || Object.keys(groupedByDay).length === 0) {
@@ -125,8 +118,6 @@ export const initScheduleLogic = async () => {
             setScheduleLoadedState();
             return;
         }
-
-        // Викликаємо функції, що знаходяться в цьому ж файлі
         setupDaySelector(groupedByDay, userData.role);
         setScheduleLoadedState();
 
@@ -136,3 +127,4 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
