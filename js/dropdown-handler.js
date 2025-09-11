@@ -143,8 +143,7 @@ export function initDropdown(userData) {
                     action: 'journal',
                     subject: subject,
                     teacherLastName: dataset.teacherLastName,
-                    className: firstClassOrSubject,
-                    userData: userData
+                    className: firstClassOrSubject
                 };
                 const response = await request(API_URL_STUDENT_JOURNAL, payload);
                 console.log("Відправка до API:", payload);
@@ -176,8 +175,7 @@ export function initDropdown(userData) {
                     const payload = {
                        action: 'journal',
                        subject: selectedSubjectForTeacher,
-                       className: className,
-                       userData: userData
+                       className: className
                     };
                     const response = await request(API_URL_FULL_JOURNAL, payload);
                     console.log("Відправка до API:", payload);
@@ -195,6 +193,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
