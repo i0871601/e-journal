@@ -9,7 +9,7 @@
  * Створює HTML-форму для додавання нового уроку на сторінку.
  * @param {Function} onSaveCallback - Колбек-функція для обробки збереження форми.
  */
-export const setupAddLessonForm = () => {
+export const setupAddLessonForm = (currentStudents, classOrSubject, selectedClass) => {
     const contentContainer = document.getElementById("GradeOfJournal");
     if (document.getElementById("add-lesson-form")) {
         return;
@@ -70,10 +70,7 @@ export const setupAddLessonForm = () => {
                 Topic: lessonTopicInput.value,
                 lessonType: lessonType
             };
-
-            // ✅ Закоментував рядок, який відправляє дані
-            // onSaveCallback(lessonData);
-            
+            handleLessonAdd(lessonData, currentStudents, classOrSubject, selectedClass);
             // ✅ Додав сповіщення, щоб показати, що дані були б готові до відправки
             alert("Форма готова до відправки! Дані: " + JSON.stringify(lessonData));
 
