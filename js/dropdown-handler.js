@@ -1,17 +1,11 @@
 // dropdown.js
 
-import { request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL } from './config.js';
+import { request} from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
 import { setupAddLessonForm } from './grade-client.js';
 
 let selectedSubjectForTeacher = null;
 
-/**
- * Універсальна функція для заповнення випадаючого списку.
- * @param {HTMLElement} listElement - Елемент <ul> для заповнення.
- * @param {Array|Object} data - Дані для списку.
- * @param {string} type - Тип даних ("subjects", "classesBySubject" або "simpleList").
- */
 function populateDropdown(listElement, data, type) {
     if (!listElement) {
         console.error("Помилка: Не знайдено елемент списку для заповнення.");
@@ -47,11 +41,6 @@ function populateDropdown(listElement, data, type) {
     });
 }
 
-/**
- * Встановлює обробник подій для перемикання видимості списку.
- * @param {HTMLElement} buttonElement - Кнопка, яка перемикає список.
- * @param {HTMLElement} listElement - Елемент списку <ul>.
- */
 function setupToggle(buttonElement, listElement) {
     if (!buttonElement || !listElement) {
         console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
@@ -70,12 +59,6 @@ function setupToggle(buttonElement, listElement) {
     });
 }
 
-/**
- * Встановлює обробник подій для елементів списку.
- * @param {HTMLElement} listElement - Елемент <ul>.
- * @param {HTMLElement} buttonTextElement - Елемент <p> в кнопці.
- * @param {Function} onSelectCallback - Колбек-функція, яка викликається після вибору.
- */
 function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
     listElement.addEventListener('click', async (event) => {
         if (event.target.tagName === 'LI') {
@@ -87,12 +70,6 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
     });
 }
 
-/**
- * Колбек-функція, що обробляє вибір предмета вчителем.
- * @param {string} selectedSubject - Вибраний предмет.
- * @param {object} dataset - dataset вибраного елемента.
- * @param {object} userData - Дані користувача.
- */
 function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
     selectedSubjectForTeacher = selectedSubject;
     const classListElement = document.getElementById("class-list");
@@ -116,10 +93,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
 }
 
 
-/**
- * Ініціалізує та заповнює випадаючі списки на основі ролі користувача.
- * @param {object} userData - Об'єкт даних користувача.
- */
 export function initDropdown(userData) {
     if (!userData || !userData.data) {
         console.error("Помилка: Неповні дані користувача для ініціалізації випадаючого списку.");
@@ -145,10 +118,14 @@ export function initDropdown(userData) {
                     teacherLastName: dataset.teacherLastName,
                     className: firstClassOrSubject
                 };
-                const response = await request(API_URL_STUDENT_JOURNAL, payload);
+                const response = await request(payload);
                 console.log("Відправка до API:", payload);
                 console.log(`Відповідь:`, response);
-                displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
+                if (response && response.journalData && response.journalData.length > 0) {
+                    displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
+                } else {
+                    console.log("Відповідь від API пуста або не містить даних журналу.");
+                }
                 console.log("✅ Запит на отримання журналу учня відправлено.");
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
@@ -178,16 +155,11 @@ export function initDropdown(userData) {
                        subject: selectedSubjectForTeacher,
                        className: className
                     };
-                    const response = await request(API_URL_FULL_JOURNAL, payload);
+                    const response = await request(payload);
                     console.log("Відправка до API:", payload);
                     console.log(`Відповідь:`, response);
 
-                    // ✅ Додана перевірка наявності даних у відповіді
                     if (response && response.journalData && response.journalData.length > 0) {
-                        setupAddLessonForm(response.journalData, selectedSubjectForTeacher, className);
-                        const updateGradeCallback = (gradeData, newValue) => {
-                            console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
-                        };
                         displayFullJournal(response.journalData, updateGradeCallback);
                     } else {
                         console.log("Відповідь від API пуста або не містить даних журналу.");
@@ -204,4 +176,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
