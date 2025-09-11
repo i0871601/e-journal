@@ -156,5 +156,3 @@ export function initDropdown(data) {
         }
     }
 }
-
-
