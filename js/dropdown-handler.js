@@ -133,14 +133,14 @@ export function initDropdown(userData) {
             setupToggle(buttonElement, listElement);
             setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
                 const firstClassOrSubject = classOrsubject.split(',')[0].trim();
-                const payload = {
-                    action: 'journal',
-                    subject: subject,
-                    teacherLastName: dataset.teacherLastName,
-                    className: firstClassOrSubject
-                };
-                const response = await request(API_URL_FULL_JOURNAL, payload);
-                console.log("Відправка до API:", payload);
+                //const payload = {
+                    //action: 'journal',
+                    //subject: subject,
+                   // teacherLastName: dataset.teacherLastName,
+                   // className: firstClassOrSubject
+                //};
+                //const response = await request(API_URL_FULL_JOURNAL, payload);
+                //console.log("Відправка до API:", payload);
                 console.log(`Вибраний предмет: ${subject}`);
                 console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
                 console.log(`Перший елемент даних (клас):`, firstClassOrSubject);
@@ -167,13 +167,13 @@ export function initDropdown(userData) {
             if (classListElement && classButtonElement && classButtonTextElement) {
                 setupToggle(classButtonElement, classListElement);
                 setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
-                    const payload = {
-                    action: 'journal',
-                    subject: subject,
-                    className: className
-                };
-                const response = await request(API_URL_STUDENT_JOURNAL, payload);
-                console.log("Відправка до API:", payload);
+                    //const payload = {
+                       // action: 'journal',
+                      //  subject: subject,
+                      //  className: className
+                    //};
+                    //const response = await request(API_URL_STUDENT_JOURNAL, payload);
+                    //console.log("Відправка до API:", payload);
                     console.log(`Вибраний клас: ${className}`);
                 });
             }
@@ -187,6 +187,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
