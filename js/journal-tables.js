@@ -2,9 +2,9 @@
 // Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 export function displayGrades(grades, role, name) {
-    const tableContainer = document.getElementById("journal-table-container");
+    const tableContainer = document.querySelector(".TabletJournal"); // ✅ Змінено на пошук за класом
     if (!tableContainer) {
-        console.error("Елемент 'journal-table-container' не знайдено.");
+        console.error("Елемент з класом '.TabletJournal' не знайдено.");
         return;
     }
     tableContainer.innerHTML = '';
@@ -57,23 +57,19 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         return;
     }
 
-    // ⭐️ Видаляємо рядок, який видаляє всі елементи, включаючи випадаючі списки.
-    // journalContainer.innerHTML = '';
-
-    const tableContainer = document.getElementById("journal-table-container");
+    const tableContainer = document.querySelector(".TabletJournal"); // ✅ Змінено на пошук за класом
     if (!tableContainer) {
-        console.error("Елемент 'journal-table-container' не знайдено.");
+        console.error("Елемент з класом '.TabletJournal' не знайдено.");
         return;
     }
     
-    // ⭐️ Створюємо новий елемент-обгортку для таблиці
     let tableWrapper = document.getElementById('journal-table-wrapper');
     if (!tableWrapper) {
         tableWrapper = document.createElement('div');
         tableWrapper.id = 'journal-table-wrapper';
         tableContainer.appendChild(tableWrapper);
     }
-    tableWrapper.innerHTML = ''; // Очищаємо тільки обгортку з таблицею
+    tableWrapper.innerHTML = '';
 
     if (journalData.length === 0) {
         tableWrapper.innerHTML = '<p>Журнал пустий. Додайте перший урок.</p>';
