@@ -2,7 +2,7 @@
 
 import { request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL } from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
-import { setupAddLessonForm } from './js/grade-client.js';
+import { setupAddLessonForm } from './grade-client.js';
 
 let selectedSubjectForTeacher = null;
 
@@ -204,3 +204,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
