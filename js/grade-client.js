@@ -3,13 +3,14 @@
 // Закоментував імпорт, оскільки він зараз не використовується
 // import { addLessonToJournal } from './journal-api.js';
 
-const contentContainer = document.getElementById("GradeOfJournal");
+//const contentContainer = document.getElementById("GradeOfJournal");
 
 /**
  * Створює HTML-форму для додавання нового уроку на сторінку.
  * @param {Function} onSaveCallback - Колбек-функція для обробки збереження форми.
  */
-export const setupAddLessonForm = (onSaveCallback) => {
+export const setupAddLessonForm = () => {
+    const contentContainer = document.getElementById("GradeOfJournal");
     if (document.getElementById("add-lesson-form")) {
         return;
     }
