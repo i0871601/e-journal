@@ -1,11 +1,17 @@
+// dropdown.js
+
+import { request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL } from './config.js';
+
+// Змінні для збереження вибраних значень
+let selectedSubjectForTeacher = null;
+let selectedClassForTeacher = null;
+
 /**
  * Універсальна функція для заповнення випадаючого списку.
  * @param {HTMLElement} listElement - Елемент <ul> для заповнення.
  * @param {Array|Object} data - Дані для списку.
  * @param {string} type - Тип даних ("subjects", "classesBySubject" або "simpleList").
  */
-import {request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL} from './config.js';
-
 function populateDropdown(listElement, data, type) {
     if (!listElement) {
         console.error("Помилка: Не знайдено елемент списку для заповнення.");
@@ -71,12 +77,12 @@ function setupToggle(buttonElement, listElement) {
  * @param {Function} onSelectCallback - Колбек-функція, яка викликається після вибору.
  */
 function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
-    listElement.addEventListener('click', (event) => {
+    listElement.addEventListener('click', async (event) => {
         if (event.target.tagName === 'LI') {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
             listElement.style.display = 'none';
-            onSelectCallback(selectedText, event.target.dataset);
+            await onSelectCallback(selectedText, event.target.dataset);
         }
     });
 }
@@ -88,6 +94,7 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
  * @param {object} userData - Дані користувача.
  */
 function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
+    selectedSubjectForTeacher = selectedSubject;
     const classListElement = document.getElementById("class-list");
     const classButtonTextElement = document.querySelector("#Class-button p");
     const classContainer = document.getElementById("ClassTeacher");
@@ -98,7 +105,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         const classesData = userData.data.data[selectedSubject] || [];
         
         let classesForSubject = [];
-        // ✅ ВІДНОВЛЕНО ПОЧАТКОВУ ЛОГІКУ: вона працює для даних сервера
         if (classesData.length > 0 && typeof classesData[0] === 'string') {
             classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
         }
@@ -131,19 +137,19 @@ export function initDropdown(userData) {
             buttonTextElement.textContent = "Виберіть предмет";
             populateDropdown(listElement, data.data, "subjects");
             setupToggle(buttonElement, listElement);
-            setupListSelection(listElement, buttonTextElement, (subject, dataset) => {
+            setupListSelection(listElement, buttonTextElement, async (subject, dataset) => {
                 const firstClassOrSubject = classOrsubject.split(',')[0].trim();
                 const payload = {
                     action: 'journal',
                     subject: subject,
                     teacherLastName: dataset.teacherLastName,
-                    className: firstClassOrSubject
+                    className: firstClassOrSubject,
+                    userData: userData
                 };
-                const response = await request(API_URL_FULL_JOURNAL, payload);
+                const response = await request(API_URL_STUDENT_JOURNAL, payload);
                 console.log("Відправка до API:", payload);
-                console.log(`Вибраний предмет: ${subject}`);
-                console.log(`Прізвище вчителя: ${dataset.teacherLastName}`);
-                console.log(`Перший елемент даних (клас):`, firstClassOrSubject);
+                console.log(`Відповідь:`, response);
+                console.log("✅ Запит на отримання журналу учня відправлено.");
             });
             console.log("✅ Список предметів для учня заповнено та налаштовано.");
         } else {
@@ -166,19 +172,21 @@ export function initDropdown(userData) {
             const classButtonTextElement = document.querySelector("#Class-button p");
             if (classListElement && classButtonElement && classButtonTextElement) {
                 setupToggle(classButtonElement, classListElement);
-                setupListSelection(classListElement, classButtonTextElement, (className, classDataset) => {
+                setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
                     const payload = {
                        action: 'journal',
-                       subject: subject,
-                       className: className
+                       subject: selectedSubjectForTeacher,
+                       className: className,
+                       userData: userData
                     };
-                    const response = await request(API_URL_STUDENT_JOURNAL, payload);
+                    const response = await request(API_URL_FULL_JOURNAL, payload);
                     console.log("Відправка до API:", payload);
-                    console.log(`Вибраний клас: ${className}`);
+                    console.log(`Відповідь:`, response);
+                    console.log("✅ Запит на отримання журналу вчителя відправлено.");
                 });
             }
 
-            setupListSelection(listElement, buttonTextElement, (selectedSubject, dataset) => {
+            setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                 handleTeacherSubjectSelection(selectedSubject, dataset, userData);
             });
             console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
@@ -187,6 +195,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
