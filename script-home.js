@@ -12,7 +12,7 @@
 
 import { getUserData } from './js/config.js';
 import { initDropdown } from './js/dropdown-handler.js'; // Імпортуємо нову функцію
-import { setupAddLessonForm } from './js/journal/grade-client.js';
+import { setupAddLessonForm } from './js/grade-client.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 
 
 
