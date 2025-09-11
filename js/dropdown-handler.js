@@ -191,6 +191,13 @@ export function initDropdown(userData) {
                         // ⭐️ Створюємо колбек з необхідними даними
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response.journalData, updateGradeCallback);
+                        setupAddLessonForm(selectedSubjectForTeacher, className, response.journalData, async () => {
+                            // Колбек для оновлення журналу після успішного додавання уроку
+                            const refreshResponse = await request(payload);
+                            if (refreshResponse && refreshResponse.journalData) {
+                                displayFullJournal(refreshResponse.journalData, updateGradeCallback);
+                            }
+                        });
                     } else {
                         console.log("Відповідь від API пуста або не містить даних журналу.");
                     }
@@ -206,6 +213,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
