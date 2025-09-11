@@ -1,5 +1,8 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 
+// Закоментував імпорт, оскільки він зараз не використовується
+// import { addLessonToJournal } from './journal-api.js';
+
 const contentContainer = document.getElementById("GradeOfJournal");
 
 /**
@@ -61,11 +64,17 @@ export const setupAddLessonForm = (onSaveCallback) => {
             }
 
             const lessonType = selectedListItem.dataset.type;
-            onSaveCallback({
+            const lessonData = {
                 Date: lessonDateInput.value,
                 Topic: lessonTopicInput.value,
                 lessonType: lessonType
-            });
+            };
+
+            // ✅ Закоментував рядок, який відправляє дані
+            // onSaveCallback(lessonData);
+            
+            // ✅ Додав сповіщення, щоб показати, що дані були б готові до відправки
+            alert("Форма готова до відправки! Дані: " + JSON.stringify(lessonData));
 
             lessonDateInput.value = "";
             lessonTopicInput.value = "";
@@ -79,52 +88,46 @@ export const setupAddLessonForm = (onSaveCallback) => {
 };
 
 /**
- * Обробляє дані уроку та відправляє їх до API для додавання.
- * @param {object} lessonData - Дані нового уроку (Дата, Тема, Тип).
- * @param {object} currentStudents - Масив даних про учнів.
- * @param {string} classOrSubject - Назва поточного предмету.
- * @param {string} selectedClass - Назва поточного класу.
- * @returns {Promise<boolean>} - Успішність операції.
+ * Ця функція зараз не використовується, але її можна залишити закоментованою
+ * для майбутнього використання.
  */
 export const handleLessonAdd = async (lessonData, currentStudents, classOrSubject, selectedClass) => {
-    console.log("Клієнт Оцінок Лог: Спроба додати новий урок. Дані:", lessonData);
-    
-    let newLessonNumber = 1;
-    if (currentStudents && currentStudents.length > 0 && currentStudents[0].grades) {
-        const allLessons = currentStudents[0].grades;
-        const maxLessonNumber = allLessons.length > 0 
-            ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10)))
-            : 0;
-
-        if (lessonData.lessonType === "Normal") {
-            newLessonNumber = maxLessonNumber + 1;
-        } else {
-            newLessonNumber = maxLessonNumber;
-        }
-    }
-
-    const gradesData = currentStudents.map((student) => ({
-        studentFirstName: student.firstName,
-        studentLastName: student.lastName,
-        grade: ""
-    }));
-
-    const fullLessonData = {
-        ...lessonData,
-        lessonNumber: newLessonNumber,
-        teacherSubject: classOrSubject,
-        class: selectedClass,
-        grades: gradesData
-    };
-
-    const res = await addLessonToJournal(fullLessonData);
-    if (res.success) {
-        console.log("Клієнт Оцінок Лог: Урок успішно додано.");
-        alert("Урок успішно додано!");
-        return true;
-    } else {
-        console.error("Клієнт Оцінок Лог: Помилка при додаванні уроку:", res.message);
-        alert("Помилка при додаванні уроку.");
-        return false;
-    }
+    // console.log("Клієнт Оцінок Лог: Спроба додати новий урок. Дані:", lessonData);
+    //
+    // let newLessonNumber = 1;
+    // if (currentStudents && currentStudents.length > 0 && currentStudents[0].grades) {
+    //     const allLessons = currentStudents[0].grades;
+    //     const maxLessonNumber = allLessons.length > 0 
+    //         ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10)))
+    //         : 0;
+    //
+    //     if (lessonData.lessonType === "Normal") {
+    //         newLessonNumber = maxLessonNumber + 1;
+    //     } else {
+    //         newLessonNumber = maxLessonNumber;
+    //     }
+    // }
+    //
+    // const gradesData = currentStudents.map((student) => ({
+    //     studentFirstName: student.firstName,
+    //     studentLastName: student.lastName,
+    //     grade: ""
+    // }));
+    //
+    // const fullLessonData = {
+    //     ...lessonData,
+    //     lessonNumber: newLessonNumber,
+    //     teacherSubject: classOrSubject,
+    //     class: selectedClass,
+    //     grades: gradesData
+    // };
+    //
+    // const res = await addLessonToJournal(fullLessonData);
+    // if (res.success) {
+    //     alert("Урок успішно додано!");
+    //     return true;
+    // } else {
+    //     alert("Помилка при додаванні уроку.");
+    //     return false;
+    // }
 };
