@@ -9,25 +9,24 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
     if (!contentContainer) return;
 
     const addLessonFormHTML = `
-        <div id="add-lesson-form">
-            <h3>Додати новий урок</h3>
-            <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
-            <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
-            <div id="lessonTypeInput" class="container-all">
-                <div id="lessonType-Button" class="dropdown-button">
-                    <p>Виберіть тип уроку</p>
-                    <div class="arrow-down"></div>
-                </div>
-                <ul id="lessonTypeList" class="dropdown-list">
-                    <li data-type="Normal">Звичайний</li>
-                    <li data-type="Thematic">Тематична</li>
-                    <li data-type="Semester">Семестрова</li>
-                    <li data-type="Final">Річна</li>
-                </ul>
-            </div>
-            <button id="saveLessonButton">Зберегти урок</button>
-        </div>
-    `;
+    <div id="add-lesson-form">
+      <h3>Додати новий урок</h3>
+      <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
+      <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
+      <div id="lessonTypeInput" class="container-all">
+        <div id="lessonType-Button" class="dropdown-button">
+          <p>Виберіть тип уроку</p>
+          <div class="arrow-down"></div>
+        </div>
+        <ul id="lessonTypeList" class="dropdown-list">
+          <li data-type="Normal">Звичайний</li>
+          <li data-type="Thematic">Тематична</li>
+          <li data-type="Semester">Семестрова</li>
+          <li data-type="Final">Річна</li>
+        </ul>
+      </div>
+      <button id="saveLessonButton">Зберегти урок</button>
+    </div>`;
     contentContainer.insertAdjacentHTML('afterend', addLessonFormHTML);
 
     const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
