@@ -16,6 +16,7 @@ export function displayGrades(grades, role, name) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Предмет</th>`;
 
+    // ⭐️ Змінено: використовуємо 'Subject' з великої літери
     const lessons = grades.reduce((acc, current) => {
         if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
             acc.push(current);
@@ -24,22 +25,28 @@ export function displayGrades(grades, role, name) {
     }, []).sort((a, b) => a.lessonNumber - b.lessonNumber);
 
     lessons.forEach(lesson => {
-        headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.topic}</p><p class="lesson-date">${lesson.date}</p></th>`;
+        // ⭐️ Змінено: використовуємо lesson.LessonTopic та lesson.LessonDate, якщо вони існують
+        const topic = lesson.LessonTopic || ''; 
+        const date = lesson.LessonDate || '';
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
 
     const tableBody = document.createElement('tbody');
-    const subjects = [...new Set(grades.map(g => g.subject))];
+    // ⭐️ Змінено: використовуємо 'Subject' з великої літери
+    const subjects = [...new Set(grades.map(g => g.Subject))];
 
     subjects.forEach(subject => {
         const subjectRow = document.createElement('tr');
         subjectRow.innerHTML = `<td>${subject}</td>`;
 
-        const subjectGrades = grades.filter(g => g.subject === subject);
+        // ⭐️ Змінено: використовуємо 'Subject' з великої літери
+        const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => g.lessonNumber === lesson.lessonNumber);
-            const gradeValue = grade ? grade.grade : '';
+            // ⭐️ Змінено: використовуємо 'Grade' з великої літери
+            const gradeValue = grade ? grade.Grade : '';
             subjectRow.innerHTML += `<td>${gradeValue}</td>`;
         });
         tableBody.appendChild(subjectRow);
@@ -77,9 +84,9 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const students = journalData;
 
     // ✅ Оновлена логіка: збираємо всі унікальні уроки з усіх студентів
-    const allLessons = students.flatMap(s => s.grades || []); // ⭐️ Використовуємо .flatMap() для отримання всіх уроків з усіх студентів. Додано `|| []` на випадок, якщо grades відсутній.
+    const allLessons = students.flatMap(s => s.grades || []); 
     
-    // ✅ Новий підхід для визначення унікальних уроків. Це надійніше, ніж брати уроки лише з першого студента.
+    // ✅ Новий підхід для визначення унікальних уроків. 
     const uniqueLessons = allLessons.reduce((acc, current) => {
         if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
             acc.push(current);
@@ -95,7 +102,10 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
     uniqueLessons.forEach(lesson => {
-        headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.topic}</p><p class="lesson-date">${lesson.date}</p></th>`;
+        // ⭐️ Змінено: використовуємо lesson.LessonTopic та lesson.LessonDate
+        const topic = lesson.LessonTopic || ''; 
+        const date = lesson.LessonDate || '';
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -108,7 +118,8 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         // ✅ Оновлена логіка: для кожного унікального уроку шукаємо відповідну оцінку студента
         const gradeCells = uniqueLessons.map(lesson => {
             const studentGrade = student.grades.find(g => g.lessonNumber === lesson.lessonNumber);
-            const gradeValue = studentGrade ? studentGrade.grade : '';
+            // ⭐️ Змінено: використовуємо 'Grade' з великої літери
+            const gradeValue = studentGrade ? studentGrade.Grade : '';
             return `
                 <td
                     class="grade-cell"
