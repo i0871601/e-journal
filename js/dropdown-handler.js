@@ -2,6 +2,7 @@
 
 import { request, API_URL_STUDENT_JOURNAL, API_URL_FULL_JOURNAL } from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
+import { handleLessonAdd } from './js/grade-client.js';
 
 let selectedSubjectForTeacher = null;
 
@@ -186,7 +187,7 @@ export function initDropdown(userData) {
                         // ✅ Виклик функції handleLessonAdd з необхідними даними
                         // ❌ Важливо: функція handleLessonAdd наразі закоментована у grade-client.js.
                         //     Щоб вона працювала, її потрібно розкоментувати.
-                        // handleLessonAdd(response.journalData, response.journalData, selectedSubjectForTeacher, className);
+                        handleLessonAdd(response.journalData, selectedSubjectForTeacher, className);
                         // Ця частина коду залишилась без змін, вона показує журнал
                         const updateGradeCallback = (gradeData, newValue) => {
                             console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
@@ -206,5 +207,6 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
