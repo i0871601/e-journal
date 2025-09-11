@@ -1,7 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 // Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
-// Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 export function displayGrades(grades, role, name) {
     const tableContainer = document.querySelector(".TabletJournal");
@@ -78,10 +76,16 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     }
 
     const students = journalData;
-    const lessons = students[0].grades.sort((a, b) => {
-        return parseInt(a.lessonNumber) - parseInt(b.lessonNumber);
-    });
-    
+
+    // ⭐ Перевіряємо, чи є взагалі уроки, щоб уникнути помилок
+    const allLessons = students.flatMap(s => s.grades);
+    const uniqueLessons = allLessons.reduce((acc, current) => {
+        if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
+            acc.push(current);
+        }
+        return acc;
+    }, []).sort((a, b) => parseInt(a.lessonNumber) - parseInt(b.lessonNumber));
+
     // Створення елементів таблиці
     const table = document.createElement('table');
     table.classList.add('journal-table');
@@ -89,7 +93,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const tableHeader = document.createElement('thead');
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
-    lessons.forEach(lesson => {
+    uniqueLessons.forEach(lesson => {
         headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.topic}</p><p class="lesson-date">${lesson.date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
@@ -100,7 +104,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         const studentRow = document.createElement('tr');
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
         
-        const gradeCells = lessons.map(lesson => {
+        const gradeCells = uniqueLessons.map(lesson => {
             const studentGrade = student.grades.find(g => g.lessonNumber === lesson.lessonNumber);
             const gradeValue = studentGrade ? studentGrade.grade : '';
             return `
