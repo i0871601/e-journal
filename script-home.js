@@ -29,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (moduleName === 'schedule') {
                 module.initScheduleLogic();
             } else if (moduleName === 'teacher') {
-                module.initTeacherLogic();
-            } else if (moduleName === 'student') {
-                module.initStudentLogic();
+                module.setupAddLessonForm();
             }
 
         } catch (error) {
@@ -65,20 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target.id === 'toggle-schedule') {
                 modulePath = './js/schedule.js';
                 moduleName = 'schedule';
-            } else {
-                if (role === 'teacher') {
-                    //modulePath = './js/journal/teacher-logic.js';
-                    //moduleName = 'teacher';
-                } else {
-                    //modulePath = './js/journal/student-logic.js';
-                    //moduleName = 'student';
-                }
-            }
+            } else if (role === 'teacher') {
+              modulePath = './js/grade-client.js'; 
+              moduleName = 'journal';
+            }
             if (isChecked) {
                 loadModule(modulePath, moduleName);
             } 
         });
     });
 });
+
 
 
