@@ -181,19 +181,23 @@ export function initDropdown(userData) {
                     console.log("Відправка до API:", payload);
                     console.log(`Відповідь:`, response);
 
-                    // Створення заглушки для колбека, доки функціонал не реалізовано
-                    const updateGradeCallback = (gradeData, newValue) => {
-                        console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
-                        // Тут буде код для відправки запиту на сервер
-                    };
-                    
-                    displayFullJournal(response.journalData, updateGradeCallback);
-
-                    console.log("✅ Запит на отримання журналу вчителя відправлено.");
-                });
-            }
-
-            setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
+                    // ✅ Додана перевірка наявності даних у відповіді
+                    if (response && response.journalData && response.journalData.length > 0) {
+                        // ✅ Виклик функції handleLessonAdd з необхідними даними
+                        // ❌ Важливо: функція handleLessonAdd наразі закоментована у grade-client.js.
+                        //     Щоб вона працювала, її потрібно розкоментувати.
+                        // handleLessonAdd(response.journalData, response.journalData, selectedSubjectForTeacher, className);
+                        // Ця частина коду залишилась без змін, вона показує журнал
+                        const updateGradeCallback = (gradeData, newValue) => {
+                            console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
+                        };
+                        displayFullJournal(response.journalData, updateGradeCallback);
+                    } else {
+                        console.log("Відповідь від API пуста або не містить даних журналу.");
+                        // Ви можете додати тут логіку для відображення повідомлення користувачеві
+                    }
+                });   
+                setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                 handleTeacherSubjectSelection(selectedSubject, dataset, userData);
             });
             console.log("✅ Список предметів для вчителя заповнено та налаштовано.");
@@ -202,4 +206,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
