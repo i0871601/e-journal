@@ -270,4 +270,4 @@ export function displayFullJournal(journalData, updateGradeCallback) {
             }
         });
     });
-}
+}*/
