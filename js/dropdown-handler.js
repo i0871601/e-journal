@@ -79,10 +79,13 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         classContainer.style.display = 'block';
 
         const classesData = userData.data.data[selectedSubject] || [];
-        
-        const classesForSubject = classesData.map(c => c.class);
+
+        let classesForSubject = [];
+        if (classesData.length > 0 && typeof classesData[0] === 'string') {
+            classesForSubject = classesData[0].split(',').map(item => item.trim()).filter(Boolean);
+        }
+
         populateDropdown(classListElement, classesForSubject, "simpleList");
-        
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
     }
@@ -427,5 +430,6 @@ export function initDropdown(userData) {
         }
     }
 }*/
+
 
 
