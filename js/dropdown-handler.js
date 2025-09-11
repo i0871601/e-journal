@@ -187,7 +187,7 @@ export function initDropdown(userData) {
                         // Тут буде код для відправки запиту на сервер
                     };
                     
-                    displayFullJournal(response.journalData);//, updateGradeCallback);
+                    displayFullJournal(response.journalData, updateGradeCallback);
 
                     console.log("✅ Запит на отримання журналу вчителя відправлено.");
                 });
@@ -202,3 +202,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
