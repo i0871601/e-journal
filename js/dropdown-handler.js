@@ -184,18 +184,13 @@ export function initDropdown(userData) {
 
                     // ✅ Додана перевірка наявності даних у відповіді
                     if (response && response.journalData && response.journalData.length > 0) {
-                        // ✅ Виклик функції handleLessonAdd з необхідними даними
-                        // ❌ Важливо: функція handleLessonAdd наразі закоментована у grade-client.js.
-                        //     Щоб вона працювала, її потрібно розкоментувати.
-                        handleLessonAdd(response.journalData, selectedSubjectForTeacher, className);
-                        // Ця частина коду залишилась без змін, вона показує журнал
+                        setupAddLessonForm(response.journalData, selectedSubjectForTeacher, className);
                         const updateGradeCallback = (gradeData, newValue) => {
                             console.log("Оновлення оцінки:", gradeData, "Нове значення:", newValue);
                         };
                         displayFullJournal(response.journalData, updateGradeCallback);
                     } else {
                         console.log("Відповідь від API пуста або не містить даних журналу.");
-                        // Ви можете додати тут логіку для відображення повідомлення користувачеві
                     }
                 });   
                 setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
@@ -207,6 +202,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
