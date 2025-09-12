@@ -71,7 +71,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
                     newLessonNumber = maxLessonNumber;
                 }
             }
-
+            console.log("Значення 'students' перед викликом .map():", students);
             // Формуємо об'єкт з порожніми оцінками для всіх учнів класу
             const gradesData = students.map((student) => ({
                 studentFirstName: student.firstName,
