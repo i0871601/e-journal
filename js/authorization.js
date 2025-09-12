@@ -1,8 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+import { API_URL_AUTHORIZATION } from './config.js';
 
-import { API_URL_AUTHORIZATION } from './js/config.js';
-
-// Частина з dom.js
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
@@ -31,7 +29,6 @@ export function clearErrorMessage() {
     errorMessage.textContent = '';
 }
 
-// Частина з api.js
 export async function hashPassword(password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
@@ -78,7 +75,6 @@ export async function updatePassword(lastName, newPasswordHash) {
     return data;
 }
 
-// Основна частина
 const form = document.getElementById('loginForm');
 const passwordField = document.getElementById('password');
 const newPasswordField = document.getElementById('newPassword');
@@ -180,7 +176,6 @@ function saveSessionData(data) {
     sessionStorage.setItem('userBase', jsonString);
 }
 
-// Початкова ініціалізація
 export function initAuth() {
     window.addEventListener('pageshow', (event) => {
         if (event.persisted) {
@@ -194,6 +189,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
