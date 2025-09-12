@@ -73,6 +73,8 @@ export function displayGrades(grades, role, name) {
     tableContainer.appendChild(table);
 }
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 export function displayFullJournal(journalData, updateGradeCallback) {
     const tableContainer = document.querySelector(".TabletJournal");
     if (!tableContainer) {
@@ -82,7 +84,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
     tableContainer.innerHTML = '';
 
-    // ✅ Оновлена логіка: тепер ми очікуємо три окремі масиви
     const students = journalData.students;
     const lessons = journalData.lessons;
     const grades = journalData.grades;
@@ -95,7 +96,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const table = document.createElement('table');
     table.classList.add('journal-table');
 
-    // --- Створення заголовка таблиці ---
     const tableHeader = document.createElement('thead');
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
@@ -124,13 +124,14 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
 
-    // --- Створення тіла таблиці ---
     const tableBody = document.createElement('tbody');
     const gradesMap = new Map();
     grades.forEach(g => {
         const key = `${g.studentLastName}-${g.studentFirstName}-${g.lessonNumber}-${g.lessonType}`;
         gradesMap.set(key, g.grade);
     });
+
+    const lastNormalLesson = lessons.findLast(lesson => lesson.lessonType === 'Normal');
 
     students.forEach(student => {
         const studentRow = document.createElement('tr');
@@ -143,12 +144,10 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
             let cellContent = gradeValue;
             
-            // ✅ Оновлена логіка для визначення, де відображати інпут
-            const isNormalLesson = lesson.lessonType === 'Normal';
-            const isFinalLesson = lesson.lessonType === 'Final';
-            
-            if (isNormalLesson) {
+            if (lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType) {
                 cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
+            } else {
+                cellContent = gradeValue;
             }
 
             gradeCells += `
@@ -171,7 +170,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
 
-    // --- Налаштування обробників подій ---
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
             const newValue = event.target.value;
