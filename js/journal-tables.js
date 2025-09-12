@@ -70,7 +70,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     tableContainer.innerHTML = '';
 
     if (journalData.length === 0) {
-        tableContainer..innerHTML = '<p>Журнал пустий. Немає учнів в класі бази даних.</p>';
+        tableContainer.innerHTML = '<p>Журнал пустий. Немає учнів в класі бази даних.</p>';
         return;
     }
 
