@@ -31,7 +31,6 @@ export function displayGrades(grades, role, name) {
     lessons.forEach(lesson => {
         let topicText = lesson.Topic || lesson.lessonType;
 
-        // ✅ Виправлення: зміна тексту заголовка залежно від типу уроку
         switch (lesson.lessonType) {
             case 'Normal':
                 topicText = `Урок ${lesson.lessonNumber}`;
@@ -61,7 +60,7 @@ export function displayGrades(grades, role, name) {
         const subjectRow = document.createElement('tr');
         subjectRow.innerHTML = `<td>${subject}</td>`;
 
-        const subjectGrades = grades.filter(g => g.Subject === g);
+        const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
             const gradeValue = grade ? grade.Grade : '';
@@ -73,6 +72,8 @@ export function displayGrades(grades, role, name) {
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
 }
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 export function displayFullJournal(journalData, updateGradeCallback) {
     const journalContainer = document.getElementById("GradeOfJournal");
@@ -114,7 +115,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     uniqueLessons.forEach(lesson => {
         let topicText = lesson.Topic || lesson.lessonType;
 
-        // ✅ Виправлення: зміна тексту заголовка залежно від типу уроку
         switch (lesson.lessonType) {
             case 'Normal':
                 topicText = `Урок ${lesson.lessonNumber}`;
@@ -143,9 +143,21 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         const studentRow = document.createElement('tr');
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
 
-        const gradeCells = uniqueLessons.map(lesson => {
+        // ✅ Виправлена логіка для визначення, коли показувати input
+        const maxLessonIndex = uniqueLessons.length - 1;
+
+        const gradeCells = uniqueLessons.map((lesson, index) => {
             const studentGrade = student.grades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
             const gradeValue = studentGrade ? studentGrade.Grade : '';
+            
+            let cellContent;
+            // Умова, що дозволяє відобразити input:
+            // Це останній урок у списку І його тип - 'Normal'
+            if (index === maxLessonIndex && lesson.lessonType === 'Normal') {
+                cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
+            } else {
+                cellContent = gradeValue;
+            }
 
             return `
                 <td
@@ -155,16 +167,15 @@ export function displayFullJournal(journalData, updateGradeCallback) {
                     data-student-first-name="${student.firstName}"
                     data-student-last-name="${student.lastName}"
                 >
-                    <input type="text" value="${gradeValue}" class="grade-input" />
+                    ${cellContent}
                 </td>
             `;
         }).join('');
+        
         studentRow.innerHTML += gradeCells;
         tableBody.appendChild(studentRow);
     });
     table.appendChild(tableBody);
-
-    tableContainer.appendChild(table);
 
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
@@ -181,4 +192,4 @@ export function displayFullJournal(journalData, updateGradeCallback) {
             }
         });
     });
-    }
+}
