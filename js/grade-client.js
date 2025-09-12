@@ -12,6 +12,14 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
         console.error("Елемент 'GradeOfJournal' не знайдено.");
         return;
     }
+    const allLessons = students.flatMap(s => s.grades || []);
+    const finalGradeExists = allLessons.some(lesson => lesson.lessonType === 'Final');
+
+    // Якщо річна оцінка існує, ми не будемо відображати форму
+    if (finalGradeExists) {
+        // Ми не будемо додавати форму до DOM
+        return;
+    }
 
     const addLessonFormHTML = `
     <div id="add-lesson-form">
