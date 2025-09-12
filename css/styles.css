@@ -7,7 +7,7 @@
   --color2: #262626;
   --text-color: #878787;
 }
-/*Roboto*/
+
 body {
   margin: 0;
   padding: 0;
@@ -39,7 +39,6 @@ h1{
 
 .loginForm {
   width: 30vmin;
-  /*padding: 20px;  внутрішній відступ */
   box-sizing: border-box;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
