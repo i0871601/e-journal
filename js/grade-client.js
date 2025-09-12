@@ -3,49 +3,43 @@ import { request } from './config.js';
 
 export const setupAddLessonForm = (selectedSubject, selectedClass, students, refreshJournalCallback) => {
     const contentContainer = document.getElementById("GradeOfJournal");
-    // Якщо форма вже існує, ми не створюємо її знову, але важливо переприв'язати обробник подій
-    let addLessonForm = document.getElementById("add-lesson-form");
+    const existingForm = document.getElementById("add-lesson-form");
+    if (existingForm) {
+        existingForm.remove(); // Видаляємо стару форму, щоб створити нову
+    }
 
-    if (!addLessonForm) {
-        if (!contentContainer) {
-            console.error("Елемент 'GradeOfJournal' не знайдено.");
-            return;
-        }
+    if (!contentContainer) {
+        console.error("Елемент 'GradeOfJournal' не знайдено.");
+        return;
+    }
 
-        const addLessonFormHTML = `
-        <div id="add-lesson-form">
-          <h3>Додати новий урок</h3>
-          <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
-          <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
-          <div id="lessonTypeInput" class="container-all">
+    const addLessonFormHTML = `
+    <div id="add-lesson-form">
+        <h3>Додати новий урок</h3>
+        <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
+        <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
+        <div id="lessonTypeInput" class="container-all">
             <div id="lessonType-Button" class="dropdown-button">
-              <p>Виберіть тип уроку</p>
-              <div class="arrow-down"></div>
+                <p>Виберіть тип уроку</p>
+                <div class="arrow-down"></div>
             </div>
             <ul id="lessonTypeList" class="dropdown-list">
-              <li data-type="Normal">Звичайний</li>
-              <li data-type="Thematic">Тематична</li>
-              <li data-type="Semester">Семестрова</li>
-              <li data-type="Final">Річна</li>
+                <li data-type="Normal">Звичайний</li>
+                <li data-type="Thematic">Тематична</li>
+                <li data-type="Semester">Семестрова</li>
+                <li data-type="Final">Річна</li>
             </ul>
-          </div>
-          <button id="saveLessonButton">Зберегти урок</button>
-        </div>`;
-        contentContainer.insertAdjacentHTML('afterend', addLessonFormHTML);
-        addLessonForm = document.getElementById("add-lesson-form");
-    } else {
-        // Якщо форма існує, видаляємо попередній обробник, щоб уникнути дублювання
-        const oldButton = document.getElementById("saveLessonButton");
-        if (oldButton) {
-            const newButton = oldButton.cloneNode(true);
-            oldButton.parentNode.replaceChild(newButton, oldButton);
-        }
-    }
+        </div>
+        <button id="saveLessonButton">Зберегти урок</button>
+    </div>`;
+    contentContainer.insertAdjacentHTML('afterend', addLessonFormHTML);
 
     const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
     const lessonTypeList = document.getElementById("lessonTypeList");
     const saveLessonButton = document.getElementById("saveLessonButton");
+    const lessonTypeButton = document.getElementById("lessonType-Button");
 
+    // ✅ Виправлення: обробники подій для випадаючого списку тепер налаштовуються одразу
     lessonTypeList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const allListItems = lessonTypeList.querySelectorAll('li');
@@ -57,8 +51,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
         }
     });
 
-    // Налаштовуємо перемикач для списку типів уроків
-    const lessonTypeButton = document.getElementById("lessonType-Button");
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -85,7 +77,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
 
             const lessonType = selectedListItem.dataset.type;
 
-            // ✅ Додана перевірка для уникнення помилки
             if (!students || !Array.isArray(students)) {
                 console.error("Помилка: Не вдалося отримати дані учнів. 'students' є undefined або не є масивом.");
                 alert("Не вдалося додати урок. Будь ласка, оновіть сторінку і спробуйте знову.");
@@ -93,10 +84,8 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
             }
 
             let newLessonNumber = 1;
-            // Перевіряємо, чи існує хоча б один учень та його оцінки
             if (students.length > 0 && students[0].grades) {
                 const allLessons = students[0].grades;
-                // ✅ Виправлення для коректної роботи з порожнім масивом
                 const maxLessonNumber = allLessons.length > 0
                     ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10)))
                     : 0;
