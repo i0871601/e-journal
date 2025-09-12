@@ -126,7 +126,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
                     grades: gradesData
                 }
             };
-
+            console.log("Відправка payload на воркер:", payload);
             try {
                 const response = await request(payload);
                 if (response.success) {
