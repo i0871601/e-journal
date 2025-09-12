@@ -60,6 +60,7 @@ export function displayGrades(grades, role, name) {
         const subjectRow = document.createElement('tr');
         subjectRow.innerHTML = `<td>${subject}</td>`;
 
+        // ✅ Виправлено: порівнюємо з `subject`, а не `g`
         const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
@@ -143,7 +144,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         const studentRow = document.createElement('tr');
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
 
-        // ✅ Виправлена логіка для визначення, коли показувати input
         const maxLessonIndex = uniqueLessons.length - 1;
 
         const gradeCells = uniqueLessons.map((lesson, index) => {
@@ -151,8 +151,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
             const gradeValue = studentGrade ? studentGrade.Grade : '';
             
             let cellContent;
-            // Умова, що дозволяє відобразити input:
-            // Це останній урок у списку І його тип - 'Normal'
             if (index === maxLessonIndex && lesson.lessonType === 'Normal') {
                 cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
             } else {
