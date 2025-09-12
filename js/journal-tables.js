@@ -138,24 +138,34 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     table.appendChild(tableHeader);
 
     const tableBody = document.createElement('tbody');
+
+    // ❗️ Оновлена логіка для визначення, де відображати інпут
+    const lastNormalLesson = uniqueLessons.findLast(lesson => lesson.lessonType === 'Normal');
+    const lastSummaryLessonNumber = Math.max(
+        ...uniqueLessons
+            .filter(lesson => ['Thematic', 'Semester', 'Final'].includes(lesson.lessonType))
+            .map(lesson => parseInt(lesson.lessonNumber, 10) || 0)
+    );
+
     students.forEach(student => {
         const studentRow = document.createElement('tr');
-        studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
+        const studentNameCell = `<td>${student.lastName} ${student.firstName}</td>`;
+        let gradeCells = '';
 
-        const lastNormalLesson = uniqueLessons.slice().reverse().find(lesson => lesson.lessonType === 'Normal');
-
-        const gradeCells = uniqueLessons.map(lesson => {
+        uniqueLessons.forEach(lesson => {
             const studentGrade = student.grades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
             const gradeValue = studentGrade ? studentGrade.Grade : '';
 
-            let cellContent;
-            if (lastNormalLesson && `${lesson.lessonNumber}-${lesson.lessonType}` === `${lastNormalLesson.lessonNumber}-${lastNormalLesson.lessonType}`) {
+            let cellContent = gradeValue;
+            
+            const isLastNormalLesson = lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === 'Normal';
+            const isAfterLastSummary = parseInt(lesson.lessonNumber, 10) > lastSummaryLessonNumber || lastSummaryLessonNumber === 0;
+
+            if (isLastNormalLesson && isAfterLastSummary) {
                 cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
-            } else {
-                cellContent = gradeValue;
             }
 
-            return `
+            gradeCells += `
                 <td
                     class="grade-cell"
                     data-lesson-number="${lesson.lessonNumber}"
@@ -166,15 +176,15 @@ export function displayFullJournal(journalData, updateGradeCallback) {
                     ${cellContent}
                 </td>
             `;
-        }).join('');
-
-        studentRow.innerHTML += gradeCells;
+        });
+        
+        studentRow.innerHTML = studentNameCell + gradeCells;
         tableBody.appendChild(studentRow);
     });
-    table.appendChild(tableBody);
-    tableContainer.appendChild(table); // Додаємо таблицю в DOM
 
-    // Тільки зараз, після додавання таблиці, шукаємо інпути та додаємо обробники подій
+    table.appendChild(tableBody);
+    tableContainer.appendChild(table);
+
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
             const newValue = event.target.value;
