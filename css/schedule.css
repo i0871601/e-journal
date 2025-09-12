@@ -1,4 +1,4 @@
-/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
+/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович*/
 :root{
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
@@ -53,7 +53,7 @@
 }
 .first-option div{
     width: 5vmin;
-    background-image: url('image/down.svg');
+    background-image: url('../image/down.svg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -90,5 +90,6 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
