@@ -116,9 +116,10 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
 
             const payload = {
                 action: 'addLesson',
-                subject: selectedSubject,
-                className: selectedClass,
+                userData: JSON.parse(sessionStorage.getItem('userData')),
                 lesson: {
+                    subject: selectedSubject,
+                    className: selectedClass,
                     Date: lessonDateInput.value,
                     Topic: lessonTopicInput.value,
                     lessonType: lessonType,
