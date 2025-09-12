@@ -172,14 +172,14 @@ footer{
 }
 @font-face{
   font-family: 'Aristotelica';
-  src: url('fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
+  src: url('../fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face{
   font-family: 'SourceSans3';
-  src: url('fonts/SourceSans3-Regular.ttf') format('truetype');
+  src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
