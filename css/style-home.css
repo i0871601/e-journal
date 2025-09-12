@@ -72,11 +72,11 @@ body {
 }
 
 #button-schedule {
-    background-image: url('image/schedule.svg');
+    background-image: url('../image/schedule.svg');
 }
 
 #button-journal {
-    background-image: url('image/journale.svg');
+    background-image: url('../image/journale.svg');
 }
 
 .button:hover {
@@ -165,3 +165,4 @@ body {
     opacity: 1;
   }
 }
+
