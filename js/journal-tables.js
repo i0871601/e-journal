@@ -119,7 +119,15 @@ export function displayFullJournal(journalData, updateGradeCallback) {
                 topicText = lesson.Topic || lesson.lessonType;
         }
         const date = lesson.Date || ' ';
-        headerRow.innerHTML += `<th><p class="lesson-topic">${topicText}</p><p class="lesson-date">${date}</p></th>`;
+        // ✅ Додаємо data-атрибути для доступу до даних уроку
+        headerRow.innerHTML += `<th 
+            data-lesson-number="${lesson.lessonNumber}"
+            data-lesson-type="${lesson.lessonType}"
+            data-lesson-topic="${lesson.Topic}"
+            data-lesson-date="${lesson.Date}">
+            <p class="lesson-topic">${topicText}</p>
+            <p class="lesson-date">${date}</p>
+        </th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -131,11 +139,9 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         gradesMap.set(key, g.grade);
     });
 
-    // ✅ Оновлена логіка: знаходимо номер останнього підсумкового уроку
     const lastFinalLesson = lessons.findLast(lesson => ['Thematic', 'Semester', 'Final'].includes(lesson.lessonType));
     const lastFinalLessonNumber = lastFinalLesson ? lastFinalLesson.lessonNumber : 0;
     
-    // ✅ Знаходимо номер останнього звичайного уроку
     const lastNormalLesson = lessons.findLast(lesson => lesson.lessonType === 'Normal');
 
     students.forEach(student => {
@@ -149,7 +155,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
             let cellContent = gradeValue;
             
-            // ✅ Умова: інпут додається тільки для останнього звичайного уроку, якщо його номер більший за номер останнього підсумкового.
             const isLastNormalLesson = lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType;
             const isLessonNumberGreaterThanFinal = parseInt(lesson.lessonNumber, 10) > parseInt(lastFinalLessonNumber, 10);
             
@@ -193,5 +198,26 @@ export function displayFullJournal(journalData, updateGradeCallback) {
                 updateGradeCallback(newValue, lessonNumber, studentFirstName, studentLastName, lessonType);
             }
         });
+    });
+
+    // ✅ НОВИЙ КОД: Додавання обробника кліків на заголовки стовпців
+    document.querySelectorAll('thead th').forEach(headerCell => {
+        // Виключаємо перший заголовок "Прізвище та Ім'я"
+        if (headerCell.dataset.lessonNumber) {
+            headerCell.addEventListener('click', () => {
+                const lessonNumber = headerCell.dataset.lessonNumber;
+                const lessonType = headerCell.dataset.lessonType;
+                const lessonTopic = headerCell.dataset.lessonTopic;
+                const lessonDate = headerCell.dataset.lessonDate;
+
+                console.log('---------------------------');
+                console.log(`Клік на заголовок уроку:`);
+                console.log(`Номер уроку: ${lessonNumber}`);
+                console.log(`Тип уроку: ${lessonType}`);
+                console.log(`Дата: ${lessonDate}`);
+                console.log(`Тема: ${lessonTopic}`);
+                console.log('---------------------------');
+            });
+        }
     });
 }
