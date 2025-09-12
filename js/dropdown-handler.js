@@ -1,5 +1,4 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 import { request } from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
@@ -118,8 +117,6 @@ function createUpdateGradeCallback(subject, className) {
     };
 }
 
-//---
-
 export function initDropdown(userData) {
     if (!userData || !userData.data) {
         console.error("Помилка: Неповні дані користувача для ініціалізації випадаючого списку.");
@@ -153,9 +150,9 @@ export function initDropdown(userData) {
                 } else {
                     console.log("Відповідь від API пуста або не містить даних журналу.");
                 }
-                console.log("✅ Запит на отримання журналу учня відправлено.");
+                console.log("Запит на отримання журналу учня відправлено.");
             });
-            console.log("✅ Список предметів для учня заповнено та налаштовано.");
+            console.log("Список предметів для учня заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списку предметів учня.");
         }
@@ -203,9 +200,10 @@ export function initDropdown(userData) {
                 });
             });
 
-            console.log("✅ Списки для вчителя заповнено та налаштовано.");
+            console.log("Списки для вчителя заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
 }
+
