@@ -17,14 +17,20 @@ export function displayGrades(grades, role, name) {
     headerRow.innerHTML = `<th>Предмет</th>`;
 
     const lessons = grades.reduce((acc, current) => {
-        if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
+        const uniqueId = `${current.lessonNumber}-${current.lessonType}`;
+        if (!acc.find(item => `${item.lessonNumber}-${item.lessonType}` === uniqueId)) {
             acc.push(current);
         }
         return acc;
-    }, []).sort((a, b) => a.lessonNumber - b.lessonNumber);
+    }, []).sort((a, b) => {
+        const numA = parseInt(a.lessonNumber, 10);
+        const numB = parseInt(b.lessonNumber, 10);
+        return numA - numB;
+    });
 
     lessons.forEach(lesson => {
-        headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.Topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
+        const topic = lesson.Topic || lesson.lessonType;
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -38,8 +44,8 @@ export function displayGrades(grades, role, name) {
 
         const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
-            const grade = subjectGrades.find(g => g.lessonNumber === lesson.lessonNumber);
-            const gradeValue = grade ? grade.Grade : '';
+            const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
+            const gradeValue = grade ? (grade.Grade || grade.CalculatedGrade) : '';
             subjectRow.innerHTML += `<td>${gradeValue}</td>`;
         });
         tableBody.appendChild(subjectRow);
@@ -61,25 +67,21 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         return;
     }
 
-    //let tableWrapper = document.getElementById('journal-table-wrapper');
-    //if (!tableWrapper) {
-        //tableWrapper = document.createElement('div');
-        //tableWrapper.id = 'journal-table-wrapper';
-        //tableContainer.appendChild(tableWrapper);
-   // }
     tableContainer.innerHTML = '';
 
-    if (journalData.length === 0) {
+    if (!journalData || journalData.length === 0) {
         tableContainer.innerHTML = '<p>Журнал пустий. Немає учнів в класі бази даних.</p>';
         return;
     }
 
     const students = journalData;
 
-    const allLessons = students.flatMap(s => s.grades || []); 
+    const allLessons = students.flatMap(s => s.grades || []);
     
+    // ✅ Створюємо унікальний ідентифікатор з номера та типу уроку
     const uniqueLessons = allLessons.reduce((acc, current) => {
-        if (!acc.find(item => item.lessonNumber === current.lessonNumber)) {
+        const uniqueId = `${current.lessonNumber}-${current.lessonType}`;
+        if (!acc.find(item => `${item.lessonNumber}-${item.lessonType}` === uniqueId)) {
             acc.push(current);
         }
         return acc;
@@ -92,7 +94,9 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
     uniqueLessons.forEach(lesson => {
-        headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.Topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
+        const topic = lesson.Topic || lesson.lessonType;
+        const date = lesson.Date || ' ';
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -103,8 +107,11 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
         
         const gradeCells = uniqueLessons.map(lesson => {
-            const studentGrade = student.grades.find(g => g.lessonNumber === lesson.lessonNumber);
-            const gradeValue = studentGrade ? studentGrade.Grade : '';
+            // ✅ Використовуємо унікальний ідентифікатор для пошуку оцінки
+            const studentGrade = student.grades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
+            // ✅ Перевіряємо обидва поля для оцінки, оскільки вони можуть відрізнятися
+            const gradeValue = studentGrade ? (studentGrade.Grade || studentGrade.CalculatedGrade) : '';
+            
             return `
                 <td
                     class="grade-cell"
