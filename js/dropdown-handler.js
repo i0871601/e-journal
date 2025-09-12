@@ -174,44 +174,46 @@ export function initDropdown(userData) {
             setupToggle(buttonElement, listElement);
             setupToggle(classButtonElement, classListElement);
 
-            // ✅ Виправлено: обробник для предметів
+            // ✅ Виправлено: обробник вибору ПРЕДМЕТА
             setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                 handleTeacherSubjectSelection(selectedSubject, dataset, userData);
-            });
-            
-            // ✅ Виправлено: обробник для класів, який тепер не є вкладеним
-            setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
-                const payload = {
-                    action: 'journal',
-                    subject: selectedSubjectForTeacher,
-                    className: className
-                };
-                const response = await request(payload);
-                console.log("Відправка до API:", payload);
-                console.log(`Відповідь:`, response);
+                
+                // ✅ Виправлено: Обробник вибору КЛАСУ тепер знаходиться тут,
+                // всередині обробника вибору предмета.
+                setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
+                    const payload = {
+                        action: 'journal',
+                        subject: selectedSubject, // Використовуємо selectedSubject, а не глобальну змінну
+                        className: className
+                    };
+                    const response = await request(payload);
+                    console.log("Відправка до API:", payload);
+                    console.log(`Відповідь:`, response);
 
-                if (response && response.journalData && response.journalData.length > 0) {
-                    const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
-                    displayFullJournal(response.journalData, updateGradeCallback);
-                    setupAddLessonForm(selectedSubjectForTeacher, className, response.journalData, async () => {
-                        const refreshPayload = {
-                            action: 'journal',
-                            subject: selectedSubjectForTeacher,
-                            className: className
-                        };
-                        const refreshResponse = await request(refreshPayload);
-                        if (refreshResponse && refreshResponse.journalData) {
-                            displayFullJournal(refreshResponse.journalData, updateGradeCallback);
-                        }
-                    });
-                } else {
-                    console.log("Відповідь від API пуста або не містить даних журналу.");
-                }
+                    if (response && response.journalData && response.journalData.length > 0) {
+                        const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
+                        displayFullJournal(response.journalData, updateGradeCallback);
+                        setupAddLessonForm(selectedSubject, className, response.journalData, async () => {
+                            const refreshPayload = {
+                                action: 'journal',
+                                subject: selectedSubject,
+                                className: className
+                            };
+                            const refreshResponse = await request(refreshPayload);
+                            if (refreshResponse && refreshResponse.journalData) {
+                                displayFullJournal(refreshResponse.journalData, updateGradeCallback);
+                            }
+                        });
+                    } else {
+                        console.log("Відповідь від API пуста або не містить даних журналу.");
+                    }
+                });
             });
-            
+
             console.log("✅ Списки для вчителя заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
 }
+
