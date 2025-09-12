@@ -131,6 +131,11 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         gradesMap.set(key, g.grade);
     });
 
+    // ✅ Оновлена логіка: знаходимо номер останнього підсумкового уроку
+    const lastFinalLesson = lessons.findLast(lesson => ['Thematic', 'Semester', 'Final'].includes(lesson.lessonType));
+    const lastFinalLessonNumber = lastFinalLesson ? lastFinalLesson.lessonNumber : 0;
+    
+    // ✅ Знаходимо номер останнього звичайного уроку
     const lastNormalLesson = lessons.findLast(lesson => lesson.lessonType === 'Normal');
 
     students.forEach(student => {
@@ -144,7 +149,11 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
             let cellContent = gradeValue;
             
-            if (lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType) {
+            // ✅ Умова: інпут додається тільки для останнього звичайного уроку, якщо його номер більший за номер останнього підсумкового.
+            const isLastNormalLesson = lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType;
+            const isLessonNumberGreaterThanFinal = parseInt(lesson.lessonNumber, 10) > parseInt(lastFinalLessonNumber, 10);
+            
+            if (isLastNormalLesson && isLessonNumberGreaterThanFinal) {
                 cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
             } else {
                 cellContent = gradeValue;
