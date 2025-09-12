@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-//))) Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
+// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 export function displayGrades(grades, role, name) {
     const tableContainer = document.querySelector(".TabletJournal");
@@ -24,25 +24,21 @@ export function displayGrades(grades, role, name) {
     }, []).sort((a, b) => a.lessonNumber - b.lessonNumber);
 
     lessons.forEach(lesson => {
-        // ✅ Виправлено: 'Topic' та 'Date' з великої літери
         headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.Topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
 
     const tableBody = document.createElement('tbody');
-    // ✅ Виправлено: 'Subject' з великої літери
     const subjects = [...new Set(grades.map(g => g.Subject))];
 
     subjects.forEach(subject => {
         const subjectRow = document.createElement('tr');
         subjectRow.innerHTML = `<td>${subject}</td>`;
 
-        // ✅ Виправлено: 'Subject' з великої літери
         const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => g.lessonNumber === lesson.lessonNumber);
-            // ✅ Виправлено: 'Grade' з великої літери
             const gradeValue = grade ? grade.Grade : '';
             subjectRow.innerHTML += `<td>${gradeValue}</td>`;
         });
@@ -65,16 +61,16 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         return;
     }
 
-    let tableWrapper = document.getElementById('journal-table-wrapper');
-    if (!tableWrapper) {
-        tableWrapper = document.createElement('div');
-        tableWrapper.id = 'journal-table-wrapper';
-        tableContainer.appendChild(tableWrapper);
-    }
-    tableWrapper.innerHTML = '';
+    //let tableWrapper = document.getElementById('journal-table-wrapper');
+    //if (!tableWrapper) {
+        //tableWrapper = document.createElement('div');
+        //tableWrapper.id = 'journal-table-wrapper';
+        //tableContainer.appendChild(tableWrapper);
+   // }
+    tableContainer.innerHTML = '';
 
     if (journalData.length === 0) {
-        tableWrapper.innerHTML = '<p>Журнал пустий. Додайте перший урок.</p>';
+        tableContainer..innerHTML = '<p>Журнал пустий. Немає учнів в класі бази даних.</p>';
         return;
     }
 
@@ -96,7 +92,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
     uniqueLessons.forEach(lesson => {
-        // ✅ Виправлено: 'Topic' та 'Date' з великої літери
         headerRow.innerHTML += `<th><p class="lesson-topic">${lesson.Topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
@@ -109,7 +104,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         
         const gradeCells = uniqueLessons.map(lesson => {
             const studentGrade = student.grades.find(g => g.lessonNumber === lesson.lessonNumber);
-            // ✅ Виправлено: 'Grade' з великої літери
             const gradeValue = studentGrade ? studentGrade.Grade : '';
             return `
                 <td
@@ -128,7 +122,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     });
     table.appendChild(tableBody);
 
-    tableWrapper.appendChild(table);
+    tableContainer.appendChild(table);
 
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
