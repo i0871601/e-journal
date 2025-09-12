@@ -190,7 +190,7 @@ export function initDropdown(userData) {
                     console.log("Відправка до API:", payload);
                     console.log(`Відповідь:`, response);
 
-                    if (response && response.journalData && response.journalData.length > 0) {
+                    //if (response && response.journalData && response.journalData.length > 0) {
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
                         displayFullJournal(response.journalData, updateGradeCallback);
                         setupAddLessonForm(selectedSubject, className, response.journalData, async () => {
@@ -204,9 +204,9 @@ export function initDropdown(userData) {
                                 displayFullJournal(refreshResponse.journalData, updateGradeCallback);
                             }
                         });
-                    } else {
-                        console.log("Відповідь від API пуста або не містить даних журналу.");
-                    }
+                    //} else {
+                        //console.log("Відповідь від API пуста або не містить даних журналу.");
+                    //}
                 });
             });
 
@@ -216,4 +216,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
