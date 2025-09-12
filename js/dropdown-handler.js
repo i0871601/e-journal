@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-//))) Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
+// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
 
 import { request } from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
@@ -118,6 +118,7 @@ function createUpdateGradeCallback(subject, className) {
     };
 }
 
+//---
 
 export function initDropdown(userData) {
     if (!userData || !userData.data) {
@@ -174,39 +175,31 @@ export function initDropdown(userData) {
             setupToggle(buttonElement, listElement);
             setupToggle(classButtonElement, classListElement);
 
-            // ✅ Виправлено: обробник вибору ПРЕДМЕТА
             setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                 handleTeacherSubjectSelection(selectedSubject, dataset, userData);
                 
-                // ✅ Виправлено: Обробник вибору КЛАСУ тепер знаходиться тут,
-                // всередині обробника вибору предмета.
                 setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
-                    const payload = {
-                        action: 'journal',
-                        subject: selectedSubject, // Використовуємо selectedSubject, а не глобальну змінну
-                        className: className
+                    const refreshJournal = async () => {
+                        const payload = {
+                            action: 'journal',
+                            subject: selectedSubject,
+                            className: className
+                        };
+                        const response = await request(payload);
+                        
+                        if (response && response.success) {
+                            console.log("Відправка до API:", payload);
+                            console.log(`Відповідь:`, response);
+                            
+                            const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
+                            displayFullJournal(response, updateGradeCallback); 
+                            setupAddLessonForm(selectedSubject, className, response, refreshJournal);
+                        } else {
+                            console.error("Помилка при отриманні журналу:", response.message);
+                        }
                     };
-                    const response = await request(payload);
-                    console.log("Відправка до API:", payload);
-                    console.log(`Відповідь:`, response);
 
-                    //if (response && response.journalData && response.journalData.length > 0) {
-                        const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
-                        displayFullJournal(response.journalData, updateGradeCallback);
-                        setupAddLessonForm(selectedSubject, className, response.journalData, async () => {
-                            const refreshPayload = {
-                                action: 'journal',
-                                subject: selectedSubject,
-                                className: className
-                            };
-                            const refreshResponse = await request(refreshPayload);
-                            if (refreshResponse && refreshResponse.journalData) {
-                                displayFullJournal(refreshResponse.journalData, updateGradeCallback);
-                            }
-                        });
-                    //} else {
-                        //console.log("Відповідь від API пуста або не містить даних журналу.");
-                    //}
+                    refreshJournal();
                 });
             });
 
@@ -216,5 +209,3 @@ export function initDropdown(userData) {
         }
     }
 }
-
-
