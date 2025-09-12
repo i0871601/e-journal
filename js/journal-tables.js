@@ -45,7 +45,7 @@ export function displayGrades(grades, role, name) {
         const subjectGrades = grades.filter(g => g.Subject === subject);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
-            const gradeValue = grade ? (grade.Grade || grade.CalculatedGrade) : '';
+            const gradeValue = grade ? grade.Grade : '';
             subjectRow.innerHTML += `<td>${gradeValue}</td>`;
         });
         tableBody.appendChild(subjectRow);
@@ -109,8 +109,8 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         const gradeCells = uniqueLessons.map(lesson => {
             // ✅ Використовуємо унікальний ідентифікатор для пошуку оцінки
             const studentGrade = student.grades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
-            // ✅ Перевіряємо обидва поля для оцінки, оскільки вони можуть відрізнятися
-            const gradeValue = studentGrade ? (studentGrade.Grade || studentGrade.CalculatedGrade) : '';
+            // ✅ Використовуємо тільки поле Grade, як ти й просив
+            const gradeValue = studentGrade ? studentGrade.Grade : '';
             
             return `
                 <td
