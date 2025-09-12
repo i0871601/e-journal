@@ -74,8 +74,6 @@ export function displayGrades(grades, role, name) {
     tableContainer.appendChild(table);
 }
 
----
-
 export function displayFullJournal(journalData, updateGradeCallback) {
     const journalContainer = document.getElementById("GradeOfJournal");
     if (!journalContainer) {
