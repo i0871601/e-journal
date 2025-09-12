@@ -38,7 +38,7 @@
 
 .dropdown-button div{
   width: 5vmin;
-  background-image: url('image/down.svg');
+  background-image: url('../image/down.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -75,7 +75,7 @@
 }
 .dropdown-button div{
   width: 5vmin;
-  background-image: url('image/down.svg');
+  background-image: url('../image/down.svg');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -136,6 +136,7 @@
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
