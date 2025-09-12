@@ -1,6 +1,4 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-// Цей файл відповідає за відображення журналу та обробку подій оновлення оцінок.
-
 export function displayGrades(grades, role, name) {
     const tableContainer = document.querySelector(".TabletJournal");
     if (!tableContainer) {
@@ -73,8 +71,6 @@ export function displayGrades(grades, role, name) {
     tableContainer.appendChild(table);
 }
 
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 export function displayFullJournal(journalData, updateGradeCallback) {
     const tableContainer = document.querySelector(".TabletJournal");
     if (!tableContainer) {
@@ -119,7 +115,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
                 topicText = lesson.Topic || lesson.lessonType;
         }
         const date = lesson.Date || ' ';
-        // ✅ Додаємо data-атрибути для доступу до даних уроку
         headerRow.innerHTML += `<th 
             data-lesson-number="${lesson.lessonNumber}"
             data-lesson-type="${lesson.lessonType}"
@@ -200,9 +195,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         });
     });
 
-    // ✅ НОВИЙ КОД: Додавання обробника кліків на заголовки стовпців
     document.querySelectorAll('thead th').forEach(headerCell => {
-        // Виключаємо перший заголовок "Прізвище та Ім'я"
         if (headerCell.dataset.lessonNumber) {
             headerCell.addEventListener('click', () => {
                 const lessonNumber = headerCell.dataset.lessonNumber;
