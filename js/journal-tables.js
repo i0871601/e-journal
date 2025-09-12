@@ -29,8 +29,27 @@ export function displayGrades(grades, role, name) {
     });
 
     lessons.forEach(lesson => {
-        const topic = lesson.Topic || lesson.lessonType;
-        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${lesson.Date}</p></th>`;
+        let topicText = lesson.Topic || lesson.lessonType;
+
+        // ✅ Виправлення: зміна тексту заголовка залежно від типу уроку
+        switch (lesson.lessonType) {
+            case 'Normal':
+                topicText = `Урок ${lesson.lessonNumber}`;
+                break;
+            case 'Thematic':
+                topicText = "Тематична";
+                break;
+            case 'Semester':
+                topicText = "Семестр";
+                break;
+            case 'Final':
+                topicText = "Річна";
+                break;
+            default:
+                topicText = lesson.Topic || lesson.lessonType;
+        }
+
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topicText}</p><p class="lesson-date">${lesson.Date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -42,7 +61,7 @@ export function displayGrades(grades, role, name) {
         const subjectRow = document.createElement('tr');
         subjectRow.innerHTML = `<td>${subject}</td>`;
 
-        const subjectGrades = grades.filter(g => g.Subject === subject);
+        const subjectGrades = grades.filter(g => g.Subject === g);
         lessons.forEach(lesson => {
             const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
             const gradeValue = grade ? grade.Grade : '';
@@ -54,6 +73,8 @@ export function displayGrades(grades, role, name) {
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
 }
+
+---
 
 export function displayFullJournal(journalData, updateGradeCallback) {
     const journalContainer = document.getElementById("GradeOfJournal");
@@ -77,8 +98,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const students = journalData;
 
     const allLessons = students.flatMap(s => s.grades || []);
-    
-    // ✅ Створюємо унікальний ідентифікатор з номера та типу уроку
+
     const uniqueLessons = allLessons.reduce((acc, current) => {
         const uniqueId = `${current.lessonNumber}-${current.lessonType}`;
         if (!acc.find(item => `${item.lessonNumber}-${item.lessonType}` === uniqueId)) {
@@ -94,9 +114,28 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
     uniqueLessons.forEach(lesson => {
-        const topic = lesson.Topic || lesson.lessonType;
+        let topicText = lesson.Topic || lesson.lessonType;
+
+        // ✅ Виправлення: зміна тексту заголовка залежно від типу уроку
+        switch (lesson.lessonType) {
+            case 'Normal':
+                topicText = `Урок ${lesson.lessonNumber}`;
+                break;
+            case 'Thematic':
+                topicText = "Тематична";
+                break;
+            case 'Semester':
+                topicText = "Семестр";
+                break;
+            case 'Final':
+                topicText = "Річна";
+                break;
+            default:
+                topicText = lesson.Topic || lesson.lessonType;
+        }
+
         const date = lesson.Date || ' ';
-        headerRow.innerHTML += `<th><p class="lesson-topic">${topic}</p><p class="lesson-date">${date}</p></th>`;
+        headerRow.innerHTML += `<th><p class="lesson-topic">${topicText}</p><p class="lesson-date">${date}</p></th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
@@ -105,13 +144,11 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     students.forEach(student => {
         const studentRow = document.createElement('tr');
         studentRow.innerHTML = `<td>${student.lastName} ${student.firstName}</td>`;
-        
+
         const gradeCells = uniqueLessons.map(lesson => {
-            // ✅ Використовуємо унікальний ідентифікатор для пошуку оцінки
             const studentGrade = student.grades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
-            // ✅ Використовуємо тільки поле Grade, як ти й просив
             const gradeValue = studentGrade ? studentGrade.Grade : '';
-            
+
             return `
                 <td
                     class="grade-cell"
@@ -146,4 +183,4 @@ export function displayFullJournal(journalData, updateGradeCallback) {
             }
         });
     });
-}
+    }
