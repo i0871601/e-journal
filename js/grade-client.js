@@ -1,21 +1,24 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 import { request } from './config.js';
 
-export const setupAddLessonForm = (selectedSubject, selectedClass, students, refreshJournalCallback) => {
+export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, refreshJournalCallback) => {
     const contentContainer = document.getElementById("GradeOfJournal");
     const existingForm = document.getElementById("add-lesson-form");
     if (existingForm) {
-        existingForm.remove(); // Видаляємо стару форму, щоб створити нову
+        existingForm.remove();
     }
 
     if (!contentContainer) {
         console.error("Елемент 'GradeOfJournal' не знайдено.");
         return;
     }
-    const allLessons = Array.isArray(students) ? students.flatMap(s => s.grades || []) : [];
-    const finalGradeExists = allLessons.some(lesson => lesson.lessonType === 'Final');
 
-    // Якщо річна оцінка існує, ми не будемо відображати форму
+    // ✅ Оновлена логіка: отримуємо дані з нової структури
+    const students = journalData.students;
+    const lessons = journalData.lessons;
+
+    // Перевіряємо, чи існує річна оцінка
+    const finalGradeExists = lessons.some(lesson => lesson.lessonType === 'Final');
     if (finalGradeExists) {
         return;
     }
@@ -46,7 +49,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
     const saveLessonButton = document.getElementById("saveLessonButton");
     const lessonTypeButton = document.getElementById("lessonType-Button");
 
-    // ✅ Виправлення: обробники подій для випадаючого списку тепер налаштовуються одразу
     lessonTypeList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const allListItems = lessonTypeList.querySelectorAll('li');
@@ -85,25 +87,23 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
             const lessonType = selectedListItem.dataset.type;
 
             if (!students || !Array.isArray(students)) {
-                console.error("Помилка: Не вдалося отримати дані учнів. 'students' є undefined або не є масивом.");
+                console.error("Помилка: Не вдалося отримати дані учнів.");
                 alert("Не вдалося додати урок. Будь ласка, оновіть сторінку і спробуйте знову.");
                 return;
             }
-
+            
+            // ✅ Оновлена логіка для розрахунку newLessonNumber
             let newLessonNumber = 1;
-            if (students.length > 0 && students[0].grades) {
-                const allLessons = students[0].grades;
-                const maxLessonNumber = allLessons.length > 0
-                    ? Math.max(...allLessons.map(g => parseInt(g.lessonNumber, 10)))
-                    : 0;
+            const maxLessonNumber = lessons && lessons.length > 0
+                ? Math.max(...lessons.map(l => parseInt(l.lessonNumber, 10)))
+                : 0;
 
-                if (lessonType === "Normal") {
-                    newLessonNumber = maxLessonNumber + 1;
-                } else {
-                    newLessonNumber = maxLessonNumber;
-                }
+            if (lessonType === "Normal") {
+                newLessonNumber = maxLessonNumber + 1;
+            } else {
+                newLessonNumber = maxLessonNumber;
             }
-
+            
             const gradesData = students.map((student) => ({
                 studentFirstName: student.firstName,
                 studentLastName: student.lastName,
@@ -123,6 +123,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
                     grades: gradesData
                 }
             };
+            
             console.log("Відправка payload на воркер:", payload);
             try {
                 const response = await request(payload);
@@ -133,7 +134,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, students, ref
                     lessonTypePara.textContent = "Виберіть тип уроку";
                     const selected = document.querySelector('#lessonTypeList li.selected');
                     if (selected) { selected.classList.remove('selected'); }
-
+                    
                     refreshJournalCallback();
                 } else {
                     alert("Помилка при додаванні уроку: " + (response.message || "Невідома помилка."));
