@@ -1,3 +1,4 @@
+/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
 :root{
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
@@ -135,6 +136,7 @@
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
