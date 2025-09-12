@@ -13,11 +13,9 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
         return;
     }
 
-    // ✅ Оновлена логіка: отримуємо дані з нової структури
     const students = journalData.students;
     const lessons = journalData.lessons;
 
-    // Перевіряємо, чи існує річна оцінка
     const finalGradeExists = lessons.some(lesson => lesson.lessonType === 'Final');
     if (finalGradeExists) {
         return;
@@ -92,7 +90,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
                 return;
             }
             
-            // ✅ Оновлена логіка для розрахунку newLessonNumber
             let newLessonNumber = 1;
             const maxLessonNumber = lessons && lessons.length > 0
                 ? Math.max(...lessons.map(l => parseInt(l.lessonNumber, 10)))
