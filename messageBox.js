@@ -37,7 +37,7 @@ function initializeMessageBox() {
 }
 
 // Функція для заповнення контейнера user-id
-function UserID() {
+/*function UserID() {
   const user = getUserData();
   const messageBoxElement = document.getElementById('message-box');
 
@@ -53,7 +53,7 @@ function UserID() {
 
     showMessageBox();
   }
-}
+}*/
 
 // Функція для оновлення тексту в message-text
 export function MessageText(text) {
@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
