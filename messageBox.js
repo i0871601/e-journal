@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(messageBoxTimeoutId);
     messageBoxTimeoutId = null;
     initializeMessageBox();
-    loadSvg(url1, containerId1);
-    loadSvg(url2, containerId1);
+    loadSvg('./image/error.svg', imgError);
+    //loadSvg(url2, containerId1);
     FonColor();
     const user = getUserData();
     if(user){
@@ -131,4 +131,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
