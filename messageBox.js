@@ -1,15 +1,15 @@
 // messageBox.js
 
-// Розмітка, яку ви хочете динамічно створити.
-// Змінна const, щоб її не можна було змінити випадково.
+import { getUserData } from './js/config.js';
+
+// Розмітка, яка буде використовуватися на обох сторінках
 const messageBoxHTML = `
   <div id="message-box">
     <div id="user-id"></div>
     <div id="message-text"></div>
   </div>`;
 
-// Функція для ініціалізації: створює розмітку та додає її в body.
-// Викликається тільки один раз, коли скрипт завантажується.
+// Функція для ініціалізації: створює розмітку
 function initializeMessageBox() {
   const bodyElement = document.body;
   if (bodyElement) {
@@ -17,99 +17,80 @@ function initializeMessageBox() {
   }
 }
 
+// Функція для заповнення контейнера user-id
 function UserID() {
-  const pathname = window.location.pathname;
+  const user = getUserData();
 
-  // Перевірка на "index.html" або просто "/"
-  const isAuthPage = pathname.endsWith('index.html') || pathname === '/';
-
-  if (isAuthPage) {
-    return;
-  }
-  
-  // Решта вашої логіки
-  const user = { firstName: 'Іван', lastName: 'Петров' }; 
-  const userIdElement = document.getElementById('user-id');
-  
-  if (userIdElement) {
-    const pTag = document.createElement('p');
-    pTag.textContent = `${user.firstName} ${user.lastName}`;
-    userIdElement.appendChild(pTag);
+  // Перевіряємо, чи є об'єкт користувача
+  if (user) {
+    const userIdElement = document.getElementById('user-id');
+    if (userIdElement) {
+      const pTag = document.createElement('p');
+      pTag.textContent = `${user.firstName} ${user.lastName}`;
+      userIdElement.appendChild(pTag);
+    }
   }
 }
 
-// Функція для оновлення тексту в message-text.
-// Вона буде експортована, щоб її можна було викликати з інших файлів.
-function MessageText(text) {
+// Функція для оновлення тексту в message-text
+export function MessageText(text) {
   const messageTextElement = document.getElementById('message-text');
   if (messageTextElement) {
     messageTextElement.textContent = text;
   }
 }
 
-// Функція для зміни кольору фону message-box на основі умов.
+// Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
 function FonColor() {
   const messageBox = document.getElementById('message-box');
-  if (!messageBox) return; // Виходимо, якщо елемент ще не створений
+  if (!messageBox) return;
 
-  const pathname = window.location.pathname;
+  // Отримуємо дані користувача з config.js
+  const user = getUserData();
 
-  // Логіка для сторінки index.html
-  if (pathname.endsWith('index.html')) {
-    const bodyColor = getComputedStyle(document.body).getPropertyValue('--main-color');
-    if (bodyColor) {
-      // Приклад: якщо колір тіла червоний, робимо messageBox синім
-      if (bodyColor.trim() === '#ff0000') {
-        messageBox.style.backgroundColor = '#0000ff';
-      } else {
-        // Інший колір за замовчуванням
-        messageBox.style.backgroundColor = '#cccccc';
-      }
-    }
-  } 
-  
-  // Логіка для сторінки Home.html
-  else if (pathname.endsWith('Home.html')) {
+  // Логіка для авторизованого користувача
+  if (user) {
     const toggleSchedule = document.getElementById('toggle-schedule');
     const toggleJournal = document.getElementById('toggle-journal');
     
-    // Перевіряємо, чи відмічений один із чекбоксів
+    // Якщо хоча б один з чекбоксів відмічений
     if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
       messageBox.style.backgroundColor = 'lime';
     } else {
       messageBox.style.backgroundColor = 'transparent';
+    }
+  } 
+  // Логіка для неавторизованого користувача
+  else {
+    const bodyColor = getComputedStyle(document.body).getPropertyValue('--main-color');
+    if (bodyColor) {
+      if (bodyColor.trim() === '#ff0000') {
+        messageBox.style.backgroundColor = '#0000ff';
+      } else {
+        messageBox.style.backgroundColor = '#cccccc';
+      }
     }
   }
 }
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Створюємо розмітку
   initializeMessageBox();
-  
-  // 2. Заповнюємо дані користувача
   UserID();
-  
-  // 3. Встановлюємо початковий колір
   FonColor();
 
-  // Додаємо слухачі подій для чекбоксів, якщо вони існують
-  if (window.location.pathname.endsWith('Home.html')) {
-    const toggleSchedule = document.getElementById('toggle-schedule');
-    const toggleJournal = document.getElementById('toggle-journal');
+  const toggleSchedule = document.getElementById('toggle-schedule');
+  const toggleJournal = document.getElementById('toggle-journal');
     
-    if (toggleSchedule) {
-      toggleSchedule.addEventListener('change', FonColor);
-    }
-    if (toggleJournal) {
-      toggleJournal.addEventListener('change', FonColor);
-    }
+  if (toggleSchedule) {
+    toggleSchedule.addEventListener('change', FonColor);
+  }
+  if (toggleJournal) {
+    toggleJournal.addEventListener('change', FonColor);
   }
 });
 
-// Експортуємо лише ту функцію, яка потрібна для зовнішнього використання
-export { MessageText };
-
+export { FonColor };
 
 
 
