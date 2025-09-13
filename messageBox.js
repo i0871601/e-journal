@@ -110,7 +110,7 @@ function FonColor() {
       //}
     //}
   //}
-}
+//}
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
