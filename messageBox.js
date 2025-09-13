@@ -1,4 +1,11 @@
 // messageBox.js
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    clearTimeout(messageBoxTimeoutId);
+    messageBoxTimeoutId = null;
+    sessionStorage.clear();
+  }
+});
 import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
@@ -86,13 +93,6 @@ function FonColor() {
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
-    window.addEventListener('pageshow', (event) => {
-        if (event.persisted) {
-            clearTimeout(messageBoxTimeoutId);
-            messageBoxTimeoutId = null;
-            sessionStorage.clear();
-        }
-    });
     setTimeout(() => {
     initializeMessageBox();
     FonColor();
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
