@@ -34,7 +34,7 @@ const messageBoxStyles = `
     justify-content: center;
     height: 100%;
   }
-  #message-icon{
+  #message-icon svg{
     height: 80%;
   }
 `;
@@ -140,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
