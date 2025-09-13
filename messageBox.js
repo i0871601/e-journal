@@ -5,7 +5,7 @@ const messageBoxHTML = `
   <div id="message-box">
     <div id="message-text"></div>
   </div>`;
-
+//для фото aspect-ratio: 1 / 1;
 const messageBoxStyles = `
   #message-box {
     background-color: #151419;
@@ -42,11 +42,39 @@ function initializeMessageBox() {
   bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
 
+async function loadSvg(url, containerId) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Помилка завантаження SVG: ${response.status} ${response.statusText}`);
+    }
+    const svgCode = await response.text();
+    const container = document.getElementById(containerId);
+    if (container) {
+      const existingSvg = container.querySelector('.svg-icon');
+      if (existingSvg) {
+        existingSvg.remove();
+      }
+      container.insertAdjacentHTML('afterbegin', svgCode);
+    }
+  } catch (error) {
+    console.error('Помилка завантаження SVG:', error);
+  }
+}
 // Функція для оновлення тексту в message-text
-export function MessageText(text) {
+export function MessageText(text, status = 'default') {
   const messageBox = document.getElementById('message-box');
   if (messageBox) {
     const messageTextElement = document.getElementById('message-text');
+    messageBox.classList.remove('message-box--success', 'message-box--error');
+    if (status === 'success') {
+      //та визов функції створення картинки
+      messageBox.classList.add('message-box--success');
+    } else if (status === 'error') {
+      //та визов функції створення картинки
+      messageBox.classList.add('message-box--error');
+    }
+    
     if (messageBoxTimeoutId !== null) {
         clearTimeout(messageBoxTimeoutId);
         messageBoxTimeoutId = null;
@@ -64,6 +92,7 @@ export function MessageText(text) {
       
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
+        messageBox.classList.remove('message-box--success', 'message-box--error');
         if (pTag) {
           pTag.textContent = '';
         }
@@ -91,12 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(messageBoxTimeoutId);
     messageBoxTimeoutId = null;
     initializeMessageBox();
+    loadSvg(url1, containerId1);
+    loadSvg(url2, containerId1);
     FonColor();
     const user = getUserData();
     if(user){
       const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
-      setTimeout(() => { MessageText(textIDuser);}, 2000);
+      setTimeout(() => { MessageText(textIDuser, 'success');}, 2000);
     }
 });
 
 export {FonColor};
+
