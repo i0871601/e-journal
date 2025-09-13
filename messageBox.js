@@ -55,7 +55,15 @@ async function loadSvg(url, containerId) {
       if (existingSvg) {
         existingSvg.remove();
       }
-      container.insertAdjacentHTML('afterbegin', svgCode);
+      // Створюємо тимчасовий div для надійного парсингу SVG-коду
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = svgCode;
+
+      // Отримуємо перший SVG-елемент з тимчасового div і переміщуємо його в контейнер
+      const svgElement = tempDiv.querySelector('svg');
+      if (svgElement) {
+        container.prepend(svgElement);
+      }
     }
   } catch (error) {
     console.error('Помилка завантаження SVG:', error);
@@ -130,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
