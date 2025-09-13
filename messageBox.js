@@ -17,6 +17,10 @@ const messageBoxStyles = `
     opacity: 0;
     transition-y: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
+  #message-box p{
+    padding: 0;
+    margin: 0;
+  }
   #message-box.show-message-box {
     width: 45%;
     opacity: 1;
@@ -87,18 +91,17 @@ function FonColor() {
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
     messageBoxTimeoutId = null;
-    setTimeout(() => {
     initializeMessageBox();
     FonColor();
     const user = getUserData();
     if(user){
       const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
-      MessageText(textIDuser);
+      setTimeout(() => { MessageText(textIDuser);}, 300);
     }
-  }, 10);
 });
 
 export {FonColor};
+
 
 
 
