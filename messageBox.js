@@ -77,7 +77,7 @@ function showMessageBox() {
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.style.width = '0%';
         messageBox.style.opacity = '0';
-      }, 30000);
+      }, 7000);
     }
 }
 
@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
