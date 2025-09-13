@@ -95,9 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = getUserData();
     if(user){
       const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
-      setTimeout(() => { MessageText(textIDuser);}, 300);
+      setTimeout(() => { MessageText(textIDuser);}, 2000);
     }
 });
 
 export {FonColor};
-
