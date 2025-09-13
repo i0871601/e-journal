@@ -114,10 +114,6 @@ async function handleLogin(lastName, password) {
             showPasswordUpdateForm(data.message);
         } else {
             saveSessionData(data);
-            MessageText("Успішний вхід!");
-            setTimeout(() => {
-                window.location.href = "Home.html";
-            }, 1500);
         }
     } catch (error) {
         MessageText("Помилка: невірний логін чи пароль.");
@@ -195,5 +191,6 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
