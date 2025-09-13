@@ -2,7 +2,6 @@
 
 import { getUserData } from './js/config.js';
 
-// Розмітка, яка буде використовуватися на обох сторінках
 const messageBoxHTML = `
   <div id="message-box">
     <div id="user-id"></div>
@@ -14,13 +13,14 @@ const messageBoxStyles = `
     position: absolute;
     right: 0;
     top: 3vmin;
-    width: 45%;
+    width: 0%;
     height: 0;
     padding-top: 7%;
     opacity: 0;
-    transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
 `;
+
 
 // Функція для ініціалізації: створює розмітку
 function initializeMessageBox() {
@@ -45,6 +45,7 @@ function UserID() {
       const pTag = document.createElement('p');
       pTag.textContent = `${user.firstName} ${user.lastName}`;
       userIdElement.appendChild(pTag);
+      showMessageBox();
     }
   }
 }
@@ -53,8 +54,23 @@ function UserID() {
 export function MessageText(text) {
   const messageTextElement = document.getElementById('message-text');
   if (messageTextElement) {
-    messageTextElement.textContent = text;
+    let pTag = messageTextElement.querySelector('p');
+    
+    if (!pTag) {
+      pTag = document.createElement('p');
+      messageTextElement.appendChild(pTag);
+    }
+    pTag.textContent = text;
+    showMessageBox();
   }
+}
+
+function showMessageBox() {
+    const messageBox = document.getElementById('message-box');
+    if (messageBox) {
+        messageBox.style.width = '45%';
+        messageBox.style.opacity = '1';
+    }
 }
 
 // Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
@@ -108,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
