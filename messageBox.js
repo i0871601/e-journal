@@ -10,7 +10,11 @@ const messageBoxHTML = `
   </div>`;
 
 const messageBoxStyles = `
-  
+  #message-box {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 `;
 
 // Функція для ініціалізації: створює розмітку
@@ -99,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
