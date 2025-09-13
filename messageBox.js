@@ -76,7 +76,7 @@ function FonColor() {
   else {
     const bodyColor = getComputedStyle(document.body).getPropertyValue('--main-color');
     if (bodyColor) {
-      if (bodyColor.trim() === '#ff0000') {
+      if (bodyColor.trim() === '#151419') {
         messageBox.style.backgroundColor = '#0000ff';
       } else {
         messageBox.style.backgroundColor = '#cccccc';
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
