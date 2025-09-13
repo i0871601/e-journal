@@ -13,7 +13,10 @@ const messageBoxStyles = `
   #message-box {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 3vmin;
+    width: 45%;
+    height: 0;
+    padding-top: 7%;
   }
 `;
 
@@ -103,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
