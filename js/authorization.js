@@ -4,12 +4,13 @@ window.addEventListener('pageshow', (event) => {
         sessionStorage.clear();
     }
 });
+
 import { API_URL_AUTHORIZATION } from './config.js';
+import { MessageText } from './messageBox.js';
 
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
-const errorMessage = document.getElementById('errorMessage');
 
 export function setButtonState(isLoading, text = "Увійти") {
     if (isLoading) {
@@ -25,13 +26,8 @@ export function setButtonState(isLoading, text = "Увійти") {
         button.classList.remove('active-animation');
     }
 }
-
-export function displayErrorMessage(message) {
-    errorMessage.textContent = message;
-}
-
-export function clearErrorMessage() {
-    errorMessage.textContent = '';
+export function clearMessageBox() {
+    MessageText('');
 }
 
 export async function hashPassword(password) {
@@ -52,7 +48,7 @@ export async function authorizeUser(lastName, passwordHash) {
             action: 'login',
             lastName: lastName,
             password: passwordHash
-      })
+        })
     });
     const data = await response.json();
     if (!response.ok) {
@@ -71,7 +67,7 @@ export async function updatePassword(lastName, newPasswordHash) {
             action: 'login',
             lastName: lastName,
             newPassword: newPasswordHash
-      })
+        })
     });
     const data = await response.json();
     if (!response.ok) {
@@ -88,7 +84,7 @@ const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
 function handleFormSubmission(event) {
     event.preventDefault();
-    clearErrorMessage();
+    clearMessageBox();
     setButtonState(true);
 
     const lastName = document.getElementById('lastName').value.trim();
@@ -104,7 +100,7 @@ function handleFormSubmission(event) {
 
 async function handleLogin(lastName, password) {
     if (!lastName || !password) {
-        displayErrorMessage("Будь ласка, заповніть всі поля.");
+        MessageText("Будь ласка, заповніть всі поля.");
         setButtonState(false);
         return;
     }
@@ -117,10 +113,13 @@ async function handleLogin(lastName, password) {
             showPasswordUpdateForm(data.message);
         } else {
             saveSessionData(data);
-            window.location.href = "Home.html";
+            MessageText("Успішний вхід!");
+            setTimeout(() => {
+                window.location.href = "Home.html";
+            }, 1500);
         }
     } catch (error) {
-        displayErrorMessage("Помилка: невірний логін чи пароль.");
+        MessageText("Помилка: невірний логін чи пароль.");
     } finally {
         setButtonState(false);
     }
@@ -131,7 +130,7 @@ async function handlePasswordUpdate(lastName) {
     const confirmNewPassword = confirmNewPasswordField.value.trim();
 
     if (!newPassword || newPassword !== confirmNewPassword) {
-        displayErrorMessage("Паролі не співпадають або поле порожнє.");
+        MessageText("Паролі не співпадають або поле порожнє.");
         setButtonState(false);
         return;
     }
@@ -142,11 +141,12 @@ async function handlePasswordUpdate(lastName) {
         
         if (data.isPasswordUpdated) {
             hidePasswordUpdateForm(data.message);
+            MessageText("Пароль успішно оновлено!");
         } else {
-            displayErrorMessage("Помилка: " + (data.message || "Не вдалося оновити пароль."));
+            MessageText("Помилка: " + (data.message || "Не вдалося оновити пароль."));
         }
     } catch (error) {
-        displayErrorMessage("Помилка: " + error.message);
+        MessageText("Помилка: " + error.message);
     } finally {
         setButtonState(false);
     }
@@ -157,7 +157,7 @@ function showPasswordUpdateForm(message) {
     newPasswordFieldsContainer.classList.remove('hidden');
     newPasswordFieldsContainer.classList.add('active');
     setButtonState(false, "Зберегти");
-    displayErrorMessage(message);
+    MessageText(message);
     newPasswordField.disabled = false;
     confirmNewPasswordField.disabled = false;
     newPasswordField.focus();
@@ -168,7 +168,7 @@ function hidePasswordUpdateForm(message) {
     newPasswordFieldsContainer.classList.add('hidden');
     newPasswordFieldsContainer.classList.remove('active');
     setButtonState(false, "Увійти");
-    displayErrorMessage(message);
+    MessageText(message);
     newPasswordField.disabled = true;
     confirmNewPasswordField.disabled = true;
     newPasswordField.value = '';
@@ -194,14 +194,3 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
-
-
-
-
-
-
-
-
-
-
-
