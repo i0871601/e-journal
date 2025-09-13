@@ -71,7 +71,6 @@ export function MessageText(text, status = 'default') {
       //та визов функції створення картинки
       messageBox.classList.add('message-box--success');
     } else if (status === 'error') {
-      loadSvg('./image/error.svg', 'message-box');
       messageBox.classList.add('message-box--error');
     }
     
@@ -131,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
