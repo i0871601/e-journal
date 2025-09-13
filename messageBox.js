@@ -17,14 +17,18 @@ function initializeMessageBox() {
   }
 }
 
-// Функція, яка заповнює контейнер user-id.
 function UserID() {
-  const pathname = window.location.pathname.toLowerCase();
-  if (pathname.endsWith('index.html')) {
+  const pathname = window.location.pathname;
+
+  // Перевірка на "index.html" або просто "/"
+  const isAuthPage = pathname.endsWith('index.html') || pathname === '/';
+
+  if (isAuthPage) {
     return;
   }
-
-  const user = { firstName: 'Іван', lastName: 'Петров' }; // Дані користувача
+  
+  // Решта вашої логіки
+  const user = { firstName: 'Іван', lastName: 'Петров' }; 
   const userIdElement = document.getElementById('user-id');
   
   if (userIdElement) {
@@ -105,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Експортуємо лише ту функцію, яка потрібна для зовнішнього використання
 export { MessageText };
+
 
 
 
