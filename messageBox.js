@@ -28,6 +28,15 @@ const messageBoxStyles = `
     width: 45%;
     opacity: 1;
   }
+  #message-icon{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  #message-icon{
+    height: 80%;
+  }
 `;
 
 let messageBoxTimeoutId = null;
@@ -68,7 +77,6 @@ export function MessageText(text, status = 'default') {
     const messageTextElement = document.getElementById('message-text');
     messageBox.classList.remove('message-box--success', 'message-box--error');
     if (status === 'success') {
-      //та визов функції створення картинки
       messageBox.classList.add('message-box--success');
     } else if (status === 'error') {
       messageBox.classList.add('message-box--error');
@@ -86,7 +94,9 @@ export function MessageText(text, status = 'default') {
         messageTextElement.appendChild(pTag);
       }
       pTag.textContent = text;
-      
+
+      const contimg = document.getElementById('message-icon');
+      contimg.style.display = 'flex';
       messageBox.classList.add('show-message-box');
       
       messageBoxTimeoutId = setTimeout(() => {
@@ -130,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
