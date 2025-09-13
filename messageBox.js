@@ -14,8 +14,7 @@ const messageBoxStyles = `
     right: 0;
     top: 3vmin;
     width: 0%;
-    height: 0;
-    padding-top: 7%;
+    aspect-ratio: 100 / 7;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
@@ -124,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
