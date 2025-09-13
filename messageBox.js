@@ -17,6 +17,10 @@ const messageBoxStyles = `
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
+  #message-box.show-message-box {
+    width: 45%;
+    opacity: 1;
+  }
 `;
 
 let messageBoxTimeoutId = null;
@@ -73,12 +77,10 @@ function showMessageBox() {
         clearTimeout(messageBoxTimeoutId);
         messageBoxTimeoutId = null;
       }
-      messageBox.style.width = '45%';
-      messageBox.style.opacity = '1';
+      messageBox.classList.add('show-message-box');
 
       messageBoxTimeoutId = setTimeout(() => {
-        messageBox.style.width = '0%';
-        messageBox.style.opacity = '0';
+        messageBox.classList.remove('show-message-box');
         const messageTextParagraph = document.querySelector('#message-text p');
         if (messageTextParagraph) {
           messageTextParagraph.textContent = '';
@@ -136,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
