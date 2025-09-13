@@ -4,6 +4,7 @@ import { getUserData } from './js/config.js';
 const messageBoxHTML = `
   <div id="message-box">
     <div id="message-text"></div>
+    <div id="message-icon"></div>
   </div>`;
 //для фото aspect-ratio: 1 / 1;
 const messageBoxStyles = `
@@ -50,25 +51,16 @@ async function loadSvg(url, containerId) {
     }
     const svgCode = await response.text();
     const container = document.getElementById(containerId);
-    if (container) {
-      const existingSvg = container.querySelector('.svg-icon');
-      if (existingSvg) {
-        existingSvg.remove();
-      }
-      // Створюємо тимчасовий div для надійного парсингу SVG-коду
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = svgCode;
 
-      // Отримуємо перший SVG-елемент з тимчасового div і переміщуємо його в контейнер
-      const svgElement = tempDiv.querySelector('svg');
-      if (svgElement) {
-        container.prepend(svgElement);
-      }
+    if (container) {
+      // Видаляємо попередню іконку перед вставкою нової
+      container.innerHTML = svgCode;
     }
   } catch (error) {
     console.error('Помилка завантаження SVG:', error);
   }
 }
+
 // Функція для оновлення тексту в message-text
 export function MessageText(text, status = 'default') {
   const messageBox = document.getElementById('message-box');
@@ -138,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
