@@ -74,7 +74,7 @@ function FonColor() {
   } 
   // Логіка для неавторизованого користувача
   else {
-    const bodyColor = getComputedStyle(document.body).getPropertyValue('--main-color');
+    const bodyColor = getComputedStyle(document.body).getPropertyValue('--fon-color');
     if (bodyColor) {
       if (bodyColor.trim() === '#151419') {
         messageBox.style.backgroundColor = '#0000ff';
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
