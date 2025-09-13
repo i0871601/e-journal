@@ -37,25 +37,6 @@ function initializeMessageBox() {
   bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
 
-// Функція для заповнення контейнера user-id
-/*function UserID() {
-  const user = getUserData();
-  const messageBoxElement = document.getElementById('message-box');
-
-  if (user && messageBoxElement) {
-    const userIdElement = document.createElement('div');
-    userIdElement.id = 'user-id';
-    
-    const pTag = document.createElement('p');
-    pTag.textContent = `${user.firstName} ${user.lastName}`;
-    
-    userIdElement.appendChild(pTag);
-    messageBoxElement.prepend(userIdElement);
-
-    showMessageBox();
-  }
-}*/
-
 // Функція для оновлення тексту в message-text
 export function MessageText(text) {
   const messageTextElement = document.getElementById('message-text');
@@ -116,19 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     FonColor();
   }, 500);
-
-  //const toggleSchedule = document.getElementById('toggle-schedule');
-  //const toggleJournal = document.getElementById('toggle-journal');
-    
-  //if (toggleSchedule) {
-    //toggleSchedule.addEventListener('change', FonColor);
-  //}
-  //if (toggleJournal) {
-    //toggleJournal.addEventListener('change', FonColor);
-  //}
 });
 
 export {FonColor};
+
 
 
 
