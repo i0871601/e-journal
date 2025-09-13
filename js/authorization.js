@@ -9,6 +9,15 @@ window.addEventListener('pageshow', (event) => {
 import { API_URL_AUTHORIZATION } from './config.js';
 import { MessageText } from '../messageBox.js';
 
+const messages = {
+  loginSuccess: "Успішний вхід!",
+  loginError: "Помилка: невірний логін чи пароль.",
+  fieldsEmpty: "Будь ласка, заповніть всі поля.",
+  passwordMismatch: "Паролі не співпадають або поле порожнє.",
+  passwordUpdateSuccess: "Пароль успішно оновлено!",
+  passwordUpdateError: "Не вдалося оновити пароль.",
+};
+
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
@@ -101,7 +110,7 @@ function handleFormSubmission(event) {
 
 async function handleLogin(lastName, password) {
     if (!lastName || !password) {
-        MessageText("Будь ласка, заповніть всі поля.");
+        MessageText(messages.fieldsEmpty);
         setButtonState(false);
         return;
     }
@@ -116,7 +125,7 @@ async function handleLogin(lastName, password) {
             saveSessionData(data);
         }
     } catch (error) {
-        MessageText("Помилка: невірний логін чи пароль.");
+        MessageText(messages.loginError);
     } finally {
         setButtonState(false);
     }
@@ -127,7 +136,7 @@ async function handlePasswordUpdate(lastName) {
     const confirmNewPassword = confirmNewPasswordField.value.trim();
 
     if (!newPassword || newPassword !== confirmNewPassword) {
-        MessageText("Паролі не співпадають або поле порожнє.");
+        MessageText(messages.passwordMismatch);
         setButtonState(false);
         return;
     }
@@ -138,12 +147,12 @@ async function handlePasswordUpdate(lastName) {
         
         if (data.isPasswordUpdated) {
             hidePasswordUpdateForm(data.message);
-            MessageText("Пароль успішно оновлено!");
+            MessageText(messages.passwordUpdateSuccess);
         } else {
-            MessageText("Помилка: " + (data.message || "Не вдалося оновити пароль."));
+            MessageText("Помилка: " + (data.message || messages.passwordUpdateError));
         }
     } catch (error) {
-        MessageText("Помилка: " + error.message);
+        console.log("Помилка: " + error.message);
     } finally {
         setButtonState(false);
     }
@@ -154,7 +163,7 @@ function showPasswordUpdateForm(message) {
     newPasswordFieldsContainer.classList.remove('hidden');
     newPasswordFieldsContainer.classList.add('active');
     setButtonState(false, "Зберегти");
-    MessageText(message);
+    console.log(message);
     newPasswordField.disabled = false;
     confirmNewPasswordField.disabled = false;
     newPasswordField.focus();
@@ -165,7 +174,7 @@ function hidePasswordUpdateForm(message) {
     newPasswordFieldsContainer.classList.add('hidden');
     newPasswordFieldsContainer.classList.remove('active');
     setButtonState(false, "Увійти");
-    MessageText(message);
+    console.log(message);
     newPasswordField.disabled = true;
     confirmNewPasswordField.disabled = true;
     newPasswordField.value = '';
@@ -191,6 +200,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
