@@ -9,6 +9,8 @@ const messageBoxHTML = `
 //для фото aspect-ratio: 1 / 1;
 const messageBoxStyles = `
   #message-box {
+    display: flex;
+    flex-direction: row-reverse;
     background-color: #151419;
     position: absolute;
     right: 0;
@@ -35,6 +37,7 @@ const messageBoxStyles = `
     height: 100%;
   }
   #message-icon svg{
+    width: auto;
     height: 80%;
   }
 `;
@@ -140,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
