@@ -1,7 +1,6 @@
 // messageBox.js
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
-    clearTimeout(messageBoxTimeoutId);
     messageBoxTimeoutId = null;
     sessionStorage.clear();
   }
@@ -105,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
