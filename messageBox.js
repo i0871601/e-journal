@@ -13,7 +13,6 @@ const messageBoxStyles = `
     right: 0;
     top: 3vmin;
     width: 0%;
-    height: 0%;
     aspect-ratio: 100 / 7;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -75,13 +74,15 @@ function showMessageBox() {
         messageBoxTimeoutId = null;
       }
       messageBox.style.width = '45%';
-      messageBox.style.height = 'auto';
       messageBox.style.opacity = '1';
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.style.width = '0%';
-        messageBox.style.height = '0%';
         messageBox.style.opacity = '0';
+        const messageTextParagraph = document.querySelector('#message-text p');
+        if (messageTextParagraph) {
+          messageTextParagraph.textContent = '';
+        }
       }, 3000);
     }
 }
@@ -135,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
