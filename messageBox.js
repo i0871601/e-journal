@@ -2,7 +2,6 @@
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     messageBoxTimeoutId = null;
-    sessionStorage.clear();
   }
 });
 import { getUserData } from './js/config.js';
@@ -104,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
