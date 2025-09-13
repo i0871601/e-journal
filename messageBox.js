@@ -77,7 +77,7 @@ function showMessageBox() {
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.style.width = '0%';
         messageBox.style.opacity = '0';
-      }, 7000);
+      }, 3000);
     }
 }
 
@@ -96,9 +96,9 @@ function FonColor() {
     
     // Якщо хоча б один з чекбоксів відмічений
     if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
-      messageBox.style.backgroundColor = 'lime';
+      messageBox.style.backgroundColor = '#151419';
     } else {
-      messageBox.style.backgroundColor = 'transparent';
+      messageBox.style.backgroundColor = '#fbfbfb';
     }
   } 
   // Логіка для неавторизованого користувача
@@ -106,9 +106,7 @@ function FonColor() {
     const bodyColor = getComputedStyle(document.body).getPropertyValue('--fon-color');
     if (bodyColor) {
       if (bodyColor.trim() === '#151419') {
-        messageBox.style.backgroundColor = '#0000ff';
-      } else {
-        messageBox.style.backgroundColor = '#cccccc';
+        messageBox.style.backgroundColor = '#fbfbfb';
       }
     }
   }
@@ -132,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
