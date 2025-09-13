@@ -101,23 +101,21 @@ function FonColor() {
     messageBox.style.backgroundColor = '#151419';
   } else {
       messageBox.style.backgroundColor = '#fbfbfb';
-    }
-  } 
-  //else {
-    //const bodyColor = getComputedStyle(document.body).getPropertyValue('--fon-color');
-    //if (bodyColor) {
-      //if (bodyColor.trim() === '#151419') {
-        //messageBox.style.backgroundColor = '#fbfbfb';
-      //}
-    //}
-  //}
-//}
+  }
+} 
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
-  initializeMessageBox();
-  //UserID();
-  FonColor();
+  setTimeout(() => {
+    initializeMessageBox();
+    //UserID();
+    const user = getUserData();
+    if(user){
+      textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
+      MessageText(textIDuser);
+    }
+    FonColor();
+  }, 500);
 
   //const toggleSchedule = document.getElementById('toggle-schedule');
   //const toggleJournal = document.getElementById('toggle-journal');
@@ -131,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
