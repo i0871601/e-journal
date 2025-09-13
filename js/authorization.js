@@ -6,7 +6,7 @@ window.addEventListener('pageshow', (event) => {
 });
 
 import { API_URL_AUTHORIZATION } from './config.js';
-import { MessageText } from './messageBox.js';
+import { MessageText } from '../messageBox.js';
 
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
@@ -194,3 +194,4 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
