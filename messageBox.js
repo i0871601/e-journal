@@ -20,7 +20,7 @@ const messageBoxStyles = `
   }
 `;
 
-
+let messageBoxTimeoutId = null;
 // Функція для ініціалізації: створює розмітку
 function initializeMessageBox() {
   const bodyElement = document.body;
@@ -67,8 +67,17 @@ export function MessageText(text) {
 function showMessageBox() {
     const messageBox = document.getElementById('message-box');
     if (messageBox) {
-        messageBox.style.width = '45%';
-        messageBox.style.opacity = '1';
+      if (messageBoxTimeoutId !== null) {
+        clearTimeout(messageBoxTimeoutId);
+        messageBoxTimeoutId = null;
+      }
+      messageBox.style.width = '45%';
+      messageBox.style.opacity = '1';
+      
+      messageBoxTimeoutId = setTimeout(() => {
+        messageBox.style.width = '0%';
+        messageBox.style.opacity = '0';
+      }, 30000);
     }
 }
 
@@ -123,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
