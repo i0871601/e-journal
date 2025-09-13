@@ -93,31 +93,23 @@ function showMessageBox() {
 function FonColor() {
   const messageBox = document.getElementById('message-box');
   if (!messageBox) return;
-
-  // Отримуємо дані користувача з config.js
-  const user = getUserData();
-
-  // Логіка для авторизованого користувача
-  if (user) {
-    const toggleSchedule = document.getElementById('toggle-schedule');
-    const toggleJournal = document.getElementById('toggle-journal');
-    
-    // Якщо хоча б один з чекбоксів відмічений
-    if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
-      messageBox.style.backgroundColor = '#151419';
-    } else {
+  const toggleSchedule = document.getElementById('toggle-schedule');
+  const toggleJournal = document.getElementById('toggle-journal');
+  
+  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
+    messageBox.style.backgroundColor = '#151419';
+  } else {
       messageBox.style.backgroundColor = '#fbfbfb';
     }
   } 
-  // Логіка для неавторизованого користувача
-  else {
-    const bodyColor = getComputedStyle(document.body).getPropertyValue('--fon-color');
-    if (bodyColor) {
-      if (bodyColor.trim() === '#151419') {
-        messageBox.style.backgroundColor = '#fbfbfb';
-      }
-    }
-  }
+  //else {
+    //const bodyColor = getComputedStyle(document.body).getPropertyValue('--fon-color');
+    //if (bodyColor) {
+      //if (bodyColor.trim() === '#151419') {
+        //messageBox.style.backgroundColor = '#fbfbfb';
+      //}
+    //}
+  //}
 }
 
 // Запускаємо логіку, коли DOM повністю завантажено
@@ -138,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
