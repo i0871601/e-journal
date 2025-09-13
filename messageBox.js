@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //UserID();
     const user = getUserData();
     if(user){
-      textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
+      const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
       MessageText(textIDuser);
     }
     FonColor();
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
