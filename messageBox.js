@@ -63,9 +63,8 @@ export function MessageText(text) {
       
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
-        const messageTextParagraph = document.querySelector('#message-text p');
-        if (messageTextParagraph) {
-          messageTextParagraph.textContent = '';
+        if (pTag) {
+          pTag.textContent = '';
         }
       }, 3000);
     }
