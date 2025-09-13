@@ -9,12 +9,20 @@ const messageBoxHTML = `
     <div id="message-text"></div>
   </div>`;
 
+const messageBoxStyles = `
+  
+`;
+
 // Функція для ініціалізації: створює розмітку
 function initializeMessageBox() {
   const bodyElement = document.body;
-  if (bodyElement) {
-    bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
-  }
+  if (!bodyElement) return;
+
+  const styleTag = document.createElement('style');
+  styleTag.textContent = messageBoxStyles;
+  document.head.appendChild(styleTag);
+  
+  bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
 
 // Функція для заповнення контейнера user-id
@@ -91,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export { FonColor };
+
 
 
 
