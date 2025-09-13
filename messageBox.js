@@ -96,10 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
       MessageText(textIDuser);
     }
     FonColor();
-  }, 500);
+  }, 1500);
 });
 
 export {FonColor};
+
 
 
 
