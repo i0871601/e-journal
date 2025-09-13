@@ -9,6 +9,7 @@ const messageBoxHTML = `
 
 const messageBoxStyles = `
   #message-box {
+    background-color: #151419;
     position: absolute;
     right: 0;
     top: 3vmin;
@@ -130,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
