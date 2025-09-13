@@ -7,6 +7,9 @@
   --color2: #262626;
   --text-color: #878787;
 }
+body{
+  position: relative;
+}
 .TabletJournal{
   overflow-y: auto;
   flex-grow: 1;
@@ -136,6 +139,7 @@
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
