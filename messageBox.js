@@ -4,7 +4,6 @@ import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
   <div id="message-box">
-    <div id="user-id"></div>
     <div id="message-text"></div>
   </div>`;
 
@@ -36,16 +35,19 @@ function initializeMessageBox() {
 // Функція для заповнення контейнера user-id
 function UserID() {
   const user = getUserData();
+  const messageBoxElement = document.getElementById('message-box');
 
-  // Перевіряємо, чи є об'єкт користувача
-  if (user) {
-    const userIdElement = document.getElementById('user-id');
-    if (userIdElement) {
-      const pTag = document.createElement('p');
-      pTag.textContent = `${user.firstName} ${user.lastName}`;
-      userIdElement.appendChild(pTag);
-      showMessageBox();
-    }
+  if (user && messageBoxElement) {
+    const userIdElement = document.createElement('div');
+    userIdElement.id = 'user-id';
+    
+    const pTag = document.createElement('p');
+    pTag.textContent = `${user.firstName} ${user.lastName}`;
+    
+    userIdElement.appendChild(pTag);
+    messageBoxElement.prepend(userIdElement);
+
+    showMessageBox();
   }
 }
 
@@ -130,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
