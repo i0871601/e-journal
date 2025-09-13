@@ -93,17 +93,17 @@ function FonColor() {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     initializeMessageBox();
-    //UserID();
+    FonColor();
     const user = getUserData();
     if(user){
       const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
       MessageText(textIDuser);
     }
-    FonColor();
-  }, 1500);
+  }, 10);
 });
 
 export {FonColor};
+
 
 
 
