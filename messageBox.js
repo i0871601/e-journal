@@ -131,7 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-export {FonColor, MessageText};
+export {FonColor};
+
 
 
 
