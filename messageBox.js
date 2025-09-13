@@ -19,6 +19,7 @@ const messageBoxStyles = `
   }
   #message-box p{
     white-space: nowrap;
+    overflow: hidden;
     padding: 0;
     margin: 0;
   }
@@ -99,3 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
