@@ -13,7 +13,7 @@ const messageBoxHTML = `
 function initializeMessageBox() {
   const bodyElement = document.body;
   if (bodyElement) {
-    bodyElement.insertAdjacentHTML('beforeend', messageBoxHTML);
+    bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
   }
 }
 
@@ -100,3 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Експортуємо лише ту функцію, яка потрібна для зовнішнього використання
 export { MessageText };
+
