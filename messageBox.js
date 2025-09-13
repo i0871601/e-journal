@@ -1,9 +1,4 @@
 // messageBox.js
-window.addEventListener('pageshow', (event) => {
-    if (event.persisted) {
-        sessionStorage.clear();
-    }
-});
 import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
@@ -20,7 +15,7 @@ const messageBoxStyles = `
     width: 0%;
     aspect-ratio: 100 / 7;
     opacity: 0;
-    transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition-y: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
   #message-box.show-message-box {
     width: 45%;
@@ -91,7 +86,14 @@ function FonColor() {
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            clearTimeout(messageBoxTimeoutId);
+            messageBoxTimeoutId = null;
+            sessionStorage.clear();
+        }
+    });
+    setTimeout(() => {
     initializeMessageBox();
     FonColor();
     const user = getUserData();
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
