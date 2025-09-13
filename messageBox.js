@@ -1,5 +1,9 @@
 // messageBox.js
-
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        sessionStorage.clear();
+    }
+});
 import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
@@ -100,33 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
