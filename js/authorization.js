@@ -1,4 +1,9 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        sessionStorage.clear();
+    }
+});
 import { API_URL_AUTHORIZATION } from './config.js';
 
 const button = document.getElementById('loginButton');
@@ -189,6 +194,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
