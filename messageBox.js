@@ -19,9 +19,7 @@ function initializeMessageBox() {
 
 // Функція, яка заповнює контейнер user-id.
 function UserID() {
-  const pathname = window.location.pathname;
-
-  // Виходимо, якщо сторінка є index.html (сторінкою авторизації)
+  const pathname = window.location.pathname.toLowerCase();
   if (pathname.endsWith('index.html')) {
     return;
   }
@@ -107,5 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Експортуємо лише ту функцію, яка потрібна для зовнішнього використання
 export { MessageText };
+
 
 
