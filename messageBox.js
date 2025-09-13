@@ -15,7 +15,7 @@ const messageBoxStyles = `
     width: 0%;
     aspect-ratio: 100 / 7;
     opacity: 0;
-    transition-y: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
   #message-box p{
     padding: 0;
@@ -90,6 +90,7 @@ function FonColor() {
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
+    clearTimeout(messageBoxTimeoutId);
     messageBoxTimeoutId = null;
     initializeMessageBox();
     FonColor();
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
