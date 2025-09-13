@@ -115,21 +115,22 @@ function FonColor() {
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
   initializeMessageBox();
-  UserID();
+  //UserID();
   FonColor();
 
-  const toggleSchedule = document.getElementById('toggle-schedule');
-  const toggleJournal = document.getElementById('toggle-journal');
+  //const toggleSchedule = document.getElementById('toggle-schedule');
+  //const toggleJournal = document.getElementById('toggle-journal');
     
-  if (toggleSchedule) {
-    toggleSchedule.addEventListener('change', FonColor);
-  }
-  if (toggleJournal) {
-    toggleJournal.addEventListener('change', FonColor);
-  }
+  //if (toggleSchedule) {
+    //toggleSchedule.addEventListener('change', FonColor);
+  //}
+  //if (toggleJournal) {
+    //toggleJournal.addEventListener('change', FonColor);
+  //}
 });
 
 export {FonColor};
+
 
 
 
