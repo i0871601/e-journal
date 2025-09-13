@@ -1,9 +1,4 @@
 // messageBox.js
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) {
-    messageBoxTimeoutId = null;
-  }
-});
 import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
@@ -91,6 +86,7 @@ function FonColor() {
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
+    messageBoxTimeoutId = null;
     setTimeout(() => {
     initializeMessageBox();
     FonColor();
@@ -103,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
