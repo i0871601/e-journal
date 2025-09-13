@@ -18,6 +18,7 @@ const messageBoxStyles = `
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
   #message-box p{
+    white-space: nowrap;
     padding: 0;
     margin: 0;
   }
@@ -42,28 +43,24 @@ function initializeMessageBox() {
 
 // Функція для оновлення тексту в message-text
 export function MessageText(text) {
-  const messageTextElement = document.getElementById('message-text');
-  if (messageTextElement) {
-    let pTag = messageTextElement.querySelector('p');
-    
-    if (!pTag) {
-      pTag = document.createElement('p');
-      messageTextElement.appendChild(pTag);
-    }
-    pTag.textContent = text;
-    showMessageBox();
-  }
-}
-
-function showMessageBox() {
-    const messageBox = document.getElementById('message-box');
-    if (messageBox) {
-      if (messageBoxTimeoutId !== null) {
+  const messageBox = document.getElementById('message-box');
+  if (messageBox) {
+    const messageTextElement = document.getElementById('message-text');
+    if (messageBoxTimeoutId !== null) {
         clearTimeout(messageBoxTimeoutId);
         messageBoxTimeoutId = null;
+    }
+    if (messageTextElement) {
+      let pTag = messageTextElement.querySelector('p');
+      
+      if (!pTag) {
+        pTag = document.createElement('p');
+        messageTextElement.appendChild(pTag);
       }
+      pTag.textContent = text;
+      
       messageBox.classList.add('show-message-box');
-
+      
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
         const messageTextParagraph = document.querySelector('#message-text p');
@@ -72,6 +69,7 @@ function showMessageBox() {
         }
       }, 3000);
     }
+  }
 }
 
 // Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
@@ -102,16 +100,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
-
-
-
-
-
-
-
-
-
-
-
-
-
