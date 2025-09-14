@@ -38,8 +38,8 @@ const messageBoxStyles = `
     height: 100%;
   }
   #message-icon svg{
-    width: auto;
     height: 80%;
+    aspect-ratio: 1 / 1;
   }
 `;
 
@@ -55,7 +55,7 @@ function initializeMessageBox() {
 
   bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
-
+//створює зображення
 async function loadSvg(url, containerId) {
   try {
     const response = await fetch(url);
@@ -70,6 +70,7 @@ async function loadSvg(url, containerId) {
       container.innerHTML = svgCode;
     }
   } catch (error) {
+    //добавляє тег р в контейнер message-icon якому написано слово Error
     console.error('Помилка завантаження SVG:', error);
   }
 }
@@ -81,10 +82,11 @@ export function MessageText(text, status = 'default') {
     const messageTextElement = document.getElementById('message-text');
     messageBox.classList.remove('message-box--success', 'message-box--error');
     if (status === 'success') {
-      messageBox.classList.add('message-box--success');
+      //messageBox.classList.add('message-box--success'); 
     } else if (status === 'error') {
-      messageBox.classList.add('message-box--error');
+      //messageBox.classList.add('message-box--error');
     }
+    //логіку статуса поки пуста для того щоб протестувати
 
     if (messageBoxTimeoutId !== null) {
         clearTimeout(messageBoxTimeoutId);
@@ -99,8 +101,8 @@ export function MessageText(text, status = 'default') {
       }
       pTag.textContent = text;
 
-      const contimg = document.getElementById('message-icon');
-      contimg.style.display = 'flex';
+      const contimg = document.getElementById('message-icon');//тут поки для тестування пізніше перенесем до логіки коли статус помилка
+      contimg.style.display = 'flex'; //тут поки для тестування пізніше перенесем до логіки коли статус помилка
       messageBox.classList.add('show-message-box');
 
       messageBoxTimeoutId = setTimeout(() => {
@@ -134,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     messageBoxTimeoutId = null;
     initializeMessageBox();
     loadSvg('./image/error.svg', 'message-icon');
-    //loadSvg(url2, containerId1);
     FonColor();
     const user = getUserData();
     if(user){
@@ -144,3 +145,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
