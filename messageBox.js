@@ -40,10 +40,15 @@ const messageBoxStyles = `
     align-items: center;
     justify-content: center;
     height: 100%;
+    opacity: 0;
   }
   #message-icon svg{
     height: 80%;
-    aspect-ratio: 1 / 1;
+    width: auto;
+  }
+  #message-icon.show-message-box{
+    display: flex;
+    opacity: 1;
   }
 `;
 
@@ -106,14 +111,15 @@ export function MessageText(text, status = 'default') {
       pTag.textContent = text;
 
       const contimg = document.getElementById('message-icon');//тут поки для тестування пізніше перенесем до логіки коли статус помилка
-      contimg.style.display = 'flex'; //тут поки для тестування пізніше перенесем до логіки коли статус помилка
+      contimg.classList.add('show-message-box'); //тут поки для тестування пізніше перенесем до логіки коли статус помилка
       messageBox.classList.add('show-message-box');
       pTag.classList.add('show-message-box');
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
         pTag.classList.add('show-message-box');
-        messageBox.classList.remove('message-box--success', 'message-box--error');
+        contimg.classList.add('show-message-box');
+        messageBox.classList.remove('message-box--success', 'message-box--error'); //тут поки для тестування
         if (pTag) {
           pTag.textContent = '';
         }
@@ -151,5 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
