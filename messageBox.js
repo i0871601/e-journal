@@ -117,8 +117,8 @@ export function MessageText(text, status = 'default') {
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
-        pTag.classList.add('show-message-box');
-        contimg.classList.add('show-message-box');
+        pTag.classList.remove('show-message-box');
+        contimg.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error'); //тут поки для тестування
         if (pTag) {
           pTag.textContent = '';
@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
