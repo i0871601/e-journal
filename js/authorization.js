@@ -111,6 +111,7 @@ function handleFormSubmission(event) {
 
 async function handleLogin(lastName, password) {
     if (!lastName || !password) {
+        errorButton()
         MessageText(messages.fieldsEmpty);
         setButtonState(false);
         return;
@@ -202,6 +203,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
