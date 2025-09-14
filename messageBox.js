@@ -52,7 +52,7 @@ function initializeMessageBox() {
   const styleTag = document.createElement('style');
   styleTag.textContent = messageBoxStyles;
   document.head.appendChild(styleTag);
-  
+
   bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
 
@@ -85,28 +85,30 @@ export function MessageText(text, status = 'default') {
     } else if (status === 'error') {
       messageBox.classList.add('message-box--error');
     }
-    
+
     if (messageBoxTimeoutId !== null) {
         clearTimeout(messageBoxTimeoutId);
         messageBoxTimeoutId = null;
     }
     if (messageTextElement) {
       let pTag = messageTextElement.querySelector('p');
-      
+
       if (!pTag) {
         pTag = document.createElement('p');
         messageTextElement.appendChild(pTag);
       }
       pTag.textContent = text;
 
-      //const contimg = document.getElementById('message-icon');
-      //contimg.style.display = 'flex';
+      const contimg = document.getElementById('message-icon');
+      contimg.style.display = 'flex';
       messageBox.classList.add('show-message-box');
-      
+
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
-        if(pTag){pTag.textContent = '';}
+        if (pTag) {
+          pTag.textContent = '';
+        }
       }, 3000);
     }
   }
@@ -118,7 +120,7 @@ function FonColor() {
   if (!messageBox) return;
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
-  
+
   if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
     messageBox.style.backgroundColor = '#151419';
   } else {
@@ -142,21 +144,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
