@@ -36,9 +36,6 @@ export function setButtonState(isLoading, text = "Увійти") {
         button.classList.remove('active-animation');
     }
 }
-export function clearMessageBox() {
-    MessageText('');
-}
 
 export async function hashPassword(password) {
     const encoder = new TextEncoder();
@@ -94,7 +91,6 @@ const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
 function handleFormSubmission(event) {
     event.preventDefault();
-    clearMessageBox();
     setButtonState(true);
 
     const lastName = document.getElementById('lastName').value.trim();
@@ -201,6 +197,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
