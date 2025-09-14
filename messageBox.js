@@ -20,7 +20,7 @@ const messageBoxStyles = `
     height: 7%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition: background-color 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    /*transition: background-color 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;*/
     overflow: hidden;
   }
   #message-box p{
@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
