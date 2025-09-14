@@ -22,16 +22,17 @@ const messageBoxStyles = `
     top: 3vmin;
     width: 0%;
     height: 7%;
+    padding-left: 3%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    /*overflow: hidden;*/
+    overflow: hidden;
   }
   #message-text{
     display: flex;
   }
   #message-text p{
     white-space: nowrap;
-    /*overflow: hidden;*/
+    overflow: hidden;
     padding: 0;
     margin: 0;
     opacity: 0;
@@ -105,7 +106,7 @@ export function MessageText(text, status = 'default') {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
         if (pTag) {
-          //pTag.textContent = '';
+          pTag.textContent = '';
         }
       }, 3000);
     }
@@ -154,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
