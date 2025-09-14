@@ -95,7 +95,7 @@ h1{
   caret-color: var(--color-accent);
 }
 
-#loginButton:hover{
+.loginForm button:hover{
   transform: scale(1.03);
   background-color: var(--color-accent);
   font-size: clamp(16px, 2.37vh, 40px);
