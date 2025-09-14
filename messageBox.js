@@ -26,7 +26,7 @@ const messageBoxStyles = `
     padding-left: 3%;
     padding-right: 3%;
     border-radius: 50px 0 0 50px;
-    /*gap: 5%;*/
+    gap: 5%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
@@ -121,6 +121,7 @@ export function MessageText(text, status = 'default') {
 function FonColor() {
   const messageBox = document.getElementById('message-box');
   const svgObject = document.querySelector('#message-icon svg');
+  const pText = messageTextElement.querySelector('#message-text p');
   if (!messageBox || !svgObject) {
     return;
   }
@@ -131,9 +132,11 @@ function FonColor() {
   if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
     messageBox.style.backgroundColor = '#151419';
     svgObject.style.fill = '#fbfbfb'; 
+    pText.style.color = '#fbfbfb';
   } else {
     messageBox.style.backgroundColor = '#fbfbfb';
     svgObject.style.fill = '#151419'; 
+    pText.style.color = '#151419';
   }
 }
 
@@ -160,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
