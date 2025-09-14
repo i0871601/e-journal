@@ -116,23 +116,45 @@ function FonColor() {
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
   
-  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
+  // Перевірка, чи існують елементи
+  if (!toggleSchedule || !toggleJournal) {
+    return;
+  }
+  
+  if (toggleSchedule.checked || toggleJournal.checked) {
     messageBox.style.backgroundColor = '#151419';
-    svgObject.style.fill = '#fbfbfb';
+    // Примітка: 'style.fill' не працює для background-image, тому цей рядок краще видалити
+    // svgObject.style.fill = '#fbfbfb'; 
   } else {
     messageBox.style.backgroundColor = '#fbfbfb';
-    svgObject.style.fill = '#151419';
+    // svgObject.style.fill = '#151419'; 
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMessageBox();
     FonColor();
+
     const user = getUserData();
     if(user){
       const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
       setTimeout(() => { MessageText(textIDuser, 'success');}, 2000);
     }
+
+    // Отримання посилань на перемикачі
+    const toggleSchedule = document.getElementById('toggle-schedule');
+    const toggleJournal = document.getElementById('toggle-journal');
+    
+    // Додавання слухачів подій
+    if (toggleSchedule) {
+      toggleSchedule.addEventListener('change', FonColor);
+    }
+    if (toggleJournal) {
+      toggleJournal.addEventListener('change', FonColor);
+    }
 });
 
 export {FonColor};
+
+export {FonColor};
+
