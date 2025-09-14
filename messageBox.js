@@ -29,12 +29,6 @@ const messageBoxStyles = `
     margin: 0;
     opacity: 0;
   }
-  #message-box.lightTheme {
-    background-color: #fbfbfb;
-  }
-  #message-box.darkTheme {
-    background-color: #151419;
-  }
   #message-box.show-message-box {
     width: 45%;
     opacity: 1;
@@ -54,12 +48,6 @@ const messageBoxStyles = `
     width: auto;
     /*transition: fill 0.5s ease-in-out;*/
   }
-  #message-box.light-theme #message-icon svg {
-    fill: #151419; /* Колір іконки для світлого фону */
-  }
-  #message-box.dark-theme #message-icon svg {
-    fill: #fbfbfb; /* Колір іконки для темного фону */
-  }
   #message-icon.show-message-box{
     display: flex;
     opacity: 1;
@@ -146,21 +134,18 @@ export function MessageText(text, status = 'default') {
 // Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
 function FonColor() {
   const messageBox = document.getElementById('message-box');
+  const svgObject = document.querySelector('message-icon svg');
   if (!messageBox) return;
 
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
   
-  const isDarkTheme = (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked);
-
-  if (isDarkTheme) {
-    console.log("Темна");
-    messageBox.classList.remove('light-theme');
-    messageBox.classList.add('dark-theme');
+  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
+    messageBox.style.backgroundColor = '#151419';
+    svgObject.style.fill = '#fbfbfb';
   } else {
-    console.log("Світла");
-    messageBox.classList.remove('darkTheme');
-    messageBox.classList.add('lightTheme');
+    messageBox.style.backgroundColor = '#fbfbfb';
+    svgObject.style.fill = '#151419';
   }
 }
 
@@ -179,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
