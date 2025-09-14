@@ -71,6 +71,9 @@ h1{
   color: var(--text-color);
   outline: none;
 }
+.loginForm input.error{
+  border: 0.22vmin solid #f5332c;
+}
 
 .loginForm button{
   background-color: var(--text-color);
