@@ -23,11 +23,10 @@ function errorButton(){
     const button = document.querySelector('#loginButton');
     inputOne.classList.add('error');
     inputTwo.classList.add('error');
-    button.classList.remove('loginButton');
+    button.style.pointerEvents = 'none';
     setTimeout(() => {
         inputOne.classList.remove('error');
         inputTwo.classList.remove('error');
-        button.classList.add('loginButton');
     }, 1000);
 }
 
@@ -211,6 +210,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
