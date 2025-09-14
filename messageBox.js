@@ -19,7 +19,7 @@ const messageBoxStyles = `
     height: 7%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    /*transition: background-color 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;*/
+    transition: background-color 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
   }
   #message-box p{
@@ -29,6 +29,12 @@ const messageBoxStyles = `
     margin: 0;
     opacity: 0;
   }
+  #message-box.lightTheme {
+    background-color: #fbfbfb;
+  }
+  #message-box.darkTheme {
+    background-color: #151419;
+  }
   #message-box.show-message-box {
     width: 45%;
     opacity: 1;
@@ -133,22 +139,21 @@ export function MessageText(text, status = 'default') {
 
 // Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
 function FonColor() {
-  const messageBox = document.getElementById('message-box');
-  const svgObject = document.querySelector('#message-icon svg');
-  if (!messageBox || !svgObject) {
-    return;
-  }
+  const messageBox = document.getElementById('message-box');
+  if (!messageBox) return;
 
-  const toggleSchedule = document.getElementById('toggle-schedule');
-  const toggleJournal = document.getElementById('toggle-journal');
-  
-  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
-    messageBox.style.backgroundColor = '#151419';
-    svgObject.style.fill = '#fbfbfb';
-  } else {
-    messageBox.style.backgroundColor = '#fbfbfb';
-    svgObject.style.fill = '#151419';
-  }
+  const toggleSchedule = document.getElementById('toggle-schedule');
+  const toggleJournal = document.getElementById('toggle-journal');
+
+  if (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked) {
+    console.log("Темна");
+    messageBox.classList.remove('lightTheme');
+    messageBox.classList.add('darkTheme');
+  } else {
+    console.log("Світла");
+    messageBox.classList.remove('darkTheme');
+    messageBox.classList.add('lightTheme');
+  }
 }
 
 // Запускаємо логіку, коли DOM повністю завантажено
@@ -166,20 +171,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
