@@ -22,7 +22,8 @@ const messageBoxStyles = `
     top: 3vmin;
     width: 0%;
     height: 7%;
-    padding-left: 7%;
+    padding-left: 3%;
+    padding-right: 3%;
     border-radius: 50px 0 0 50px;
     gap: 5%;
     opacity: 0;
@@ -35,7 +36,7 @@ const messageBoxStyles = `
     padding-bottom: 2.5%;
   }
   #message-text p{
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -158,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
