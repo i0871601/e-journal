@@ -20,11 +20,14 @@ const messages = {
 function errorButton(){
     const inputOne = document.querySelector('#lastName');
     const inputTwo = document.querySelector('#password');
+    const button = document.querySelector('.loginForm button');
     inputOne.classList.add('error');
     inputTwo.classList.add('error');
+    button.classList.remove('loginForm button');
     setTimeout(() => {
         inputOne.classList.remove('error');
         inputTwo.classList.remove('error');
+        button.classList.add('loginForm button');
     }, 1000);
 }
 
@@ -208,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
