@@ -27,7 +27,7 @@ function errorButton(){
     setTimeout(() => {
         inputOne.classList.remove('error');
         inputTwo.classList.remove('error');
-        button.classList.add('loginForm button');
+        button.classList.add('loginButton');
     }, 1000);
 }
 
@@ -211,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
