@@ -29,10 +29,10 @@ const messageBoxStyles = `
     margin: 0;
     opacity: 0;
   }
-  #message-box.light-theme {
+  #message-box.lightTheme {
     background-color: #fbfbfb;
   }
-  #message-box.dark-theme {
+  #message-box.darkTheme {
     background-color: #151419;
   }
   #message-box.show-message-box {
@@ -159,8 +159,8 @@ function FonColor() {
     messageBox.classList.add('dark-theme');
   } else {
     console.log("Світла");
-    messageBox.classList.remove('dark-theme');
-    messageBox.classList.add('light-theme');
+    messageBox.classList.remove('darkTheme');
+    messageBox.classList.add('lightTheme');
   }
 }
 
@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
