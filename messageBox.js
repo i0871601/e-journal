@@ -145,7 +145,7 @@ function FonColor() {
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
 
-  if (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked) {
+  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
     console.log("Темна");
     messageBox.classList.remove('lightTheme');
     messageBox.classList.add('darkTheme');
@@ -171,3 +171,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
