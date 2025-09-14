@@ -18,9 +18,14 @@ const messages = {
   passwordUpdateError: "Не вдалося оновити пароль.",
 };
 function errorButton(){
-    const inputForm = document.querySelector('.loginForm input');
-    inputForm.classList.add('error');
-    setTimeout(() => {inputForm.classList.remove('error');}, 700);
+    const inputOne = document.querySelector('#lastName');
+    const inputTwo = document.querySelector('#password');
+    inputOne.classList.add('error');
+    inputTwo.classList.add('error');
+    setTimeout(() => {
+        inputOne.classList.remove('error');
+        inputTwo.classList.remove('error');
+    }, 1000);
 }
 
 const button = document.getElementById('loginButton');
@@ -203,6 +208,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
