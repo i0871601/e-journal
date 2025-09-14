@@ -26,9 +26,13 @@ const messageBoxStyles = `
     overflow: hidden;
     padding: 0;
     margin: 0;
+    opacity: 0;
   }
   #message-box.show-message-box {
     width: 45%;
+    opacity: 1;
+  }
+  #message-box p.show-message-box {
     opacity: 1;
   }
   #message-icon{
@@ -104,9 +108,11 @@ export function MessageText(text, status = 'default') {
       const contimg = document.getElementById('message-icon');//тут поки для тестування пізніше перенесем до логіки коли статус помилка
       contimg.style.display = 'flex'; //тут поки для тестування пізніше перенесем до логіки коли статус помилка
       messageBox.classList.add('show-message-box');
+      pTag.classList.add('show-message-box');
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
+        pTag.classList.add('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
         if (pTag) {
           pTag.textContent = '';
@@ -145,4 +151,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
