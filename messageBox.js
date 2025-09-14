@@ -19,6 +19,7 @@ const messageBoxStyles = `
     height: 7%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
   }
   #message-box p{
@@ -28,11 +29,17 @@ const messageBoxStyles = `
     margin: 0;
     opacity: 0;
   }
+  #message-box.light-theme {
+    background-color: #fbfbfb;
+  }
+  #message-box.dark-theme {
+    background-color: #151419;
+  }
   #message-box.show-message-box {
     width: 45%;
     opacity: 1;
   }
-  #message-box p.show-message-box {
+  #message-box.show-message-box #message-box p {
     opacity: 1;
   }
   #message-icon{
@@ -45,7 +52,14 @@ const messageBoxStyles = `
   #message-icon svg{
     height: 80%;
     width: auto;
+    transition: fill 0.5s ease-in-out;
   }
+  #message-box.light-theme #message-icon svg {
+    fill: #151419; /* Колір іконки для світлого фону */
+  }
+  #message-box.dark-theme #message-icon svg {
+    fill: #fbfbfb; /* Колір іконки для темного фону */
+  }
   #message-icon.show-message-box{
     display: flex;
     opacity: 1;
@@ -116,11 +130,9 @@ export function MessageText(text, status = 'default') {
       const contimg = document.getElementById('message-icon');//тут поки для тестування пізніше перенесем до логіки коли статус помилка
       contimg.classList.add('show-message-box'); //тут поки для тестування пізніше перенесем до логіки коли статус помилка
       messageBox.classList.add('show-message-box');
-      pTag.classList.add('show-message-box');
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
-        pTag.classList.remove('show-message-box');
         contimg.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error'); //тут поки для тестування
         if (pTag) {
@@ -135,15 +147,19 @@ export function MessageText(text, status = 'default') {
 function FonColor() {
   const messageBox = document.getElementById('message-box');
   if (!messageBox) return;
+
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
-
-  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
-    messageBox.style.backgroundColor = '#151419';
+  
+  const isDarkTheme = (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked);
+  if (isDarkTheme) {
+    messageBox.classList.remove('light-theme');
+    messageBox.classList.add('dark-theme');
   } else {
-      messageBox.style.backgroundColor = '#fbfbfb';
+    messageBox.classList.remove('dark-theme');
+    messageBox.classList.add('light-theme');
   }
-} 
+}
 
 // Запускаємо логіку, коли DOM повністю завантажено
 document.addEventListener('DOMContentLoaded', () => {
@@ -160,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
