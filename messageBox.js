@@ -22,7 +22,9 @@ const messageBoxStyles = `
     top: 3vmin;
     width: 0%;
     height: 7%;
-    padding-left: 3%;
+    padding-left: 7%;
+    border-radius: 50px 0 0 50px;
+    gap: 5%;
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
@@ -47,7 +49,6 @@ const messageBoxStyles = `
   #message-icon{
     display: none;
     align-items: center;
-    justify-content: space-around;
     height: 100%;
     width: 50px;
     opacity: 0;
@@ -155,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
