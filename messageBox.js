@@ -16,6 +16,7 @@ const messageBoxStyles = `
   #message-box {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-around;
     /*background-color: #151419;*/
     position: absolute;
     right: 0;
@@ -25,7 +26,7 @@ const messageBoxStyles = `
     padding-left: 3%;
     padding-right: 3%;
     border-radius: 50px 0 0 50px;
-    gap: 5%;
+    /*gap: 5%;*/
     opacity: 0;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
@@ -159,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
