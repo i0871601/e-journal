@@ -152,12 +152,13 @@ function FonColor() {
   const toggleJournal = document.getElementById('toggle-journal');
   
   const isDarkTheme = (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked);
+
   if (isDarkTheme) {
-    messageBox.classList.add('dark-theme');
     messageBox.classList.remove('light-theme');
+    messageBox.classList.add('dark-theme');
   } else {
-    messageBox.classList.add('light-theme');
     messageBox.classList.remove('dark-theme');
+    messageBox.classList.add('light-theme');
   }
 }
 
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
