@@ -30,7 +30,7 @@ const messageBoxStyles = `
     opacity: 0;
   }
   #message-box.show-message-box {
-    width: 35%;
+    width: 25%;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -149,5 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
