@@ -17,6 +17,11 @@ const messages = {
   passwordUpdateSuccess: "Пароль успішно оновлено!",
   passwordUpdateError: "Не вдалося оновити пароль.",
 };
+function errorButton(){
+    const inputForm = document.querySelector('.loginForm input');
+    inputForm.classList.add('error');
+    setTimeout(() => {inputForm.classList.remove('error');}, 700);
+}
 
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
@@ -197,6 +202,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
