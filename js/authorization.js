@@ -27,6 +27,7 @@ function errorButton(){
     setTimeout(() => {
         inputOne.classList.remove('error');
         inputTwo.classList.remove('error');
+        button.style.pointerEvents = 'auto';
     }, 1000);
 }
 
@@ -210,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
