@@ -121,7 +121,7 @@ export function MessageText(text, status = 'default') {
 function FonColor() {
   const messageBox = document.getElementById('message-box');
   const svgObject = document.querySelector('#message-icon svg');
-  const pText = messageTextElement.querySelector('#message-text p');
+  const pText = document.querySelector('#message-text p');
   if (!messageBox || !svgObject) {
     return;
   }
@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
