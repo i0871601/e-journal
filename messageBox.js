@@ -154,9 +154,11 @@ function FonColor() {
   const isDarkTheme = (toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked);
 
   if (isDarkTheme) {
+    console.log("Темна");
     messageBox.classList.remove('light-theme');
     messageBox.classList.add('dark-theme');
   } else {
+    console.log("Світла");
     messageBox.classList.remove('dark-theme');
     messageBox.classList.add('light-theme');
   }
@@ -177,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
