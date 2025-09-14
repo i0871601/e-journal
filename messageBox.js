@@ -11,7 +11,7 @@ const messageBoxStyles = `
   #message-box {
     display: flex;
     flex-direction: row-reverse;
-    background-color: #151419;
+    /*background-color: #151419;*/
     position: absolute;
     right: 0;
     top: 3vmin;
@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
