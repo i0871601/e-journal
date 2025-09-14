@@ -123,6 +123,7 @@ async function handleLogin(lastName, password) {
             showPasswordUpdateForm(data.message);
         } else {
             saveSessionData(data);
+            window.location.href = "Home.html";
         }
     } catch (error) {
         MessageText(messages.loginError);
@@ -200,6 +201,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
