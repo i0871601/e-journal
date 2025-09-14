@@ -3,7 +3,7 @@ import { getUserData } from './js/config.js';
 
 const messageBoxHTML = `
   <div id="message-box">
-    <div id="message-text"></div>
+    <div id="message-text"><p></p></div>
     <div id="message-icon">
       <?xml version="1.0" encoding="utf-8"?>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="131.054 296.302 695.635 369.199" width="695.635pt" height="369.199pt">
@@ -99,10 +99,6 @@ export function MessageText(text, status = 'default') {
 
     if (messageTextElement) {
       let pTag = messageTextElement.querySelector('p');
-      if (!pTag) {
-        pTag = document.createElement('p');
-        messageTextElement.appendChild(pTag);
-      }
       pTag.textContent = text;
 
       messageBox.classList.add('show-message-box');
@@ -163,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
