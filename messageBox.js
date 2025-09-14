@@ -153,8 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleJournal.addEventListener('change', FonColor);
     }
 });
-
 export {FonColor};
 
-export {FonColor};
 
