@@ -71,13 +71,10 @@ h1{
   color: var(--text-color);
   outline: none;
 }
-.loginForm input.error{
+#lastName.error{
   border: 0.22vmin solid #f5332c;
 }
-.loginForm input.error #lastName{
-  border: 0.22vmin solid #f5332c;
-}
-.loginForm input.error #password{
+#password.error{
   border: 0.22vmin solid #f5332c;
 }
 
