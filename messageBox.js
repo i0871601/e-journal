@@ -96,8 +96,6 @@ export function MessageText(text, status = 'default') {
       if (!pTag) {
         pTag = document.createElement('p');
         messageTextElement.appendChild(pTag);
-      } else {
-        pTag.textContent = '';
       }
       pTag.textContent = text;
 
@@ -109,6 +107,7 @@ export function MessageText(text, status = 'default') {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
       }, 3000);
+      setTimeout(() =>{ if(pTag) {pTag.textContent = '';}}, 300);
     }
   }
 }
@@ -143,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
