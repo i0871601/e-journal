@@ -30,10 +30,10 @@ const messageBoxStyles = `
     opacity: 0;
   }
   #message-box.light-theme {
-    background-color: #fbfbfb;
+    background-color: #151419;
   }
   #message-box.dark-theme {
-    background-color: #151419;
+    background-color: #fbfbfb;
   }
   #message-box.show-message-box {
     width: 45%;
@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
