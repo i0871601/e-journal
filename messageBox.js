@@ -79,8 +79,11 @@ async function loadSvg(url, containerId) {
       container.innerHTML = svgCode;
     }
   } catch (error) {
-    //добавляє тег р в контейнер message-icon якому написано слово Error
-    console.error('Помилка завантаження SVG:', error);
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<p style="color:red; font-size:12px;">Error</p>`;
+      console.error('Помилка завантаження SVG:', error);
+    }
   }
 }
 
@@ -157,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
