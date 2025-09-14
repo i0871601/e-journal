@@ -31,6 +31,8 @@ const messageBoxStyles = `
   }
   #message-text{
     display: flex;
+    align-items: center;
+    padding-bottom: 2.5%;
   }
   #message-text p{
     white-space: nowrap;
@@ -156,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
