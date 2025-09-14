@@ -112,7 +112,7 @@ export function MessageText(text, status = 'default') {
 // Функція для зміни кольору фону message-box, тепер залежить від результату getUserData()
 function FonColor() {
   const messageBox = document.getElementById('message-box');
-  const svgObject = document.querySelector('#message-icon svg');
+  const svgObject = document.getElementById('message-icon');
   if (!messageBox || !svgObject) {
     return;
   }
@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
