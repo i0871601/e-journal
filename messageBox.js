@@ -116,7 +116,7 @@ function FonColor() {
   const toggleSchedule = document.getElementById('toggle-schedule');
   const toggleJournal = document.getElementById('toggle-journal');
   
-  if (toggleSchedule.checked || toggleJournal.checked) {
+  if ((toggleSchedule && toggleSchedule.checked) || (toggleJournal && toggleJournal.checked)) {
     messageBox.style.backgroundColor = '#151419';
     // Примітка: 'style.fill' не працює для background-image, тому цей рядок краще видалити
     // svgObject.style.fill = '#fbfbfb'; 
@@ -149,3 +149,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
