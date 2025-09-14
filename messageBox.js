@@ -99,8 +99,8 @@ export function MessageText(text, status = 'default') {
       }
       pTag.textContent = text;
 
-      const contimg = document.getElementById('message-icon');
-      contimg.style.display = 'flex';
+      //const contimg = document.getElementById('message-icon');
+      //contimg.style.display = 'flex';
       messageBox.classList.add('show-message-box');
       
       messageBoxTimeoutId = setTimeout(() => {
@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export {FonColor};
+
 
 
 
