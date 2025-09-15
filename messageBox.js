@@ -63,6 +63,7 @@ const messageBoxStyles = `
     box-sizing: content-box;
   }
   #message-icon.box-error{
+    display: flex;
     opacity: 1;
   }
   
@@ -99,7 +100,7 @@ export function MessageText(message) {
     const boxImage = document.getElementById('message-icon');
     
     if (status == 'success') {
-      //тут зміні чи дії
+      boxImage.style.display = 'none';
     } else if (status == 'error') {
       boxImage.classList.add('box-error');
     }
@@ -169,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
