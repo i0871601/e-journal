@@ -57,8 +57,10 @@ export function closeAllDropdowns() {
 function setupScrollHover(listElement) {
     const activeClass = 'active-li';
     const listItems = listElement.querySelectorAll('li');
-    listItems.forEach(item => item.classList.remove(activeClass));
+    const itemHeight = listItems.length > 0 ? listItems[0].clientHeight : 0;
 
+    listItems.forEach(item => item.classList.remove(activeClass));
+    
     if (listItems.length > 0) {
         listItems[0].classList.add(activeClass);
     }
@@ -75,41 +77,37 @@ function setupScrollHover(listElement) {
             }
         });
     });
-    let isScrolling;
 
+    let isScrolling;
+    let lastScrollTop = listElement.scrollTop;
+    
     listElement.addEventListener('scroll', () => {
         window.clearTimeout(isScrolling);
+        
+        const currentScrollTop = listElement.scrollTop;
+        const scrollDirection = currentScrollTop > lastScrollTop ? 1 : -1;
+        const targetScrollTop = Math.round(currentScrollTop / itemHeight) * itemHeight;
+        
         listItems.forEach(item => item.classList.remove(activeClass));
         
         isScrolling = setTimeout(() => {
+            listElement.scrollTo({
+                top: targetScrollTop,
+                behavior: 'smooth'
+            });
             const bestMatch = findBestMatch(listElement);
             if (bestMatch) {
                 bestMatch.classList.add(activeClass);
             }
+            
+            lastScrollTop = listElement.scrollTop;
         }, 50);
     });
     
     function findBestMatch(listElement) {
-        const listItems = listElement.querySelectorAll('li');
-        const containerHeight = listElement.clientHeight;
         const containerScrollTop = listElement.scrollTop;
-        
-        let bestMatch = null;
-        let minDistance = Infinity;
-
-        listItems.forEach(item => {
-            const itemTop = item.offsetTop - containerScrollTop;
-            const itemBottom = itemTop + item.clientHeight;
-            const distanceFromTop = Math.abs(itemTop);
-            const distanceFromBottom = Math.abs(itemBottom - containerHeight);
-            const minEdgeDistance = Math.min(distanceFromTop, distanceFromBottom);
-
-            if (minEdgeDistance < minDistance) {
-                minDistance = minEdgeDistance;
-                bestMatch = item;
-            }
-        });
-        return bestMatch;
+        const closestIndex = Math.round(containerScrollTop / itemHeight);
+        return listItems[closestIndex] || null;
     }
 }
 
@@ -298,3 +296,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
