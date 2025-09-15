@@ -64,7 +64,7 @@ body{
   font-family: 'SourceSans3';
   position: relative;
 }
-#Select-Subject.click-button, #ClassTeacher.click-button, #lessonTypeInput.click-button,{
+.click-button{
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 #subject-button, #Class-button,  #lessonType-Button{
@@ -150,6 +150,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
