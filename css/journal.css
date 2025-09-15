@@ -108,6 +108,10 @@ body{
     color: var(--fon-color);
     background-color: var(--color-accent-shadow);
 }
+.dropdown-list li.active-li {
+    color: var(--fon-color);
+    background-color: var(--color-accent-shadow);
+}
 .dropdown-list li:first-child:hover{
   border-radius: 1.5vmin 1.5vmin 0 0;
 }
@@ -150,6 +154,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
