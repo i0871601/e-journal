@@ -3,6 +3,7 @@
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
   --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.7);
   --color1: #1b1b1e;
   --color2: #262626;
   --text-color: #878787;
@@ -101,18 +102,18 @@ body{
 .dropdown-list li {
     padding: 1vmin;
     cursor: pointer;
-    border-bottom: 0.1rem solid transparent;
 }
 
 .dropdown-list li:hover {
-    /*border-radius: 1.5vmin;
-    background-color: var(--color1);
-    color: var(--text-color);*/
-    color: var(--color-accent);
-    border-bottom: 0.1rem solid var(--color-accent);
+    background-color: var(--color-accent-shadow);
+    color: var(--text-color);
+    border-radius: 1.5vmin;
+}
+.dropdown-list li:first-child:hover{
+  border-radius: 1.5vmin 1.5vmin 0 0;
 }
 .dropdown-list li:last-child:hover{
-  border-bottom: 0.1rem solid transparent;
+  border-radius: 0 0 1.5vmin 1.5vmin;
 }
 
 #ClassTeacher{
@@ -150,6 +151,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
