@@ -51,7 +51,7 @@ function setupToggle(buttonElement, listElement) {
     
     // Перевіряємо, чи існує батьківський елемент
     if (!parentContainer) {
-        console.error("Помилка: Не знайдено батьківський елемент кнопки.");
+        console.log("Помилка: Не знайдено батьківський елемент кнопки.");
         return;
     }
 
@@ -225,6 +225,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
