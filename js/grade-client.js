@@ -1,5 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 import { request } from './config.js';
+import { closeAllDropdowns } from './dropdown-handler.js'; 
 
 export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, refreshJournalCallback) => {
     const contentContainer = document.getElementById("GradeOfJournal");
@@ -68,6 +69,9 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
             const isListVisible = lessonTypeList.style.display === 'block';
+            if (!isListVisible) {
+                closeAllDropdowns();
+            }
             lessonTypeList.style.display = isListVisible ? 'none' : 'block';
 
             // Додаємо/видаляємо клас на батьківському контейнері
