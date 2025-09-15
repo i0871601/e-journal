@@ -10,12 +10,12 @@ import { API_URL_AUTHORIZATION } from './config.js';
 import { MessageText } from '../messageBox.js';
 
 const messages = {
-  loginSuccess: "Успішний вхід!",
-  loginError: "Помилка: невірний логін чи пароль.",
-  fieldsEmpty: "Будь ласка, заповніть всі поля.",
-  passwordMismatch: "Паролі не співпадають або поле порожнє.",
-  passwordUpdateSuccess: "Пароль успішно оновлено!",
-  passwordUpdateError: "Не вдалося оновити пароль.",
+  loginSuccess: {status: 'success', text: "Успішний вхід!"},
+  loginError: {status: 'error', text: "Помилка: невірний логін чи пароль."},
+  fieldsEmpty: {statu: 'error', text: "Будь ласка, заповніть всі поля."},
+  passwordMismatch: {status: 'error', text: "Паролі не співпадають або поле порожнє."},
+  passwordUpdateSuccess: {status: 'success', text: "Пароль успішно оновлено!"},
+  passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}
 };
 function errorButton(){
     const inputOne = document.querySelector('#lastName');
@@ -211,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
