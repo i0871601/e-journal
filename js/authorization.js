@@ -1,8 +1,8 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
-        console.clear();
         sessionStorage.clear();
+        console.clear();
     }
 });
 
@@ -211,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
