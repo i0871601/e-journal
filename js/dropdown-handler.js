@@ -57,55 +57,70 @@ export function closeAllDropdowns() {
 function setupScrollHover(listElement) {
     const activeClass = 'active-li';
     const listItems = listElement.querySelectorAll('li');
-    const itemHeight = listItems.length > 0 ? listItems[0].clientHeight : 0;
+    if (listItems.length === 0) return;
 
+    const itemHeight = listItems[0].clientHeight;
+    
     listItems.forEach(item => item.classList.remove(activeClass));
     
     if (listItems.length > 0) {
         listItems[0].classList.add(activeClass);
     }
+    
+    let isScrollingProgrammatically = false;
+    let isMouseOrTouchDown = false;
+
+    listElement.addEventListener('mousedown', () => isMouseOrTouchDown = true);
+    listElement.addEventListener('touchstart', () => isMouseOrTouchDown = true);
+    listElement.addEventListener('mouseup', () => isMouseOrTouchDown = false);
+    listElement.addEventListener('touchend', () => isMouseOrTouchDown = false);
+    listElement.addEventListener('mouseleave', () => isMouseOrTouchDown = false);
+
     listElement.addEventListener('mouseover', (event) => {
-        listItems.forEach(item => item.classList.remove(activeClass));
-        event.target.classList.add(activeClass);
-    });
-    listElement.addEventListener('mouseout', () => {
-        const bestMatch = findBestMatch(listElement);
-        listItems.forEach(item => {
-            item.classList.remove(activeClass);
-            if (item === bestMatch) {
-                item.classList.add(activeClass);
-            }
-        });
+        if (!isScrollingProgrammatically) {
+            listItems.forEach(item => item.classList.remove(activeClass));
+            event.target.classList.add(activeClass);
+        }
     });
 
-    let isScrolling;
-    let lastScrollTop = listElement.scrollTop;
-    
     listElement.addEventListener('scroll', () => {
-        window.clearTimeout(isScrolling);
-        
-        const currentScrollTop = listElement.scrollTop;
-        const scrollDirection = currentScrollTop > lastScrollTop ? 1 : -1;
-        const targetScrollTop = Math.round(currentScrollTop / itemHeight) * itemHeight;
-        
-        listItems.forEach(item => item.classList.remove(activeClass));
-        
-        isScrolling = setTimeout(() => {
-            listElement.scrollTo({
-                top: targetScrollTop,
-                behavior: 'smooth'
-            });
-            const bestMatch = findBestMatch(listElement);
-            if (bestMatch) {
-                bestMatch.classList.add(activeClass);
+        if (!isScrollingProgrammatically) {
+            if (isMouseOrTouchDown) {
+                 listItems.forEach(item => item.classList.remove(activeClass));
             }
             
-            lastScrollTop = listElement.scrollTop;
-        }, 50);
+            window.clearTimeout(scrollTimer);
+
+            scrollTimer = setTimeout(() => {
+                const targetScrollTop = Math.round(listElement.scrollTop / itemHeight) * itemHeight;
+                isScrollingProgrammatically = true;
+                listElement.scrollTo({
+                    top: targetScrollTop,
+                    behavior: 'smooth'
+                });
+                
+                setTimeout(() => {
+                    isScrollingProgrammatically = false;
+                    const bestMatch = findBestMatch(listElement);
+                    if (bestMatch) {
+                        listItems.forEach(item => item.classList.remove(activeClass));
+                        bestMatch.classList.add(activeClass);
+                    }
+                }, 200);
+            }, 50);
+        }
     });
     
     function findBestMatch(listElement) {
+        const listItems = listElement.querySelectorAll('li');
+        if (listItems.length === 0) return null;
+
+        const itemHeight = listItems[0].clientHeight;
         const containerScrollTop = listElement.scrollTop;
+        const maxScrollTop = listElement.scrollHeight - listElement.clientHeight;
+        if (containerScrollTop >= maxScrollTop) {
+            return listItems[listItems.length - 1];
+        }
         const closestIndex = Math.round(containerScrollTop / itemHeight);
         return listItems[closestIndex] || null;
     }
@@ -296,4 +311,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
