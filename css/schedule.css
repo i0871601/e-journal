@@ -3,6 +3,7 @@
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
   --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.25);
   --color1: #1b1b1e;
   --color2: #262626;
   --text-color: #878787;
@@ -34,7 +35,7 @@
     width: clamp(300px, 30vmin, 300px);
     border: 0;
     border-radius: 15vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--color1);
+    box-shadow: 0 0 0.5vmin var(--text-color);
     padding: 0.3vmin;
     padding-left: 0.9vmin;
     font-family: 'SourceSans3';
@@ -67,7 +68,7 @@
     background-color: var(--fon-color-2);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--color1);
+    box-shadow: 0 0 0.5vmin var(--color-accent);
     position: absolute;
 }
 #Days.visible {
@@ -80,8 +81,14 @@
 }
 
 #Days li:hover {
-    border-radius: 1.5vmin;
-    background-color: var(--text-color);
+    color: var(--fon-color);
+    background-color: var(--color-accent-shadow);
+}
+#Days li:first-child:hover{
+  border-radius: 1.5vmin 1.5vmin 0 0;
+}
+#Days li:last-child:hover{
+  border-radius: 0 0 1.5vmin 1.5vmin;
 }
 
 @font-face{
@@ -90,6 +97,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
