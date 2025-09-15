@@ -112,7 +112,7 @@ body{
     border-bottom: 0.1rem solid var(--color-accent);
 }
 .dropdown-list li:last-child:hover{
-  border: 0;
+  border-bottom: 0.1rem solid transparent;
 }
 
 #ClassTeacher{
@@ -150,6 +150,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
