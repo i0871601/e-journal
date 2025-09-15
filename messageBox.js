@@ -117,7 +117,7 @@ export function MessageText(text, status = 'default') {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
       }, 3000);
-      if (pTag) {pTag.textContent = '';}
+      pTag.textContent = '';
     }
   }
 }
@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
