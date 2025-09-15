@@ -92,14 +92,15 @@ function initializeMessageBox() {
 export function MessageText(message) {
   const text = message.text;
   const status = message.status || 'default';
+  console.log(text, status);
   const messageBox = document.getElementById('message-box');
   if (messageBox) {
     const messageTextElement = document.getElementById('message-text');
     const boxImage = document.getElementById('message-icon');
     
-    if (status === 'success') {
+    if (status == 'success') {
       //тут зміні чи дії
-    } else if (status === 'error') {
+    } else if (status == 'error') {
       boxImage.classList.add('box-error');
     }
 
@@ -151,8 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const user = getUserData();
     if(user){
-      const textIDuser = `Увійшов ${user.firstName} ${user.lastName}`;
-      setTimeout(() => { MessageText(textIDuser, 'success');}, 2000);
+      const textIDuser = {status:'success', text: `Увійшов ${user.firstName} ${user.lastName}`};
+      setTimeout(() => { MessageText(textIDuser);}, 2000);
     }
 
     // Отримання посилань на перемикачі
@@ -168,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
