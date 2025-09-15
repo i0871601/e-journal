@@ -21,14 +21,15 @@ const messageBoxStyles = `
     position: absolute;
     right: 0;
     top: 3vmin;
-    width: 0%;
+    width: auto;
+    max-width: 0;
     height: 50px;
     padding-left: 3%;
     padding-right: 3%;
     border-radius: 1000px 0 0 1000px;
     gap: 5%;
     opacity: 0;
-    transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
+    transition: max-width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
   }
   #message-text{
@@ -44,7 +45,7 @@ const messageBoxStyles = `
     opacity: 0;
   }
   #message-box.show-message-box {
-    width: 27%;
+    max-width: 100%;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -66,7 +67,10 @@ const messageBoxStyles = `
     }
   @media (orientation: portrait){
     #message-box{
+      width: 0%;
+      max-width: auto;
       height: clamp(50px, 10vmin, 100px);
+      transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     }
     #message-box.show-message-box{
       width: 87%; 
@@ -168,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
