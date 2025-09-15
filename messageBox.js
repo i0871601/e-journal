@@ -43,6 +43,7 @@ const messageBoxStyles = `
     padding: 0;
     margin: 0;
     opacity: 0;
+    transition: opacity 0.7s ease-in-out;
   }
   #message-box.show-message-box {
     max-width: 100vw;
@@ -57,6 +58,7 @@ const messageBoxStyles = `
     height: 100%;
     width: clamp(40px, 8vmin, 90px);
     opacity: 0;
+    transition: opacity 0.7s ease-in-out;
   }
   #message-icon svg{
     box-sizing: content-box;
@@ -173,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
