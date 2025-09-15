@@ -26,7 +26,7 @@ const messageBoxStyles = `
     padding-left: 5.5vmin;
     padding-right: 3vmin;
     border-radius: 1000px 0 0 1000px;
-    gap: 5vmin;
+    /*gap: 5vmin;*/
     opacity: 0;
     transition: max-width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
