@@ -17,17 +17,16 @@ const messageBoxStyles = `
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    /*background-color: #151419;*/
     position: absolute;
     right: 0;
     top: 3vmin;
     width: auto;
     max-width: 0;
     height: 50px;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 5.5vmin;
+    padding-right: 3vmin;
     border-radius: 1000px 0 0 1000px;
-    gap: 5%;
+    gap: 5vmin;
     opacity: 0;
     transition: max-width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
@@ -174,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
