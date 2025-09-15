@@ -62,7 +62,7 @@ const messageBoxStyles = `
   #message-icon svg{
     box-sizing: content-box;
   }
-  #message-box.show-message-box #message-icon{
+  #message-icon.box-error{
     opacity: 1;
   }
   
@@ -89,17 +89,18 @@ function initializeMessageBox() {
   bodyElement.insertAdjacentHTML('afterbegin', messageBoxHTML);
 }
 
-export function MessageText(text, status = 'default') {
+export function MessageText(message) {
+  const text = message.text;
+  const status = message.status || 'default';
   const messageBox = document.getElementById('message-box');
   if (messageBox) {
     const messageTextElement = document.getElementById('message-text');
-
-    messageBox.classList.remove('message-box--success', 'message-box--error');
-    // Логіка для зміни класів залежно від статусу (success/error)
+    const boxImage = document.getElementById('message-icon');
+    
     if (status === 'success') {
-      messageBox.classList.add('message-box--success');
+      //тут зміні чи дії
     } else if (status === 'error') {
-      messageBox.classList.add('message-box--error');
+      boxImage.classList.add('box-error');
     }
 
     if (messageBoxTimeoutId !== null) {
@@ -116,7 +117,7 @@ export function MessageText(text, status = 'default') {
 
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
-        messageBox.classList.remove('message-box--success', 'message-box--error');
+        boxImage.classList.remove('box-error');
       }, 3000);
     }
   }
@@ -167,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
