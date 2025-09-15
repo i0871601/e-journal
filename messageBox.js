@@ -70,7 +70,7 @@ const messageBoxStyles = `
   
   @media (orientation: portrait){
     #message-box{
-      height: clamp(50px, 10vmin, 100px);
+      height: clamp(45px, 10vmin, 100px);
     }
     #message-box.show-message-box{
       max-width: 87vw;
@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
