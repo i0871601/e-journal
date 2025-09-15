@@ -64,8 +64,8 @@ body{
   font-family: 'SourceSans3';
   position: relative;
 }
-#Selesect-Subject:hover, #ClassTeacher:hover, #lessonTypeInput:hover,
-#Selesect-Subject:active, #ClassTeacher:active, #lessonTypeInput:active{
+#Select-Subject:hover, #ClassTeacher:hover, #lessonTypeInput:hover,
+#Select-Subject:focus, #ClassTeacher:focus, #lessonTypeInput:focus{
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 #subject-button, #Class-button,  #lessonType-Button{
@@ -150,6 +150,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
