@@ -29,18 +29,12 @@
     <footer>
         <p>&copy; 2025, Сікан І.В.</p>
     </footer>
-    <script>
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted) {
-                sessionStorage.removeItem('userBase');
-                console.clear();
-            }
-        });
-    </script>
+    <script>sessionStorage.removeItem('userBase');console.clear();</script>
     <script src="./messageBox.js" type="module"></script>
     <script src="./js/authorization.js" type="module"></script>
 </body>
 </html>
+
 
 
 
