@@ -45,7 +45,7 @@ const messageBoxStyles = `
     opacity: 0;
   }
   #message-box.show-message-box {
-    max-width: 100%;
+    max-width: 100vw;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -112,6 +112,7 @@ export function MessageText(text, status = 'default') {
 
     if (messageTextElement) {
       let pTag = messageTextElement.querySelector('p');
+      pTag.textContent = '';
       pTag.textContent = text;
 
       messageBox.classList.add('show-message-box');
@@ -119,9 +120,9 @@ export function MessageText(text, status = 'default') {
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
-        if (pTag) {
-          pTag.textContent = '';
-        }
+        //if (pTag) {
+          //pTag.textContent = '';
+        //}
       }, 3000);
     }
   }
@@ -172,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
