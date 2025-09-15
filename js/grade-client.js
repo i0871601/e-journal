@@ -59,7 +59,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             
             // Видаляємо клас з батьківського контейнера при виборі елемента
             if (lessonTypeInputContainer) {
-                lessonTypeInputContainer.classList.remove('button-clicked');
+                lessonTypeInputContainer.classList.remove('click-button');
             }
         }
     });
@@ -73,9 +73,9 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             // Додаємо/видаляємо клас на батьківському контейнері
             if (lessonTypeInputContainer) {
                 if (!isListVisible) {
-                    lessonTypeInputContainer.classList.add('button-clicked');
+                    lessonTypeInputContainer.classList.add('click-button');
                 } else {
-                    lessonTypeInputContainer.classList.remove('button-clicked');
+                    lessonTypeInputContainer.classList.remove('click-button');
                 }
             }
         });
@@ -85,7 +85,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
                 lessonTypeList.style.display = 'none';
                 // Видаляємо клас, якщо користувач клікнув за межами
                 if (lessonTypeInputContainer) {
-                    lessonTypeInputContainer.classList.remove('button-clicked');
+                    lessonTypeInputContainer.classList.remove('click-button');
                 }
             }
         });
