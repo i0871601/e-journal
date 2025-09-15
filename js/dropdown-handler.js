@@ -47,33 +47,15 @@ function setupToggle(buttonElement, listElement) {
         return;
     }
 
-    const parentContainer = buttonElement.parentElement;
-    
-    // Перевіряємо, чи існує батьківський елемент
-    if (!parentContainer) {
-        console.log("Помилка: Не знайдено батьківський елемент кнопки.");
-        return;
-    }
-
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
+        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
         
-        const isListVisible = listElement.style.display === 'block';
-        listElement.style.display = isListVisible ? 'none' : 'block';
-
-        // Додаємо/видаляємо клас на батьківському елементі
-        if (!isListVisible) {
-            parentContainer.classList.add('click-button');
-        } else {
-            parentContainer.classList.remove('click-button');
-        }
     });
 
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
             listElement.style.display = 'none';
-            // Видаляємо клас на батьківському елементі при кліку за межами
-            parentContainer.classList.remove('click-button');
         }
     });
 }
@@ -225,6 +207,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
