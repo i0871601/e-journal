@@ -64,7 +64,7 @@ const messageBoxStyles = `
     box-sizing: content-box;
   }
   #message-icon.box-error{
-    width: clamp(40px, 8vmin, 90px);
+    width: clamp(43px, 5.5vw, 57px);
     opacity: 1;
   }
   
@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
