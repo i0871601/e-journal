@@ -66,7 +66,7 @@ const messageBoxStyles = `
     }
   @media (orientation: portrait){
     #message-box.show-message-box{
-      width: 95%; 
+      width: 87%; 
       opacity: 1;
     }
   }
@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
