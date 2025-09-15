@@ -64,7 +64,7 @@ const messageBoxStyles = `
     box-sizing: content-box;
   }
   #message-icon.box-error{
-    width: clamp(43px, 5.5vw, 57px);
+    width: 50px;
     opacity: 1;
   }
   
@@ -74,6 +74,9 @@ const messageBoxStyles = `
     }
     #message-box.show-message-box{
       max-width: 87vw;
+    }
+    #message-icon.box-error{
+      width: clamp(45px, 10vmin, 100px);
     }
   }
 `;
@@ -171,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
