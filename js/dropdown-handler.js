@@ -41,7 +41,7 @@ function populateDropdown(listElement, data, type) {
     });
 }
 
-function closeAllDropdowns() {
+export function closeAllDropdowns() {
     const allDropdowns = document.querySelectorAll('.dropdown-list');
     allDropdowns.forEach(dropdown => {
         dropdown.style.display = 'none';
@@ -244,6 +244,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
