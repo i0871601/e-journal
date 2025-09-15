@@ -54,7 +54,7 @@ const messageBoxStyles = `
     display: none;
     align-items: center;
     height: 100%;
-    width: 50px;
+    width: clamp(40px, 8vmin, 90px);
     opacity: 0;
   }
   #message-icon svg{
@@ -66,7 +66,7 @@ const messageBoxStyles = `
     }
   @media (orientation: portrait){
     #message-box.show-message-box{
-      width: 70%; 
+      width: 87%; 
       opacity: 1;
     }
   }
@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
