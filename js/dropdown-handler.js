@@ -224,7 +224,7 @@ export function initDropdown(userData) {
                 const refreshJournal = async () => {
                     const payload = {
                         action: 'journal',
-                        subject: selectedSubject,
+                        subject: selectedSubjectForTeacher,
                         className: className
                     };
                     const response = await request(payload);
@@ -249,3 +249,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
