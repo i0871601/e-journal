@@ -46,7 +46,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     const lessonTypeList = document.getElementById("lessonTypeList");
     const saveLessonButton = document.getElementById("saveLessonButton");
     const lessonTypeButton = document.getElementById("lessonType-Button");
-    const lessonTypeInputContainer = document.querySelectorAll(".container-all button-clicked"); // Зміни
+    const lessonTypeInputContainer = document.querySelectorAll(".container-all"); // Зміни
 
     lessonTypeList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
