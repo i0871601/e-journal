@@ -22,13 +22,13 @@ const messageBoxStyles = `
     right: 0;
     top: 3vmin;
     width: 0%;
-    height: 7%;
+    height: 50px;
     padding-left: 3%;
     padding-right: 3%;
     border-radius: 1000px 0 0 1000px;
     gap: 5%;
     opacity: 0;
-    transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: width 1.7s ease-in-out, opacity 1.7s ease-in-out;
     overflow: hidden;
   }
   #message-text{
@@ -65,6 +65,9 @@ const messageBoxStyles = `
     opacity: 1;
     }
   @media (orientation: portrait){
+    #message-box{
+      height: clamp(50px, 10vmin, 100px);
+    }
     #message-box.show-message-box{
       width: 87%; 
       opacity: 1;
@@ -165,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
