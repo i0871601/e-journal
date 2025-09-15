@@ -41,21 +41,47 @@ function populateDropdown(listElement, data, type) {
     });
 }
 
+function closeAllDropdowns() {
+  const allDropdowns = document.querySelectorAll('.dropdown-list');
+  allDropdowns.forEach(dropdown => {
+    dropdown.style.display = 'none';
+  });
+}
+
 function setupToggle(buttonElement, listElement) {
     if (!buttonElement || !listElement) {
         console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
         return;
     }
 
+    const parentContainer = buttonElement.parentElement;
+
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
         
+        const isListVisible = listElement.style.display === 'block';
+
+        // Крок 1: Закрийте всі інші випадаючі списки
+        if (!isListVisible) {
+            closeAllDropdowns();
+        }
+
+        // Крок 2: Відкрийте або закрийте поточний список
+        listElement.style.display = isListVisible ? 'none' : 'block';
+
+        // Керування класом
+        if (!isListVisible) {
+            parentContainer.classList.add('click-button');
+        } else {
+            parentContainer.classList.remove('click-button');
+        }
     });
 
+    // Обробник кліку за межами все ще потрібен, але тепер він також викликає закриття
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
             listElement.style.display = 'none';
+            parentContainer.classList.remove('click-button');
         }
     });
 }
@@ -207,6 +233,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
