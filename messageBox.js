@@ -53,7 +53,7 @@ const messageBoxStyles = `
     opacity: 1;
   }
   #message-icon{
-    display: none;
+    display: flex;
     align-items: center;
     height: 100%;
     width: clamp(40px, 8vmin, 90px);
@@ -66,7 +66,6 @@ const messageBoxStyles = `
     transition: opacity 0.7s ease-in-out;
   }
   #message-box.show-message-box #message-icon{
-    display: flex;
     opacity: 1;
     }
   #message-box.show-message-box #message-icon svg{
@@ -75,14 +74,8 @@ const messageBoxStyles = `
   
   @media (orientation: portrait){
     #message-box{
-      width: 0%;
-      max-width: auto;
+      width: 87%;
       height: clamp(50px, 10vmin, 100px);
-      transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
-    }
-    #message-box.show-message-box{
-      width: 87%; 
-      opacity: 1;
     }
   }
 `;
@@ -181,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
