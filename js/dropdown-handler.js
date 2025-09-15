@@ -98,6 +98,11 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
             listElement.style.display = 'none';
+
+            const buttonElement = listElement.previousElementSibling;
+            if (buttonElement && buttonElement.parentElement) {
+                buttonElement.parentElement.classList.remove('click-button');
+            }
             await onSelectCallback(selectedText, event.target.dataset);
         }
     });
@@ -239,6 +244,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
