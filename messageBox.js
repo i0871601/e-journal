@@ -116,9 +116,8 @@ export function MessageText(text, status = 'default') {
       messageBoxTimeoutId = setTimeout(() => {
         messageBox.classList.remove('show-message-box');
         messageBox.classList.remove('message-box--success', 'message-box--error');
-        setTimeout(() =>{
-          if (pTag) {pTag.textContent = '';}},3100);
       }, 3000);
+      if (pTag) {pTag.textContent = '';}
     }
   }
 }
@@ -168,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
