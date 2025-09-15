@@ -3,7 +3,7 @@
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
   --color-accent: #f56e0f;
-  --color-accent-shadow: rgba(245, 110, 15, 0.5);
+  --color-accent-shadow: rgba(245, 110, 15, 0.25);
   --color1: #1b1b1e;
   --color2: #262626;
   --text-color: #878787;
@@ -150,6 +150,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
