@@ -28,7 +28,7 @@ const messageBoxStyles = `
     border-radius: 1000px 0 0 1000px;
     gap: 5%;
     opacity: 0;
-    transition: width 0.5s ease-in-out, opacity 1.0s ease-in-out;
+    transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
   }
   #message-text{
@@ -44,7 +44,7 @@ const messageBoxStyles = `
     opacity: 0;
   }
   #message-box.show-message-box {
-    width: 27%;
+    width: auto;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
