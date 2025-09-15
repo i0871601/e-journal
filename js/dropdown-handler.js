@@ -196,6 +196,7 @@ export function initDropdown(userData) {
         }
 
     } else if (role === 'teacher') {
+        const subjectContainer = document.getElementById("Select-Subject");
         const listElement = document.getElementById("subject-list");
         const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#subject-button p");
@@ -203,53 +204,48 @@ export function initDropdown(userData) {
         const classButtonElement = document.getElementById("Class-button");
         const classButtonTextElement = document.querySelector("#Class-button p");
 
-        if (listElement && buttonElement && buttonTextElement && classListElement && classButtonElement && classButtonTextElement) {
+        if (subjectContainer && listElement && buttonElement && buttonTextElement && classListElement && classButtonElement && classButtonTextElement) {
             buttonTextElement.textContent = "Виберіть предмет";
-            const subjects = Object.keys(userData.data.data).map(s => ({ subject: s }));
-            populateDropdown(listElement, subjects, "subjects");
-            setupToggle(buttonElement, listElement);
+            const subjects = Object.keys(userData.data.data);
+
+            if (subjects.length === 1) {
+                const selectedSubject = subjects[0];
+                subjectContainer.style.display = 'none';
+                handleTeacherSubjectSelection(selectedSubject, null, userData);
+            } else {
+                subjectContainer.style.display = 'block';
+                populateDropdown(listElement, subjects.map(s => ({ subject: s })), "subjects");
+                setupToggle(buttonElement, listElement);
+                setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
+                    handleTeacherSubjectSelection(selectedSubject, dataset, userData);});
+            }
             setupToggle(classButtonElement, classListElement);
-
-            setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
-                handleTeacherSubjectSelection(selectedSubject, dataset, userData);
-                
-                setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
-                    const refreshJournal = async () => {
-                        const payload = {
-                            action: 'journal',
-                            subject: selectedSubject,
-                            className: className
-                        };
-                        const response = await request(payload);
-                        
-                        if (response && response.success) {
-                            console.log("Відправка до API:", payload);
-                            console.log(`Відповідь:`, response);
-                            
-                            const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
-                            displayFullJournal(response, updateGradeCallback); 
-                            setupAddLessonForm(selectedSubject, className, response, refreshJournal);
-                        } else {
-                            console.error("Помилка при отриманні журналу:", response.message);
-                        }
+            setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
+                const refreshJournal = async () => {
+                    const payload = {
+                        action: 'journal',
+                        subject: selectedSubject,
+                        className: className
                     };
-
-                    refreshJournal();
-                });
+                    const response = await request(payload);
+                        
+                    if (response && response.success) {
+                        console.log("Відправка до API:", payload);
+                        console.log(`Відповідь:`, response);
+                            
+                        const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
+                        displayFullJournal(response, updateGradeCallback); 
+                        setupAddLessonForm(selectedSubject, className, response, refreshJournal);
+                    } else {
+                        console.error("Помилка при отриманні журналу:", response.message);
+                    }
+                };
+                refreshJournal();
             });
-
+            
             console.log("Списки для вчителя заповнено та налаштовано.");
         } else {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
 }
-
-
-
-
-
-
-
-
-
