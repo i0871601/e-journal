@@ -12,7 +12,7 @@ import { MessageText } from '../messageBox.js';
 const messages = {
   loginSuccess: {status: 'success', text: "Успішний вхід!"},
   loginError: {status: 'error', text: "Помилка: невірний логін чи пароль."},
-  fieldsEmpty: {statu: 'error', text: "Будь ласка, заповніть всі поля."},
+  fieldsEmpty: {status: 'error', text: "Будь ласка, заповніть всі поля."},
   passwordMismatch: {status: 'error', text: "Паролі не співпадають або поле порожнє."},
   passwordUpdateSuccess: {status: 'success', text: "Пароль успішно оновлено!"},
   passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}
@@ -211,6 +211,7 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
 
 
 
