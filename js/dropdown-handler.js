@@ -59,58 +59,62 @@ function setupScrollHover(listElement) {
     const listItems = listElement.querySelectorAll('li');
     if (listItems.length === 0) return;
 
+    // Встановлюємо висоту елемента
     const itemHeight = listItems[0].clientHeight;
     
-    listItems.forEach(item => item.classList.remove(activeClass));
-    
-    if (listItems.length > 0) {
-        listItems[0].classList.add(activeClass);
-    }
-    
+    // Встановлюємо перший елемент активним при ініціалізації
+    const setInitialActive = () => {
+        listItems.forEach(item => item.classList.remove(activeClass));
+        if (listItems.length > 0) {
+            listItems[0].classList.add(activeClass);
+        }
+    };
+    setInitialActive();
+
+    let isMouseOver = false;
     let isScrollingProgrammatically = false;
-    let isMouseOrTouchDown = false;
-
-    listElement.addEventListener('mousedown', () => isMouseOrTouchDown = true);
-    listElement.addEventListener('touchstart', () => isMouseOrTouchDown = true);
-    listElement.addEventListener('mouseup', () => isMouseOrTouchDown = false);
-    listElement.addEventListener('touchend', () => isMouseOrTouchDown = false);
-    listElement.addEventListener('mouseleave', () => isMouseOrTouchDown = false);
-
+    let scrollTimeout;
+    
+    // Обробники для миші
     listElement.addEventListener('mouseover', (event) => {
         if (!isScrollingProgrammatically) {
+            isMouseOver = true;
             listItems.forEach(item => item.classList.remove(activeClass));
             event.target.classList.add(activeClass);
         }
     });
+    
+    listElement.addEventListener('mouseout', () => {
+        isMouseOver = false;
+    });
 
+    // Обробник скролу
     listElement.addEventListener('scroll', () => {
-        if (!isScrollingProgrammatically) {
-            if (isMouseOrTouchDown) {
-                 listItems.forEach(item => item.classList.remove(activeClass));
-            }
-            
-            window.clearTimeout(scrollTimer);
+        if (isScrollingProgrammatically || isMouseOver) return;
 
-            scrollTimer = setTimeout(() => {
-                const targetScrollTop = Math.round(listElement.scrollTop / itemHeight) * itemHeight;
+        // Очищаємо попередній таймер, щоб не було "стрибків"
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(() => {
+            const bestMatch = findBestMatch(listElement);
+            if (bestMatch) {
                 isScrollingProgrammatically = true;
                 listElement.scrollTo({
-                    top: targetScrollTop,
+                    top: bestMatch.offsetTop,
                     behavior: 'smooth'
                 });
                 
+                // Оновлюємо виділення після завершення анімації
                 setTimeout(() => {
+                    listItems.forEach(item => item.classList.remove(activeClass));
+                    bestMatch.classList.add(activeClass);
                     isScrollingProgrammatically = false;
-                    const bestMatch = findBestMatch(listElement);
-                    if (bestMatch) {
-                        listItems.forEach(item => item.classList.remove(activeClass));
-                        bestMatch.classList.add(activeClass);
-                    }
-                }, 200);
-            }, 50);
-        }
+                }, 200); // Час, необхідний для завершення анімації
+            }
+        }, 50); // Затримка для плавного реагування на скрол
     });
     
+    // Ця функція знаходить елемент, найближчий до поточного скролу
     function findBestMatch(listElement) {
         const listItems = listElement.querySelectorAll('li');
         if (listItems.length === 0) return null;
@@ -118,10 +122,14 @@ function setupScrollHover(listElement) {
         const itemHeight = listItems[0].clientHeight;
         const containerScrollTop = listElement.scrollTop;
         const maxScrollTop = listElement.scrollHeight - listElement.clientHeight;
+        const closestIndex = Math.round(containerScrollTop / itemHeight);
+
+        // Перевіряємо, чи досягли ми кінця скролу
         if (containerScrollTop >= maxScrollTop) {
             return listItems[listItems.length - 1];
         }
-        const closestIndex = Math.round(containerScrollTop / itemHeight);
+        
+        // Повертаємо найближчий елемент
         return listItems[closestIndex] || null;
     }
 }
@@ -311,5 +319,6 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
