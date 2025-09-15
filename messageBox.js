@@ -37,14 +37,14 @@ const messageBoxStyles = `
     padding-bottom: 2.5%;
   }
   #message-text p{
-    /*white-space: nowrap;*/
+    white-space: nowrap;
     overflow: hidden;
     padding: 0;
     margin: 0;
     opacity: 0;
   }
   #message-box.show-message-box {
-    width: auto;
+    width: 27%;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
