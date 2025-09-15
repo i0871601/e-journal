@@ -42,10 +42,16 @@ function populateDropdown(listElement, data, type) {
 }
 
 function closeAllDropdowns() {
-  const allDropdowns = document.querySelectorAll('.dropdown-list');
-  allDropdowns.forEach(dropdown => {
-    dropdown.style.display = 'none';
-  });
+    const allDropdowns = document.querySelectorAll('.dropdown-list');
+    allDropdowns.forEach(dropdown => {
+        dropdown.style.display = 'none';
+        
+        // Знаходимо батьківський елемент і видаляємо клас
+        const parentContainer = dropdown.parentElement;
+        if (parentContainer && parentContainer.classList.contains('click-button')) {
+            parentContainer.classList.remove('click-button');
+        }
+    });
 }
 
 function setupToggle(buttonElement, listElement) {
@@ -233,6 +239,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
