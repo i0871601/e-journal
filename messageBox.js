@@ -52,7 +52,6 @@ const messageBoxStyles = `
     opacity: 1;
   }
   #message-icon{
-    display: flex;
     align-items: center;
     height: 100%;
     width: clamp(40px, 8vmin, 90px);
@@ -100,7 +99,7 @@ export function MessageText(message) {
     const boxImage = document.getElementById('message-icon');
     
     if (status == 'success') {
-      boxImage.style.display = 'none';
+      //
     } else if (status == 'error') {
       boxImage.classList.add('box-error');
     }
@@ -153,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const user = getUserData();
     if(user){
-      const textIDuser = {status:'success', text: `Увійшов ${user.firstName} ${user.lastName}`};
+      const textIDuser = {status:'success', text: `Вітаю, ${user.firstName}`};
       setTimeout(() => { MessageText(textIDuser);}, 2000);
     }
 
@@ -170,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
