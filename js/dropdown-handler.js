@@ -54,86 +54,6 @@ export function closeAllDropdowns() {
     });
 }
 
-function setupScrollHover(listElement) {
-    const activeClass = 'active-li';
-    const listItems = listElement.querySelectorAll('li');
-    if (listItems.length === 0) return;
-
-    // Встановлюємо висоту елемента
-    const itemHeight = listItems[0].clientHeight;
-    
-    // Встановлюємо перший елемент активним при ініціалізації
-    const setInitialActive = () => {
-        listItems.forEach(item => item.classList.remove(activeClass));
-        if (listItems.length > 0) {
-            listItems[0].classList.add(activeClass);
-        }
-    };
-    setInitialActive();
-
-    let isMouseOver = false;
-    let isScrollingProgrammatically = false;
-    let scrollTimeout;
-    
-    // Обробники для миші
-    listElement.addEventListener('mouseover', (event) => {
-        if (!isScrollingProgrammatically) {
-            isMouseOver = true;
-            listItems.forEach(item => item.classList.remove(activeClass));
-            event.target.classList.add(activeClass);
-        }
-    });
-    
-    listElement.addEventListener('mouseout', () => {
-        isMouseOver = false;
-    });
-
-    // Обробник скролу
-    listElement.addEventListener('scroll', () => {
-        if (isScrollingProgrammatically || isMouseOver) return;
-
-        // Очищаємо попередній таймер, щоб не було "стрибків"
-        clearTimeout(scrollTimeout);
-        
-        scrollTimeout = setTimeout(() => {
-            const bestMatch = findBestMatch(listElement);
-            if (bestMatch) {
-                isScrollingProgrammatically = true;
-                listElement.scrollTo({
-                    top: bestMatch.offsetTop,
-                    behavior: 'smooth'
-                });
-                
-                // Оновлюємо виділення після завершення анімації
-                setTimeout(() => {
-                    listItems.forEach(item => item.classList.remove(activeClass));
-                    bestMatch.classList.add(activeClass);
-                    isScrollingProgrammatically = false;
-                }, 200); // Час, необхідний для завершення анімації
-            }
-        }, 50); // Затримка для плавного реагування на скрол
-    });
-    
-    // Ця функція знаходить елемент, найближчий до поточного скролу
-    function findBestMatch(listElement) {
-        const listItems = listElement.querySelectorAll('li');
-        if (listItems.length === 0) return null;
-
-        const itemHeight = listItems[0].clientHeight;
-        const containerScrollTop = listElement.scrollTop;
-        const maxScrollTop = listElement.scrollHeight - listElement.clientHeight;
-        const closestIndex = Math.round(containerScrollTop / itemHeight);
-
-        // Перевіряємо, чи досягли ми кінця скролу
-        if (containerScrollTop >= maxScrollTop) {
-            return listItems[listItems.length - 1];
-        }
-        
-        // Повертаємо найближчий елемент
-        return listItems[closestIndex] || null;
-    }
-}
-
 function setupToggle(buttonElement, listElement) {
     if (!buttonElement || !listElement) {
         console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
@@ -149,7 +69,6 @@ function setupToggle(buttonElement, listElement) {
         listElement.style.display = isListVisible ? 'none' : 'block';
         if (!isListVisible) {
             parentContainer.classList.add('click-button');
-            setupScrollHover(listElement);
         } else {
             parentContainer.classList.remove('click-button');
         }
@@ -319,6 +238,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
