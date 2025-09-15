@@ -54,36 +54,87 @@ export function closeAllDropdowns() {
     });
 }
 
+function setupScrollHover(listElement) {
+    const activeClass = 'active-li';
+    const listItems = listElement.querySelectorAll('li');
+    listItems.forEach(item => item.classList.remove(activeClass));
+
+    if (listItems.length > 0) {
+        listItems[0].classList.add(activeClass);
+    }
+    
+    listElement.addEventListener('mouseover', (event) => {
+        listItems.forEach(item => item.classList.remove(activeClass));
+        event.target.classList.add(activeClass);
+    });
+    
+    listElement.addEventListener('mouseout', () => {
+        const bestMatch = findBestMatch(listElement);
+        listItems.forEach(item => {
+            item.classList.remove(activeClass);
+            if (item === bestMatch) {
+                item.classList.add(activeClass);
+            }
+        });
+    });
+
+    let isScrolling;
+
+    listElement.addEventListener('scroll', () => {
+        window.clearTimeout(isScrolling);
+        listItems.forEach(item => item.classList.remove(activeClass));
+        
+        isScrolling = setTimeout(() => {
+            const bestMatch = findBestMatch(listElement);
+            if (bestMatch) {
+                bestMatch.classList.add(activeClass);
+            }
+        }, 50);
+    });
+    
+    function findBestMatch(listElement) {
+        const listItems = listElement.querySelectorAll('li');
+        const containerHeight = listElement.clientHeight;
+        const containerScrollTop = listElement.scrollTop;
+        
+        let bestMatch = null;
+        let minDistance = Infinity;
+
+        listItems.forEach(item => {
+            const itemTop = item.offsetTop - containerScrollTop;
+            const itemCenter = itemTop + item.clientHeight / 2;
+            const containerCenter = containerHeight / 2;
+            const distance = Math.abs(itemCenter - containerCenter);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                bestMatch = item;
+            }
+        });
+        return bestMatch;
+    }
+}
+
 function setupToggle(buttonElement, listElement) {
     if (!buttonElement || !listElement) {
         console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
         return;
     }
-
     const parentContainer = buttonElement.parentElement;
-
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        
         const isListVisible = listElement.style.display === 'block';
-
-        // Крок 1: Закрийте всі інші випадаючі списки
         if (!isListVisible) {
             closeAllDropdowns();
         }
-
-        // Крок 2: Відкрийте або закрийте поточний список
         listElement.style.display = isListVisible ? 'none' : 'block';
-
-        // Керування класом
         if (!isListVisible) {
             parentContainer.classList.add('click-button');
+            setupScrollHover(listElement);
         } else {
             parentContainer.classList.remove('click-button');
         }
     });
-
-    // Обробник кліку за межами все ще потрібен, але тепер він також викликає закриття
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
             listElement.style.display = 'none';
@@ -249,3 +300,4 @@ export function initDropdown(userData) {
         }
     }
 }
+
