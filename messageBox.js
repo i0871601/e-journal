@@ -45,7 +45,7 @@ const messageBoxStyles = `
     transition: opacity 0.7s ease-in-out;
   }
   #message-box.show-message-box {
-    max-width: 100vw;
+    max-width: 45vw;
     opacity: 1;
   }
   #message-box.show-message-box #message-text p {
@@ -73,8 +73,10 @@ const messageBoxStyles = `
   
   @media (orientation: portrait){
     #message-box{
-      width: 87%;
       height: clamp(50px, 10vmin, 100px);
+    }
+    #message-box.show-message-box{
+      max-width: 87vw;
     }
   }
 `;
@@ -173,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
