@@ -52,17 +52,18 @@ const messageBoxStyles = `
     opacity: 1;
   }
   #message-icon{
+    display: flex;
     align-items: center;
     height: 100%;
-    width: clamp(40px, 8vmin, 90px);
+    width: 0;
     opacity: 0;
-    transition: opacity 0.7s ease-in-out;
+    transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
   }
   #message-icon svg{
     box-sizing: content-box;
   }
   #message-icon.box-error{
-    display: flex;
+    width: clamp(40px, 8vmin, 90px);
     opacity: 1;
   }
   
@@ -169,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
