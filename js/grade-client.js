@@ -46,6 +46,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     const lessonTypeList = document.getElementById("lessonTypeList");
     const saveLessonButton = document.getElementById("saveLessonButton");
     const lessonTypeButton = document.getElementById("lessonType-Button");
+    const lessonTypeInputContainer = document.getElementById("lessonTypeInput"); // Зміни
 
     lessonTypeList.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
@@ -55,18 +56,37 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             const selectedType = event.target.textContent;
             lessonTypePara.textContent = selectedType;
             lessonTypeList.style.display = "none";
+            
+            // Видаляємо клас з батьківського контейнера при виборі елемента
+            if (lessonTypeInputContainer) {
+                lessonTypeInputContainer.classList.remove('button-clicked');
+            }
         }
     });
 
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            lessonTypeList.style.display = lessonTypeList.style.display === 'block' ? 'none' : 'block';
-        });
+            const isListVisible = lessonTypeList.style.display === 'block';
+            lessonTypeList.style.display = isListVisible ? 'none' : 'block';
 
+            // Додаємо/видаляємо клас на батьківському контейнері
+            if (lessonTypeInputContainer) {
+                if (!isListVisible) {
+                    lessonTypeInputContainer.classList.add('button-clicked');
+                } else {
+                    lessonTypeInputContainer.classList.remove('button-clicked');
+                }
+            }
+        });
+        
         document.addEventListener('click', (event) => {
             if (!lessonTypeButton.contains(event.target) && !lessonTypeList.contains(event.target)) {
                 lessonTypeList.style.display = 'none';
+                // Видаляємо клас, якщо користувач клікнув за межами
+                if (lessonTypeInputContainer) {
+                    lessonTypeInputContainer.classList.remove('button-clicked');
+                }
             }
         });
     }
