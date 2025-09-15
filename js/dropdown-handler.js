@@ -49,12 +49,19 @@ function setupToggle(buttonElement, listElement) {
 
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        listElement.style.display = listElement.style.display === 'block' ? 'none' : 'block';
+        const isListVisible = listElement.style.display === 'block';
+        listElement.style.display = isListVisible ? 'none' : 'block';
+        if (!isListVisible) {
+            buttonElement.classList.add('click-button');
+        } else {
+            buttonElement.classList.remove('click-button');
+        }
     });
 
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
             listElement.style.display = 'none';
+            buttonElement.classList.remove('click-button');
         }
     });
 }
@@ -206,4 +213,5 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
