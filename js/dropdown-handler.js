@@ -233,9 +233,9 @@ export function initDropdown(userData) {
                         console.log("Відправка до API:", payload);
                         console.log(`Відповідь:`, response);
                             
-                        const updateGradeCallback = createUpdateGradeCallback(selectedSubject, className);
+                        const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response, updateGradeCallback); 
-                        setupAddLessonForm(selectedSubject, className, response, refreshJournal);
+                        setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);
                     } else {
                         console.error("Помилка при отриманні журналу:", response.message);
                     }
@@ -249,4 +249,3 @@ export function initDropdown(userData) {
         }
     }
 }
-
