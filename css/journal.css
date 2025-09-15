@@ -75,6 +75,7 @@ body{
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  color: var(--text-color);
   cursor: pointer;
 }
 #subject-button p, #Class-button p, #lessonType-Button p{
@@ -159,6 +160,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
