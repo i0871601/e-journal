@@ -56,7 +56,12 @@ export const setupDaySelector = (groupedByDay, role) => {
     selectedTextContainer.textContent = 'Виберіть день уроків';
     
     firstOptionDiv.addEventListener('click', () => {
-        dayList.classList.toggle('visible');
+        const isVisible = dayList.classList.toggle('visible');
+        if (isVisible) {
+            selectContainer.classList.add('click-button');
+        } else {
+            selectContainer.classList.remove('click-button'); 
+        }
     });
 
     dayList.addEventListener('click', (event) => {
@@ -64,6 +69,7 @@ export const setupDaySelector = (groupedByDay, role) => {
         if (selectedDay) {
             selectedTextContainer.textContent = selectedDay;
             dayList.classList.remove('visible');
+            selectContainer.classList.remove('click-button');
             displaySchedule(groupedByDay, role, selectedDay);
         }
     });
@@ -72,6 +78,7 @@ export const setupDaySelector = (groupedByDay, role) => {
         const isClickOutside = !selectContainer.contains(event.target);
         if (isClickOutside && dayList.classList.contains('visible')) {
             dayList.classList.remove('visible');
+            selectContainer.classList.remove('click-button');
         }
     });
 };
@@ -127,4 +134,5 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
