@@ -62,12 +62,10 @@ function setupScrollHover(listElement) {
     if (listItems.length > 0) {
         listItems[0].classList.add(activeClass);
     }
-    
     listElement.addEventListener('mouseover', (event) => {
         listItems.forEach(item => item.classList.remove(activeClass));
         event.target.classList.add(activeClass);
     });
-    
     listElement.addEventListener('mouseout', () => {
         const bestMatch = findBestMatch(listElement);
         listItems.forEach(item => {
@@ -77,7 +75,6 @@ function setupScrollHover(listElement) {
             }
         });
     });
-
     let isScrolling;
 
     listElement.addEventListener('scroll', () => {
@@ -102,12 +99,13 @@ function setupScrollHover(listElement) {
 
         listItems.forEach(item => {
             const itemTop = item.offsetTop - containerScrollTop;
-            const itemCenter = itemTop + item.clientHeight / 2;
-            const containerCenter = containerHeight / 2;
-            const distance = Math.abs(itemCenter - containerCenter);
+            const itemBottom = itemTop + item.clientHeight;
+            const distanceFromTop = Math.abs(itemTop);
+            const distanceFromBottom = Math.abs(itemBottom - containerHeight);
+            const minEdgeDistance = Math.min(distanceFromTop, distanceFromBottom);
 
-            if (distance < minDistance) {
-                minDistance = distance;
+            if (minEdgeDistance < minDistance) {
+                minDistance = minEdgeDistance;
                 bestMatch = item;
             }
         });
@@ -300,4 +298,3 @@ export function initDropdown(userData) {
         }
     }
 }
-
