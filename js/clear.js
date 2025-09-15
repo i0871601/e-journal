@@ -1,6 +1,6 @@
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
-        sessionStorage.clear();
+        sessionStorage.removeItem('userBase');
         console.clear();
     }
 });
