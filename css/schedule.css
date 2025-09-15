@@ -41,6 +41,9 @@
     font-family: 'SourceSans3';
     position: relative;
 }
+#Select.click-button{
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
 .first-option{
     display: flex;
     flex-direction: row;
@@ -97,6 +100,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
