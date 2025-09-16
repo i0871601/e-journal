@@ -39,10 +39,9 @@
     padding: 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     position: relative;
-    color: var(--color2);
+    color: var(--text-color);
 }
 #Select.click-button{
-  color: var(--text-color);
   border: 0.1rem solid var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
@@ -71,10 +70,10 @@
     left: 0;
     padding: 0;
     display: none;
-    background-color: var(--color2);
+    background-color: var(--text-color);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--color2);
+    box-shadow: 0 0 0.5vmin var(--text-color);
     position: absolute;
     color: var(--fon-color-2);
 }
@@ -107,6 +106,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
