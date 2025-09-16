@@ -84,7 +84,6 @@
 #Days li {
     padding: 1vmin;
     cursor: pointer;
-    border-bottom: 0.05rem solid var(--color-accent);
 }
 #Days li:last-child{
   border-bottom: 0;
@@ -107,6 +106,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
