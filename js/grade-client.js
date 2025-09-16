@@ -76,8 +76,9 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
                     lessonTypeInputContainer.classList.remove('click-button');
                 }
             } else {
-                closeAllDropdowns();
+                console.log("Проблема");
                 if (lessonTypeInputContainer) {
+                    closeAllDropdowns();
                     lessonTypeList.classList.add('visible-list');
                     lessonTypeInputContainer.classList.add('click-button');
                 }
