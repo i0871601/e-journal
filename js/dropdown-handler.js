@@ -46,9 +46,7 @@ export function closeAllDropdowns() {
     allDropdowns.forEach(dropdown => {
         dropdown.classList.remove('visible-list');
         const parentContainer = dropdown.parentElement;
-        console.log("Перевірка зовні");
         if (parentContainer) {
-            console.log("Перевірка dyenhs");
             parentContainer.classList.remove('click-button');
         }
     });
@@ -243,6 +241,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
