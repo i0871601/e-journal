@@ -55,26 +55,34 @@ export function closeAllDropdowns() {
         }
     });
 }
+export function toggleDropdown(buttonElement, listElement) {
+    const parentContainer = buttonElement.parentElement;
+    const isListVisible = listElement.classList.contains('visible-list');
+    console.log("Перевірка зовні");
+    if (isListVisible) {
+        console.log("Проблема зовні");
+        listElement.classList.remove('visible-list');
+        parentContainer.classList.remove('click-button');
+    } else {
+        console.log("Проблема зовні");
+        closeAllDropdowns();
+        listElement.classList.add('visible-list');
+        parentContainer.classList.add('click-button');
+    }
+}
 
 function setupToggle(buttonElement, listElement) {
     if (!buttonElement || !listElement) {
         console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
         return;
     }
-    const parentContainer = buttonElement.parentElement;
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        const isListVisible = listElement.classList.contains('visible-list');
-        if (!isListVisible) {
-            closeAllDropdowns();
-            listElement.classList.add('visible-list');
-            parentContainer.classList.add('click-button');
-        } else {
-            listElement.classList.remove('visible-list');
-            parentContainer.classList.remove('click-button');
-        }
+        toggleDropdown(buttonElement, listElement);
     });
+
     document.addEventListener('click', (event) => {
+        const parentContainer = buttonElement.parentElement;
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
             listElement.classList.remove('visible-list');
             parentContainer.classList.remove('click-button');
@@ -239,6 +247,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
