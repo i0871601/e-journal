@@ -46,7 +46,9 @@ export function closeAllDropdowns() {
     allDropdowns.forEach(dropdown => {
         dropdown.classList.remove('visible-list');
         const parentContainer = dropdown.parentElement;
+        console.log("Перевірка зовні");
         if (parentContainer) {
+            console.log("Перевірка dyenhs");
             parentContainer.classList.remove('click-button');
         }
     });
@@ -55,13 +57,10 @@ export function closeAllDropdowns() {
 export function toggleDropdown(buttonElement, listElement) {
     const parentContainer = buttonElement.parentElement;
     const isListVisible = listElement.classList.contains('visible-list');
-    console.log("Перевірка зовні");
     if (isListVisible) {
-        console.log("Проблема зовні");
         listElement.classList.remove('visible-list');
         parentContainer.classList.remove('click-button');
     } else {
-        console.log("Проблема зовні");
         closeAllDropdowns();
         listElement.classList.add('visible-list');
         parentContainer.classList.add('click-button');
@@ -244,6 +243,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
