@@ -39,8 +39,10 @@
     padding: 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     position: relative;
+    color: var(--color1);
 }
 #Select.click-button{
+  color: var(--text-color);
   border: 0.1rem solid var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
@@ -74,7 +76,7 @@
     border-radius: 1.5vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--fon-color);
     position: absolute;
-    color: var(--text-color);
+    color: var(--fon-color-2);
 }
 #Days.visible {
     display: block; /* Показати, коли додається клас visible */
@@ -86,8 +88,7 @@
 }
 
 #Days li:hover {
-    color: var(--fon-color);
-    background-color: var(--color-accent-shadow);
+    background-color: var(--color-accent);
 }
 #Days li:first-child:hover{
   border-radius: 1.5vmin 1.5vmin 0 0;
@@ -102,6 +103,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
