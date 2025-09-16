@@ -1,4 +1,4 @@
-/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович*/
+0/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович*/
 :root{
   --fon-color: #151419;
   --fon-color-2: #fbfbfb;
@@ -33,13 +33,13 @@
 }
 #Select{
     width: clamp(300px, 30vmin, 300px);
-    border: 0.1rem solid var(--color1);
+    border: 0.1rem solid var(--text-color);
     border-radius: 15vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--text-color);
     padding: 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     position: relative;
-    color: var(--color1);
+    color: var(--color2);
 }
 #Select.click-button{
   color: var(--text-color);
@@ -71,10 +71,10 @@
     left: 0;
     padding: 0;
     display: none;
-    background-color: var(--fon-color);
+    background-color: var(--color2);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--fon-color);
+    box-shadow: 0 0 0.5vmin var(--color2);
     position: absolute;
     color: var(--fon-color-2);
 }
@@ -107,6 +107,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
