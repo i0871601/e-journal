@@ -116,6 +116,7 @@ body{
 #subject-list.visible-list, #class-list.visible-list, #lessonTypeList.visible-list {
   max-height: 11.5rem;
   opacity: 1;
+  z-index: 15;
 }
 .dropdown-list li {
     padding: 1vmin;
@@ -133,9 +134,6 @@ body{
 }
 #lessonTypeList{
   display: none;
-}
-.container-all:has(.dropdown-list[style*="flex"]) {
-  z-index: 15;
 }
 .journal-table {
   border-collapse: collapse;
@@ -161,35 +159,5 @@ body{
 }
 
 .journal-table thead th:first-child {
-  z-index: 15;
+  z-index: 13;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
