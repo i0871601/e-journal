@@ -96,7 +96,7 @@
 #Days li {
     padding: 1vmin;
     cursor: pointer;
-    transition: background-color 0.5s ease-in-out
+    transition: background-color 0.3s ease-in-out
 }
 
 #Days li:hover {
@@ -110,6 +110,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
