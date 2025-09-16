@@ -86,7 +86,7 @@
     cursor: pointer;
 }
 
-#Days li:hover, #Days li:active {
+#Days li:hover {
     color: var(--fon-color-2);
     background-color: var(--color-accent);
 }
@@ -103,6 +103,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
