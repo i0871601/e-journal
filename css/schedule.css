@@ -42,7 +42,6 @@
     color: var(--text-color);
 }
 #Select.click-button{
-  border: 0.1rem solid var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 .first-option{
@@ -106,6 +105,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
