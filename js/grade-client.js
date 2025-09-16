@@ -60,6 +60,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             
             // Видаляємо клас з батьківського контейнера при виборі елемента
             if (lessonTypeInputContainer) {
+                console.log("Проблема1");
                 lessonTypeInputContainer.classList.remove('click-button');
             }
         }
@@ -73,6 +74,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             if (isListVisible) {
                 lessonTypeList.classList.remove('visible-list');
                 if (lessonTypeInputContainer) {
+                    console.log("Проблема2");
                     lessonTypeInputContainer.classList.remove('click-button');
                 }
             } else {
@@ -92,6 +94,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             if (!lessonTypeButton.contains(event.target) && !lessonTypeList.contains(event.target)) {
                 lessonTypeList.classList.remove('visible-list');
                 if (lessonTypeInputContainer) {
+                    console.log("Проблема3");
                     lessonTypeInputContainer.classList.remove('click-button');
                 }
             }
