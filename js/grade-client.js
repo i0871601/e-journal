@@ -77,11 +77,14 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
                 }
             } else {
                 console.log("Проблема");
-                if (lessonTypeInputContainer) {
-                    closeAllDropdowns();
-                    lessonTypeList.classList.add('visible-list');
-                    lessonTypeInputContainer.classList.add('click-button');
-                }
+                closeAllDropdowns();
+                lessonTypeList.classList.add('visible-list');
+                lessonTypeInputContainer.classList.add('click-button');
+                //if (lessonTypeInputContainer) {
+                  //  closeAllDropdowns();
+                    //lessonTypeList.classList.add('visible-list');
+                    //lessonTypeInputContainer.classList.add('click-button');
+                //}
             }
         });
         
