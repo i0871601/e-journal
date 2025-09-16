@@ -58,15 +58,17 @@ body{
 }
 #Select-Subject, #ClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
-  border: 0;
-  border-radius: 15vmin /*від шрифта*/;
+  border: 0.07rem solid transparent;
+  border-radius: 1rem /*від шрифта*/;
   box-shadow: 0 0 0.5vmin var(--text-color);
-  padding: 0.3vmin;
-  padding-left: 1.1vmin;
+  padding: 0.3vmin 1.5vmin;
   font-family: 'SourceSans3';
   position: relative;
+  color: var(--text-color);
+  transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
 #Select-Subject.click-button, #ClassTeacher.click-button, #lessonTypeInput.click-button{
+  border-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 #subject-button, #Class-button,  #lessonType-Button{
@@ -82,9 +84,7 @@ body{
   margin: 0;
   padding: 0;
 }
-#Select-Subject.click-button #subject-button, #ClassTeacher.click-button #Class-button, #lessonTypeInput.click-button #lessonType-Button{
-  color: var(--text-color-accent);
-}
+
 .dropdown-button div{
   width: 5vmin;
   background-image: url('../image/down.svg');
@@ -92,41 +92,42 @@ body{
   background-position: center;
   background-repeat: no-repeat;
 }
+
 #subject-list, #class-list, #lessonTypeList{
     width: 100%;
     height: 9.29rem;
     top: 100%;
     left: 0;
     padding: 0;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     flex-wrap: wrap;
     flex-direction: column;
     background-color: var(--fon-color-2);
     color: var(--text-color);
     list-style-type: none;
-    border-radius: 1.5vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--color-accent);
+    border-radius: 1rem /*від шрифта*/;
+    box-shadow: 0 0 0.5vmin var(--text-color);
     position: absolute;
     overflow-y: auto;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
+}
+#subject-list.visible-list, #class-list.visible-list, #lessonTypeList.visible-list {
+  max-height: 100vh;
+  opacity: 1;
 }
 .dropdown-list li {
     padding: 1vmin;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .dropdown-list li:hover {
-    color: var(--fon-color);
-    background-color: var(--color-accent-shadow);
-}
-.dropdown-list li.active-li {
-    color: var(--fon-color);
-    background-color: var(--color-accent-shadow);
-}
-.dropdown-list li:first-child:hover{
-  border-radius: 1.5vmin 1.5vmin 0 0;
-}
-.dropdown-list li:last-child:hover{
-  border-radius: 0 0 1.5vmin 1.5vmin;
+    color: var(--fon-color-2);
+    background-color: var(--color-accent);
 }
 
 #ClassTeacher{
@@ -135,7 +136,7 @@ body{
 #lessonTypeList{
   display: none;
 }
-.container-all:has(.dropdown-list[style*="block"]) {
+.container-all:has(.dropdown-list[style*="flex"]) {
   z-index: 15;
 }
 .journal-table {
@@ -164,6 +165,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 15;
 }
+
 
 
 
