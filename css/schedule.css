@@ -33,7 +33,7 @@
 }
 #Select{
     width: clamp(300px, 30vmin, 300px);
-    border: 0.1rem solid var(--text-color);
+    border: 0;
     border-radius: 15vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--text-color);
     padding: 0.3vmin 1.5vmin;
@@ -70,7 +70,7 @@
     left: 0;
     padding: 0;
     display: none;
-    background-color: var(--text-color);
+    background-color: var(--fon-color-2);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--text-color);
@@ -84,7 +84,7 @@
 #Days li {
     padding: 1vmin;
     cursor: pointer;
-    border-bottom: 0.1rem solid var(--color-accent);
+    border-bottom: 0.05rem solid var(--color-accent);
 }
 #Days li:last-child{
   border-bottom: 0;
@@ -106,6 +106,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
