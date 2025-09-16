@@ -113,7 +113,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
 
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
-        classListElement.style.display = 'none';
         classListElement.classList.remove('visible-list');
     }
 }
@@ -238,6 +237,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
