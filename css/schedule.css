@@ -33,7 +33,7 @@
 }
 #Select{
     width: clamp(300px, 30vmin, 300px);
-    border: 0.1rem solid;
+    border: 0.1rem solid var(--color1);
     border-radius: 15vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--text-color);
     padding: 0.3vmin 1.5vmin;
@@ -41,6 +41,7 @@
     position: relative;
 }
 #Select.click-button{
+  border: 0.1rem solid var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 .first-option{
@@ -71,7 +72,7 @@
     background-color: var(--fon-color);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--color-accent);
+    box-shadow: 0 0 0.5vmin var(--fon-color);
     position: absolute;
     color: var(--text-color);
 }
@@ -101,6 +102,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
