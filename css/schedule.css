@@ -69,16 +69,21 @@
     top: 100%;
     left: 0;
     padding: 0;
-    display: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background-color: var(--fon-color-2);
     list-style-type: none;
     border-radius: 1.5vmin /*від шрифта*/;
     box-shadow: 0 0 0.5vmin var(--text-color);
     position: absolute;
     color: var(--text-color);
+    max-height: 0;
+    transition: max-height 0.7s ease-in-out;
 }
 #Days.visible {
-    display: block; /* Показати, коли додається клас visible */
+  max-height: auto;
+    /*display: flex; Показати, коли додається клас visible */
 }
 
 #Days li {
@@ -90,12 +95,6 @@
     color: var(--fon-color-2);
     background-color: var(--color-accent);
 }
-#Days li:first-child:hover{
-  border-radius: 1.5vmin 1.5vmin 0 0;
-}
-#Days li:last-child:hover{
-  border-radius: 0 0 1.5vmin 1.5vmin;
-}
 
 @font-face{
   font-family: 'SourceSans3';
@@ -103,25 +102,3 @@
   font-weight: 400;
   font-style: normal;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
