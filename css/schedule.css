@@ -85,11 +85,8 @@
     padding: 1vmin;
     cursor: pointer;
 }
-#Days li:last-child{
-  border-bottom: 0;
-}
 
-#Days li:hover {
+#Days li:hover, #Days li:active {
     color: var(--fon-color-2);
     background-color: var(--color-accent);
 }
@@ -106,6 +103,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
