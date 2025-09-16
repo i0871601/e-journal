@@ -69,32 +69,14 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            const isListVisible = lessonTypeList.classList.contains('visible-list');
-
-            if (isListVisible) {
-                lessonTypeList.classList.remove('visible-list');
-                if (lessonTypeInputContainer) {
-                    console.log("Проблема2");
-                    lessonTypeInputContainer.classList.remove('click-button');
-                }
-            } else {
-                console.log("Проблема");
-                closeAllDropdowns();
-                lessonTypeList.classList.add('visible-list');
-                lessonTypeInputContainer.classList.add('click-button');
-                //if (lessonTypeInputContainer) {
-                  //  closeAllDropdowns();
-                    //lessonTypeList.classList.add('visible-list');
-                    //lessonTypeInputContainer.classList.add('click-button');
-                //}
-            }
+            toggleDropdown(lessonTypeButton, lessonTypeList);
         });
-        
+    
+        const lessonTypeInputContainer = document.getElementById("lessonTypeInput");
         document.addEventListener('click', (event) => {
             if (!lessonTypeButton.contains(event.target) && !lessonTypeList.contains(event.target)) {
                 lessonTypeList.classList.remove('visible-list');
                 if (lessonTypeInputContainer) {
-                    console.log("Проблема3");
                     lessonTypeInputContainer.classList.remove('click-button');
                 }
             }
