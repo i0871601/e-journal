@@ -60,7 +60,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             
             // Видаляємо клас з батьківського контейнера при виборі елемента
             if (lessonTypeInputContainer) {
-                console.log("Проблема1");
                 lessonTypeInputContainer.classList.remove('click-button');
             }
         }
