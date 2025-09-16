@@ -56,7 +56,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
             event.target.classList.add('selected');
             const selectedType = event.target.textContent;
             lessonTypePara.textContent = selectedType;
-            lessonTypeList.style.display = "none";
+            lessonTypeList.classList.remove('visible-list');
             
             // Видаляємо клас з батьківського контейнера при виборі елемента
             if (lessonTypeInputContainer) {
@@ -68,26 +68,25 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            const isListVisible = lessonTypeList.style.display === 'block';
-            if (!isListVisible) {
-                closeAllDropdowns();
-            }
-            lessonTypeList.style.display = isListVisible ? 'none' : 'block';
+            const isListVisible = lessonTypeList.classList.contains('visible-list');
 
-            // Додаємо/видаляємо клас на батьківському контейнері
-            if (lessonTypeInputContainer) {
-                if (!isListVisible) {
-                    lessonTypeInputContainer.classList.add('click-button');
-                } else {
+            if (isListVisible) {
+                lessonTypeList.classList.remove('visible-list');
+                if (lessonTypeInputContainer) {
                     lessonTypeInputContainer.classList.remove('click-button');
+                }
+            } else {
+                closeAllDropdowns();
+                lessonTypeList.classList.add('visible-list');
+                if (lessonTypeInputContainer) {
+                    lessonTypeInputContainer.classList.add('click-button');
                 }
             }
         });
         
         document.addEventListener('click', (event) => {
             if (!lessonTypeButton.contains(event.target) && !lessonTypeList.contains(event.target)) {
-                lessonTypeList.style.display = 'none';
-                // Видаляємо клас, якщо користувач клікнув за межами
+                lessonTypeList.classList.remove('visible-list');
                 if (lessonTypeInputContainer) {
                     lessonTypeInputContainer.classList.remove('click-button');
                 }
