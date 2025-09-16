@@ -132,9 +132,7 @@ body{
 #ClassTeacher{
   display: none;
 }
-#lessonTypeList{
-  display: none;
-}
+
 .journal-table {
   border-collapse: collapse;
 }
@@ -161,3 +159,4 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
