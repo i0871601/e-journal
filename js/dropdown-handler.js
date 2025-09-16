@@ -62,20 +62,19 @@ function setupToggle(buttonElement, listElement) {
     const parentContainer = buttonElement.parentElement;
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        const isListVisible = listElement.classList.add('.visible-list');
+        const isListVisible = listElement.classList.contains('visible-list');
         if (!isListVisible) {
             closeAllDropdowns();
-        }
-        //listElement.style.display = isListVisible ? 'none' : 'block'; ?як тут треба відносно classList.add('.visible-list');
-        if (!isListVisible) {
+            listElement.classList.add('visible-list');
             parentContainer.classList.add('click-button');
         } else {
+            listElement.classList.remove('visible-list');
             parentContainer.classList.remove('click-button');
         }
     });
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
-            listElement.classList.remove('.visible-list');
+            listElement.classList.remove('visible-list');
             parentContainer.classList.remove('click-button');
         }
     });
@@ -86,7 +85,7 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
         if (event.target.tagName === 'LI') {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
-            listElement.classList.remove('.visible-list');
+            listElement.classList.remove('visible-list');
 
             const buttonElement = listElement.previousElementSibling;
             if (buttonElement && buttonElement.parentElement) {
@@ -115,7 +114,7 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
-        classListElement.classList.remove('.visible-list');
+        classListElement.classList.remove('visible-list');
     }
 }
 
@@ -239,6 +238,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
