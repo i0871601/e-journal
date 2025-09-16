@@ -45,16 +45,13 @@ export function closeAllDropdowns() {
     const allDropdowns = document.querySelectorAll('.dropdown-list');
     allDropdowns.forEach(dropdown => {
         dropdown.classList.remove('visible-list');
-        console.log("Перевірка зовні");
-        // Знаходимо батьківський елемент і видаляємо клас
         const parentContainer = dropdown.parentElement;
-        if (parentContainer && parentContainer.classList.contains('click-button')) {
-            console.log("Проблема зовні");
-            //allDropdowns.classList.remove('visible-list');
+        if (parentContainer) {
             parentContainer.classList.remove('click-button');
         }
     });
 }
+
 export function toggleDropdown(buttonElement, listElement) {
     const parentContainer = buttonElement.parentElement;
     const isListVisible = listElement.classList.contains('visible-list');
@@ -247,6 +244,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
