@@ -44,7 +44,7 @@ function populateDropdown(listElement, data, type) {
 export function closeAllDropdowns() {
     const allDropdowns = document.querySelectorAll('.dropdown-list');
     allDropdowns.forEach(dropdown => {
-        dropdown.style.display = 'none';
+        dropdown.classList.remove('.visible-list');
         
         // Знаходимо батьківський елемент і видаляємо клас
         const parentContainer = dropdown.parentElement;
@@ -62,11 +62,11 @@ function setupToggle(buttonElement, listElement) {
     const parentContainer = buttonElement.parentElement;
     buttonElement.addEventListener('click', (event) => {
         event.stopPropagation();
-        const isListVisible = listElement.style.display === 'block';
+        const isListVisible = listElement.classList.add('.visible-list');
         if (!isListVisible) {
             closeAllDropdowns();
         }
-        listElement.style.display = isListVisible ? 'none' : 'block';
+        //listElement.style.display = isListVisible ? 'none' : 'block'; ?як тут треба відносно classList.add('.visible-list');
         if (!isListVisible) {
             parentContainer.classList.add('click-button');
         } else {
@@ -75,7 +75,7 @@ function setupToggle(buttonElement, listElement) {
     });
     document.addEventListener('click', (event) => {
         if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
-            listElement.style.display = 'none';
+            listElement.classList.remove('.visible-list');
             parentContainer.classList.remove('click-button');
         }
     });
@@ -86,7 +86,7 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
         if (event.target.tagName === 'LI') {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
-            listElement.style.display = 'none';
+            listElement.classList.remove('.visible-list');
 
             const buttonElement = listElement.previousElementSibling;
             if (buttonElement && buttonElement.parentElement) {
@@ -115,6 +115,7 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         populateDropdown(classListElement, classesForSubject, "simpleList");
         classButtonTextElement.textContent = "Виберіть клас";
         classListElement.style.display = 'none';
+        classListElement.classList.remove('.visible-list');
     }
 }
 
@@ -238,6 +239,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
