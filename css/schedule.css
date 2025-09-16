@@ -40,11 +40,12 @@
     font-family: 'SourceSans3';
     position: relative;
     color: var(--text-color);
+    /*transition: box-shadow 0.8s ease-in-out, border-color 0.8s ease-in-out;*/
 }
-#Select.click-button{
+/*#Select.click-button{
   border-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
-}
+}*/
 .first-option{
     display: flex;
     flex-direction: row;
@@ -87,6 +88,10 @@
   opacity: 1;
     /*display: flex; Показати, коли додається клас visible */
 }
+#Days.visible #Select{
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
 
 #Days li {
     padding: 1vmin;
@@ -104,4 +109,5 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
