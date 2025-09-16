@@ -49,6 +49,7 @@ export function closeAllDropdowns() {
         // Знаходимо батьківський елемент і видаляємо клас
         const parentContainer = dropdown.parentElement;
         if (parentContainer && parentContainer.classList.contains('click-button')) {
+            console.log("Проблема зовні");
             parentContainer.classList.remove('click-button');
         }
     });
@@ -237,6 +238,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
