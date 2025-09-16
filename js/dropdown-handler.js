@@ -44,13 +44,13 @@ function populateDropdown(listElement, data, type) {
 export function closeAllDropdowns() {
     const allDropdowns = document.querySelectorAll('.dropdown-list');
     allDropdowns.forEach(dropdown => {
-        //dropdown.classList.remove('.visible-list');
+        dropdown.classList.remove('visible-list');
         console.log("Перевірка зовні");
         // Знаходимо батьківський елемент і видаляємо клас
         const parentContainer = dropdown.parentElement;
         if (parentContainer && parentContainer.classList.contains('click-button')) {
             console.log("Проблема зовні");
-            dropdown.classList.remove('.visible-list');
+            //allDropdowns.classList.remove('visible-list');
             parentContainer.classList.remove('click-button');
         }
     });
@@ -239,6 +239,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
