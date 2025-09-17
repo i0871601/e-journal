@@ -183,6 +183,7 @@ body{
 #toggle-add-grade:checked ~ .add-grade-container .add-grade-content {
     max-height: 200px; /* Задайте достатню висоту */
     opacity: 1;
+    z-index: 20;
 }
 
 #toggle-add-grade:checked ~ .add-grade-container .add-grade-button::before {
@@ -220,6 +221,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
 
 
