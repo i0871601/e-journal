@@ -40,7 +40,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
         </div>
         <button id="saveLessonButton">Зберегти урок</button>
     </div>`;
-    contentContainer.insertAdjacentHTML('afterend', addLessonFormHTML);
+    contentContainer.appendChild(addLessonFormHTML);
 
     const lessonTypePara = document.getElementById("lessonType-Button").querySelector("p");
     const lessonTypeList = document.getElementById("lessonTypeList");
