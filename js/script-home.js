@@ -26,20 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const isChecked = event.target.checked;
 
             if (isChecked) {
+                if (event.target.id === 'toggle-schedule') {
+                    initScheduleLogic();
+                } 
                 allCheckboxes.forEach(otherCheckbox => {
                     if (otherCheckbox !== event.target) {
                         otherCheckbox.checked = false;
                     }
                 });
             }
-            if (isChecked) {
-                if (event.target.id === 'toggle-schedule') {
-                    initScheduleLogic();
-                } 
-            }
         });
     });
 });
+
 
 
 
