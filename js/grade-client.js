@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 import { request } from './config.js';
-import { closeAllDropdowns, toggleDropdown } from './dropdown-handler.js'; 
+import { /*closeAllDropdowns,*/ toggleDropdown } from './dropdown-handler.js'; 
 
 export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, refreshJournalCallback) => {
     const contentContainer = document.getElementById("add-grade-content");
@@ -67,7 +67,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            toggleDropdown(lessonTypeButton, lessonTypeList);
+            //toggleDropdown(lessonTypeButton, lessonTypeList);
         });
     
         const lessonTypeInputContainer = document.getElementById("lessonTypeInput");
