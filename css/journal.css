@@ -15,6 +15,7 @@ body{
 .TabletJournal{
   overflow-y: auto;
   flex-grow: 1;
+  padding-left: 3%;
 }
 .TabletJournal::-webkit-scrollbar{
   background-color: var(--fon-color);
@@ -33,12 +34,15 @@ body{
   gap: 3vmin;
   width: 95%;
   height: 100%;
-  padding-left: 3%;
   font-family: 'SourceSans3';
   flex-grow: 1;
 }
-.contentJournal h3{
+.contentJournal h2{
   margin-bottom: 0;
+  padding-left: 3%;
+}
+.Limits{
+  position: relative;
 }
 
 .dropdown-button div{
@@ -55,6 +59,7 @@ body{
   flex-direction: row;
   width: clamp(300px, 70%, 370px);
   gap: 5vmin;
+  padding-left: 3%;
 }
 #Select-Subject, #ClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
@@ -128,6 +133,57 @@ body{
     color: var(--fon-color-2);
     background-color: var(--color-accent);
 }
+/* Стилі для кнопки "Додати оцінку" */
+.add-grade-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #556B2F; /* Оливковий колір */
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-grade-button::before {
+    content: '+';
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Стилі для контейнера з формою */
+.add-grade-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    position: absolute;
+}
+
+/* Приховуємо стандартний checkbox */
+#toggle-add-grade {
+    display: none;
+}
+
+/* Коли checkbox позначений, показуємо контент і змінюємо кнопку */
+#toggle-add-grade:checked ~ .add-grade-container .add-grade-content {
+    max-height: 200px; /* Задайте достатню висоту */
+    opacity: 1;
+}
+
+#toggle-add-grade:checked ~ .add-grade-container .add-grade-button::before {
+    content: 'x';
+    transform: rotate(180deg);
+}
 
 #ClassTeacher{
   display: none;
@@ -159,4 +215,5 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
