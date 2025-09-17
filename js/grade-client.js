@@ -67,7 +67,7 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
     if (lessonTypeButton && lessonTypeList) {
         lessonTypeButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            //toggleDropdown(lessonTypeButton, lessonTypeList);
+            toggleDropdown(lessonTypeButton, lessonTypeList);
         });
     
         const lessonTypeInputContainer = document.getElementById("lessonTypeInput");
