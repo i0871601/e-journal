@@ -3,7 +3,7 @@ import { request } from './config.js';
 import { closeAllDropdowns, toggleDropdown } from './dropdown-handler.js'; 
 
 export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, refreshJournalCallback) => {
-    const contentContainer = document.getElementById("GradeOfJournal");
+    const contentContainer = document.getElementById("add-grade-content");
     const existingForm = document.getElementById("add-lesson-form");
     if (existingForm) {
         existingForm.remove();
@@ -24,7 +24,6 @@ export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, 
 
     const addLessonFormHTML = `
     <div id="add-lesson-form">
-        <h3>Додати новий урок</h3>
         <input type="text" id="lessonDateInput" placeholder="Дата (дд.мм.рррр)" required>
         <input type="text" id="lessonTopicInput" placeholder="Тема уроку" required>
         <div id="lessonTypeInput" class="container-all">
