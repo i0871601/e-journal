@@ -113,6 +113,55 @@ body {
     gap: 15%;
 }
 
+/* Стилі для кнопки "Додати оцінку" */
+.add-grade-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #556B2F; /* Оливковий колір */
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-grade-button::before {
+    content: '+';
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Стилі для контейнера з формою */
+.add-grade-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+/* Приховуємо стандартний checkbox */
+#toggle-add-grade {
+    display: none;
+}
+
+/* Коли checkbox позначений, показуємо контент і змінюємо кнопку */
+#toggle-add-grade:checked ~ .add-grade-container .add-grade-content {
+    max-height: 200px; /* Задайте достатню висоту */
+    opacity: 1;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+#toggle-add-grade:checked ~ .add-grade-container .add-grade-button::before {
+    content: 'x';
+    transform: rotate(180deg);
+}
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
     .Body {
@@ -165,6 +214,7 @@ body {
     opacity: 1;
   }
 }
+
 
 
 
