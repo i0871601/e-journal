@@ -171,6 +171,7 @@ body{
     background-color: #f0f0f0;
     border-radius: 8px;
     position: absolute;
+    overflow: auto;
 }
 
 /* Приховуємо стандартний checkbox */
@@ -220,6 +221,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
 
 
