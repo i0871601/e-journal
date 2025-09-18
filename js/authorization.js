@@ -10,17 +10,22 @@ const messages = {
   passwordUpdateSuccess: {status: 'success', text: "Пароль успішно оновлено!"},
   passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}
 };
+//Всі html об'єкти
+const button = document.getElementById('loginButton');
+const defaultText = button.querySelector('.default-text');
+const dots = button.querySelector('.dots');
+const form = document.getElementById('loginForm');
+const passwordField = document.getElementById('password');
+const newPasswordField = document.getElementById('newPassword');
+const confirmNewPasswordField = document.getElementById('confirmNewPassword');
+const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
+
 function errorButton(){
-    const button = document.querySelector('#loginButton');
     button.style.pointerEvents = 'none';
     setTimeout(() => {
         button.style.pointerEvents = 'auto';
     }, 1000);
 }
-
-const button = document.getElementById('loginButton');
-const defaultText = button.querySelector('.default-text');
-const dots = button.querySelector('.dots');
 
 export function setButtonState(isLoading, text = "Увійти") {
     if (isLoading) {
@@ -82,12 +87,6 @@ export async function updatePassword(lastName, newPasswordHash) {
     }
     return data;
 }
-
-const form = document.getElementById('loginForm');
-const passwordField = document.getElementById('password');
-const newPasswordField = document.getElementById('newPassword');
-const confirmNewPasswordField = document.getElementById('confirmNewPassword');
-const newPasswordFieldsContainer = document.getElementById('newPasswordFields');
 
 function handleFormSubmission(event) {
     event.preventDefault();
@@ -198,4 +197,3 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
-
