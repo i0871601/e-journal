@@ -11,15 +11,9 @@ const messages = {
   passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}
 };
 function errorButton(){
-    const inputOne = document.querySelector('#lastName');
-    const inputTwo = document.querySelector('#password');
     const button = document.querySelector('#loginButton');
-    inputOne.classList.add('error');
-    inputTwo.classList.add('error');
     button.style.pointerEvents = 'none';
     setTimeout(() => {
-        inputOne.classList.remove('error');
-        inputTwo.classList.remove('error');
         button.style.pointerEvents = 'auto';
     }, 1000);
 }
@@ -204,3 +198,4 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
