@@ -30,6 +30,7 @@ body {
   align-items: center;
   flex-shrink: 0;
   transition: width 0.7s ease-in-out;
+  z-index: 70;
 }
 .button-container {
   width: 25%;
@@ -113,7 +114,7 @@ body {
   }
   .Schedule, .Journal{
     height: 0;
-    transition: height 0.65s ease-in-out, opacity 0.65s ease-in-out;;
+    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;;
   }
   #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
     width: 100%;
@@ -137,3 +138,4 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
