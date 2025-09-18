@@ -7,11 +7,10 @@
   --color2: #262626;
   --text-color: #878787;
 }
-
 body {
+  height: 100dvh;
   margin: 0;
   padding: 0;
-  height: 100dvh;
   background-color: var(--fon-color);
   color: var(--color-accent);
   display: flex;
@@ -20,7 +19,6 @@ body {
   flex-direction: column;
   position: relative;
 }
-
 h1{
   font-family: 'Aristotelica';
   font-weight: 400;
@@ -29,7 +27,6 @@ h1{
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards; 
 }
-
 .loginForm, #newPasswordFields {
   display: flex;
   flex-direction: column;
@@ -37,90 +34,67 @@ h1{
   align-items: center;
   gap: 1.5vmin;
 }
-
 .loginForm {
   width: 30vmin;
   box-sizing: border-box;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
 }
-
-#newPasswordFields{
+#newPasswordFields {
   width: 100%;
 }
-
-.hidden{
+.hidden {
   display: none !important;
 }
-
-.loginForm input, 
-.loginForm button{
+.loginForm input, .loginForm button {
   width: 100%;
-  box-sizing: border-box;
-  border-radius: 25vmin;
-  font-size: clamp(16px, 2.35vh, 40px);
-  transition: all 0.3s ease-in-out;
   padding: 1.25vmin 5%;
+  border-radius: 25vmin;
+  box-sizing: border-box;
+  font-size: clamp(16px, 2.35vh, 40px);
   font-family: 'SourceSans3';
   font-weight: 400;
+  transition: all 0.3s ease-in-out;
 }
-
 .loginForm input {
   border: 0.22vmin solid var(--color1);
   background-color: var(--color2);
   color: var(--text-color);
   outline: none;
 }
-#lastName.error{
-  border: 0.22vmin solid #f5332c;
-}
-#password.error{
-  border: 0.22vmin solid #f5332c;
-}
-
 .loginForm button{
+  border: 0;
   background-color: var(--text-color);
   color: var(--color2);
-  border: 0;
 }
-
-.loginForm input:hover
-/*, .loginForm input:focus*/{
+.loginForm input:hover{
   border: 0.22vmin solid var(--color-accent);
-  color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
+  color: var(--color-accent);
 }
 .loginForm input:focus{
   color: var(--color-accent-shadow);
   caret-color: var(--color-accent);
 }
-
 .loginForm button:hover{
   transform: scale(1.03);
   background-color: var(--color-accent);
   font-size: clamp(16px, 2.37vh, 40px);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-
 .loginForm button.active-animation{
   transform: none;
   background-color: var(--color-accent);
   font-size: clamp(16px, 2.35vh, 40px);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-/*Error*/
-.errorMessage{
-  color: #f5332c;
-  cursor: default;
-  font-size: clamp(8px, 1.5vh, 15px);
-}
 footer{
   width: auto;
-  position: absolute;
   bottom: 0;
   font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
   cursor: default;
+  position: absolute;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
 }
@@ -129,7 +103,7 @@ footer{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px; /* задає проміжки між кругами*/
+  gap: 4px;
   height: 16px;
   vertical-align: middle;
 }
