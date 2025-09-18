@@ -1,16 +1,8 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-import { API_URL_AUTHORIZATION } from './config.js';
+import { API_URL_AUTHORIZATION, messages } from './config.js';
 import { MessageText } from '../messageBox.js';
 
-const messages = {
-  loginSuccess: {status: 'success', text: "Успішний вхід!"},
-  loginError: {status: 'error', text: "Помилка: невірний логін чи пароль."},
-  fieldsEmpty: {status: 'error', text: "Будь ласка, заповніть всі поля."},
-  passwordMismatch: {status: 'error', text: "Паролі не співпадають або поле порожнє."},
-  passwordUpdateSuccess: {status: 'success', text: "Пароль успішно оновлено!"},
-  passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}
-};
-//Всі html об'єкти
+//Всі html об'єкти для скрипта
 const button = document.getElementById('loginButton');
 const defaultText = button.querySelector('.default-text');
 const dots = button.querySelector('.dots');
@@ -197,3 +189,4 @@ export function initAuth() {
 }
 
 document.addEventListener('DOMContentLoaded', initAuth);
+
