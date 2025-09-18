@@ -27,8 +27,7 @@
     flex-direction: column;
     gap: 3vmin;
     width: 95%;
-    height: 100%;
-    padding-left: 3%;
+    height: 95%;
     font-family: 'SourceSans3';
 }
 #Select{
@@ -110,6 +109,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
