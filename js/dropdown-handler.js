@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 
-import { request } from './config.js';
+import { request, getUserData } from './config.js';
 import { displayFullJournal, displayGrades } from './journal-tables.js';
 import { setupAddLessonForm } from './grade-client.js';
 
@@ -147,7 +147,8 @@ function createUpdateGradeCallback(subject, className) {
     };
 }
 
-export function initDropdown(userData) {
+export function initDropdown() {
+    const userData = getUserData();
     if (!userData || !userData.data) {
         console.error("Помилка: Неповні дані користувача для ініціалізації випадаючого списку.");
         return;
@@ -241,6 +242,7 @@ export function initDropdown(userData) {
         }
     }
 }
+
 
 
 
