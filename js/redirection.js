@@ -25,11 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (event.target.id ==='toggle-journal') {
                     const userData = getUserData();
-                    if(uaerData){ initDropdown(userData); }
+                    if(userData){ initDropdown(userData); }
                 }
             }
         });
     });
 });
+
 
 
