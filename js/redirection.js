@@ -10,7 +10,6 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
-import { getUserData } from './config.js';
 import { initScheduleLogic } from './schedule.js';
 import { initDropdown } from './dropdown-handler.js';
 
@@ -24,13 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     initScheduleLogic();
                 }
                 if (event.target.id ==='toggle-journal') {
-                    const userData = getUserData();
-                    if(userData){ initDropdown(userData); }
+                    initDropdown();
                 }
             }
         });
     });
 });
+
 
 
 
