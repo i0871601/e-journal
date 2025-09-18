@@ -16,7 +16,6 @@ import { initDropdown } from './dropdown-handler.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
-    const userData = getUserData();
 
     allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (event) => {
@@ -24,11 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (event.target.id === 'toggle-schedule') {
                     initScheduleLogic();
                 }
-                if (event.target.id ==='toggle-journal'){
-                    if(uaerData){initDropdown(userData);}
+                if (event.target.id ==='toggle-journal') {
+                    const userData = getUserData();
+                    if(uaerData){ initDropdown(userData); }
                 }
             }
         });
     });
 });
+
 
