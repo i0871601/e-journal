@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', (event) => {
-            const isChecked = event.target.checked;
-
-            if (isChecked) {
+            if (event.target.checked) {
                 if (event.target.id === 'toggle-schedule') {
                     initScheduleLogic();
                 }
@@ -33,3 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
