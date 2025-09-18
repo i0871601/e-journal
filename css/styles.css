@@ -125,7 +125,7 @@ footer{
 
 @media (orientation: portrait){
   .loginForm {
-    width: 70vmin;
+    width: 50vmin;
   }
   .loginForm button:hover{
     transform: none;
