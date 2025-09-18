@@ -5,168 +5,135 @@
   --color-accent: #f56e0f;
 }
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: 100dvh;
-    display: flex;
-    justify-content: center;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 }
-
 .toggle-checkbox {
-    display: none;
+  display: none;
 }
-
 .Body {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
-
 .Menu {
-    background-color: var(--fon-color);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: width 0.7s ease-in-out;
-    flex-shrink: 0;
-    
+  width: 100%;
+  height: 100%;
+  background-color: var(--fon-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  transition: width 0.7s ease-in-out;
+}
+.button-container {
+  width: 25%;
+  height: 35%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 21%;
+  transition: all 0.5s ease-in-out;
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards; 
+}
+.button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease-in-out;
+}
+#button-schedule {
+  background-image: url('../image/schedule.svg');
+}
+#button-journal {
+  background-image: url('../image/journale.svg');
+}
+.button:hover {
+  transform: scale(1.07);
 }
 #copyright{
-    width: auto;
-    position: fixed;
-    bottom: 0;
-    font-size: clamp(5px, 1.3vh, 13px);
-    color: var(--text-color);
-    cursor: default;
-    -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
-    animation: fadeUp 1.7s ease-in-out forwards;
+  width: auto;
+  bottom: 0;
+  position: fixed;
+  cursor: default;
+  font-size: clamp(5px, 1.3vh, 13px);
+  color: var(--text-color);
+  -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
+  animation: fadeUp 1.7s ease-in-out forwards;
 }
-
-.button-container {
-    width: 25%;
-    height: 35%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    gap: 21%;
-    transition: all 0.5s ease-in-out;
-    -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
-    animation: fadeUp 1.7s ease-in-out forwards; 
-}
-
-.button {
-    width: 100%;
-    height: 100%;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: all 0.5s ease-in-out;
-}
-
-#button-schedule {
-    background-image: url('../image/schedule.svg');
-}
-
-#button-journal {
-    background-image: url('../image/journale.svg');
-}
-
-.button:hover {
-    transform: scale(1.07);
-}
-
 .Schedule, .Journal {
-    width: 0;
-    height: 100%;
-    background-color: --fon-color-2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    transition: width 0.65s ease-in-out, opacity 0.65s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
+  width: 0;
+  height: 100%;
+  background-color: --fon-color-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
-
 #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
-    width: 35%;
+  width: 35%;
 }
-
 #toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
-    width: 65%;
-    opacity: 1;
-    visibility: visible;
+  width: 65%;
+  opacity: 1;
+  visibility: visible;
 }
-
-/* Стилі для button-container при активації будь-якої кнопки */
 .toggle-checkbox:checked ~ .Body .Menu .button-container {
-    height: 35%;
-    flex-direction: column;
-    gap: 15%;
+  height: 35%;
+  flex-direction: column;
+  gap: 15%;
 }
-
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
-    .Body {
-        flex-direction: column-reverse;
-    }
-    
-    .Menu {
-        transition: height 0.7s ease-in-out;
-    }
-    .button-container{
-        width: 27%;
-        height: 35%;
-        flex-direction: column;
-    }
-    .Schedule, .Journal{
-        height: 0;
-        transition: height 0.65s ease-in-out, opacity 0.65s ease-in-out;;
-    }
-
-    #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
-        width: 100%;
-        height: 35%;
-    }
-    
-    #toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
-        width: 100%;
-        height: 65%;
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* Стилі для button-container при активації будь-якої кнопки */
-    .toggle-checkbox:checked ~ .Body .Menu .button-container {
-        height: 35%;
-        width: 55%;
-        align-content: center;
-        flex-direction: row;
-        gap: 15%;
-    }
+  .Body {
+    flex-direction: column-reverse;
+  }  
+  .Menu {
+    transition: height 0.7s ease-in-out;
+  }
+  .button-container{
+    width: 27%;
+    height: 35%;
+    flex-direction: column;
+  }
+  .Schedule, .Journal{
+    height: 0;
+    transition: height 0.65s ease-in-out, opacity 0.65s ease-in-out;;
+  }
+  #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
+    width: 100%;
+    height: 35%;
+  }
+  #toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
+    width: 100%;
+    height: 65%;
+    opacity: 1;
+    visibility: visible;
+  }
+  .toggle-checkbox:checked ~ .Body .Menu .button-container {
+    height: 35%;
+    width: 55%;
+    align-content: center;
+    flex-direction: row;
+    gap: 15%;
+  }
 }
 @keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes blink{
-  0%, 80%, 100%{
-    opacity: 0.2;
-  }
-  40%{
-    opacity: 1;
-  }
-}
-
-
-
-
-
