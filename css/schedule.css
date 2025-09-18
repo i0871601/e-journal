@@ -94,6 +94,7 @@
 
 #Days li {
     padding: 1vmin;
+    padding-left: 3%;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
@@ -109,6 +110,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
