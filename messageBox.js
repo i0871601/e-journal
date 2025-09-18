@@ -30,7 +30,7 @@ const messageBoxStyles = `
     opacity: 0;
     transition: max-width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
-    z-index: 70;
+    z-index: 100;
   }
   #message-text{
     display: flex;
@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 export {FonColor};
+
 
 
 
