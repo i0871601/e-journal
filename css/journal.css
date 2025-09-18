@@ -18,7 +18,7 @@ body{
   padding-left: 3%;
   padding-left: 3%;
   padding-right: 3%;
-  padding-bottom: 3%;
+  padding-bottom: 2.9%;
 }
 .TabletJournal::-webkit-scrollbar{
   background-color: var(--fon-color);
@@ -163,18 +163,26 @@ body{
   justify-content: space-between;
   padding-left: 3%;
   padding-right: 3%;
-}/* Стилі для контейнера з формою */
+}
+.Title p{
+  margin: 0;
+  padding: 0;
+}
+/* Стилі для контейнера з формою */
 .add-grade-content {
+    height: 0;
     max-height: 0;
     opacity: 0;
     transition: max-height 0.5s ease, opacity 0.5s ease;
     top: 0;
     left: 0;
-    width: 100%;
+    display: flex;
+    width: 0;
     background-color: #f0f0f0;
     border-radius: 8px;
     position: absolute;
     overflow: auto;
+    flex-direction: column;
 }
 
 /* Приховуємо стандартний checkbox */
@@ -184,10 +192,11 @@ body{
 
 /* Коли checkbox позначений, показуємо контент і змінюємо кнопку */
 #toggle-add-grade:checked ~ .add-grade-container .add-grade-content {
-    height: 65vh;
     max-height: 55vh;
     opacity: 1;
     z-index: 20;
+    height: auto;
+    width: 100%;
 }
 
 #toggle-add-grade:checked ~ .add-grade-container .add-grade-button::before {
@@ -224,6 +233,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
 
 
