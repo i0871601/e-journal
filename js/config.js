@@ -3,7 +3,6 @@ export const API_URL_AUTHORIZATION = "https://worker-refuge.i087.workers.dev/";
 export const API_URL = "https://worker-refuge.i087.workers.dev/";
 
 export const messages = {
-  loginSuccess: {status: 'success', text: "Успішний вхід!"},
   loginError: {status: 'error', text: "Помилка: невірний логін чи пароль."},
   fieldsEmpty: {status: 'error', text: "Будь ласка, заповніть всі поля."},
   passwordMismatch: {status: 'error', text: "Паролі не співпадають або поле порожнє."},
@@ -48,6 +47,7 @@ export async function request(payload) {
         return { success: false, message: error.message };
     }
 }
+
 
 
 
