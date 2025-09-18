@@ -44,10 +44,6 @@ body{
   margin-bottom: 0;
   padding-left: 3%;
 }
-.Limits{
-  position: relative;
-}
-
 .dropdown-button div{
   width: 5vmin;
   background-image: url('../image/down.svg');
@@ -64,6 +60,7 @@ body{
   gap: 5vmin;
   padding-left: 3%;
   padding-right: 3%;
+  position: relative;
 }
 #Select-Subject, #ClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
@@ -227,6 +224,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
 
 
