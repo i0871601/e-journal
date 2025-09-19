@@ -29,6 +29,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   flex-shrink: 0;
   transition: width 0.5s ease-in-out;
 }
@@ -142,3 +143,4 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
