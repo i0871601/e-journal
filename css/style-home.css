@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--fon-color);
+  /*background-color: var(--fon-color);*/
 }
 .toggle-checkbox {
   display: none;
@@ -126,7 +126,7 @@ body {
     transition: grid-template-rows 0.5s ease-in-out;
   }  
   .Menu {
-    order: 2;
+    /*order: 2;*/
   }
   .button-container{
     width: 27%;
@@ -134,7 +134,7 @@ body {
     flex-direction: column;
   }
   .MainContent{
-    order: 1;
+    /*order: 1;*/
   }
   #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body{
     grid-template-columns: 1fr;
@@ -148,6 +148,7 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
 
