@@ -20,7 +20,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 0;
-  transition: grid-template-columns 0.5s;
+  transition: grid-template-columns 0.5s ease-in-out;
 }
 .Menu {
   width: 100%;
@@ -75,37 +75,54 @@ body {
   animation: fadeUp 1.7s ease-in-out forwards;
 }
 .MainContent{
-  background-color: var(--fon-color-2);
   width: 100%;
   height: 100%
+  position: relative;
+  overflow: hidden;
+  background-color: var(--fon-color-2);
+  transition: width 0.5s ease-in-out;
 }
 .Schedule, .Journal {
-  width: 0;
+  width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  opacity: 0;
-  visibility: hidden;
-  transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+}
+.Schedule{
+  transform: translateX(0);
+}
+.Journal{
+  transform: translateX(100%);
 }
 #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body {
   grid-template-columns: 35% 65%;
 }
-.toggle-checkbox:checked ~ .Body .Menu .button-container {
-  height: 35%;
-  flex-direction: column;
-  gap: 15%;
+#toggle-schedule:checked ~ .Body .Schedule{
+  transform: translateX(0);
+}
+#toggle-schedule:checked ~ .Body .Jornal{
+  transform: translateX(100%);
+}
+#toggle-journal:checked ~ .Body .Schedule{
+  transform: translateX(-100%);
+}
+#toggle-journal:checked ~ .Body .Jornal{
+  transform: translateX(0);
 }
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
   .Body {
     grid-template-columns: 1fr;
     grid-template-rows: 0 1fr;
-    transition: grid-template-rows 0.5s;
+    transition: grid-template-rows 0.5s ease-in-out;
   }  
   .Menu {
+    order: 2;
     transition: height 0.5s ease-in-out;
   }
   .button-container{
@@ -113,25 +130,15 @@ body {
     height: 35%;
     flex-direction: column;
   }
-  .Schedule, .Journal{
-    height: 0;
-    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;;
+  .MainContent{
+    order: 1;
+    transition: height 0.5 ease-in-out;
   }
   #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body{
     grid-template-rows: 65% 35%;
-  }
-  .toggle-checkbox:checked ~ .Body .Menu .button-container {
-    height: 35%;
-    width: 55%;
-    align-content: center;
-    flex-direction: row;
-    gap: 15%;
   }
 }
 @keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-
-
-
