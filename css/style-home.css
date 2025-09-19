@@ -121,13 +121,14 @@ body {
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
   .Body {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0;
+    grid-template-columns: 100%;
+    grid-template-rows: 100% 0;
     transition: grid-template-rows 0.7s ease-in-out;
   }  
   .Menu {
+    grid-row: 2;
     /*order: 2;*/
-    transition: height 0.5s ease-in-out;
+    transition: height 0.7s ease-in-out;
   }
   .button-container{
     width: 27%;
@@ -135,10 +136,11 @@ body {
     flex-direction: column;
   }
   .MainContent{
+    grid-row: 1;
     /*order: 1;*/
   }
   #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body{
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: 35% 65%;
   }
   #toggle-schedule:checked ~ .Body .Menu .button-container, #toggle-journal:checked ~ .Body .Menu .button-container{
@@ -149,6 +151,7 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
 
