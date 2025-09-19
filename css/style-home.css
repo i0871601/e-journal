@@ -99,10 +99,10 @@ body {
 .Journal {
   transform: translateX(100%);
 }
-#toggle-chekbox:checked ~ .Body .Menu {
+#toggle-checkbox:checked ~ .Body .Menu {
   width: 35%;
 }
-.toggle-chekbox:checked ~ .Body .MainContent {
+.toggle-checkbox:checked ~ .Body .MainContent {
   width: 65%;
   opacity: 1;
 }
@@ -164,4 +164,5 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
