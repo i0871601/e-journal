@@ -21,7 +21,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 0;
-  transition: grid-template-columns 0.5s ease-in-out;
+  transition: grid-template-columns 0.7s ease-in-out;
 }
 .Menu {
   /*width: 100%;*/
@@ -123,7 +123,7 @@ body {
   .Body {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0;
-    transition: grid-template-rows 0.5s ease-in-out;
+    transition: grid-template-rows 0.7s ease-in-out;
   }  
   .Menu {
     /*order: 2;*/
@@ -148,6 +148,7 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
 
