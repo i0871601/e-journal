@@ -127,6 +127,7 @@ body {
   }  
   .Menu {
     /*order: 2;*/
+    transition: height 0.5s ease-in-out;
   }
   .button-container{
     width: 27%;
@@ -148,6 +149,7 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
 
