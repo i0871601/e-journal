@@ -127,7 +127,6 @@ body {
   }  
   .Menu {
     order: 2;
-    transition: height 0.5s ease-in-out;
   }
   .button-container{
     width: 27%;
@@ -136,7 +135,6 @@ body {
   }
   .MainContent{
     order: 1;
-    transition: height 0.5 ease-in-out;
   }
   #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body{
     grid-template-columns: 1fr;
@@ -150,6 +148,7 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
 
