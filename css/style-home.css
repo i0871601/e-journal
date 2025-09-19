@@ -73,30 +73,58 @@ body {
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
 }
-.Schedule, .Journal {
-  width: 0;
+.MainContent {
+  width: 0%;
   height: 100%;
+  position: relative;
+  opacity: 0;
+  overflow: hidden;
   background-color: var(--fon-color-2);
+}
+.Schedule, .Journal {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  opacity: 0;
-  visibility: hidden;
-  transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
-#toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
+.Schedule {
+  transform: translateX(0);
+}
+
+.Journal {
+  transform: translateX(100%);
+}
+#toggle-chekbox:checked ~ .Body .Menu {
   width: 35%;
 }
-#toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
+.toggle-chekbox:checked ~ .Body .MainContent {
   width: 65%;
   opacity: 1;
-  visibility: visible;
 }
 .toggle-checkbox:checked ~ .Body .Menu .button-container {
   height: 35%;
   flex-direction: column;
   gap: 15%;
+}
+#toggle-schedule:checked ~ .Body .Schedule {
+  transform: translateX(0);
+}
+
+#toggle-schedule:checked ~ .Body .Journal {
+  transform: translateX(100%);
+}
+
+#toggle-journal:checked ~ .Body .Schedule {
+  transform: translateX(-100%);
+}
+
+#toggle-journal:checked ~ .Body .Journal {
+  transform: translateX(0);
 }
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
@@ -111,19 +139,18 @@ body {
     height: 35%;
     flex-direction: column;
   }
-  .Schedule, .Journal{
+  .MainContent{
     height: 0;
     transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;;
   }
-  #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
+  #toggle-checkbox:checked ~ .Body .Menu {
     width: 100%;
     height: 35%;
   }
-  #toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
+  #toggle-checkbox:checked ~ .Body .MainContent {
     width: 100%;
     height: 65%;
     opacity: 1;
-    visibility: visible;
   }
   .toggle-checkbox:checked ~ .Body .Menu .button-container {
     height: 35%;
@@ -137,3 +164,4 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
