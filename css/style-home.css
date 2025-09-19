@@ -78,7 +78,7 @@ body {
   animation: fadeUp 1.7s ease-in-out forwards;
   }
 
-#MainContent {
+.MainContent {
     width: 0; /* Початкова ширина */
     height: 100%;
     position: relative;
@@ -114,7 +114,7 @@ body {
 #toggle-schedule:checked ~ .Body .Menu {
     width: 35%;
 }
-#toggle-schedule:checked ~ .Body #MainContent {
+#toggle-schedule:checked ~ .Body .MainContent {
     width: 65%;
 }
 #toggle-schedule:checked ~ .Body .Schedule {
@@ -129,7 +129,7 @@ body {
 #toggle-journal:checked ~ .Body .Menu {
     width: 35%;
 }
-#toggle-journal:checked ~ .Body #MainContent {
+#toggle-journal:checked ~ .Body .MainContent {
     width: 65%;
 }
 #toggle-journal:checked ~ .Body .Schedule {
@@ -150,7 +150,7 @@ body {
         transition: height 0.5s ease-in-out;
     }
     
-    #MainContent {
+    .MainContent {
         width: 100%;
         height: 0;
         transition: height 0.5s ease-in-out;
@@ -174,7 +174,7 @@ body {
     #toggle-schedule:checked ~ .Body .Menu {
         height: 35%;
     }
-    #toggle-schedule:checked ~ .Body #MainContent {
+    #toggle-schedule:checked ~ .Body .MainContent {
         height: 65%;
     }
     #toggle-schedule:checked ~ .Body .Schedule {
@@ -187,7 +187,7 @@ body {
     #toggle-journal:checked ~ .Body .Menu {
         height: 35%;
     }
-    #toggle-journal:checked ~ .Body #MainContent {
+    #toggle-journal:checked ~ .Body .MainContent {
         height: 65%;
     }
     #toggle-journal:checked ~ .Body .Schedule {
@@ -201,4 +201,5 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
