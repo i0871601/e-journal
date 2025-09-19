@@ -29,7 +29,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   flex-shrink: 0;
   transition: width 0.5s ease-in-out;
 }
@@ -103,6 +102,9 @@ body {
 #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body {
   grid-template-columns: 35% 65%;
 }
+#toggle-schedule:checked ~ .Body .Menu .button-container, #toggle-journal:checked ~ .Body .Menu .button-container{
+  flex-direction: column;
+}
 #toggle-schedule:checked ~ .Body .Schedule{
   transform: translateX(0);
 }
@@ -136,12 +138,17 @@ body {
     transition: height 0.5 ease-in-out;
   }
   #toggle-schedule:checked ~ .Body, #toggle-journal:checked ~ .Body{
+    grid-template-columns: 1fr;
     grid-template-rows: 65% 35%;
+  }
+  #toggle-schedule:checked ~ .Body .Menu .button-container, #toggle-journal:checked ~ .Body .Menu .button-container{
+    flex-direction: row;
   }
 }
 @keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
 
 
