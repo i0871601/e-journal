@@ -1,40 +1,35 @@
-/* Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
-:root {
-    --fon-color: #151419;
-    --fon-color-2: #fbfbfb;
-    --color-accent: #f56e0f;
+/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
+:root{
+  --fon-color: #151419;
+  --fon-color-2: #fbfbfb; 
+  --color-accent: #f56e0f;
 }
-
 body {
-    height: 100dvh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 }
-
 .toggle-checkbox {
-    display: none;
+  display: none;
 }
-
-/* Зміни в Body: Flexbox */
 .Body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
-
 .Menu {
-    width: 100%; /* Початкова ширина */
-    height: 100%;
-    background-color: var(--fon-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    transition: width 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+  background-color: var(--fon-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  transition: width 0.5s ease-in-out;
 }
 .button-container {
   width: 25%;
@@ -42,6 +37,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
   gap: 21%;
   transition: all 0.5s ease-in-out;
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
@@ -70,138 +66,74 @@ body {
 #copyright{
   width: auto;
   bottom: 0;
-  cursor: default;
   position: fixed;
+  cursor: default;
   font-size: clamp(5px, 1.3vh, 13px);
   color: var(--text-color);
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
-  }
-
-.MainContent {
-    width: 0; /* Початкова ширина */
-    height: 100%;
-    position: relative;
-    overflow: hidden; /* Ключова властивість */
-    background-color: var(--fon-color-2);
-    transition: width 0.5s ease-in-out;
 }
-
-.Schedule,
-.Journal {
-    width: 100%; /* Дочірні елементи займають всю ширину батька */
-    height: 100%;
-    position: absolute; /* Позиціонуємо абсолютно відносно #MainContent */
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease-in-out; /* Анімуємо зміщення */
+.Schedule, .Journal {
+  width: 0;
+  height: 100%;
+  background-color: var(--fon-color-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
-
-.Schedule {
-    /* Початкове положення для розкладу */
-    transform: translateX(0);
+#toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
+  width: 35%;
 }
-
-.Journal {
-    /* Початкове положення для журналу (за межами екрану справа) */
-    transform: translateX(100%);
+#toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
+  width: 65%;
+  opacity: 1;
+  visibility: visible;
 }
-
-/* Анімація при натисканні на Розклад */
-#toggle-schedule:checked ~ .Body .Menu {
-    width: 35%;
+.toggle-checkbox:checked ~ .Body .Menu .button-container {
+  height: 35%;
+  flex-direction: column;
+  gap: 15%;
 }
-#toggle-schedule:checked ~ .Body .MainContent {
-    width: 65%;
-}
-#toggle-schedule:checked ~ .Body .Schedule {
-    transform: translateX(0); /* Розклад на місці */
-}
-#toggle-schedule:checked ~ .Body .Journal {
-    transform: translateX(100%); /* Журнал поза екраном */
-}
-
-
-/* Анімація при натисканні на Журнал */
-#toggle-journal:checked ~ .Body .Menu {
-    width: 35%;
-}
-#toggle-journal:checked ~ .Body .MainContent {
-    width: 65%;
-}
-#toggle-journal:checked ~ .Body .Schedule {
-    transform: translateX(-100%); /* Розклад від'їжджає вліво */
-}
-#toggle-journal:checked ~ .Body .Journal {
-    transform: translateX(0); /* Журнал з'являється */
-}
-
-
-/* Медіа-запити для портретної орієнтації */
+/* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
-    .Body {
-        flex-direction: column-reverse;
-    }
-    
-    .Menu {
-        width: 100%;
-        transition: height 0.5s ease-in-out;
-    }
-    
-    .MainContent {
-        width: 100%;
-        height: 0;
-        transition: height 0.5s ease-in-out;
-    }
-    
-    .Schedule,
-    .Journal {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.5s ease-in-out;
-    }
-    
-    .Schedule {
-        transform: translateY(0);
-    }
-    
-    .Journal {
-        transform: translateY(100%);
-    }
-    
-    #toggle-schedule:checked ~ .Body .Menu {
-        height: 35%;
-    }
-    #toggle-schedule:checked ~ .Body .MainContent {
-        height: 65%;
-    }
-    #toggle-schedule:checked ~ .Body .Schedule {
-        transform: translateY(0);
-    }
-    #toggle-schedule:checked ~ .Body .Journal {
-        transform: translateY(100%);
-    }
-    
-    #toggle-journal:checked ~ .Body .Menu {
-        height: 35%;
-    }
-    #toggle-journal:checked ~ .Body .MainContent {
-        height: 65%;
-    }
-    #toggle-journal:checked ~ .Body .Schedule {
-        transform: translateY(-100%);
-    }
-    #toggle-journal:checked ~ .Body .Journal {
-        transform: translateY(0);
-    }
+  .Body {
+    flex-direction: column-reverse;
+  }  
+  .Menu {
+    transition: height 0.5s ease-in-out;
+  }
+  .button-container{
+    width: 27%;
+    height: 35%;
+    flex-direction: column;
+  }
+  .Schedule, .Journal{
+    height: 0;
+    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;;
+  }
+  #toggle-schedule:checked ~ .Body .Menu, #toggle-journal:checked ~ .Body .Menu {
+    width: 100%;
+    height: 35%;
+  }
+  #toggle-schedule:checked ~ .Body .Schedule, #toggle-journal:checked ~ .Body .Journal {
+    width: 100%;
+    height: 65%;
+    opacity: 1;
+    visibility: visible;
+  }
+  .toggle-checkbox:checked ~ .Body .Menu .button-container {
+    height: 35%;
+    width: 55%;
+    align-content: center;
+    flex-direction: row;
+    gap: 15%;
+  }
 }
 @keyframes fadeUp {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-
-
-
