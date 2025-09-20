@@ -122,9 +122,9 @@
 }
 .status-icon{
   position: absolute;
-  left: 0.3rem;
-  width: 20px;
-  height: 20px;
+  left: 0.39rem;
+  width: 1.1rem;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: 2px solid;
   background-color: #fff;
@@ -143,6 +143,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
