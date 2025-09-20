@@ -107,10 +107,24 @@
     content: '';
     position: absolute;
     top: 0;
-    left: 10px;
+    left: 1rem;
     height: 100%;
-    width: 2px;
+    width: 0.1rem;
     background-color: var(--text-color);
+}
+.schedule-entry{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.status-icon{
+  position: absolute;
+  left: 0.3rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  background-color: #fff;
 }
 @font-face{
   font-family: 'SourceSans3';
@@ -118,4 +132,5 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
