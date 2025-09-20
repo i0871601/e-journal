@@ -177,19 +177,19 @@ export function initDropdown() {
                 console.log("Відправка до API:", payload);
                 console.log(`Відповідь:`, response);
                 if (response && response.grades && response.grades.length > 0) {
-                    // Об'єднуємо дані про оцінки з даними про уроки
-                    const combinedGrades = response.grades.map(grade => {
-                        // Знаходимо відповідний урок в масиві lessons
-                        const lessonInfo = response.lessons.find(lesson => lesson.lessonNumber === grade.lessonNumber && lesson.lessonType === grade.lessonType);
-                        // Повертаємо новий об'єкт, який містить дані з обох джерел
-                        return {
-                            ...grade,
-                            ...lessonInfo,
-                            // Додаємо інформацію про предмет для коректного відображення
-                            Subject: response.subject
-                        };
-                    });
-                    displayGrades(combinedGrades, userData.role, `${userData.lastName} ${userData.firstName}`);
+                    // КОРЕКТНЕ ОБ'ЄДНАННЯ ДАНИХ
+                    // Додаємо інформацію про предмет до кожної оцінки
+                    const gradesWithSubject = response.grades.map(grade => ({
+                        ...grade,
+                        Subject: response.subject,
+                    }));
+                    // Об'єднуємо всі необхідні дані в один об'єкт для displayGrades
+                    const finalData = {
+                        grades: gradesWithSubject,
+                        lessons: response.lessons,
+                        students: response.students
+                    };
+                    displayGrades(finalData, userData.role, `${userData.lastName} ${userData.firstName}`);
                 }
                 /*if (response && response.grades && response.grades.length > 0) {
                     displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
@@ -257,4 +257,5 @@ export function initDropdown() {
         }
     }
 }
+
 
