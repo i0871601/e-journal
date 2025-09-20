@@ -73,15 +73,6 @@ export function displayGrades(journalData, name) {
         const gradeValue = gradesMap.get(gradeKey) || '';
 
         let cellContent = gradeValue;
-            
-        const isLastNormalLesson = lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType;
-        const isLessonNumberGreaterThanFinal = parseInt(lesson.lessonNumber, 10) > parseInt(lastFinalLessonNumber, 10);
-            
-        if (isLastNormalLesson && isLessonNumberGreaterThanFinal) {
-            cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
-        } else {
-            cellContent = gradeValue;
-        }
 
         gradeCells += `<td class="grade-cell" data-lesson-number="${lesson.lessonNumber}" data-lesson-type="${lesson.lessonType}">${cellContent}</td>`;
     });
