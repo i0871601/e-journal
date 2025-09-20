@@ -38,6 +38,7 @@
     padding: 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     position: relative;
+    z-index: 50;
     color: var(--text-color);
     transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
@@ -116,6 +117,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 5%;
 }
 .status-icon{
   position: absolute;
@@ -126,11 +128,15 @@
   border: 2px solid;
   background-color: #fff;
 }
+.info-block h3, .info-block p{
+  margin: 0;
+}
 @font-face{
   font-family: 'SourceSans3';
   src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
+
 
 
