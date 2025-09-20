@@ -1,5 +1,5 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-export function displayGrades(grades, role, name) {
+export function displayGrades(journalData, name) {
     const tableContainer = document.querySelector(".TabletJournal");
     if (!tableContainer) {
         console.error("Елемент з класом '.TabletJournal' не знайдено.");
@@ -7,28 +7,23 @@ export function displayGrades(grades, role, name) {
     }
     tableContainer.innerHTML = '';
 
+    const lessons = journalData.lessons;
+    const grades = journalData.grades;
+    const studentName = name;
+
+    if ((!lessons || lessons.length === 0) || (!grades || grades.length === 0)) {
+        tableContainer.innerHTML = '<p>Журнал пустий. Немає записів та оцінок в журналі.</p>';
+        return;
+    }
     const table = document.createElement('table');
     table.classList.add('journal-table');
 
     const tableHeader = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = `<th>Предмет</th>`;
-
-    const lessons = grades.reduce((acc, current) => {
-        const uniqueId = `${current.lessonNumber}-${current.lessonType}`;
-        if (!acc.find(item => `${item.lessonNumber}-${item.lessonType}` === uniqueId)) {
-            acc.push(current);
-        }
-        return acc;
-    }, []).sort((a, b) => {
-        const numA = parseInt(a.lessonNumber, 10);
-        const numB = parseInt(b.lessonNumber, 10);
-        return numA - numB;
-    });
+    headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
 
     lessons.forEach(lesson => {
         let topicText = lesson.Topic || lesson.lessonType;
-
         switch (lesson.lessonType) {
             case 'Normal':
                 topicText = `Урок ${lesson.lessonNumber}`;
@@ -45,32 +40,76 @@ export function displayGrades(grades, role, name) {
             default:
                 topicText = lesson.Topic || lesson.lessonType;
         }
-
-        headerRow.innerHTML += `<th><p class="lesson-topic">${topicText}</p><p class="lesson-date">${lesson.Date}</p></th>`;
+        const date = lesson.Date || ' ';
+        headerRow.innerHTML += `<th 
+            data-lesson-number="${lesson.lessonNumber}"
+            data-lesson-type="${lesson.lessonType}"
+            data-lesson-topic="${lesson.Topic}"
+            data-lesson-date="${lesson.Date}">
+            <p class="lesson-topic">${topicText}</p>
+            <p class="lesson-date">${date}</p>
+        </th>`;
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
-
+    
     const tableBody = document.createElement('tbody');
-    const subjects = [...new Set(grades.map(g => g.Subject))];
 
-    subjects.forEach(subject => {
-        const subjectRow = document.createElement('tr');
-        subjectRow.innerHTML = `<td>${subject}</td>`;
-
-        const subjectGrades = grades.filter(g => g.Subject === subject);
-        lessons.forEach(lesson => {
-            const grade = subjectGrades.find(g => `${g.lessonNumber}-${g.lessonType}` === `${lesson.lessonNumber}-${lesson.lessonType}`);
-            const gradeValue = grade ? grade.Grade : '';
-            subjectRow.innerHTML += `<td>${gradeValue}</td>`;
-        });
-        tableBody.appendChild(subjectRow);
+    const gradesMap = new Map();
+    grades.forEach(g => {
+        const key = `${g.lessonNumber}-${g.lessonType}`;
+        gradesMap.set(key, g.grade);
     });
+    const lastFinalLesson = lessons.findLast(lesson => ['Thematic', 'Semester', 'Final'].includes(lesson.lessonType));
+    const lastFinalLessonNumber = lastFinalLesson ? lastFinalLesson.lessonNumber : 0;
+    const lastNormalLesson = lessons.findLast(lesson => lesson.lessonType === 'Normal');
 
+    const studentRow = document.createElement('tr');
+    const studentNameCell = `<td>${studentName}</td>`;
+
+    let gradeCells = '';
+    lessons.forEach(lesson => {
+        const gradeKey = `${lesson.lessonNumber}-${lesson.lessonType}`;
+        const gradeValue = gradesMap.get(gradeKey) || '';
+
+        let cellContent = gradeValue;
+            
+        const isLastNormalLesson = lastNormalLesson && lesson.lessonNumber === lastNormalLesson.lessonNumber && lesson.lessonType === lastNormalLesson.lessonType;
+        const isLessonNumberGreaterThanFinal = parseInt(lesson.lessonNumber, 10) > parseInt(lastFinalLessonNumber, 10);
+            
+        if (isLastNormalLesson && isLessonNumberGreaterThanFinal) {
+            cellContent = `<input type="text" value="${gradeValue}" class="grade-input" />`;
+        } else {
+            cellContent = gradeValue;
+        }
+
+        gradeCells += `<td class="grade-cell" data-lesson-number="${lesson.lessonNumber}" data-lesson-type="${lesson.lessonType}">${cellContent}</td>`;
+    });
+    studentRow.innerHTML = studentNameCell + gradeCells;
+    tableBody.appendChild(studentRow);
+    
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
-}
 
+    document.querySelectorAll('thead th').forEach(headerCell => {
+        if (headerCell.dataset.lessonNumber) {
+            headerCell.addEventListener('click', () => {
+                const lessonNumber = headerCell.dataset.lessonNumber;
+                const lessonType = headerCell.dataset.lessonType;
+                const lessonTopic = headerCell.dataset.lessonTopic;
+                const lessonDate = headerCell.dataset.lessonDate;
+
+                console.log('---------------------------');
+                console.log(`Клік на заголовок уроку:`);
+                console.log(`Номер уроку: ${lessonNumber}`);
+                console.log(`Тип уроку: ${lessonType}`);
+                console.log(`Дата: ${lessonDate}`);
+                console.log(`Тема: ${lessonTopic}`);
+                console.log('---------------------------');
+            });
+        }
+    });
+}
 export function displayFullJournal(journalData, updateGradeCallback) {
     const tableContainer = document.querySelector(".TabletJournal");
     if (!tableContainer) {
