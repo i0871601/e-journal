@@ -177,23 +177,8 @@ export function initDropdown() {
                 console.log("Відправка до API:", payload);
                 console.log(`Відповідь:`, response);
                 if (response && response.grades && response.grades.length > 0) {
-                    // КОРЕКТНЕ ОБ'ЄДНАННЯ ДАНИХ
-                    // Додаємо інформацію про предмет до кожної оцінки
-                    const gradesWithSubject = response.grades.map(grade => ({
-                        ...grade,
-                        Subject: response.subject,
-                    }));
-                    // Об'єднуємо всі необхідні дані в один об'єкт для displayGrades
-                    const finalData = {
-                        grades: gradesWithSubject,
-                        lessons: response.lessons,
-                        students: response.students
-                    };
-                    displayGrades(finalData, userData.role, `${userData.lastName} ${userData.firstName}`);
-                }
-                /*if (response && response.grades && response.grades.length > 0) {
                     displayGrades(response.grades, userData.role, `${userData.lastName} ${userData.firstName}`);
-                }*/ else {
+                } else {
                     console.log("Відповідь від API пуста або не містить даних журналу.");
                 }
                 console.log("Запит на отримання журналу учня відправлено.");
@@ -257,5 +242,6 @@ export function initDropdown() {
         }
     }
 }
+
 
 
