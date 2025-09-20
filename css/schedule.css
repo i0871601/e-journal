@@ -103,9 +103,19 @@
   padding-left: 7%;
 }
 
+#scheduleText::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    width: 2px;
+    background-color: var(--text-color);
+}
 @font-face{
   font-family: 'SourceSans3';
   src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
+
