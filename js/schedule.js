@@ -24,22 +24,54 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
         'student': ['Subject', 'Teacher_LastName'],
         'teacher': ['Subject', 'Class']
     };
-
+    
     const displayFields = dataMapping[role];
     const dayData = groupedByDay[selectedDay];
 
     if (dayData && dayData.length > 0) {
-        const dayBlock = document.createElement('div');
-        dayBlock.classList.add('schedule-day');
-
         dayData.forEach(item => {
-            const lessonInfo = document.createElement('p');
-            const linkHtml = item.Link ? `<a href="${item.Link}" target="_blank">Посилання</a>` : '';
-            const infoText = displayFields.map(field => item[field]).join(' | ');
-            lessonInfo.innerHTML = `${item.Time} | ${infoText} | ${linkHtml}`;
-            dayBlock.appendChild(lessonInfo);
-        });
-        contentSchedule.appendChild(dayBlock);
+            const entryArticle = document.createElement('article');
+            entryArticle.classList.add('schedule-entry');
+
+            const timeBlock = document.createElement('div');
+            timeBlock.classList.add('time-block');
+
+            const statusIcon = document.createElement('span');
+            statusIcon.classList.add('status-icon');
+
+            const timeElement = document.createElement('span');
+            timeElement.classList.add('time');
+            timeElement.textContent = item.Time;
+
+            timeBlock.appendChild(statusIcon);
+            timeBlock.appendChild(timeElement);
+
+            const infoBlock = document.createElement('div');
+            infoBlock.classList.add('info-block');
+
+            const titleElement = document.createElement('h3');
+            titleElement.classList.add('title');
+            titleElement.textContent = item[displayFields[0]];
+
+            const tagElement = document.createElement('p');
+            tagElement.classList.add('tag');
+            tagElement.textContent = item[displayFields[1]];
+
+            infoBlock.appendChild(titleElement);
+            infoBlock.appendChild(tagElement);
+
+            if (item.Link) {
+                const linkElement = document.createElement('a');
+                linkElement.href = item.Link;
+                linkElement.target = '_blank';
+                linkElement.textContent = 'Посилання';
+                infoBlock.appendChild(linkElement);
+            }
+            entryArticle.appendChild(timeBlock);
+            entryArticle.appendChild(infoBlock);
+
+            contentSchedule.appendChild(entryArticle);
+         });
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
     }
@@ -134,5 +166,6 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
