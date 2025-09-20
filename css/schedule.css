@@ -128,6 +128,11 @@
   border: 2px solid;
   background-color: #fff;
 }
+.info-block{
+  border-radius: 50px;
+  padding: 0 5%;
+  background-color: aqua;
+}
 .info-block h3, .info-block p{
   margin: 0;
 }
@@ -137,6 +142,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
