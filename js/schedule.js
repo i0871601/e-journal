@@ -49,8 +49,8 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             endTimeElement.classList.add('end-time');
             endTimeElement.textContent = endTime;
             
-            timeBlock.appendChild(startTimeElement);
-            timeBlock.appendChild(endTimeElement);
+            timeContainer.appendChild(startTimeElement);
+            timeContainer.appendChild(endTimeElement);
 
             const infoBlock = document.createElement('div');
             infoBlock.classList.add('info-block');
@@ -174,6 +174,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
