@@ -136,8 +136,7 @@
   width: 1.1rem;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 2px solid;
-  background-color: #fff;
+  background-color: var(--text-color);
 }
 .time{
   padding: 0 0 0 7%;
@@ -170,6 +169,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
