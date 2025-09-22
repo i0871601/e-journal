@@ -17,6 +17,27 @@ const selectedTextContainer = document.querySelector('.first-option p');
 const firstOptionDiv = document.querySelector('.first-option');
 const selectContainer = document.getElementById('Select');
 
+function TimeNow (startTime, endTime){
+    const now = new Data();
+    const currentHours = now.getHours();
+    const currentMinutes = now.getMinutes();
+
+    const [startHours, startMinutes] = startTime.split(':').map(Number);
+    const [endHours, endMinutes] = endTime.split(':').map(Number);
+
+    const currentTotalMinutes = currentHours * 60 + currentMinutes;
+    const startTotalMinutes = startHours * 60 +  startMinutes;
+    const endTotalMinutes = endHours * 60 +  endMinutes;
+
+    if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes){
+        const entryArticle = document.querySelector('.schedule-entry');
+        const statusIcon = document.querySelector('status-icon');
+
+        entryArticle.classList.add('current');
+        statusIcon.classList.add('current');
+    }
+}
+
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
     contentSchedule.innerHTML = '';
 
@@ -79,6 +100,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             entryArticle.appendChild(infoBlock);
 
             contentSchedule.appendChild(entryArticle);
+            TimeNow (startTime, endTime);
          });
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
@@ -174,6 +196,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
