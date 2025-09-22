@@ -8,9 +8,7 @@
   --color2: #262626;
   --text-color: #878787;
 }
-.Schedule{
-    overflow-y: auto;/*auto;*/
-}
+
 .Schedule::-webkit-scrollbar{
     background-color: var(--fon-color);
 }
@@ -113,6 +111,9 @@
     width: 0.1rem;
     background-color: var(--text-color);
 }
+#scheduleText{
+    overflow-y: auto;/*auto;*/
+}
 .schedule-entry{
   display: flex;
   flex-direction: row;
@@ -138,8 +139,11 @@
 }
 .info-block{
   border-radius: 50px;
-  padding: 0 5%;
-  background-color: aqua;
+  padding: 1% 5%;
+  border-radius: 1rem /*від шрифта*/;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  font-family: 'SourceSans3';
+  color: var(--text-color);
 }
 .info-block h3, .info-block p{
   margin: 0;
@@ -150,6 +154,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
