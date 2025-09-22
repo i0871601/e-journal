@@ -18,6 +18,9 @@
     font-family: 'SourceSans3';
     padding-bottom: 5%;
 }
+.contentSchedule h2{
+  text-align: center;
+}
 #Select{
     width: clamp(300px, 30vmin, 300px);
     border: 0.07rem solid transparent;
@@ -194,6 +197,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
