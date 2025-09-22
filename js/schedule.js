@@ -17,7 +17,8 @@ const selectedTextContainer = document.querySelector('.first-option p');
 const firstOptionDiv = document.querySelector('.first-option');
 const selectContainer = document.getElementById('Select');
 
-function TimeNow (startTime, endTime){
+function TimeNow (startTime, endTime, checkTime){
+    if(!checkTime){ return;}
     const now = new Date();
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
@@ -49,6 +50,16 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const displayFields = dataMapping[role];
     const dayData = groupedByDay[selectedDay];
 
+    const now = new Date();
+    const todayIndex = now.getDay();
+
+    const isWorkingDay = todayIndex >= 1 && todayIndex <= 5;
+
+    const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];
+    const isSelectedDayToday = (selectedDay === daysOfWeek[todayIndex]);
+
+    const checkTime = isSelectedDayToday && isWorkingDay;
+    
     if (dayData && dayData.length > 0) {
         dayData.forEach(item => {
             const entryArticle = document.createElement('article');
@@ -100,7 +111,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             entryArticle.appendChild(infoBlock);
 
             contentSchedule.appendChild(entryArticle);
-            TimeNow (startTime, endTime);
+            TimeNow (startTime, endTime, checkTime);
          });
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
@@ -196,6 +207,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
