@@ -68,7 +68,7 @@
     position: absolute;
     color: var(--text-color);
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
     transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
 }
 #Days.visible {
@@ -192,6 +192,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
