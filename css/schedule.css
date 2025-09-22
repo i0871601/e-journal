@@ -133,6 +133,10 @@
 .schedule-entry:last-child{
   margin-bottom: 3%;
 }
+.schedule-entry.current{
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--text-color);
+}
 .status-icon{
   position: absolute;
   left: 0.41rem;
@@ -141,6 +145,13 @@
   border-radius: 50%;
   border: 0.1rem solid var(--text-color);
   background-color: var(--fon-color-2);
+}
+.status-icon.current{
+  border: 0.1rem solid var(--color-accent);
+  background-color: var(--color-accent);
+}
+.status-icon.current .time .info-block{
+  color: var(--fon-color-2);
 }
 .time{
   font-family: 'SourceSans3';
@@ -177,6 +188,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
