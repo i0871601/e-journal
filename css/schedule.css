@@ -101,6 +101,17 @@
 .scheduleTextMain{
   overflow-y: auto;
 }
+.scheduleTextMain::-webkit-scrollbar{
+    background-color: var(--fon-color);
+}
+.scheduleTextMain::-webkit-scrollbar-thumb{
+    background-color: var(--text-color);
+    border-radius: 25px;
+    border: 3px solid var(--fon-color);
+}
+.scheduleTextMain::-webkit-scrollbar-thumb:active{
+    background-color: var(--color-accent);
+}
 #scheduleText{
   position: relative;
   padding-left: 7%;
@@ -174,6 +185,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
