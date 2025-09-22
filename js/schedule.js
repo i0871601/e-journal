@@ -63,6 +63,9 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             tagElement.classList.add('tag');
             tagElement.textContent = item[displayFields[1]];
 
+            infoBlock.appendChild(titleElement);
+            infoBlock.appendChild(tagElement);
+            
             if (item.Link) {
                 const linkElement = document.createElement('a');
                 linkElement.href = item.Link;
@@ -70,9 +73,6 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
                 linkElement.textContent = 'Посилання';
                 infoBlock.appendChild(linkElement);
             }
-
-            infoBlock.appendChild(titleElement);
-            infoBlock.appendChild(tagElement);
             
             entryArticle.appendChild(statusIcon);
             entryArticle.appendChild(timeContainer);
@@ -174,6 +174,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
