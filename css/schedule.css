@@ -109,7 +109,7 @@
     position: absolute;
     top: 0;
     left: 1rem;
-    height: 100%;
+    height: 94%;
     width: 0.1rem;
     background-color: var(--text-color);
     margin-top: 3%;
@@ -129,6 +129,7 @@
 }
 .schedule-entry:last-child{
   padding-bottom: 0;
+  margin-bottom: 3%;
 }
 .status-icon{
   position: absolute;
@@ -159,8 +160,10 @@
   font-size: 1rem;
 }
 .info-block p{
+  font-size: 0.9rem;
 }
 .info-block a{
+  font-size: 0.9rem;
 }
 @font-face{
   font-family: 'SourceSans3';
@@ -168,6 +171,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
