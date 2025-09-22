@@ -109,7 +109,7 @@
 #scheduleText{
   position: relative;
   padding-left: 7%;
-  padding-right: 3%;
+  /*padding-right: 3%;*/
   /*width: clamp(300px, 30vmin, 300px);*/
 }
 
@@ -194,6 +194,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
