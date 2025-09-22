@@ -98,7 +98,7 @@
     background-color: var(--fon-color);
     border-radius: 25px;
 }
-.scheduleTextMain::-webkit-scrollbar-thumb:active{
+.scheduleTextMain::-webkit-scrollbar-thumb:focus, .scheduleTextMain::-webkit-scrollbar-thumb:active{
     background-color: var(--color-accent);
 }
 #scheduleText{
@@ -179,6 +179,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
