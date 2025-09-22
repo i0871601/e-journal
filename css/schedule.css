@@ -9,17 +9,6 @@
   --text-color: #878787;
 }
 
-.Schedule::-webkit-scrollbar{
-    background-color: var(--fon-color);
-}
-.Schedule::-webkit-scrollbar-thumb{
-    background-color: var(--text-color);
-    border-radius: 25px;
-    border: 3px solid var(--fon-color);
-}
-.Schedule::-webkit-scrollbar-thumb:active{
-    background-color: var(--color-accent);
-}
 .contentSchedule{
     display: flex;
     flex-direction: column;
@@ -102,12 +91,11 @@
   overflow-y: auto;
 }
 .scheduleTextMain::-webkit-scrollbar{
-    background-color: var(--fon-color);
+    background-color: transparent;
 }
 .scheduleTextMain::-webkit-scrollbar-thumb{
-    background-color: var(--text-color);
+    background-color: var(--fon-color);
     border-radius: 25px;
-    border: 3px solid var(--fon-color);
 }
 .scheduleTextMain::-webkit-scrollbar-thumb:active{
     background-color: var(--color-accent);
@@ -148,11 +136,12 @@
 }
 .status-icon{
   position: absolute;
-  left: 0.5rem;
+  left: 0.41rem;
   width: 1.1rem;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background-color: var(--text-color);
+  border: 0.1rem solid;
+  background-color: var(--fon-color-2);
 }
 .time{
   padding: 0 0 0 7%;
@@ -185,6 +174,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
