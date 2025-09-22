@@ -90,8 +90,10 @@
     background-color: var(--color-accent);
 }
 .scheduleTextMain{
-  width: 100%;
+  width: 100vmin;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
 }
 .scheduleTextMain::-webkit-scrollbar{
     width: 0.5rem;
@@ -191,6 +193,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
