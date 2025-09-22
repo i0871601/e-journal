@@ -109,7 +109,7 @@
 #scheduleText{
   position: relative;
   padding-left: 7%;
-  width: clamp(300px, 30vmin, 300px);
+  /*width: clamp(300px, 30vmin, 300px);*/
 }
 
 #scheduleText::before {
@@ -133,10 +133,10 @@
   box-shadow: 0 0 0.5vmin var(--text-color);
 }
 .schedule-entry:first-child{
-  margin-top: 3%;
+  /*margin-top: 3%;*/
 }
 .schedule-entry:last-child{
-  margin-bottom: 3%;
+  /*margin-bottom: 3%;*/
 }
 .schedule-entry.current{
   background-color: var(--color-accent);
@@ -193,6 +193,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
