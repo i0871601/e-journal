@@ -33,18 +33,24 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             const entryArticle = document.createElement('article');
             entryArticle.classList.add('schedule-entry');
 
-            const timeBlock = document.createElement('div');
-            timeBlock.classList.add('time-block');
-
             const statusIcon = document.createElement('span');
             statusIcon.classList.add('status-icon');
 
-            const timeElement = document.createElement('span');
-            timeElement.classList.add('time');
-            timeElement.textContent = item.Time;
+            const timeContainer = document.createElement('div');
+            timeContainer.classList.add('time')
 
-            timeBlock.appendChild(statusIcon);
-            timeBlock.appendChild(timeElement);
+            const [startTime, endTime] = item.Time.split('-');
+
+            const startTimeElement = document.createElement('p');
+            startTimeElement.classList.add('start-time');
+            startTimeElement.textContent = startTime;
+
+            const endTimeElement = document.createElement('p');
+            endTimeElement.classList.add('end-time');
+            endTimeElement.textContent = endTime;
+            
+            timeBlock.appendChild(startTimeElement);
+            timeBlock.appendChild(endTimeElement);
 
             const infoBlock = document.createElement('div');
             infoBlock.classList.add('info-block');
@@ -57,9 +63,6 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             tagElement.classList.add('tag');
             tagElement.textContent = item[displayFields[1]];
 
-            infoBlock.appendChild(titleElement);
-            infoBlock.appendChild(tagElement);
-
             if (item.Link) {
                 const linkElement = document.createElement('a');
                 linkElement.href = item.Link;
@@ -67,7 +70,12 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
                 linkElement.textContent = 'Посилання';
                 infoBlock.appendChild(linkElement);
             }
-            entryArticle.appendChild(timeBlock);
+
+            infoBlock.appendChild(titleElement);
+            infoBlock.appendChild(tagElement);
+            
+            entryArticle.appendChild(statusIcon);
+            entryArticle.appendChild(timeContainer);
             entryArticle.appendChild(infoBlock);
 
             contentSchedule.appendChild(entryArticle);
@@ -166,6 +174,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
