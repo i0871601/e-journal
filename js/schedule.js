@@ -18,7 +18,7 @@ const firstOptionDiv = document.querySelector('.first-option');
 const selectContainer = document.getElementById('Select');
 
 function TimeNow (startTime, endTime){
-    const now = new Data();
+    const now = new Date();
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
 
@@ -196,6 +196,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
