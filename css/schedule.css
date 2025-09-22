@@ -113,10 +113,9 @@
     width: 0.1rem;
     background-color: var(--text-color);
     margin-top: 3%;
-    padding-bottom: 0;
 }
 #scheduleText{
-    overflow-y: auto;/*auto;*/
+    overflow-y: auto;
 }
 .schedule-entry{
   display: flex;
@@ -130,7 +129,6 @@
 }
 .schedule-entry:last-child{
   padding-bottom: 0;
-  margin-bottom: 3%;
 }
 .status-icon{
   position: absolute;
@@ -163,6 +161,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
