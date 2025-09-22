@@ -130,7 +130,7 @@
 }
 .schedule-entry:last-child{
   padding-bottom: 0;
-  margin-bottom: 0;
+  margin-bottom: 3%;
 }
 .status-icon{
   position: absolute;
@@ -163,6 +163,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
