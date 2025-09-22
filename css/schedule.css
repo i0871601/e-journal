@@ -135,7 +135,7 @@
 }
 .schedule-entry.current{
   background-color: var(--color-accent);
-  box-shadow: 0 0 0.5vmin var(--text-color);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 .status-icon{
   position: absolute;
@@ -148,9 +148,9 @@
 }
 .status-icon.current{
   border: 0.1rem solid var(--color-accent);
-  background-color: var(--color-accent);
+  background-color: var(--fon-color-2);
 }
-.status-icon.current .time .info-block{
+.status-icon.current .time, .status-icon.current .info-block{
   color: var(--fon-color-2);
 }
 .time{
@@ -188,6 +188,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
