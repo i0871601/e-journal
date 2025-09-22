@@ -151,6 +151,11 @@
   white-space: nowrap;
   font-size: 0.9rem;
 }
+.info-block{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+}
 .info-block h3, .info-block p, .info-block a{
   margin: 0;
   white-space: nowrap;
@@ -158,6 +163,7 @@
 }
 .info-block h3{
   font-size: 1rem;
+  width: 100%;
 }
 .info-block p{
   font-size: 0.9rem;
@@ -171,6 +177,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
