@@ -155,12 +155,20 @@
   margin: 0;
   white-space: nowrap;
 }
+.info-block h3{
+  font-size: 1rem;
+}
+.info-block p{
+}
+.info-block a{
+}
 @font-face{
   font-family: 'SourceSans3';
   src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
