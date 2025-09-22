@@ -12,9 +12,10 @@
 .contentSchedule{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 3vmin;
-    width: 95%;
-    height: 100%;
+    /*width: 95%;
+    height: 100%;*/
     font-family: 'SourceSans3';
     padding-bottom: 5%;
 }
@@ -67,11 +68,13 @@
     position: absolute;
     color: var(--text-color);
     opacity: 0;
+    visibility: hidden;
     transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
 }
 #Days.visible {
   height: (auto, 100vh);
   opacity: 1;
+  visibility: auto;
 }
 .schedule-day {
   padding-left: 0.2rem;
@@ -88,6 +91,7 @@
     background-color: var(--color-accent);
 }
 .scheduleTextMain{
+  width: 100%;
   overflow-y: auto;
 }
 .scheduleTextMain::-webkit-scrollbar{
@@ -188,6 +192,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
