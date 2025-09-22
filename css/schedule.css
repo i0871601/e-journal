@@ -27,6 +27,7 @@
     width: 95%;
     height: 100%;
     font-family: 'SourceSans3';
+    padding-bottom: 5%;
 }
 #Select{
     width: clamp(300px, 30vmin, 300px);
@@ -100,6 +101,7 @@
 #scheduleText{
   position: relative;
   padding-left: 7%;
+  overflow: hidden;
 }
 
 #scheduleText::before {
@@ -155,6 +157,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
