@@ -150,6 +150,11 @@
   font-family: 'SourceSans3';
   color: var(--text-color);
 }
+.time p{
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
 .info-block h3, .info-block p, .info-block a{
   margin: 0;
   white-space: nowrap;
@@ -169,6 +174,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
