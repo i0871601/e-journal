@@ -31,7 +31,7 @@ function TimeNow (startTime, endTime){
 
     if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes){
         const entryArticle = document.querySelector('.schedule-entry');
-        const statusIcon = document.querySelector('status-icon');
+        const statusIcon = document.querySelector('.status-icon');
 
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
@@ -196,6 +196,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
