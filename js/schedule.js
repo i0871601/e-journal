@@ -119,11 +119,11 @@ export const setupDaySelector = (groupedByDay, role) => {
     daySelect.innerHTML = '';
 
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Виберіть день уроків';
+    /*defaultOption.textContent = 'Виберіть день уроків';
     defaultOption.value = '';
     defaultOption.disabled = true;
     defaultOption.selected = true;
-    daySelect.appendChild(defaultOption);
+    daySelect.appendChild(defaultOption);*/
     
     for (const day in groupedByDay) {
         const option = document.createElement('option');
@@ -191,5 +191,6 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
