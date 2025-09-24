@@ -73,7 +73,9 @@ h1{
   color: var(--color-accent);
 }
 .loginForm input:focus{
-  color: var(--color-accent-shadow);
+  border: 0.22vmin solid var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+  color: var(--color-accent);
   caret-color: var(--color-accent);
 }
 .loginForm button:hover{
