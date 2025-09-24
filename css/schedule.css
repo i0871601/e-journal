@@ -37,9 +37,18 @@
   box-shadow: 0 0 0.5vmin var(--color-accent);
   outline: none;
 }
-
+#Days-select option{
+  border: 0.07rem solid transparent;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+}
+#Days-select option:first-of-type{
+  
+}
 #Days-select option[value=""] {
     display: none;
+}
+#Days-select option:last-of-type{
+  
 }
 #Days{
     width: 100%;
@@ -184,6 +193,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
 
