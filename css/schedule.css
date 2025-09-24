@@ -21,7 +21,7 @@
 .contentSchedule h2{
   text-align: center;
 }
-#Select{
+#Days-select{
     width: clamp(300px, 30vmin, 300px);
     border: 0.07rem solid transparent;
     border-radius: 1rem /*від шрифта*/;
@@ -32,27 +32,16 @@
     color: var(--text-color);
     transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
-#Select.click-button{
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0.5vmin var(--color-accent);
-  z-index: 50;
+#Days-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+  outline: none;
 }
-
-.first-option{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    /*padding: 0.3vmin, 1.5vmin;*/
-    cursor: pointer;
+#Days-select:valid {
+    color: var(--fon-color);
 }
-.first-option p{
-    margin: 0;
-    padding: 0;
-}
-.first-option div{
-    width: 5vmin;
-    background: url('../image/down.svg') no-repeat center / contain;
+#Days-select option[value=""] {
+    display: none;
 }
 #Days{
     width: 100%;
@@ -197,29 +186,3 @@
   font-weight: 400;
   font-style: normal;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
