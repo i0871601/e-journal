@@ -98,8 +98,6 @@
 #wrapper-text-container{
   /*width: 100vmin;*/
   overflow-y: auto;
-  display: flex;
-  justify-content: center;
 }
 #wrapper-text-container::-webkit-scrollbar{
   width: 0.5rem;
@@ -115,9 +113,9 @@
 #text-container-schedule{
   position: relative;
   padding-left: 7%;
-  width: calc(100% - 7vmin);
+  /*width: calc(100% - 7vmin);*/
   padding-right: 3%;
-  width: clamp(300px, 30vmin, 300px);
+  /*width: clamp(300px, 30vmin, 300px);*/
 }
 #text-container-schedule::before {
   content: '';
