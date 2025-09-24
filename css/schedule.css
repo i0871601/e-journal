@@ -21,7 +21,7 @@
   text-align: center;
 }
 #CustomSelectSchedule{
-  /*text*/
+  position: relative;
 }
 #days-checkbox{
   display: none;
@@ -71,9 +71,9 @@
   /* Анімація */
   opacity: 0;
   visibility: hidden;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.65s ease-in-out, max-height 0.65s ease-in-out;
+  /*max-height: 0;
+  overflow: hidden;*/
+  transition: opacity 0.65s ease-in-out/*, max-height 0.65s ease-in-out*/;
 }
 #days-checkbox:checked ~ #button-select-schedule #select-arrow {
   transform: rotate(180deg);
@@ -81,7 +81,7 @@
 #days-checkbox:checked ~ #DaysList {
   opacity: 1;
   visibility: visible;
-  max-height: 50vh; /* Достатня висота для відображення списку */
+  /*max-height: 50vh; /* Достатня висота для відображення списку */
 }
 
 /* Стилі для кожного елемента списку */
