@@ -34,8 +34,8 @@
 }
 #Days-select:focus {
   border: 0.07rem solid transparent;
-  box-shadow: 0 0 0.5vmin var(--color-accent);
-  outline: none;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  outline: none;
 }
 
 #Days-select option[value=""] {
@@ -184,5 +184,6 @@
   font-weight: 400;
   font-style: normal;
 }
+
 
 
