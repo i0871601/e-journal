@@ -98,7 +98,7 @@
 #wrapper-text-container{
   /*flex-grow: 1;
   margin-bottom: 5%;*/
-  height: calc((2rem + 1.8vmin) * 6);
+  height: calc((2rem + 1.85vmin) * 6);
   /*width: 100vmin;*/
   overflow-y: auto;
 }
