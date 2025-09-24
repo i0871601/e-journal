@@ -12,6 +12,7 @@ export const loadScheduleData = async (payload) => {
 };
 
 const contentSchedule = document.getElementById('scheduleText');
+const dayList = document.getElementById('Days');
 const daySelect = document.getElementById('Days-select');
 
 function TimeNow (startTime, endTime, checkTime){
@@ -197,3 +198,4 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
