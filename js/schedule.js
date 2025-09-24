@@ -122,7 +122,7 @@ export const setupDaySelector = (groupedByDay, role) => {
             selectedTextContainer.textContent = target.textContent;
             
             // Знімаємо відмітку з чекбокса, щоб список закрився
-            firstOptionDiv.checked = false;
+            checkbox.checked = false;
             
             // Викликаємо вашу функцію для відображення розкладу
             displaySchedule(groupedByDay, role, selectedDay);
