@@ -12,7 +12,6 @@ export const loadScheduleData = async (payload) => {
 };
 
 const contentSchedule = document.getElementById('scheduleText');
-const dayList = document.getElementById('Days');
 const daySelect = document.getElementById('Days-select');
 
 function TimeNow (startTime, endTime, checkTime){
@@ -117,7 +116,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 };
 
 export const setupDaySelector = (groupedByDay, role) => {
-    dayList.innerHTML = '';
+    daySelect.innerHTML = '';
 
     const defaultOption = document.createElement('option');
     defaultOption.textContent = 'Виберіть день уроків';
@@ -126,12 +125,6 @@ export const setupDaySelector = (groupedByDay, role) => {
     defaultOption.selected = true;
     daySelect.appendChild(defaultOption);
     
-    for (const day in groupedByDay) {
-        const option = document.createElement('option');
-        option.textContent = day;
-        option.value = day;
-        daySelect.appendChild(option);
-    }
     for (const day in groupedByDay) {
         const option = document.createElement('option');
         option.textContent = day;
@@ -198,4 +191,5 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
