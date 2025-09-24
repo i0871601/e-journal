@@ -11,14 +11,10 @@ export const loadScheduleData = async (payload) => {
 };
 
 const contentSchedule = document.getElementById('text-container-schedule');
-const dayList = document.getElementById('DaysList');
+const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const firstOptionDiv = document.getElementById('button-select-schedule');
-const selectContainer = document.getElementById('CustomSelectSchedule');
 
-
-const selectedDayText = document.getElementById('first-option');
-const daysCheckbox = document.getElementById('button-select-schedule');
 function TimeNow (startTime, endTime, checkTime){
     if(!checkTime){ return;}
     const now = new Date();
@@ -111,18 +107,18 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 };
 
 export const setupDaySelector = (groupedByDay, role) => {
-    dayList.innerHTML = '';
+    daysList.innerHTML = '';
     for (const day in groupedByDay) {
         const li = document.createElement('li');
-        listItem.textContent = day;
-        listItem.dataset.day = day;
-        dayList.appendChild(li);
+        li.textContent = day;
+        li.dataset.day = day;
+        daysList.appendChild(li);
     }
     
     daysList.addEventListener('click', (event) => {
         const target = event.target;
         if (target.matches('li')) {
-            const selectedDay = target.dataset.value;
+            const selectedDay = target.dataset.day;
             selectedTextContainer.textContent = target.textContent;
             
             // Знімаємо відмітку з чекбокса, щоб список закрився
@@ -148,7 +144,6 @@ export const displayScheduleError = (message) => {
 };
 
 export const initScheduleLogic = async () => {
-    const contentSchedule = document.getElementById('scheduleText');
     if (contentSchedule.dataset.loaded === 'true') {
         return;
     }
