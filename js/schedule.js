@@ -117,10 +117,11 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 export const setupDaySelector = (groupedByDay, role) => {
     daySelect.innerHTML = '';
     const defaultOption = document.createElement('option');
-    defaultOption.textContent = 'Виберіть день уроків';
-    defaultOption.value = '';
-    defaultOption.selected = true;
-    daySelect.appendChild(defaultOption);
+    defaultOption.textContent = 'Виберіть день уроків';
+    defaultOption.value = '';
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    daySelect.appendChild(defaultOption);
     
     for (const day in groupedByDay) {
         const option = document.createElement('option');
@@ -131,10 +132,6 @@ export const setupDaySelector = (groupedByDay, role) => {
     daySelect.addEventListener('change', (event) => {
         const selectedDay = event.target.value;
         if (selectedDay) {
-            const initialOption = daySelect.querySelector('option[value=""]');
-            if (initialOption) {
-                daySelect.removeChild(initialOption);
-            }
             displaySchedule(groupedByDay, role, selectedDay);
         }
     });
@@ -192,6 +189,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
