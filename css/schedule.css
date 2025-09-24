@@ -31,7 +31,7 @@
   justify-content: space-between;
   align-items: center;
   width: clamp(300px, 30vmin, 300px);
-  border: 0.07rem solid var(--text-color);
+  border: 0.07rem solid transparent;
   border-radius: 1rem;
   box-shadow: 0 0 0.5vmin var(--text-color);
   padding: 0.3vmin 1.5vmin;
@@ -56,32 +56,31 @@
 #DaysList{
   position: absolute;
   width: 100%;
-  top: 100%;
-  left: 0;
   margin-top: 5px;
-  border: 0.07rem solid var(--color-accent);
   border-radius: 1rem;
-  box-shadow: 0 0 0.5vmin var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--text-color);
   background-color: var(--fon-color-2);
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 1.5vmin 0 0 0;
   z-index: 100;
 
   /* Анімація */
   opacity: 0;
   visibility: hidden;
-  /*max-height: 0;
-  overflow: hidden;*/
-  transition: opacity 0.65s ease-in-out/*, max-height 0.65s ease-in-out*/;
+  overflow: hidden;
+  transition: opacity 0.65s ease-in-out;
 }
 #days-checkbox:checked ~ #button-select-schedule #select-arrow {
   transform: rotate(180deg);
 }
+#days-checkbox:checked ~ #button-select-schedule{
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
 #days-checkbox:checked ~ #DaysList {
   opacity: 1;
   visibility: visible;
-  /*max-height: 50vh; /* Достатня висота для відображення списку */
 }
 
 /* Стилі для кожного елемента списку */
