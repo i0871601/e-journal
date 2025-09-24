@@ -9,13 +9,13 @@
   --text-color: #878787;
 }
 #ScheduleContent{
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 3vmin;
   /*width: 95%;
   height: 100%;*/
   font-family: 'SourceSans3';
-  padding-bottom: 5%;
 }
 #TitleSchedule{
   text-align: center;
@@ -95,14 +95,6 @@
     color: var(--fon-color-2);
 }
 
-/*#Days.visible {
-  height: (auto, 100vh);
-  opacity: 1;
-}
-.schedule-day {
-  padding-left: 0.2rem;
-}*/
-
 #wrapper-text-container{
   /*width: 100vmin;*/
   overflow-y: auto;
@@ -124,8 +116,8 @@
   position: relative;
   padding-left: 7%;
   width: calc(100% - 7vmin);
-  /*padding-right: 3%;*/
-  /*width: clamp(300px, 30vmin, 300px);*/
+  padding-right: 3%;
+  width: clamp(300px, 30vmin, 300px);
 }
 #text-container-schedule::before {
   content: '';
