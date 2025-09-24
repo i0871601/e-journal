@@ -1,5 +1,4 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
-
 import { request, getUserData } from './config.js';
 
 export const loadScheduleData = async (payload) => {
@@ -116,30 +115,31 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 };
 
 export const setupDaySelector = (groupedByDay, role) => {
-    daySelect.value = '';
-
     daySelect.innerHTML = '';
     const defaultOption = document.createElement('option');
     defaultOption.textContent = 'Виберіть день уроків';
     defaultOption.value = '';
-    defaultOption.disabled = true;
     defaultOption.selected = true;
     daySelect.appendChild(defaultOption);
-    
-    for (const day in groupedByDay) {
+    
+    for (const day in groupedByDay) {
         const option = document.createElement('option');
         option.textContent = day;
         option.value = day;
         daySelect.appendChild(option);
     }
-    
     daySelect.addEventListener('change', (event) => {
         const selectedDay = event.target.value;
         if (selectedDay) {
+            const initialOption = daySelect.querySelector('option[value=""]');
+            if (initialOption) {
+                daySelect.removeChild(initialOption);
+            }
             displaySchedule(groupedByDay, role, selectedDay);
         }
     });
 };
+
 
 export const setScheduleLoadingState = () => {
     contentSchedule.textContent = 'Завантаження розкладу...';
@@ -192,6 +192,7 @@ export const initScheduleLogic = async () => {
     }
 
 };
+
 
 
 
