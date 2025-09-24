@@ -101,33 +101,33 @@
 }
 .schedule-day {
   padding-left: 0.2rem;
-}
+}*/
 
-.scheduleTextMain{
+#wrapper-text-container{
   width: 100vmin;
   overflow-y: auto;
   display: flex;
   justify-content: center;
 }
-.scheduleTextMain::-webkit-scrollbar{
+#wrapper-text-container::-webkit-scrollbar{
   width: 0.5rem;
   background-color: transparent;
 }
-.scheduleTextMain::-webkit-scrollbar-thumb{
+#wrapper-text-container::-webkit-scrollbar-thumb{
   background-color: var(--fon-color);
   border-radius: 25px;
 }
-.scheduleTextMain::-webkit-scrollbar-thumb:focus, .scheduleTextMain::-webkit-scrollbar-thumb:active{
+#wrapper-text-container::-webkit-scrollbar-thumb:focus, #wrapper-text-container::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
 }
-#scheduleText{
+#text-container-schedule{
   position: relative;
   padding-left: 7%;
   width: calc(100% - 7vmin);
   /*padding-right: 3%;*/
-  /*width: clamp(300px, 30vmin, 300px);
+  width: clamp(300px, 30vmin, 300px);
 }
-#scheduleText::before {
+#text-container-schedule::before {
   content: '';
   position: absolute;
   top: 0;
@@ -143,11 +143,11 @@
   padding: 0 0 0 3%;
   margin: 0.5vmin 0 5% 5%;
   gap: 5%;
-  border-radius: 1rem /*від шрифта;
+  border-radius: 1rem /*від шрифта*/;
   box-shadow: 0 0 0.5vmin var(--text-color);
 }
 .schedule-entry:first-child{
-  /*margin-top: 0.5vmin;
+  margin-top: 0.5vmin;
 }
 .schedule-entry:last-child{
   margin-bottom: 0.5vmin;
@@ -200,7 +200,7 @@
 }
 .info-block a{
   font-size: 0.9rem;
-}*/
+}
 @font-face{
   font-family: 'SourceSans3';
   src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
