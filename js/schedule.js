@@ -13,7 +13,7 @@ export const loadScheduleData = async (payload) => {
 const contentSchedule = document.getElementById('text-container-schedule');
 const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
-const firstOptionDiv = document.getElementById('button-select-schedule');
+const checkbox = document.getElementById('days-checkbox');
 
 function TimeNow (startTime, endTime, checkTime){
     if(!checkTime){ return;}
