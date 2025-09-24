@@ -2,72 +2,75 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./css/style-home.css">
-    <link rel="stylesheet" href="./css/schedule.css">
-    <link rel="stylesheet" href="./css/journal.css">
-    <script src="./js/toggle-checkbox.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/style-home.css">
+    <link rel="stylesheet" href="./css/schedule.css">
+    <link rel="stylesheet" href="./css/journal.css">
+    <script src="./js/toggle-checkbox.js" defer></script>
 </head>
 <body>
-    <input type="checkbox" id="toggle-schedule" class="toggle-checkbox">
-    <input type="checkbox" id="toggle-journal" class="toggle-checkbox">
-    <main class="Body">    
-        <nav class="Menu" id="Menu">
-            <div class="button-container">
-                <label for="toggle-schedule" class="button" role="tab" id="button-schedule"></label>
-                <label for="toggle-journal" class="button" role="tab" id="button-journal"></label>
-            </div>
-            <p id="copyright">&copy; 2025, Сікан І.В.</p>
-        </nav>
-        <div class="MainContent">
-            <section class="Schedule" id="container-schedule">
-                <div class="contentSchedule" id="hiddenContainer">
-                    <h2>Розклад</h2>
-                    <div id="custom-select-schedule">
-                        <input type="checkbox"></input>
-                        <ul id="Days"></ul>
-                    </div>
-                    <div class="scheduleTextMain"><div id="scheduleText"></div></div>
-                </div>
-            </section>
-            <section class="Journal" id="container-journal">
-                <div class="contentJournal">
-                    <h2>Журнал</h2>
-                    <div class="GradeOfJournal" id="GradeOfJournal">
-                        <div id="Select-Subject" class="container-all">
-                            <div id="subject-button" class="first-option">
-                                <p>Виберіть предмет</p>
-                                <div></div>
-                            </div>
-                            <ul id="subject-list" class="dropdown-list"></ul>
-                        </div>
-                        <div id="ClassTeacher" class="container-all">
-                            <div id="Class-button" class="first-option">
-                                <p>Виберіть клас</p>
-                                <div></div>
-                            </div>
-                            <ul id="class-list" class="dropdown-list"></ul>
-                        </div>
-                        <input type="checkbox" id="toggle-add-grade" class="checkbox-add-lesson">
-                        <div class="add-grade-container">
-                            <label for="toggle-add-grade" class="add-grade-button" id="add-grade-button"></label>
-                            <div class="add-grade-content" id="add-grade-content">
-                                <div class="Title">
-                                    <p>Форма для додавання оцінок</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="TabletJournal"></div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <script src="./messageBox.js" type="module"></script>
-    <script src="./js/redirection.js" type="module"></script>
+    <input type="checkbox" id="toggle-schedule" class="toggle-checkbox">
+    <input type="checkbox" id="toggle-journal" class="toggle-checkbox">
+    <main id="Body">
+        <nav id="Menu">
+            <div id="button-container">
+                <label for="toggle-schedule" class="button" role="tab" id="button-schedule"></label>
+                <label for="toggle-journal" class="button" role="tab" id="button-journal"></label>
+            </div>
+            <p id="copyright">&copy; 2025, Сікан І.В.</p>
+        </nav>
+        <div id="MainContent">
+            <section id="Schedule" class="Content">
+                <div id="ScheduleContent">
+                    <h2 id="TitleSchedule" class="title-content">Розклад</h2>
+                    <div id="CustomSelectSchedule">
+                        <input type="checkbox" id="days-checkbox"></input>
+                        <label for="days-checkbox" id="button-select-schedule">
+                            <p id="first-option">Виберіть день уроків</p>
+                            <span id="select-arrow"></span>
+                        </label>
+                        <ul id="DaysList"></ul>
+                    </div>
+                    <div id="wrapper-text-container"><div id="text-container-schedule"></div></div>
+                </div>
+            </section>
+            <section id="Journal" class="Content">
+                <div class="contentJournal">
+                    <h2>Журнал</h2>
+                    <div class="GradeOfJournal" id="GradeOfJournal">
+                        <div id="Select-Subject" class="container-all">
+                            <div id="subject-button" class="first-option">
+                                <p>Виберіть предмет</p>
+                                <div></div>
+                            </div>
+                            <ul id="subject-list" class="dropdown-list"></ul>
+                        </div>
+                        <div id="ClassTeacher" class="container-all">
+                            <div id="Class-button" class="first-option">
+                                <p>Виберіть клас</p>
+                                <div></div>
+                            </div>
+                            <ul id="class-list" class="dropdown-list"></ul>
+                        </div>
+                        <input type="checkbox" id="toggle-add-grade" class="checkbox-add-lesson">
+                        <div class="add-grade-container">
+                            <label for="toggle-add-grade" class="add-grade-button" id="add-grade-button"></label>
+                            <div class="add-grade-content" id="add-grade-content">
+                                <div class="Title">
+                                    <p>Форма для додавання оцінок</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TabletJournal"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="./messageBox.js" type="module"></script>
+    <script src="./js/redirection.js" type="module"></script>
 </body>
 
 </html>

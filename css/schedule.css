@@ -1,193 +1,210 @@
 /*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович*/
 :root{
   --fon-color: #151419;
-  --fon-color-2: #fbfbfb;
-  --color-accent: #f56e0f;
-  --color-accent-shadow: rgba(245, 110, 15, 0.25);
-  --color1: #1b1b1e;
-  --color2: #262626;
-  --text-color: #878787;
+  --fon-color-2: #fbfbfb;
+  --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.25);
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
 }
-.contentSchedule{
-    display: flex;
-    flex-direction: column;
-    gap: 3vmin;
-    /*width: 95%;
-    height: 100%;*/
-    font-family: 'SourceSans3';
-    padding-bottom: 5%;
+#ScheduleContent{
+  display: flex;
+  flex-direction: column;
+  gap: 3vmin;
+  /*width: 95%;
+  height: 100%;*/
+  font-family: 'SourceSans3';
+  padding-bottom: 5%;
 }
-.contentSchedule h2{
-  text-align: center;
+#TitleSchedule{
+  text-align: center;
 }
-#Select{
-    width: clamp(300px, 30vmin, 300px);
-    border: 0.07rem solid transparent;
-    border-radius: 1rem /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--text-color);
-    padding: 0.3vmin 1.5vmin;
-    font-family: 'SourceSans3';
-    position: relative;
-    color: var(--text-color);
-    transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
+#CustomSelectSchedule{
+  /*text*/
 }
-#Select.click-button{
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0.5vmin var(--color-accent);
-  z-index: 50;
+#days-checkbox{
+  display: none;
 }
-.first-option{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    /*padding: 0.3vmin, 1.5vmin;*/
-    cursor: pointer;
+#button-select-schedule{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(300px, 30vmin, 300px);
+  border: 0.07rem solid var(--text-color);
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  padding: 0.3vmin 1.5vmin;
+  font-family: 'SourceSans3';
+  color: var(--text-color);
+  background-color: var(--fon-color-2);
+  cursor: pointer;
+  transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
-.first-option p{
-    margin: 0;
-    padding: 0;
+#button-select-schedule:hover{
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-.first-option div{
-    width: 5vmin;
-    background: url('../image/down.svg') no-repeat center / contain;
+#first-option{
+  margin: 0;
 }
-#Days{
-    width: 100%;
-    /*height: max(auto, 0);*/
-    top: 100%;
-    left: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: var(--fon-color-2);
-    list-style-type: none;
-    border-radius: 1rem/*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--text-color);
-    position: absolute;
-    color: var(--text-color);
-    opacity: 0;
-    visibility: visible;
-    transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
+#select-arrow{
+  width: 5vmin;
+  background: url('../image/down.svg') no-repeat center / contain;
+  transition: transform 0.3s ease-in-out;
 }
-#Days.visible {
-  /*height: (auto, 100vh);*/
-  opacity: 1;
+#DaysList{
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  border: 0.07rem solid var(--color-accent);
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+  background-color: var(--fon-color-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+
+  /* Анімація */
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.65s ease-in-out, max-height 0.65s ease-in-out;
+}
+#days-checkbox:checked ~ #button-select-schedule #select-arrow {
+  transform: rotate(180deg);
+}
+#days-checkbox:checked ~ #DaysList {
+  opacity: 1;
+  visibility: visible;
+  max-height: 50vh; /* Достатня висота для відображення списку */
+}
+
+/* Стилі для кожного елемента списку */
+#DaysList li {
+    padding: 1vmin 1vmin 1vmin 3.7%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    color: var(--text-color);
+}
+#DaysList li:hover {
+    background-color: var(--color-accent);
+    color: var(--fon-color-2);
+}
+
+/*#Days.visible {
+  height: (auto, 100vh);
+  opacity: 1;
 }
 .schedule-day {
-  padding-left: 0.2rem;
+  padding-left: 0.2rem;
 }
-#Days li {
-    padding: 1vmin 1vmin 1vmin 3.7%;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-#Days li:hover {
-    color: var(--fon-color-2);
-    background-color: var(--color-accent);
-}
+
 .scheduleTextMain{
-  /*width: 100vmin;*/
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
+  width: 100vmin;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
 }
 .scheduleTextMain::-webkit-scrollbar{
-    width: 0.5rem;
-    background-color: transparent;
+  width: 0.5rem;
+  background-color: transparent;
 }
 .scheduleTextMain::-webkit-scrollbar-thumb{
-    background-color: var(--fon-color);
-    border-radius: 25px;
+  background-color: var(--fon-color);
+  border-radius: 25px;
 }
 .scheduleTextMain::-webkit-scrollbar-thumb:focus, .scheduleTextMain::-webkit-scrollbar-thumb:active{
-    background-color: var(--color-accent);
+  background-color: var(--color-accent);
 }
 #scheduleText{
-  position: relative;
-  padding-left: 7%;
-  width: calc(100% - 7vmin);
-  /*padding-right: 3%;*/
-  /*width: clamp(300px, 30vmin, 300px);*/
+  position: relative;
+  padding-left: 7%;
+  width: calc(100% - 7vmin);
+  /*padding-right: 3%;*/
+  /*width: clamp(300px, 30vmin, 300px);
 }
 #scheduleText::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    height: 100%;
-    width: 0.1rem;
-    background-color: var(--text-color);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  height: 100%;
+  width: 0.1rem;
+  background-color: var(--text-color);
 }
 .schedule-entry{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 0 0 3%;
-  margin: 0.5vmin 0 5% 5%;
-  gap: 5%;
-  border-radius: 1rem /*від шрифта*/;
-  box-shadow: 0 0 0.5vmin var(--text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 0 0 3%;
+  margin: 0.5vmin 0 5% 5%;
+  gap: 5%;
+  border-radius: 1rem /*від шрифта;
+  box-shadow: 0 0 0.5vmin var(--text-color);
 }
 .schedule-entry:first-child{
-  /*margin-top: 0.5vmin;*/
+  /*margin-top: 0.5vmin;
 }
 .schedule-entry:last-child{
-  margin-bottom: 0.5vmin;
+  margin-bottom: 0.5vmin;
 }
 .schedule-entry.current{
-  background-color: var(--color-accent);
-  box-shadow: 0 0 0.5vmin var(--color-accent);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 .status-icon{
-  position: absolute;
-  left: 0.41rem;
-  width: 1.1rem;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 0.1rem solid var(--text-color);
-  background-color: var(--fon-color-2);
+  position: absolute;
+  left: 0.41rem;
+  width: 1.1rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 0.1rem solid var(--text-color);
+  background-color: var(--fon-color-2);
 }
 .status-icon.current{
-  border: 0.1rem solid var(--color-accent);
-  background-color: var(--fon-color-2);
+  border: 0.1rem solid var(--color-accent);
+  background-color: var(--fon-color-2);
 }
 .schedule-entry.current .time p, .schedule-entry.current .info-block h3, .schedule-entry.current .info-block p, .schedule-entry.current .info-block a{
-  color: var(--fon-color-2);
+  color: var(--fon-color-2);
 }
 .time{
-  font-family: 'SourceSans3';
-  color: var(--text-color);
+  font-family: 'SourceSans3';
+  color: var(--text-color);
 }
 .time p{
-  margin: 0;
-  white-space: nowrap;
-  font-size: 0.9rem;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 0.9rem;
 }
 .info-block{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
 }
 .info-block h3, .info-block p, .info-block a{
-  margin: 0;
-  white-space: nowrap;
-  color: var(--text-color);
+  margin: 0;
+  white-space: nowrap;
+  color: var(--text-color);
 }
 .info-block h3{
-  font-size: 1rem;
-  width: 100%;
+  font-size: 1rem;
+  width: 100%;
 }
 .info-block p{
-  font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 .info-block a{
-  font-size: 0.9rem;
-}
+  font-size: 0.9rem;
+}*/
 @font-face{
-  font-family: 'SourceSans3';
-  src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'SourceSans3';
+  src: url('../fonts/SourceSans3-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }

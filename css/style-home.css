@@ -15,13 +15,13 @@ body {
 .toggle-checkbox {
   display: none;
 }
-.Body {
+#Body {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
 }
-.Menu {
+#Menu {
   width: 100%;
   height: 100%;
   background-color: var(--fon-color);
@@ -31,7 +31,7 @@ body {
   flex-shrink: 0;
   transition: width 0.5s ease-in-out;
 }
-.button-container {
+#button-container {
   width: 25%;
   height: 35%;
   display: flex;
@@ -73,7 +73,7 @@ body {
   -webkit-animation: fadeOldUp 1.7s ease-in-out forwards;
   animation: fadeUp 1.7s ease-in-out forwards;
 }
-.MainContent {
+#MainContent {
   width: 0%;
   height: 100%;
   position: relative;
@@ -81,7 +81,7 @@ body {
   overflow: hidden;
   background-color: var(--fon-color-2);
 }
-.Schedule, .Journal {
+.Content {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -92,67 +92,67 @@ body {
   align-items: center;
   transition: transform 0.5s ease-in-out;
 }
-.Schedule {
+#Schedule {
   transform: translateX(0);
 }
 
-.Journal {
+#Journal {
   transform: translateX(100%);
 }
-.toggle-checkbox:checked ~ .Body .Menu {
+.toggle-checkbox:checked ~ #Body #Menu {
   width: 35%;
 }
-.toggle-checkbox:checked ~ .Body .MainContent {
+.toggle-checkbox:checked ~ #Body #MainContent {
   width: 65%;
   opacity: 1;
 }
-.toggle-checkbox:checked ~ .Body .Menu .button-container {
+.toggle-checkbox:checked ~ #Body #Menu #button-container {
   height: 35%;
   flex-direction: column;
   gap: 15%;
 }
-#toggle-schedule:checked ~ .Body .Schedule {
+#toggle-schedule:checked ~ #Body #Schedule {
   transform: translateX(0);
 }
 
-#toggle-schedule:checked ~ .Body .Journal {
+#toggle-schedule:checked ~ #Body #Journal {
   transform: translateX(100%);
 }
 
-#toggle-journal:checked ~ .Body .Schedule {
+#toggle-journal:checked ~ #Body #Schedule {
   transform: translateX(-100%);
 }
 
-#toggle-journal:checked ~ .Body .Journal {
+#toggle-journal:checked ~ #Body #Journal {
   transform: translateX(0);
 }
 /* Медіа-запити для портретної орієнтації*/
 @media (orientation: portrait) {
-  .Body {
+  #Body {
     flex-direction: column-reverse;
   }  
-  .Menu {
+  #Menu {
     transition: height 0.5s ease-in-out;
   }
-  .button-container{
+  #button-container{
     width: 27%;
     height: 35%;
     flex-direction: column;
   }
-  .MainContent{
+  #MainContent{
     height: 0;
     transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;;
   }
-  .toggle-checkbox:checked ~ .Body .Menu {
+  .toggle-checkbox:checked ~ #Body #Menu {
     width: 100%;
     height: 35%;
   }
-  .toggle-checkbox:checked ~ .Body .MainContent {
+  .toggle-checkbox:checked ~ #Body #MainContent {
     width: 100%;
     height: 65%;
     opacity: 1;
   }
-  .toggle-checkbox:checked ~ .Body .Menu .button-container {
+  .toggle-checkbox:checked ~ #Body #Menu #button-container {
     height: 35%;
     width: 55%;
     align-content: center;
@@ -164,6 +164,3 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-
-
-
