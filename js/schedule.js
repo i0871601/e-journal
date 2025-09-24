@@ -143,6 +143,13 @@ export const displayScheduleError = (message) => {
     contentSchedule.textContent = message;
 };
 
+document.addEventListener('click', (event) => {
+    const customSelectContainer = document.getElementById('CustomSelectSchedule');
+    if (customSelectContainer && !customSelectContainer.contains(event.target)) {
+        checkbox.checked = false;
+    }
+});
+
 export const initScheduleLogic = async () => {
     if (contentSchedule.dataset.loaded === 'true') {
         return;
