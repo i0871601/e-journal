@@ -47,7 +47,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const now = new Date();
     const todayIndex = now.getDay();
     const isWorkingDay = todayIndex >= 1 && todayIndex <= 5;
-    const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];
+    const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'П\'ятниця', 'Субота'];
     const isSelectedDayToday = (selectedDay === daysOfWeek[todayIndex]);
     const checkTime = isSelectedDayToday && isWorkingDay;
     
@@ -180,4 +180,5 @@ export const initScheduleLogic = async () => {
         console.error('Помилка запиту:', err);
         displayScheduleError(err.message || 'Не вдалося завантажити розклад. Спробуйте пізніше.');
     }
+
 };
