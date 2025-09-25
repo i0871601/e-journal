@@ -30,16 +30,21 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
     if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
-    } else if (nextStartTime){
-        const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-        const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+    } else if (currentTotalMinutes > endTotalMinutes){
+        let shouldPass = false;
         
-        if (currentTotalMinutes > endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
-            entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
+        if (nextStartTime) {
+            const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+            const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+            if (currentTotalMinutes < nextTotalMinutes){
+                shouldPass = true;
+            }
+        } else {
+            if (currentTotalMinutes <= endTotalMinutes + 30){
+                shouldPass = true;
+            }
         }
-    } else {
-        if (currentTotalMinutes <= endTotalMinutes + 30){
+        if (shouldPass){
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
         }
@@ -47,12 +52,9 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
 }
 
 function markPassed(){
-    const current = document.querySelector('.schedule-entry.current');
-    const passed = document.querySelector('.schedule-entry.passed');
-    //if(current && passed){
-    if (passed){
-        //let prevElement = current.previousElementSibling;
-        let prevElement = passed.previousElementSibling;
+    const current = document.querySelector('.schedule-entry.current, .schedule-entry.passed');
+    if(current){
+        let prevElement = current.previousElementSibling;
         while(prevElement){
             prevElement.classList.add('passed');
             prevElement.querySelector('.status-icon').classList.add('passed');
