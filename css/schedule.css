@@ -153,6 +153,7 @@
 }
 .schedule-entry.passed, .schedule-entry.break{
   box-shadow: 0 0 0.5vmin var(--color-passed);
+  border: 0.07rem solid var(--color-passed);
 }
 .status-icon{
   position: absolute;
