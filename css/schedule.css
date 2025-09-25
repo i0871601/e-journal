@@ -171,7 +171,7 @@
 }
 .schedule-entry.passed .status-icon{
   width: calc(1.1rem + 0.2rem);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:currentColor;}%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm5.707,8.707-7,7a1,1,0,0,1-1.414,0l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414Z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23447542;}</style></defs><title/><g data-name='Layer 28' id='Layer_28'><path class='cls-1' d='M16,31A15,15,0,1,1,31,16,15,15,0,0,1,16,31ZM16,3A13,13,0,1,0,29,16,13,13,0,0,0,16,3Z'/><path class='cls-1' d='M13.67,22a1,1,0,0,1-.73-.32l-4.67-5a1,1,0,0,1,1.46-1.36l3.94,4.21,8.6-9.21a1,1,0,1,1,1.46,1.36l-9.33,10A1,1,0,0,1,13.67,22Z'/></g></svg>");
   border: 0;
 }
 .schedule-entry.current .time p, .schedule-entry.current .info-block h3, .schedule-entry.current .info-block p, .schedule-entry.current .info-block a{
