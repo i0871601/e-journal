@@ -66,7 +66,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const checkTime = isSelectedDayToday && isWorkingDay;
     
     if (dayData && dayData.length > 0) {
-        dayData.forEach(item => {
+        dayData.forEach((item, index) => {
             const entryArticle = document.createElement('article');
             entryArticle.classList.add('schedule-entry');
             
