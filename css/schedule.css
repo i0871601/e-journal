@@ -7,6 +7,7 @@
   --color1: #1b1b1e;
   --color2: #262626;
   --text-color: #878787;
+  --color-passed: #232023;
 }
 #ScheduleContent{
   height: 100%;
@@ -150,7 +151,9 @@
   background-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-
+.schedule-entry.passed{
+  box-shadow: 0 0 0.5vmin var(--color-passed);
+}
 .status-icon{
   position: absolute;
   left: 0.41rem;
