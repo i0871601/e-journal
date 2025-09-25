@@ -36,21 +36,16 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
         const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
         if (currentTotalMinutes > endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
             entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
         }
     }
 }
 function markPassed(){
     const current = document.querySelector('.schedule-entry.current, .schedule-entry.passed');
-    const icon = document.querySelector('.status-icon.current, .status-icon.passed');
     if(current){
         let prevElement = current.previousElementSibling;
-        let prevStatus = icon.previousElementSibling;
         while(prevElement){
             prevElement.classList.add('passed');
             prevElement = prevElement.previousElementSibling;
-            prevStatus.classList.add('passed');
-            prevStatus = prevStatus.previousElementSibling;
         }
     }
 }
