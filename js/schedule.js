@@ -15,7 +15,7 @@ const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const checkbox = document.getElementById('days-checkbox');
 
-function TimeNow (startTime, endTime, checkTime){
+function TimeNow (startTime, endTime, checkTime, entryArticle, statusIcon){
     if(!checkTime){ return;}
     const now = new Date();
     const currentHours = now.getHours();
@@ -28,9 +28,6 @@ function TimeNow (startTime, endTime, checkTime){
     const endTotalMinutes = endHours * 60 +  endMinutes;
     
     if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes){
-        const entryArticle = document.querySelector('.schedule-entry');
-        const statusIcon = document.querySelector('.status-icon');
-        
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
     }
@@ -99,7 +96,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             entryArticle.appendChild(timeContainer);
             entryArticle.appendChild(infoBlock);
             contentSchedule.appendChild(entryArticle);
-            TimeNow (startTime, endTime, checkTime);
+            TimeNow (startTime, endTime, checkTime, entryArticle, statusIcon);
         });
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
