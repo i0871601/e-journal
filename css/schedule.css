@@ -151,7 +151,7 @@
   background-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-.schedule-entry.passed{
+.schedule-entry.passed, .schedule-entry.break{
   box-shadow: 0 0 0.5vmin var(--color-passed);
 }
 .status-icon{
