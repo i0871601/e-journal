@@ -36,6 +36,7 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
         const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
         if (currentTotalMinutes > endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
             entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
         }
     }
 }
@@ -45,6 +46,7 @@ function markPassed(){
         let prevElement = current.previousElementSibling;
         while(prevElement){
             prevElement.classList.add('passed');
+            prevElement.querySelector('.status-icon').classList.add('passed');
             prevElement = prevElement.previousElementSibling;
         }
     }
