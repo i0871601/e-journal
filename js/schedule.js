@@ -15,7 +15,7 @@ const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const checkbox = document.getElementById('days-checkbox');
 
-function TimeNow (startTime, endTime, checkTime, entryArticle, statusIcon){
+function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, statusIcon){
     if(!checkTime){ return;}
     const now = new Date();
     const currentHours = now.getHours();
@@ -31,9 +31,16 @@ function TimeNow (startTime, endTime, checkTime, entryArticle, statusIcon){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
     }
+    else if (nextStartTime){
+        const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+        const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+        if (currentTotalMinutes > endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
+            entryArticle.classList.add('break');
+        } 
+    }
 }
 function markPassed(){
-    const current = document.querySelector('.schedule-entry.current');
+    const current = document.querySelector('.schedule-entry.current, .schedule-entry.break');
     if(current){
         let prevElement = current.previousElementSibling;
         while(prevElement){
@@ -106,7 +113,9 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             entryArticle.appendChild(timeContainer);
             entryArticle.appendChild(infoBlock);
             contentSchedule.appendChild(entryArticle);
-            TimeNow (startTime, endTime, checkTime, entryArticle, statusIcon);
+
+            const nextStartTime = (index+1 <dayData.length) ? dayData[index+1].Time.split('-')[0] : null;
+            TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, statusIcon);
         });
         markPassed();
     } else {
