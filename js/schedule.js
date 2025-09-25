@@ -114,7 +114,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             entryArticle.appendChild(infoBlock);
             contentSchedule.appendChild(entryArticle);
 
-            const nextStartTime = (index+1 <dayData.length) ? dayData[index+1].Time.split('-')[0] : null;
+            const nextStartTime = (index + 1 < dayData.length) ? dayData[index + 1].Time.split('-')[0] : null;
             TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, statusIcon);
         });
         markPassed();
