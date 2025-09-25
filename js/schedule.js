@@ -35,12 +35,12 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
         const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
         const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
         if (currentTotalMinutes > endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
-            entryArticle.classList.add('break');
-        } 
+            entryArticle.classList.add('passed');
+        }
     }
 }
 function markPassed(){
-    const current = document.querySelector('.schedule-entry.current, .schedule-entry.break');
+    const current = document.querySelector('.schedule-entry.current, .schedule-entry.passed');
     if(current){
         let prevElement = current.previousElementSibling;
         while(prevElement){
