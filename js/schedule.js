@@ -26,21 +26,28 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
     const currentTotalMinutes = currentHours * 60 + currentMinutes;
     const startTotalMinutes = startHours * 60 +  startMinutes;
     const endTotalMinutes = endHours * 60 +  endMinutes;
-    
+    //Перевіряє чи є урок поточний
     if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes < endTotalMinutes){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
-    } else if (nextStartTime) {
-        const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-        const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-        if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= nextTotalMinutes){
-            entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
-        }
-    } else if (nextStartTime == null){
-        if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
-            entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
+    } else { //якщо урок не поточний перевіряє чи є наступний урок
+        if (nextStartTime) {//знайдений початок наступного уроку
+            const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+            const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+            //перевіряє чи час між уроками тобто перерва і урок пройшов
+            if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= nextTotalMinutes){
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+            } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє для інших уроків чи вони закінчились
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+            }
+        } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
+            //перевіряє чи урок пройшов та відображує його ще 30 хвилин
+            if (currentTotalMinutes <= endTotalMinutes + 30){
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+            }
         }
     }
 }
@@ -124,7 +131,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             const nextStartTime = (index + 1 < dayData.length) ? dayData[index + 1].Time.split('-')[0] : null;
             TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, statusIcon);
         });
-        markPassed();
+        //markPassed();
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
     }
