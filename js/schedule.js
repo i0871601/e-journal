@@ -15,44 +15,78 @@ const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const checkbox = document.getElementById('days-checkbox');
 
-function TimeNow (startTime, endTime, checkTime, maxTime, entryArticle, statusIcon){
+function TimeNow (dayData, checkTime){
     if(!checkTime){ return;}
-    const now = new Date();
-    const currentHours = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const [startHours, startMinutes] = startTime.split(':').map(Number);
-    const [endHours, endMinutes] = endTime.split(':').map(Number);
-    
-    const currentTotalMinutes = currentHours * 60 + currentMinutes;
-    const startTotalMinutes = startHours * 60 +  startMinutes;
-    const endTotalMinutes = endHours * 60 +  endMinutes;
-    //Перевіряє чи є урок поточний
-    if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
-        entryArticle.classList.add('current');
-        statusIcon.classList.add('current');
-    } else { //якщо урок не поточний перевіряє чи є наступний урок
-        if (nextStartTime) {//знайдений початок наступного уроку
-            const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-            const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-            //перевіряє чи час між уроками тобто перерва і урок пройшов
-            if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
-                entryArticle.classList.add('passed');
-                statusIcon.classList.add('passed');
-            } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє для інших уроків чи вони закінчились
-                entryArticle.classList.add('passed');
-                statusIcon.classList.add('passed');
-            }
-        } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
-            //перевіряє чи урок пройшов та відображує його ще 30 хвилин
-            if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
-                entryArticle.classList.add('passed');
-                statusIcon.classList.add('passed');
+    const entries = contentSchedule.querySelectorAll('.schedule-entry');
+    entries.forEach((entryArticle, index) => {
+        const item = dayData[index];
+        const statusIcon = entryArticle.querySelector('.status-icon');
+        const [startTime, endTime] = item.Time.split('-');
+
+        const now = new Date();
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const [startHours, startMinutes] = startTime.split(':').map(Number);
+        const [endHours, endMinutes] = endTime.split(':').map(Number);
+        const nextStartTime = (index + 1 < dayData.length) ? dayData[index + 1].Time.split('-')[0] : null;
+
+        const currentTotalMinutes = currentHours * 60 + currentMinutes;
+        const startTotalMinutes = startHours * 60 +  startMinutes;
+        const endTotalMinutes = endHours * 60 +  endMinutes;
+        
+        if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
+            entryArticle.classList.add('current');
+            statusIcon.classList.add('current');
+        } else if (currentTotalMinutes >= endTotalMinutes){
+            // Якщо є наступний урок
+            if (nextStartTime) {
+                const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+                const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+                // Перевіряємо, чи ми на перерві [End, NextStart)
+                if (currentTotalMinutes < nextTotalMinutes){
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                } 
+                // Інакше: урок давно пройшов (час вже після початку наступного)
+                else {
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                }
+            } 
+            // Якщо наступного уроку немає (останній урок)
+            else {
+                // Відображуємо ще 30 хвилин після закінчення
+                if (currentTotalMinutes <= endTotalMinutes + 30){
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                }
             }
         }
-    }
+        /*if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
+            entryArticle.classList.add('current');
+            statusIcon.classList.add('current');
+        } else { //якщо урок не поточний перевіряє чи є наступний урок
+            if (nextStartTime) {//знайдений початок наступного уроку
+                const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+                const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+                //перевіряє чи час між уроками тобто перерва і урок пройшов
+                if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє чи урок давно закінчився
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                }
+            } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
+                //перевіряє чи урок пройшов та відображує його ще 30 хвилин
+                if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
+                    entryArticle.classList.add('passed');
+                    statusIcon.classList.add('passed');
+                }
+            }
+        }*/
+    });
 }
-
-
 
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
     contentSchedule.innerHTML = '';
@@ -70,7 +104,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const checkTime = isSelectedDayToday && isWorkingDay;
     
     if (dayData && dayData.length > 0) {
-        dayData.forEach((item, index) => {
+        dayData.forEach(item => {
             const entryArticle = document.createElement('article');
             entryArticle.classList.add('schedule-entry');
             
@@ -119,7 +153,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             contentSchedule.appendChild(entryArticle);
 
         });
-        TimeNow(checkTime);
+        TimeNow(dayData, checkTime);
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
     }
