@@ -19,6 +19,11 @@ let scheduleUpdateInterval = null;
 function TimeNow (dayData, checkTime){
     if(!checkTime){ return;}
     const entries = contentSchedule.querySelectorAll('.schedule-entry');
+    const maxTime = dayData.length > 0 ? dayData[dayData.length - 1].Time.split('-')[1] : null;
+    let maxTotalMinutes = maxTime 
+        ? maxTime.split(':').map(Number).reduce((h, m) => h * 60 + m) 
+        : null;
+
     entries.forEach((entryArticle, index) => {
         const item = dayData[index];
         const statusIcon = entryArticle.querySelector('.status-icon');
@@ -32,30 +37,27 @@ function TimeNow (dayData, checkTime){
         const nextStartTime = (index + 1 < dayData.length) ? dayData[index + 1].Time.split('-')[0] : null;
 
         const currentTotalMinutes = currentHours * 60 + currentMinutes;
-        const startTotalMinutes = startHours * 60 +  startMinutes;
-        const endTotalMinutes = endHours * 60 +  endMinutes;
+        const startTotalMinutes = startHours * 60 + startMinutes;
+        const endTotalMinutes = endHours * 60 + endMinutes;
         
+        let nextTotalMinutes = nextStartTime 
+            ? nextStartTime.split(':').map(Number).reduce((h, m) => h * 60 + m) 
+            : null;
+        // Умова 1: ЗАРАЗ ТРИВАЄ УРОК
         if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
             entryArticle.classList.add('current');
             statusIcon.classList.add('current');
-        } else if (currentTotalMinutes >= endTotalMinutes){
-            if (nextStartTime) {
-                const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-                const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-                if (currentTotalMinutes < nextTotalMinutes){
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                } 
-                else {
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                }
-            } else {
-                if (currentTotalMinutes <= endTotalMinutes + 30){
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                }
-            }
+        } 
+        // Умова 2: ПЕРЕРВА (Перевіряємо, чи є наступний урок)
+        else if (nextTotalMinutes !== null && currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
+            // Час між End поточного та NextStart наступного
+            entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
+        } 
+        // Умова 3: ПРОЙШОВ/ДАВНО ПРОЙШОВ
+        else if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= maxTotalMinutes + 30){
+            entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
         }
     });
 }
