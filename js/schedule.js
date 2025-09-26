@@ -30,30 +30,29 @@ function TimeNow (startTime, endTime, checkTime, maxTime, entryArticle, statusIc
     if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
-    } else {
-        if (maxTime) {//знайдений кінець всіх уроків
-            const [maxHours, maxMinutes] = maxTime.split(':').map(Number);
-            const maxTotalMinutes = maxHours * 60 + maxMinutes;
-            if (maxTotalMinutes == endTotalMinutes){
-                if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes +30){
-                    entryArticle.classList.add('end');
-                } 
+    } else { //якщо урок не поточний перевіряє чи є наступний урок
+        if (nextStartTime) {//знайдений початок наступного уроку
+            const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+            const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+            //перевіряє чи час між уроками тобто перерва і урок пройшов
+            if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+            } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє для інших уроків чи вони закінчились
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+            }
+        } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
+            //перевіряє чи урок пройшов та відображує його ще 30 хвилин
+            if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
             }
         }
     }
 }
 
-function markPassed(){
-    const current = document.querySelector('.schedule-entry.current, .schedule-entry.end');
-    if(current){
-        let prevElement = current.previousElementSibling;
-        while(prevElement){
-            prevElement.classList.add('passed');
-            prevElement.querySelector('.status-icon').classList.add('passed');
-            prevElement = prevElement.previousElementSibling;
-        }
-    }
-}
+
 
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
     contentSchedule.innerHTML = '';
