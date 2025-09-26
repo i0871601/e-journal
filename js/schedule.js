@@ -60,12 +60,14 @@ function TimeNow (dayData, checkTime){
     });
 }
 
-function updateScheduleStatus{
+function updateScheduleStatus(dayData, checkTime) {
     document.querySelectorAll('.schedule-entry').forEach(entry => {
         entry.classList.remove('current', 'passed');
         entry.querySelector('.status-icon').classList.remove('current', 'passed');
+        console.log("Очищення");
     });
     TimeNow(dayData, checkTime);
+    console.log("Оновлення");
 }
 
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
@@ -139,12 +141,11 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 
         });
         TimeNow(dayData, checkTime);
-
         if (checkTime) {
-            // Оновлюємо кожну хвилину (60000 мілісекунд)
             scheduleUpdateInterval = setInterval(() => {
-                updateScheduleStatus();
-            }, 60000); 
+                updateScheduleStatus(dayData, checkTime);
+            }, 60000);
+            console.log("запустило оновлення"); 
         }
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
@@ -166,10 +167,8 @@ export const setupDaySelector = (groupedByDay, role) => {
             const selectedDay = target.dataset.day;
             selectedTextContainer.textContent = target.textContent;
             
-            // Знімаємо відмітку з чекбокса, щоб список закрився
             checkbox.checked = false;
             
-            // Викликаємо вашу функцію для відображення розкладу
             displaySchedule(groupedByDay, role, selectedDay);
         }
     });
