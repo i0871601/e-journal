@@ -27,7 +27,7 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
     const startTotalMinutes = startHours * 60 +  startMinutes;
     const endTotalMinutes = endHours * 60 +  endMinutes;
     //Перевіряє чи є урок поточний
-    if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes < endTotalMinutes){
+    if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
     } else { //якщо урок не поточний перевіряє чи є наступний урок
@@ -35,17 +35,16 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
             const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
             const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
             //перевіряє чи час між уроками тобто перерва і урок пройшов
-            if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= nextTotalMinutes){
+            if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
                 entryArticle.classList.add('passed');
                 statusIcon.classList.add('passed');
             } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє для інших уроків чи вони закінчились
                 entryArticle.classList.add('passed');
                 statusIcon.classList.add('passed');
             }
-            console.log("Урок на перерві чи пройшов");
         } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
             //перевіряє чи урок пройшов та відображує його ще 30 хвилин
-            if (currentTotalMinutes <= endTotalMinutes + 30){
+            if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
                 entryArticle.classList.add('passed');
                 statusIcon.classList.add('passed');
             }
