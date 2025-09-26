@@ -14,6 +14,7 @@ const contentSchedule = document.getElementById('text-container-schedule');
 const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const checkbox = document.getElementById('days-checkbox');
+let scheduleUpdateInterval = null;
 
 function TimeNow (dayData, checkTime){
     if(!checkTime){ return;}
@@ -38,54 +39,33 @@ function TimeNow (dayData, checkTime){
             entryArticle.classList.add('current');
             statusIcon.classList.add('current');
         } else if (currentTotalMinutes >= endTotalMinutes){
-            // Якщо є наступний урок
             if (nextStartTime) {
                 const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
                 const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-                // Перевіряємо, чи ми на перерві [End, NextStart)
                 if (currentTotalMinutes < nextTotalMinutes){
                     entryArticle.classList.add('passed');
                     statusIcon.classList.add('passed');
                 } 
-                // Інакше: урок давно пройшов (час вже після початку наступного)
                 else {
                     entryArticle.classList.add('passed');
                     statusIcon.classList.add('passed');
                 }
-            } 
-            // Якщо наступного уроку немає (останній урок)
-            else {
-                // Відображуємо ще 30 хвилин після закінчення
+            } else {
                 if (currentTotalMinutes <= endTotalMinutes + 30){
                     entryArticle.classList.add('passed');
                     statusIcon.classList.add('passed');
                 }
             }
         }
-        /*if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes){
-            entryArticle.classList.add('current');
-            statusIcon.classList.add('current');
-        } else { //якщо урок не поточний перевіряє чи є наступний урок
-            if (nextStartTime) {//знайдений початок наступного уроку
-                const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-                const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-                //перевіряє чи час між уроками тобто перерва і урок пройшов
-                if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes){
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                } else if(currentTotalMinutes >= endTotalMinutes){//перевіряє чи урок давно закінчився
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                }
-            } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
-                //перевіряє чи урок пройшов та відображує його ще 30 хвилин
-                if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
-                    entryArticle.classList.add('passed');
-                    statusIcon.classList.add('passed');
-                }
-            }
-        }*/
     });
+}
+
+function updateScheduleStatus{
+    document.querySelectorAll('.schedule-entry').forEach(entry => {
+        entry.classList.remove('current', 'passed');
+        entry.querySelector('.status-icon').classList.remove('current', 'passed');
+    });
+    TimeNow(dayData, checkTime);
 }
 
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
@@ -102,6 +82,11 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четверг', 'П\'ятниця', 'Субота'];
     const isSelectedDayToday = (selectedDay === daysOfWeek[todayIndex]);
     const checkTime = isSelectedDayToday && isWorkingDay;
+
+    if (scheduleUpdateInterval) {
+        clearInterval(scheduleUpdateInterval);
+        scheduleUpdateInterval = null;
+    }
     
     if (dayData && dayData.length > 0) {
         dayData.forEach(item => {
@@ -154,6 +139,13 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
 
         });
         TimeNow(dayData, checkTime);
+
+        if (checkTime) {
+            // Оновлюємо кожну хвилину (60000 мілісекунд)
+            scheduleUpdateInterval = setInterval(() => {
+                updateScheduleStatus();
+            }, 60000); 
+        }
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
     }
