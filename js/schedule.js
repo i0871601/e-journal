@@ -27,24 +27,18 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
     const startTotalMinutes = startHours * 60 +  startMinutes;
     const endTotalMinutes = endHours * 60 +  endMinutes;
     
-    if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes){
+    if (currentTotalMinutes > startTotalMinutes && currentTotalMinutes < endTotalMinutes){
         entryArticle.classList.add('current');
         statusIcon.classList.add('current');
-    } else if (currentTotalMinutes > endTotalMinutes){
-        let shouldPass = false;
-        
-        if (nextStartTime) {
-            const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
-            const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
-            if (currentTotalMinutes < nextTotalMinutes){
-                shouldPass = true;
-            }
-        } else {
-            if (currentTotalMinutes <= endTotalMinutes + 30){
-                shouldPass = true;
-            }
+    } else if (nextStartTime) {
+        const [nextStartHours, nextStartMinutes] = nextStartTime.split(':').map(Number);
+        const nextTotalMinutes = nextStartHours * 60 + nextStartMinutes;
+        if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= nextTotalMinutes){
+            entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
         }
-        if (shouldPass){
+    } else if (nextStartTime == null){
+        if (currentTotalMinutes <= endTotalMinutes + 30){
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
         }
