@@ -52,18 +52,6 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
     }
 }
 
-function markPassed(){
-    const current = document.querySelector('.schedule-entry.current, .schedule-entry.passed');
-    if(current){
-        let prevElement = current.previousElementSibling;
-        while(prevElement){
-            prevElement.classList.add('passed');
-            prevElement.querySelector('.status-icon').classList.add('passed');
-            prevElement = prevElement.previousElementSibling;
-        }
-    }
-}
-
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
     contentSchedule.innerHTML = '';
     const dataMapping = {
@@ -131,7 +119,6 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
             const nextStartTime = (index + 1 < dayData.length) ? dayData[index + 1].Time.split('-')[0] : null;
             TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, statusIcon);
         });
-        //markPassed();
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
     }
