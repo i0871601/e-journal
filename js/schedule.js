@@ -42,6 +42,7 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
                 entryArticle.classList.add('passed');
                 statusIcon.classList.add('passed');
             }
+            console.log("Урок на перерві чи пройшов");
         } else if (nextStartTime == null){//якщо не знайшовся урок початок наступного значить він один або останій
             //перевіряє чи урок пройшов та відображує його ще 30 хвилин
             if (currentTotalMinutes <= endTotalMinutes + 30){
