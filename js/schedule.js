@@ -38,7 +38,7 @@ function TimeNow (startTime, endTime, checkTime, nextStartTime, entryArticle, st
             statusIcon.classList.add('passed');
         }
     } else if (nextStartTime == null){
-        if (currentTotalMinutes <= endTotalMinutes + 30){
+        if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes + 30){
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
         }
