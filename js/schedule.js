@@ -146,8 +146,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
         if (checkTime) {
             scheduleUpdateInterval = setInterval(() => {
                 updateScheduleStatus(dayData, checkTime);
-            }, 60000);
-            console.log("запустило оновлення"); 
+            }, 10 * 60 * 1000);
         }
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
