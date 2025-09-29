@@ -54,6 +54,8 @@
   width: 1.4rem;
   aspect-ratio: 1/1;
   display: flex;
+  align-items: center;
+  justify-content: center;
   transition: none;
 }
 #select-arrow::after{
@@ -79,7 +81,7 @@
   transition: opacity 0.65s ease-in-out;
 }
 #days-checkbox:checked ~ #button-select-schedule #select-arrow {
-  transform: rotate(180deg);
+  
 }
 #days-checkbox:checked ~ #button-select-schedule{
   border-color: var(--color-accent);
