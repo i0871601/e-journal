@@ -84,6 +84,7 @@
 }
 #days-checkbox:checked ~ #button-select-schedule #select-arrow::after {
   content: '-';
+  font-size: 1.4rem;
 }
 #days-checkbox:checked ~ #button-select-schedule{
   border-color: var(--color-accent);
