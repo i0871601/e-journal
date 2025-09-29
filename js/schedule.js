@@ -84,7 +84,7 @@ function TimeNow (dayData, checkTime){
             statusIcon.classList.add('passed');
         } 
         // Умова 3: ПРОЙШОВ/ДАВНО ПРОЙШОВ
-        else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30){
+        else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30)){
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
         }
