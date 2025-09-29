@@ -18,26 +18,32 @@ let scheduleUpdateTimer = null;
 
 function getNextUpdateTime(dayData){
     const now = new Date();
-    const nowTimestamp = new Date(now.getHours(), now.getMinutes());
-    let nextEventTimestamp = Infinity;
+    const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
+    let nextEventTotalMinutes = Infinity;
+
+    const timeToMinutes = (timeStr) =>{
+        const [h, m] = timeStr.split(':').map(Number);
+        return h * 60 + m;
+    }
     dayData.forEach(item =>{
         const [startTimeStr, endTimeStr] = item.Time.split('-');
-        const [startH, startM] = startTimeStr.split(':').map(Number);
-        const startDataTime = new Date(startH, startM, 1);
+        const startMinutes = timeToMinutes(startTimeStr);
+        const endMinutes = timeToMinutes(endTimeStr);
 
-        if (startDataTime.getTime() > nowTimestamp){
-            nextEventTimestamp = Math.min(nextEventTimestamp, startDataTime.getTime());
+        if (startMinutes > currentTotalMinutes){
+            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, startMinutes);
         }
 
-        const [endH, endM] = endTimeStr.split(':').map(Number);
-        const endDataTime = new Date(endH, endM, 1);
-
-        if (endDataTime.getTime() > nowTimestamp){
-            nextEventTimestamp = Math.min(nextEventTimestamp, endDataTime.getTime());
+        if (endMinutes > currentTotalMinutes){
+            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, endMinutes);
         }
     });
-    if (nextEventTimestamp === Infinity){return -1;}
-    let delay = nextEventTimestamp - nowTimestamp;
+    if (nextEventTotalMinutes === Infinity){return -1;}
+    const delayMinunutes = nextEventTotalMinutes - currentTotalMinutes;
+    let delay = delayMinunutes * 60 * 1000;
+    const secondsToWait = 60 - now.getSeconds();
+    delay -= now.getMilliseconds;
+    delay += secondsToWait * 1000;
     if(delay <2000){delay=2000;}
     return delay;
 }
@@ -126,7 +132,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const checkTime = isSelectedDayToday && isWorkingDay;
 
     if (scheduleUpdateTimer) {
-        clearInterval(scheduleUpdateTimer);
+        clearTimeout(scheduleUpdateTimer);
         scheduleUpdateTimer = null;
     }
     
