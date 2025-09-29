@@ -39,8 +39,8 @@ function getNextUpdateTime(dayData){
         }
     });
     if (nextEventTotalMinutes === Infinity){return -1;}
-    const delayMinunutes = nextEventTotalMinutes - currentTotalMinutes;
-    let delay = delayMinunutes * 60 * 1000;
+    const delayMinutes = nextEventTotalMinutes - currentTotalMinutes;
+    let delay = delayMinutes * 60 * 1000;
     const secondsToWait = 60 - now.getSeconds();
     delay -= now.getMilliseconds();
     delay += secondsToWait * 1000;
@@ -110,7 +110,8 @@ function setNextStatusUpdate(dayData, checkTime){
     }
     const delay = getNextUpdateTime(dayData);
     if (delay === -1){console.log("Уроки закінчилися"); return;}
-    console.log(`Наступне оновлення через ${Math.floor(delay)} хвилин`);
+    const delayMinutes = delay / (60 * 1000);
+    console.log(`Наступне оновлення через ${delayMinutes.toFixed(2)} хвилин`);
     scheduleUpdateTimer = setTimeout(() => {
         updateScheduleStatus(dayData, checkTime);
     }, delay);
