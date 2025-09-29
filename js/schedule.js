@@ -14,15 +14,44 @@ const contentSchedule = document.getElementById('text-container-schedule');
 const daysList = document.getElementById('DaysList');
 const selectedTextContainer = document.getElementById('first-option');
 const checkbox = document.getElementById('days-checkbox');
-let scheduleUpdateInterval = null;
+let scheduleUpdateTimer = null;
+
+function getNextUpdateTime(dayData){
+    const now = new Date();
+    const nowTimestamp = new Date(now.getHours(), now.getMinutes());
+    let nextEventTimestamp = Infinity;
+    dayData.forEach(item =>{
+        const [startTimeStr, endTimeStr] = item.Time.split('-');
+        const [startH, startM] = startTimeStr.split(':').map(Number);
+        const startDataTime = new Date(startH, startM, 1);
+
+        if (startDataTime.getTime() > nowTimestamp){
+            nextEventTimestamp = Math.min(nextEventTimestamp, startDataTime.getTime());
+        }
+
+        const [endH, endM] = endTimeStr.split(':').map(Number);
+        const endDataTime = new Date(endH, endM, 1);
+
+        if (endDataTime.getTime() > nowTimestamp){
+            nextEventTimestamp = Math.min(nextEventTimestamp, endDataTime.getTime());
+        }
+    });
+    if (nextEventTimestamp === Infinity){return -1;}
+    let delay = nextEventTimestamp - nowTimestamp;
+    if(delay <2000){delay=2000;}
+    return delay;
+}
 
 function TimeNow (dayData, checkTime){
     if(!checkTime){ return;}
     const entries = contentSchedule.querySelectorAll('.schedule-entry');
+    entries.forEach(entry =>{
+        entry.classList.remove('current', 'passed');
+        entry.querySelector('.status-icon').classList.remove('current', 'passed');
+    });
+
     const maxTime = dayData.length > 0 ? dayData[dayData.length - 1].Time.split('-')[1] : null;
-    let maxTotalMinutes = maxTime 
-        ? maxTime.split(':').map(Number).reduce((h, m) => h * 60 + m) 
-        : null;
+    let maxTotalMinutes = maxTime ? maxTime.split(':').map(Number).reduce((h, m) => h * 60 + m) : null;
 
     entries.forEach((entryArticle, index) => {
         const item = dayData[index];
@@ -55,7 +84,7 @@ function TimeNow (dayData, checkTime){
             statusIcon.classList.add('passed');
         } 
         // Умова 3: ПРОЙШОВ/ДАВНО ПРОЙШОВ
-        else if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes <= maxTotalMinutes + 30){
+        else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30){
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
         }
@@ -63,13 +92,22 @@ function TimeNow (dayData, checkTime){
 }
 
 function updateScheduleStatus(dayData, checkTime) {
-    document.querySelectorAll('.schedule-entry').forEach(entry => {
-        entry.classList.remove('current', 'passed');
-        entry.querySelector('.status-icon').classList.remove('current', 'passed');
-        console.log("Очищення");
-    });
     TimeNow(dayData, checkTime);
     console.log("Оновлення");
+    if(checkTime){setNextStatusUpdate(dayData, checkTime);}
+}
+
+function setNextStatusUpdate(dayData, checkTime){
+    if(scheduleUpdateTimer){
+        clearTimeout(scheduleUpdateTimer);
+        scheduleUpdateTimer = null;
+    }
+    const delay = getNextUpdateTime(dayData);
+    if (delay === -1){console.log("Уроки закінчилися"); return;}
+    console.log('Наступне оновлення через ${Math.floor(delay / 60000)}');
+    scheduleUpdateTimer = setTimeout(() => {
+        updateScheduleStatus(dayData, checkTime);
+    }, delay);
 }
 
 export const displaySchedule = (groupedByDay, role, selectedDay) => {
@@ -87,9 +125,9 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
     const isSelectedDayToday = (selectedDay === daysOfWeek[todayIndex]);
     const checkTime = isSelectedDayToday && isWorkingDay;
 
-    if (scheduleUpdateInterval) {
-        clearInterval(scheduleUpdateInterval);
-        scheduleUpdateInterval = null;
+    if (scheduleUpdateTimer) {
+        clearInterval(scheduleUpdateTimer);
+        scheduleUpdateTimer = null;
     }
     
     if (dayData && dayData.length > 0) {
@@ -144,9 +182,7 @@ export const displaySchedule = (groupedByDay, role, selectedDay) => {
         });
         TimeNow(dayData, checkTime);
         if (checkTime) {
-            scheduleUpdateInterval = setInterval(() => {
-                updateScheduleStatus(dayData, checkTime);
-            }, 10 * 60 * 1000);
+            setNextStatusUpdate(dayData, checkTime);
         }
     } else {
         contentSchedule.textContent = 'На цей день розклад відсутній.';
