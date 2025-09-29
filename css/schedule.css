@@ -61,6 +61,8 @@
 #select-arrow::after{
   content: '+';
   position: absolute;
+  font-size: 1.3rem;
+  transition: content 0.3s ease-in-out;
 }
 #DaysList{
   position: absolute;
@@ -80,8 +82,8 @@
   overflow: hidden;
   transition: opacity 0.65s ease-in-out;
 }
-#days-checkbox:checked ~ #button-select-schedule #select-arrow {
-  
+#days-checkbox:checked ~ #button-select-schedule #select-arrow::after {
+  content: '-';
 }
 #days-checkbox:checked ~ #button-select-schedule{
   border-color: var(--color-accent);
