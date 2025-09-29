@@ -20,6 +20,7 @@ function getNextUpdateTime(dayData){
     const now = new Date();
     const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
     let nextEventTotalMinutes = Infinity;
+    let maxTotalMinutes = null;
 
     const timeToMinutes = (timeStr) =>{
         const [h, m] = timeStr.split(':').map(Number);
@@ -30,6 +31,8 @@ function getNextUpdateTime(dayData){
         const startMinutes = timeToMinutes(startTimeStr);
         const endMinutes = timeToMinutes(endTimeStr);
 
+        maxTotalMinutes = Math.max(maxTotalMinutes, endMinutes);
+
         if (startMinutes > currentTotalMinutes){
             nextEventTotalMinutes = Math.min(nextEventTotalMinutes, startMinutes);
         }
@@ -38,7 +41,12 @@ function getNextUpdateTime(dayData){
             nextEventTotalMinutes = Math.min(nextEventTotalMinutes, endMinutes);
         }
     });
-    if (nextEventTotalMinutes === Infinity){return -1;}
+    if (nextEventTotalMinutes === Infinity){
+        const finalCheckTime = maxTotalMinutes + 30;
+        if(currentTotalMinutes < finalCheckTime){
+            nextEventTotalMinutes = finalCheckTime;
+        } else {return -1;}
+    }
     const delayMinutes = nextEventTotalMinutes - currentTotalMinutes;
     let delay = delayMinutes * 60 * 1000;
     const secondsToWait = 60 - now.getSeconds();
