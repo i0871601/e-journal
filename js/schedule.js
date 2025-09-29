@@ -42,7 +42,7 @@ function getNextUpdateTime(dayData){
     const delayMinunutes = nextEventTotalMinutes - currentTotalMinutes;
     let delay = delayMinunutes * 60 * 1000;
     const secondsToWait = 60 - now.getSeconds();
-    delay -= now.getMilliseconds;
+    delay -= now.getMilliseconds();
     delay += secondsToWait * 1000;
     if(delay <2000){delay=2000;}
     return delay;
