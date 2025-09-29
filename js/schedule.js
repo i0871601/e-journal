@@ -104,7 +104,7 @@ function setNextStatusUpdate(dayData, checkTime){
     }
     const delay = getNextUpdateTime(dayData);
     if (delay === -1){console.log("Уроки закінчилися"); return;}
-    console.log('Наступне оновлення через ${Math.floor(delay / 60000)}');
+    console.log(`Наступне оновлення через ${Math.floor(delay / 60000)} хвилин`);
     scheduleUpdateTimer = setTimeout(() => {
         updateScheduleStatus(dayData, checkTime);
     }, delay);
