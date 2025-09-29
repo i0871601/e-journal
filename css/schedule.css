@@ -50,9 +50,15 @@
   margin: 0;
 }
 #select-arrow{
-  width: 5vmin;
-  background: url('../image/down.svg') no-repeat center / contain;
-  transition: transform 0.3s ease-in-out;
+  position: relative;
+  width: 1.4rem;
+  aspect-ratio: 1/1;
+  display: flex;
+  transition: none;
+}
+#select-arrow::after{
+  content: '+';
+  position: absolute;
 }
 #DaysList{
   position: absolute;
