@@ -5,6 +5,7 @@ export const API_URL = "https://worker-refuge.i087.workers.dev/";
 export const messages = {
   loginError: {status: 'error', text: "Помилка: невірний логін чи пароль."},
   fieldsEmpty: {status: 'error', text: "Будь ласка, заповніть всі поля."},
+  newPassword: {status: 'success', text: "Був введений тимчасовий пароль. Створіть постійний пароль."},
   passwordMismatch: {status: 'error', text: "Паролі не співпадають або поле порожнє."},
   passwordUpdateSuccess: {status: 'success', text: "Пароль успішно оновлено!"},
   passwordUpdateError: {status: 'error', text: "Не вдалося оновити пароль."}

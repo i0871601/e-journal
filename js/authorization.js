@@ -108,7 +108,14 @@ async function handleLogin(lastName, password) {
         const data = await authorizeUser(lastName, hashedPassword);
 
         if (data.tempPasswordRequired) {
-            showPasswordUpdateForm(data.message);
+            passwordField.classList.add('hidden');
+            newPasswordFieldsContainer.classList.remove('hidden');
+            newPasswordFieldsContainer.classList.add('active');
+            setButtonState(false, "Зберегти");
+            newPasswordField.disabled = false;
+            confirmNewPasswordField.disabled = false;
+            newPasswordField.focus();
+            MessageText(messages.newPassword);
         } else {
             saveSessionData(data);
             window.location.href = "Home.html";
@@ -135,40 +142,24 @@ async function handlePasswordUpdate(lastName) {
         const data = await updatePassword(lastName, hashedNewPassword);
         
         if (data.isPasswordUpdated) {
-            hidePasswordUpdateForm(data.message);
+            passwordField.classList.remove('hidden');
+            newPasswordFieldsContainer.classList.add('hidden');
+            newPasswordFieldsContainer.classList.remove('active');
+            setButtonState(false, "Увійти");
+            newPasswordField.disabled = true;
+            confirmNewPasswordField.disabled = true;
+            newPasswordField.value = '';
+            confirmNewPasswordField.value = '';
+            passwordField.value = '';
             MessageText(messages.passwordUpdateSuccess);
         } else {
-            MessageText("Помилка: " + (data.message || messages.passwordUpdateError));
+            MessageText(messages.passwordUpdateError);
         }
     } catch (error) {
         console.log("Помилка: " + error.message);
     } finally {
         setButtonState(false);
     }
-}
-
-function showPasswordUpdateForm(message) {
-    passwordField.classList.add('hidden');
-    newPasswordFieldsContainer.classList.remove('hidden');
-    newPasswordFieldsContainer.classList.add('active');
-    setButtonState(false, "Зберегти");
-    console.log(message);
-    newPasswordField.disabled = false;
-    confirmNewPasswordField.disabled = false;
-    newPasswordField.focus();
-}
-
-function hidePasswordUpdateForm(message) {
-    passwordField.classList.remove('hidden');
-    newPasswordFieldsContainer.classList.add('hidden');
-    newPasswordFieldsContainer.classList.remove('active');
-    setButtonState(false, "Увійти");
-    console.log(message);
-    newPasswordField.disabled = true;
-    confirmNewPasswordField.disabled = true;
-    newPasswordField.value = '';
-    confirmNewPasswordField.value = '';
-    passwordField.value = '';
 }
 
 function saveSessionData(data) {
