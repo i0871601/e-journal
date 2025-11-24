@@ -40,19 +40,23 @@
                 <div class="contentJournal">
                     <h2>Журнал</h2>
                     <div class="GradeOfJournal" id="GradeOfJournal">
-                        <div id="Select-Subject" class="container-all">
-                            <div id="subject-button" class="first-option">
-                                <p>Виберіть предмет</p>
-                                <div></div>
+                        <div id="customSelect">
+                            <div id="CustomSelectSubject">
+                                <input type="radio" id="subject-radio"></input>
+                                <label for="subject-radio" id="button-select-subject">
+                                    <p class="first-option">Виберіть предмет</p>
+                                    <span id="select-arrow"></span>
+                                </label>
+                                <ul id="subject-list" class="dropdown-list"></ul>
                             </div>
-                            <ul id="subject-list" class="dropdown-list"></ul>
-                        </div>
-                        <div id="ClassTeacher" class="container-all">
-                            <div id="Class-button" class="first-option">
-                                <p>Виберіть клас</p>
-                                <div></div>
+                            <div id="CustomSelectClassTeacher">
+                                <input type="radio" id="class-radio"></input>
+                                <label for="class-radio" id="button-select-class">
+                                    <p id="first-option">Виберіть клас</p>
+                                    <span id="select-arrow"></span>
+                                </label>
+                                <ul id="class-list" class="dropdown-list"></ul>
                             </div>
-                            <ul id="class-list" class="dropdown-list"></ul>
                         </div>
                         <input type="checkbox" id="toggle-add-grade" class="checkbox-add-lesson">
                         <div class="add-grade-container">
