@@ -64,8 +64,11 @@ body{
 }
 #customSelect{
   display:flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5%;
 }
-#Select-Subject, #ClassTeacher, #lessonTypeInput {
+#CustomSelectSubject, #CustomSelectClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0.07rem solid transparent;
   border-radius: 1rem /*від шрифта*/;
