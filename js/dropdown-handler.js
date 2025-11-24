@@ -48,10 +48,11 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
             buttonTextElement.textContent = selectedText;
             listElement.classList.remove('visible-list');
 
-            const buttonElement = listElement.previousElementSibling;
-            if (buttonElement && buttonElement.parentElement) {
-                buttonElement.parentElement.classList.remove('click-button');
+            const radioElement = listElement.previousElementSibling.previousElementSibling;
+            if (radioElement && radioElement.type === 'radio') {
+                radioElement.checked = false;
             }
+
             await onSelectCallback(selectedText, event.target.dataset);
         }
     });
@@ -60,8 +61,8 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
 function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
     selectedSubjectForTeacher = selectedSubject;
     const classListElement = document.getElementById("class-list");
-    const classButtonTextElement = document.querySelector("#Class-button p");
-    const classContainer = document.getElementById("ClassTeacher");
+    const classButtonTextElement = document.querySelector("#button-select-class .first-option");
+    const classContainer = document.getElementById("CustomSelectClassTeacher");
 
     if (classListElement && classButtonTextElement && classContainer) {
         classContainer.style.display = 'block';
@@ -73,8 +74,6 @@ function handleTeacherSubjectSelection(selectedSubject, dataset, userData) {
         }
 
         populateDropdown(classListElement, classesForSubject, "simpleList");
-        classButtonTextElement.textContent = "Виберіть клас";
-        classListElement.classList.remove('visible-list');
     }
 }
 
@@ -115,12 +114,10 @@ export function initDropdown() {
 
     if (role === 'student') {
         const listElement = document.getElementById("subject-list");
-        //const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#button-select-subject .first-option");
 
-        if (listElement /*&& buttonElement*/ && buttonTextElement) {
+        if (listElement && buttonTextElement) {
             populateDropdown(listElement, data.data, "subjects");
-            //setupToggle(buttonElement, listElement);
             setupListSelection(listElement, buttonTextElement, async (subject, dataset) => {
                 const firstClassOrSubject = classOrsubject.split(',')[0].trim();
                 const payload = {
@@ -147,14 +144,11 @@ export function initDropdown() {
     } else if (role === 'teacher') {
         const subjectContainer = document.getElementById("CustomSelectSubject");
         const listElement = document.getElementById("subject-list");
-        //const buttonElement = document.getElementById("subject-button");
         const buttonTextElement = document.querySelector("#button-select-subject .first-option");
         const classListElement = document.getElementById("class-list");
-        //const classButtonElement = document.getElementById("Class-button");
         const classButtonTextElement = document.querySelector("#button-select-class .first-option");
 
-        if (subjectContainer && listElement && /*buttonElement &&*/ buttonTextElement && classListElement /*&& classButtonElement*/ && classButtonTextElement) {
-            //buttonTextElement.textContent = "Виберіть предмет";
+        if (subjectContainer && listElement && buttonTextElement && classListElement && classButtonTextElement) {
             const subjects = Object.keys(userData.data.data);
 
             if (subjects.length === 1) {
@@ -164,11 +158,9 @@ export function initDropdown() {
             } else {
                 subjectContainer.style.display = 'block';
                 populateDropdown(listElement, subjects.map(s => ({ subject: s })), "subjects");
-                //setupToggle(buttonElement, listElement);
                 setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                     handleTeacherSubjectSelection(selectedSubject, dataset, userData);});
             }
-            //setupToggle(classButtonElement, classListElement);
             setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
                 const refreshJournal = async () => {
                     const payload = {

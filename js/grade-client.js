@@ -1,6 +1,6 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 import { request } from './config.js';
-import { /*closeAllDropdowns,*/ toggleDropdown } from './dropdown-handler.js'; 
+import { /*closeAllDropdowns, toggleDropdown*/ } from './dropdown-handler.js'; 
 
 export const setupAddLessonForm = (selectedSubject, selectedClass, journalData, refreshJournalCallback) => {
     const contentContainer = document.getElementById("add-grade-content");
