@@ -46,7 +46,6 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
         if (event.target.tagName === 'LI') {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
-            listElement.classList.remove('visible-list');
 
             const radioElement = listElement.previousElementSibling.previousElementSibling;
             if (radioElement && radioElement.type === 'radio') {
@@ -101,6 +100,17 @@ function createUpdateGradeCallback(subject, className) {
             console.error("Помилка оновлення оцінки:", response.message);
         }
     };
+}
+function handleClick(event) {
+    const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
+    dropdownContainers.forEach(container => {
+        if (!container.contains(event.target)) {
+            const radioElement = container.querySelector('input[type="radio"]');
+            if (radioElement) {
+                    radioElement.checked = false;
+                }
+        }
+    });
 }
 
 export function initDropdown() {
@@ -189,8 +199,8 @@ export function initDropdown() {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
+    if (!document.body.dataset.globalClickHandlerAttached) {
+        document.addEventListener('click', handleClick);
+        document.body.dataset.globalClickHandlerAttached = true;
+    }
 }
-
-
-
-
