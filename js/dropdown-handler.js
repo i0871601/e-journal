@@ -114,7 +114,7 @@ function setupRadioToggleOnClick(labelId, radioId) {
             if (radioElement.checked) {
                 radioElement.checked = false;
             }
-        }, 0); 
+        }, 1000); 
     });
 }
 
