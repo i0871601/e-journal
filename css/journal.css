@@ -68,6 +68,13 @@ body{
   flex-direction: row;
   gap: 5%;
 }
+#subject-radio, #class-radio{
+  display: none;
+}
+#button-select-subject, #button-select-class{
+  display: flex;
+  justify-content: space-between;
+}
 #CustomSelectSubject, #CustomSelectClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0.07rem solid transparent;
