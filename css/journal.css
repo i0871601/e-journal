@@ -75,6 +75,14 @@ body{
   display: flex;
   justify-content: space-between;
 }
+#button-select-subject .first-option, #button-select-class .first-option{
+  margin: 0;
+}
+#subject-radio:checked ~ #subject-list, #class-radio:checked ~ #subject-list{
+  opacity: 1;
+  visibility: hidden;
+}
+
 #CustomSelectSubject, #CustomSelectClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0.07rem solid transparent;
