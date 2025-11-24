@@ -41,49 +41,6 @@ function populateDropdown(listElement, data, type) {
     });
 }
 
-export function closeAllDropdowns() {
-    const allDropdowns = document.querySelectorAll('.dropdown-list');
-    allDropdowns.forEach(dropdown => {
-        dropdown.classList.remove('visible-list');
-        const parentContainer = dropdown.parentElement;
-        if (parentContainer) {
-            parentContainer.classList.remove('click-button');
-        }
-    });
-}
-
-export function toggleDropdown(buttonElement, listElement) {
-    const parentContainer = buttonElement.parentElement;
-    const isListVisible = listElement.classList.contains('visible-list');
-    if (isListVisible) {
-        listElement.classList.remove('visible-list');
-        parentContainer.classList.remove('click-button');
-    } else {
-        closeAllDropdowns();
-        listElement.classList.add('visible-list');
-        parentContainer.classList.add('click-button');
-    }
-}
-
-function setupToggle(buttonElement, listElement) {
-    if (!buttonElement || !listElement) {
-        console.error("Помилка: Не знайдено кнопку або список для налаштування перемикача.");
-        return;
-    }
-    buttonElement.addEventListener('click', (event) => {
-        event.stopPropagation();
-        toggleDropdown(buttonElement, listElement);
-    });
-
-    document.addEventListener('click', (event) => {
-        const parentContainer = buttonElement.parentElement;
-        if (!buttonElement.contains(event.target) && !listElement.contains(event.target)) {
-            listElement.classList.remove('visible-list');
-            parentContainer.classList.remove('click-button');
-        }
-    });
-}
-
 function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
     listElement.addEventListener('click', async (event) => {
         if (event.target.tagName === 'LI') {
@@ -158,13 +115,12 @@ export function initDropdown() {
 
     if (role === 'student') {
         const listElement = document.getElementById("subject-list");
-        const buttonElement = document.getElementById("subject-button");
-        const buttonTextElement = document.querySelector("#subject-button p");
+        //const buttonElement = document.getElementById("subject-button");
+        const buttonTextElement = document.querySelector("#button-select-subject .first-option");
 
-        if (listElement && buttonElement && buttonTextElement) {
-            buttonTextElement.textContent = "Виберіть предмет";
+        if (listElement /*&& buttonElement*/ && buttonTextElement) {
             populateDropdown(listElement, data.data, "subjects");
-            setupToggle(buttonElement, listElement);
+            //setupToggle(buttonElement, listElement);
             setupListSelection(listElement, buttonTextElement, async (subject, dataset) => {
                 const firstClassOrSubject = classOrsubject.split(',')[0].trim();
                 const payload = {
@@ -189,16 +145,16 @@ export function initDropdown() {
         }
 
     } else if (role === 'teacher') {
-        const subjectContainer = document.getElementById("Select-Subject");
+        const subjectContainer = document.getElementById("CustomSelectSubject");
         const listElement = document.getElementById("subject-list");
-        const buttonElement = document.getElementById("subject-button");
-        const buttonTextElement = document.querySelector("#subject-button p");
+        //const buttonElement = document.getElementById("subject-button");
+        const buttonTextElement = document.querySelector("#button-select-subject .first-option");
         const classListElement = document.getElementById("class-list");
-        const classButtonElement = document.getElementById("Class-button");
-        const classButtonTextElement = document.querySelector("#Class-button p");
+        //const classButtonElement = document.getElementById("Class-button");
+        const classButtonTextElement = document.querySelector("#button-select-class .first-option");
 
-        if (subjectContainer && listElement && buttonElement && buttonTextElement && classListElement && classButtonElement && classButtonTextElement) {
-            buttonTextElement.textContent = "Виберіть предмет";
+        if (subjectContainer && listElement && /*buttonElement &&*/ buttonTextElement && classListElement /*&& classButtonElement*/ && classButtonTextElement) {
+            //buttonTextElement.textContent = "Виберіть предмет";
             const subjects = Object.keys(userData.data.data);
 
             if (subjects.length === 1) {
@@ -208,11 +164,11 @@ export function initDropdown() {
             } else {
                 subjectContainer.style.display = 'block';
                 populateDropdown(listElement, subjects.map(s => ({ subject: s })), "subjects");
-                setupToggle(buttonElement, listElement);
+                //setupToggle(buttonElement, listElement);
                 setupListSelection(listElement, buttonTextElement, async (selectedSubject, dataset) => {
                     handleTeacherSubjectSelection(selectedSubject, dataset, userData);});
             }
-            setupToggle(classButtonElement, classListElement);
+            //setupToggle(classButtonElement, classListElement);
             setupListSelection(classListElement, classButtonTextElement, async (className, classDataset) => {
                 const refreshJournal = async () => {
                     const payload = {
