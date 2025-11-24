@@ -62,6 +62,9 @@ body{
   padding-right: 3%;
   position: relative;
 }
+#customSelect{
+  display:flex;
+}
 #Select-Subject, #ClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0.07rem solid transparent;
@@ -233,6 +236,7 @@ body{
 .journal-table thead th:first-child {
   z-index: 13;
 }
+
 
 
 
