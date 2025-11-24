@@ -77,12 +77,9 @@ body{
 }
 #button-select-subject .first-option, #button-select-class .first-option{
   margin: 0;
+  white-space: nowrap;
+  color: var(--text-color);
 }
-#subject-radio:checked ~ #subject-list, #class-radio:checked ~ #subject-list{
-  opacity: 1;
-  visibility: hidden;
-}
-
 #CustomSelectSubject, #CustomSelectClassTeacher, #lessonTypeInput {
   width: clamp(150px, 30vmin, 300px);
   border: 0.07rem solid transparent;
@@ -98,19 +95,6 @@ body{
   border-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-#subject-button, #Class-button,  #lessonType-Button{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  color: var(--text-color);
-  cursor: pointer;
-}
-#subject-button p, #Class-button p, #lessonType-Button p{
-  white-space: nowrap;
-  margin: 0;
-  padding: 0;
-}
 
 .dropdown-button div{
   width: 5vmin;
@@ -120,29 +104,29 @@ body{
   background-repeat: no-repeat;
 }
 
-#subject-list, #class-list, #lessonTypeList{
-    width: 100%;
-    top: 100%;
-    left: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex-direction: column;
-    background-color: var(--fon-color-2);
-    color: var(--text-color);
-    list-style-type: none;
-    border-radius: 1rem /*від шрифта*/;
-    box-shadow: 0 0 0.5vmin var(--text-color);
-    position: absolute;
-    overflow-y: auto;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
+#subject-list, #class-list /*#lessonTypeList*/{
+  width: 100%;
+  top: 100%;
+  left: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--fon-color-2);
+  color: var(--text-color);
+  list-style-type: none;
+  border-radius: 1rem /*від шрифта*/;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  position: absolute;
+  overflow-y: auto;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
 }
-#subject-list.visible-list, #class-list.visible-list, #lessonTypeList.visible-list {
-  max-height: 11.5rem;
+#subject-radio:checked ~ #subject-list, #class-radio:checked ~ #subject-list{
   opacity: 1;
+  visibility: hidden;
+  max-height: 11.5rem;
   z-index: 15;
 }
 .dropdown-list li {
