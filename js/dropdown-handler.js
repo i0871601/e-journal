@@ -101,6 +101,23 @@ function createUpdateGradeCallback(subject, className) {
         }
     };
 }
+function setupRadioToggleOnClick(labelId, radioId) {
+    const labelElement = document.getElementById(labelId);
+    const radioElement = document.getElementById(radioId);
+
+    if (!labelElement || !radioElement) {
+        console.log(`Помилка: Не знайдено label або радіо.`);
+        return;
+    }
+    labelElement.addEventListener('click', (event) => {
+        setTimeout(() => {
+            if (radioElement.checked) {
+                radioElement.checked = false;
+            }
+        }, 0); 
+    });
+}
+
 function handleClick(event) {
     const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
     dropdownContainers.forEach(container => {
@@ -199,6 +216,8 @@ export function initDropdown() {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
+    setupRadioToggleOnClick('button-select-subject', 'subject-radio');
+    setupRadioToggleOnClick('button-select-class', 'class-radio');
     if (!document.body.dataset.globalClickHandlerAttached) {
         document.addEventListener('click', handleClick);
         document.body.dataset.globalClickHandlerAttached = true;
