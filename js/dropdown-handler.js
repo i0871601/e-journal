@@ -47,12 +47,9 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
 
-            const radioElement = listElement.previousElementSibling.previousElementSibling;
-            if (radioElement && radioElement.type === 'radio') {
-                radioElement.checked = false;
-                if (typeof radioElement.resetClickCount === 'function') {
-                    radioElement.resetClickCount();
-                }
+            const checkboxElement = listElement.previousElementSibling.previousElementSibling;
+            if (checkboxElement && checkboxElement.type === 'checkbox') {
+                checkboxElement.checked = false;
             }
 
             await onSelectCallback(selectedText, event.target.dataset);
@@ -104,26 +101,46 @@ function createUpdateGradeCallback(subject, className) {
         }
     };
 }
-function setupRadioToggleOnClick() {
-    const radioElement = document.querySelectorAll('#subject-radio, #class-radio');
-    
-    let clickCount = 0;
 
+function setupToggleOnClick(checkboxId1, checkboxId2) {
+    const checkbox1 = document.getElementById(checkboxId1);
+    const checkbox2 = document.getElementById(checkboxId2);
+    
+    if (!checkbox1 || !checkbox2) {
+        console.error("Один або обидва чекбокси не знайдено.");
+        return;
+    }
+    
+    const exclusiveHandler = (activeCheckbox, otherCheckbox) => {
+        if (activeCheckbox.checked) {
+            otherCheckbox.checked = false;
+        }
+    };
+
+    checkbox1.addEventListener('change', () => {
+        exclusiveHandler(checkbox1, checkbox2);
+    });
+    checkbox2.addEventListener('change', () => {
+        exclusiveHandler(checkbox2, checkbox1);
+    });
 }
 
-function handleClick(event) {
-    const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
-    
-    dropdownContainers.forEach(container => {
-        if (!container.contains(event.target)) {
-            const radioElement = container.querySelector('input[type="radio"]');
-            if (radioElement && radioElement.checked) {
-                radioElement.checked = false;
-                if (typeof radioElement.resetClickCount === 'function') {
-                    radioElement.resetClickCount();
-                    console.log("1");
-                }
-            }
+function handleClick() {
+    const subjectCheckbox = document.getElementById('subject-checkbox');
+    const classCheckbox = document.getElementById('class-checkbox');
+
+    const subjectContainer = document.getElementById('CustomSelectSubject');
+    const classContainer = document.getElementById('CustomSelectClassTeacher');
+
+    document.addEventListener('click', (event) => {
+        const isClickInsideSubject = subjectContainer.contains(event.target);
+        const isClickInsideClass = classContainer.contains(event.target);
+
+        if (!isClickInsideSubject && subjectCheckbox.checked) {
+            subjectCheckbox.checked = false;
+        }
+        if (!isClickInsideClass && classCheckbox.checked) {
+            classCheckbox.checked = false;
         }
     });
 }
@@ -214,9 +231,6 @@ export function initDropdown() {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
-    
-    if (!document.body.dataset.globalClickHandlerAttached) {
-        document.addEventListener('click', handleClick);
-        document.body.dataset.globalClickHandlerAttached = true;
-    }
+    setupToggleOnClick('subject-checkbox', 'class-checkbox');
+    handleClick();
 }
