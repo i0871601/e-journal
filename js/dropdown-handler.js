@@ -109,18 +109,19 @@ function setupRadioToggleOnClick(labelId, radioId) {
         console.log(`Помилка: Не знайдено label або радіо.`);
         return;
     }
-    //labelElement.dataset.clickCount = 0;
+    let clickCount = 0;
     labelElement.addEventListener('click', (event) => {
-        //let count = parseInt(labelElement.dataset.clickCount);
+        clickCount++;
+        
+        if(clickCount === 2){
+            radioElement.checked = false;
+            clickCount = 0;
+        } else if(clickCount === 1){
 
-        setTimeout(() => {
-            if (radioElement.checked) {
-                //labelElement.dataset.clickCount = +1;
-            }
-            if (radioElement.checked && count === 2){
-                radioElement.checked = false;
-            }
-        }, 0); 
+        } else if(clickCount > 2){
+            clickCount = 0;
+        }
+
     });
 }
 
