@@ -153,6 +153,7 @@ function handleClick(event) {
                 radioElement.checked = false;
                 if (typeof radioElement.resetClickCount === 'function') {
                     radioElement.resetClickCount();
+                    console.log("1");
                 }
             }
         }
