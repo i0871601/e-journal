@@ -5,6 +5,7 @@ import { displayFullJournal, displayGrades } from './journal-tables.js';
 import { setupAddLessonForm } from './grade-client.js';
 
 let selectedSubjectForTeacher = null;
+let clickCount = 0;
 
 function populateDropdown(listElement, data, type) {
     if (!listElement) {
@@ -109,7 +110,6 @@ function setupRadioToggleOnClick(labelId, radioId) {
         console.log(`Помилка: Не знайдено label або радіо.`);
         return;
     }
-    let clickCount = 0;
     labelElement.addEventListener('click', (event) => {
         clickCount++;
         console.log(clickCount);
@@ -137,6 +137,7 @@ function handleClick(event) {
             const radioElement = container.querySelector('input[type="radio"]');
             if (radioElement) {
                     radioElement.checked = false;
+                    clickCount = 0;
                 }
         }
     });
