@@ -146,6 +146,10 @@ function handleClick(event) {
             const radioElement = container.querySelector('input[type="radio"]');
             if (radioElement) {
                 radioElement.checked = false;
+                if (typeof radioElement.resetClickCount === 'function') {
+                    radioElement.resetClickCount();
+                    console.log(`Лічильник скинуто на 0 через натискання поза межами списку`);
+                }
             }
         }
     });
