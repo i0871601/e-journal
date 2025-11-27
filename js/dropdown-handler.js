@@ -104,43 +104,11 @@ function createUpdateGradeCallback(subject, className) {
         }
     };
 }
-function setupRadioToggleOnClick(labelId, radioId) {
-    const labelElement = document.getElementById(labelId);
-    const radioElement = document.getElementById(radioId);
-
-    if (!labelElement || !radioElement) {
-        console.log(`Помилка: Не знайдено label або радіо.`);
-        return;
-    }
+function setupRadioToggleOnClick() {
+    const radioElement = document.querySelectorAll('#subject-radio, #class-radio');
+    
     let clickCount = 0;
 
-    radioElement.resetClickCount = () => {
-        clickCount = 0;
-        console.log(`Лічильник скинуто на 0 через зовнішній виклик.`);
-    };
-
-    labelElement.addEventListener('click', (event) => {
-        clickCount++;
-        console.log(clickCount);
-        
-        if(clickCount === 2){
-            //setTimeout(() => {
-                radioElement.checked = false;
-                setTimeout(() => {
-                    clickCount = 0;
-                    console.log(clickCount);
-                }, 5);
-                //clickCount = 0;
-                //console.log(clickCount);
-            //}, 10);
-        } else if(clickCount === 1){
-            console.log(clickCount);
-        } else if(clickCount > 2){
-            clickCount = 1;
-            console.log(clickCount);
-        }
-
-    });
 }
 
 function handleClick(event) {
@@ -246,8 +214,7 @@ export function initDropdown() {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
     }
-    setupRadioToggleOnClick('button-select-subject', 'subject-radio');
-    setupRadioToggleOnClick('button-select-class', 'class-radio');
+    
     if (!document.body.dataset.globalClickHandlerAttached) {
         document.addEventListener('click', handleClick);
         document.body.dataset.globalClickHandlerAttached = true;
