@@ -126,8 +126,12 @@ function setupRadioToggleOnClick(labelId, radioId) {
         if(clickCount === 2){
             //setTimeout(() => {
                 radioElement.checked = false;
-                clickCount = 0;
-                console.log(clickCount);
+                setTimeout(() => {
+                    clickCount = 0;
+                    console.log(clickCount);
+                }, 5);
+                //clickCount = 0;
+                //console.log(clickCount);
             //}, 10);
         } else if(clickCount === 1){
             console.log(clickCount);
