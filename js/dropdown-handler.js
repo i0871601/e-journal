@@ -112,14 +112,17 @@ function setupRadioToggleOnClick(labelId, radioId) {
     let clickCount = 0;
     labelElement.addEventListener('click', (event) => {
         clickCount++;
+        console.log(clickCount);
         
         if(clickCount === 2){
             radioElement.checked = false;
             clickCount = 0;
+            console.log(clickCount);
         } else if(clickCount === 1){
-
+            console.log(clickCount);
         } else if(clickCount > 2){
             clickCount = 0;
+            console.log(clickCount);
         }
 
     });
