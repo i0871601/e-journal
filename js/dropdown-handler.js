@@ -144,7 +144,7 @@ function handleClick(event) {
     const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
     
     const isClickInsideGradeOfJournal = gradeOfJournalContainer && gradeOfJournalContainer.contains(event.target);
-    if(!isClickInsideGradeOfJournal){
+    if(isClickInsideGradeOfJournal){
         dropdownContainers.forEach(container => {
             if (!container.contains(event.target)) {
                 const radioElement = container.querySelector('input[type="radio"]');
