@@ -144,11 +144,10 @@ function handleClick(event) {
     const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
     
     const isClickInsideGradeOfJournal = gradeOfJournalContainer && gradeOfJournalContainer.contains(event.target);
-    if(isClickInsideGradeOfJournal){
         dropdownContainers.forEach(container => {
             if (!container.contains(event.target)) {
                 const radioElement = container.querySelector('input[type="radio"]');
-                if (radioElement ) {
+                if (radioElement && radioElement.checked) {
                     radioElement.checked = false;
                     if (typeof radioElement.resetClickCount === 'function') {
                         radioElement.resetClickCount();
@@ -157,7 +156,6 @@ function handleClick(event) {
                 }
             }
         });
-    }
 }
 
 export function initDropdown() {
