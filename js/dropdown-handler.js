@@ -140,19 +140,24 @@ function setupRadioToggleOnClick(labelId, radioId) {
 }
 
 function handleClick(event) {
+    const gradeOfJournalContainer = document.getElementById('GradeOfJournal');
     const dropdownContainers = document.querySelectorAll('#CustomSelectSubject, #CustomSelectClassTeacher');
-    dropdownContainers.forEach(container => {
-        if (!container.contains(event.target)) {
-            const radioElement = container.querySelector('input[type="radio"]');
-            if (radioElement) {
-                radioElement.checked = false;
-                if (typeof radioElement.resetClickCount === 'function') {
-                    radioElement.resetClickCount();
-                    console.log(`Лічильник скинуто на 0 через натискання поза межами списку`);
+    
+    const isClickInsideGradeOfJournal = gradeOfJournalContainer && gradeOfJournalContainer.contains(event.target);
+    if(!isClickInsideGradeOfJournal){
+        dropdownContainers.forEach(container => {
+            if (!container.contains(event.target)) {
+                const radioElement = container.querySelector('input[type="radio"]');
+                if (radioElement ) {
+                    radioElement.checked = false;
+                    if (typeof radioElement.resetClickCount === 'function') {
+                        radioElement.resetClickCount();
+                        console.log(`Лічильник скинуто на 0 через натискання поза межами списку`);
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 }
 
 export function initDropdown() {
