@@ -5,7 +5,6 @@ import { displayFullJournal, displayGrades } from './journal-tables.js';
 import { setupAddLessonForm } from './grade-client.js';
 
 let selectedSubjectForTeacher = null;
-let clickCount = 0;
 
 function populateDropdown(listElement, data, type) {
     if (!listElement) {
@@ -51,6 +50,9 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
             const radioElement = listElement.previousElementSibling.previousElementSibling;
             if (radioElement && radioElement.type === 'radio') {
                 radioElement.checked = false;
+                if (typeof radioElement.resetClickCount === 'function') {
+                    radioElement.resetClickCount();
+                }
             }
 
             await onSelectCallback(selectedText, event.target.dataset);
@@ -110,6 +112,13 @@ function setupRadioToggleOnClick(labelId, radioId) {
         console.log(`Помилка: Не знайдено label або радіо.`);
         return;
     }
+    let clickCount = 0;
+
+    radioElement.resetClickCount = () => {
+        clickCount = 0;
+        console.log(`Лічильник скинуто на 0 через зовнішній виклик.`);
+    };
+
     labelElement.addEventListener('click', (event) => {
         clickCount++;
         console.log(clickCount);
@@ -123,7 +132,7 @@ function setupRadioToggleOnClick(labelId, radioId) {
         } else if(clickCount === 1){
             console.log(clickCount);
         } else if(clickCount > 2){
-            clickCount = 0;
+            clickCount = 1;
             console.log(clickCount);
         }
 
@@ -136,9 +145,8 @@ function handleClick(event) {
         if (!container.contains(event.target)) {
             const radioElement = container.querySelector('input[type="radio"]');
             if (radioElement) {
-                    radioElement.checked = false;
-                    clickCount = 0;
-                }
+                radioElement.checked = false;
+            }
         }
     });
 }
