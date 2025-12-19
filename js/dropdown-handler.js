@@ -227,6 +227,8 @@ export function initDropdown() {
             });
             
             console.log("Списки для вчителя заповнено та налаштовано.");
+            const addLesson = document.querySelector('.add-grade-container');
+            if (addLesson) { addLesson.style.opacity = '1';}
         } else {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
