@@ -131,6 +131,8 @@ export function displayFullJournal(journalData, updateGradeCallback) {
     const table = document.createElement('table');
     table.classList.add('journal-table');
 
+    const totalRowsHeight = students.length + 1;
+
     const tableHeader = document.createElement('thead');
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = `<th>Прізвище та Ім'я</th>`;
@@ -163,6 +165,12 @@ export function displayFullJournal(journalData, updateGradeCallback) {
             <p class="lesson-date">${date}</p>
         </th>`;
     });
+    const mergedCell = document.createElement('th');
+    mergedCell.rowSpan = totalRowsHeight;
+    mergedCell.innerHTML = "Об'єднаний стовпець";
+    mergedCell.style.verticalAlign = "middle";
+    headerRow.appendChild(mergedCell);
+
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
 
