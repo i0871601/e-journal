@@ -215,6 +215,8 @@ export function initDropdown() {
                     if (response && response.success) {
                         console.log("Відправка до API:", payload);
                         console.log(`Відповідь:`, response);
+                        const addLesson = document.querySelector('.add-grade-container');
+                        if (addLesson) { addLesson.style.opacity = '1';}
                             
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response, updateGradeCallback); 
@@ -227,8 +229,6 @@ export function initDropdown() {
             });
             
             console.log("Списки для вчителя заповнено та налаштовано.");
-            const addLesson = document.querySelector('.add-grade-container');
-            if (addLesson) { addLesson.style.opacity = '1';}
         } else {
             console.error("Помилка: Не знайдено елементи для списків вчителя.");
         }
