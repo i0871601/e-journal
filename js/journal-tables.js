@@ -79,13 +79,6 @@ export function displayGrades(journalData, name) {
     });
     studentRow.innerHTML = studentNameCell + gradeCells;
     tableBody.appendChild(studentRow);
-
-    const totalRowsHeight = students.length + 1;
-    const mergedCell = document.createElement('th');
-    mergedCell.rowSpan = totalRowsHeight;
-    mergedCell.innerHTML = "Об'єднаний стовпець";
-    mergedCell.style.verticalAlign = "middle";
-    headerRow.appendChild(mergedCell);
     
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
@@ -214,12 +207,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
         studentRow.innerHTML = studentNameCell + gradeCells;
         tableBody.appendChild(studentRow);
     });
-    const totalRowsHeight = students.length + 1;
-    const mergedCell = document.createElement('th');
-    mergedCell.rowSpan = totalRowsHeight;
-    mergedCell.innerHTML = "Об'єднаний стовпець";
-    mergedCell.style.verticalAlign = "middle";
-    headerRow.appendChild(mergedCell);
 
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
