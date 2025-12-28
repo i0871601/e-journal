@@ -105,6 +105,17 @@ body{
   transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
   visibility: hidden;
 }
+#class-list::-webkit-scrollbar{
+  background-color: var(--fon-color);
+}
+#class-list::-webkit-scrollbar-thumb{
+  background-color: var(--text-color);
+  border-radius: 25px;
+  border: 3px solid var(--fon-color);
+}
+#class-list::-webkit-scrollbar-thumb:active{
+  background-color: var(--color-accent);
+}
 #subject-checkbox:checked ~ #subject-list, #class-checkbox:checked ~ #class-list{
   opacity: 1;
   visibility: visible;
