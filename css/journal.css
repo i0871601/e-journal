@@ -21,12 +21,12 @@ body{
   padding-bottom: 2.9%;
 }
 .TabletJournal::-webkit-scrollbar{
-  background-color: var(--fon-color);
+  width: 0.5rem;
+  background-color: transparent;
 }
 .TabletJournal::-webkit-scrollbar-thumb{
   background-color: var(--text-color);
   border-radius: 25px;
-  border: 3px solid var(--fon-color);
 }
 .TabletJournal::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
