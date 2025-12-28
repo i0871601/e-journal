@@ -113,10 +113,10 @@ body{
   z-index: 15;
 }
 #subject-checkbox:checked ~ #CustomSelectSubject, #class-checkbox:checked ~ #CustomSelectClassTeacher{
-  border-color: var(--color-accent);
+  border: 0.07rem solid var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
-#subject-checkbox:checked ~ #button-select-subject #select-arrow::after,  #subject-checkbox:checked ~ #button-select-class #select-arrow::after{
+#subject-checkbox:checked ~ #button-select-subject #select-arrow::after,  #class-checkbox:checked ~ #button-select-class #select-arrow::after{
   content: '-';
   padding-bottom: 5%;
 }
