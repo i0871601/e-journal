@@ -106,12 +106,12 @@ body{
   visibility: hidden;
 }
 #class-list::-webkit-scrollbar{
-  background-color: var(--fon-color);
+  width: 0.5rem;
+  background-color: transparent;
 }
 #class-list::-webkit-scrollbar-thumb{
   background-color: var(--text-color);
   border-radius: 25px;
-  border: 3px solid var(--fon-color);
 }
 #class-list::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
