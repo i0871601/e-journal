@@ -107,10 +107,11 @@ body{
 }
 #class-list::-webkit-scrollbar{
   width: 0.5rem;
+  height: 90%;
   background-color: transparent;
 }
 #class-list::-webkit-scrollbar-thumb{
-  background-color: var(--text-color);
+  background-color: var(--color-accent);
   border-radius: 25px;
 }
 #class-list::-webkit-scrollbar-thumb:active{

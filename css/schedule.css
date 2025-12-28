@@ -112,7 +112,7 @@
   margin-bottom: 5%;*/
   /*height: calc((2rem + 1.7vmin + 0.5vmin) * 6);
   /*width: 100vmin;*/
-  margin-bottom: calc(2rem + 2.1vh - 3.5vmin);
+  margin-bottom: calc(2rem + 2.1vh - 4vmin);
   overflow-y: auto;
 }
 #wrapper-text-container::-webkit-scrollbar{
@@ -120,7 +120,7 @@
   background-color: transparent;
 }
 #wrapper-text-container::-webkit-scrollbar-thumb{
-  background-color: var(--fon-color);
+  background-color: var(--text-color);
   border-radius: 25px;
 }
 #wrapper-text-container::-webkit-scrollbar-thumb:focus, #wrapper-text-container::-webkit-scrollbar-thumb:active{
