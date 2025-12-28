@@ -65,27 +65,26 @@ body{
 #subject-checkbox, #class-checkbox{
   display: none;
 }
+#CustomSelectSubject, #CustomSelectClassTeacher {
+  font-family: 'SourceSans3';
+  position: relative;
+}
 #button-select-subject, #button-select-class{
   display: flex;
   justify-content: space-between;
+  width: clamp(150px, 30vmin, 300px);
+  border: 0.07rem solid transparent;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  padding: 0.3vmin 1.5vmin;
+  color: var(--text-color);
+  transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
 #button-select-subject .first-option, #button-select-class .first-option{
   margin: 0;
   white-space: nowrap;
   color: var(--text-color);
 }
-#CustomSelectSubject, #CustomSelectClassTeacher, #lessonTypeInput {
-  width: clamp(150px, 30vmin, 300px);
-  border: 0.07rem solid transparent;
-  border-radius: 1rem;
-  box-shadow: 0 0 0.5vmin var(--text-color);
-  padding: 0.3vmin 1.5vmin;
-  font-family: 'SourceSans3';
-  position: relative;
-  color: var(--text-color);
-  transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
-}
-
 #subject-list, #class-list /*#lessonTypeList*/{
   width: 100%;
   top: 100%;
@@ -112,8 +111,8 @@ body{
   max-height: 11.5rem;
   z-index: 15;
 }
-#subject-checkbox:checked ~ #CustomSelectSubject, #class-checkbox:checked ~ #CustomSelectClassTeacher{
-  border: 0.07rem solid var(--color-accent);
+#subject-checkbox:checked ~ #button-select-subject, #class-checkbox:checked ~ #button-select-class{
+  border-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 #subject-checkbox:checked ~ #button-select-subject #select-arrow::after,  #class-checkbox:checked ~ #button-select-class #select-arrow::after{
