@@ -112,7 +112,7 @@
   margin-bottom: 5%;*/
   /*height: calc((2rem + 1.7vmin + 0.5vmin) * 6);
   /*width: 100vmin;*/
-  margin-bottom: calc(2rem + 2.1vh - 4vmin);
+  margin-bottom: calc(2rem + 2.1vh - 5vmin);
   overflow-y: auto;
 }
 #wrapper-text-container::-webkit-scrollbar{

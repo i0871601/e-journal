@@ -107,7 +107,6 @@ body{
 }
 #class-list::-webkit-scrollbar{
   width: 0.5rem;
-  height: 90%;
   background-color: transparent;
 }
 #class-list::-webkit-scrollbar-thumb{
