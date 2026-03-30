@@ -110,7 +110,7 @@ body{
   background-color: transparent;
 }
 #class-list::-webkit-scrollbar-thumb{
-  background-color: var(--fon-color);
+  background-color: var(--text-color);
   border-radius: 25px;
 }
 #class-list::-webkit-scrollbar-thumb:active{
