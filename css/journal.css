@@ -131,7 +131,7 @@ body{
   padding-bottom: 5%;
 }
 .dropdown-list li {
-    padding: 1vmin;
+    padding: 1vmin 1vmin 1vmin 2.5vmin;;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
