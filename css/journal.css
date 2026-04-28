@@ -86,7 +86,7 @@ body{
   white-space: nowrap;
   color: var(--text-color);
 }
-#subject-list, #class-list, #Shadow-list{
+/*#subject-list, #class-list*/ #Shadow-list{
   width: 100%;
   top: 100%;
   left: 0;
