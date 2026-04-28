@@ -47,7 +47,7 @@ function setupListSelection(listElement, buttonTextElement, onSelectCallback) {
             const selectedText = event.target.textContent;
             buttonTextElement.textContent = selectedText;
 
-            const checkboxElement = listElement.previousElementSibling.previousElementSibling;
+            const checkboxElement = listElement.parentElement.previousElementSibling.previousElementSibling;
             if (checkboxElement && checkboxElement.type === 'checkbox') {
                 checkboxElement.checked = false;
             }
