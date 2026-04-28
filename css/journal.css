@@ -86,7 +86,7 @@ body{
   white-space: nowrap;
   color: var(--text-color);
 }
-/*#subject-list, #class-list*/ #Shadow-list{
+/*#subject-list, #class-list*/ .shadow-list{
   width: 100%;
   margin: 1.5vmin 0 0 0;
   display: flex;
