@@ -86,7 +86,7 @@ body{
   white-space: nowrap;
   color: var(--text-color);
 }
-#subject-list, #class-list /*#lessonTypeList*/{
+#subject-list, #class-list, #Shadow-list{
   width: 100%;
   top: 100%;
   left: 0;
@@ -117,7 +117,7 @@ body{
 #class-list::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
 }
-#subject-checkbox:checked ~ #subject-list, #class-checkbox:checked ~ #class-list{
+#subject-checkbox:checked ~ #subject-list, #class-checkbox:checked ~ #class-list, #class-checkbox:checked ~ #Shadow-list{
   opacity: 1;
   visibility: visible;
   max-height: 11.5rem;
