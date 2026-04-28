@@ -120,7 +120,7 @@ body{
 #class-list::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
 }
-#class-checkbox:checked ~ #Shadow-list{
+#class-checkbox:checked ~ .shadow-list{
   opacity: 1;
   visibility: visible;
   max-height: calc(11.5rem + 3vmin);
