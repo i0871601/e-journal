@@ -215,7 +215,7 @@ export function initDropdown() {
                     if (response && response.success) {
                         console.log("Відправка до API:", payload);
                         console.log(`Відповідь:`, response);
-                        const addLesson = document.querySelector('.add-grade-container');
+                        /*const addLesson = document.querySelector('.add-grade-container');
                         if (addLesson) { addLesson.style.opacity = '1';}
                             
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
@@ -223,7 +223,7 @@ export function initDropdown() {
                         setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);
                     } else {
                         console.error("Помилка при отриманні журналу:", response.message);
-                    }
+                    }*/
                 };
                 refreshJournal();
             });
