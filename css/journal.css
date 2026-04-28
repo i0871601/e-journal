@@ -88,23 +88,26 @@ body{
 }
 /*#subject-list, #class-list*/ #Shadow-list{
   width: 100%;
-  top: 100%;
-  left: 0;
-  padding: 0;
+  margin: 1.5vmin 0 0 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background-color: var(--fon-color-2);
   color: var(--text-color);
-  list-style-type: none;
   border-radius: 1rem;
   box-shadow: 0 0 0.5vmin var(--text-color);
   position: absolute;
-  overflow-y: auto;
+  pointer-events: none;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
   visibility: hidden;
+}
+#subject-list, #class-list{
+  margin: 1.5vmin 0;
+  padding: 0;
+  list-style-type: none;
+  overflow-y: auto;
 }
 #class-list::-webkit-scrollbar{
   width: 0.5rem;
@@ -117,10 +120,10 @@ body{
 #class-list::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
 }
-#subject-checkbox:checked ~ #subject-list, #class-checkbox:checked ~ #class-list, #class-checkbox:checked ~ #Shadow-list{
+#class-checkbox:checked ~ #Shadow-list{
   opacity: 1;
   visibility: visible;
-  max-height: 11.5rem;
+  max-height: calc(11.5rem + 3vmin);
   z-index: 15;
 }
 #subject-checkbox:checked ~ #button-select-subject, #class-checkbox:checked ~ #button-select-class{
