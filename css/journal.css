@@ -119,13 +119,21 @@ body{
 #class-list::-webkit-scrollbar-thumb:active{
   background-color: var(--color-accent);
 }
-#subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list{
+#subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list {
   opacity: 1;
   visibility: visible;
-  max-height: 12.9rem;
   z-index: 15;
 }
+#subject-checkbox:checked ~ .shadow-list {
+  max-height: 11rem;
+}
+#class-checkbox:checked ~ .shadow-list{
+  max-height: 12.9rem;
+}
 @media (orientation: portrait) {
+  #subject-checkbox:checked ~ .shadow-list {
+    max-height: 11rem;
+  }
   #subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list{
     max-height: 11.8rem;
   }
