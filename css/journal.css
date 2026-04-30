@@ -103,11 +103,15 @@ body{
   visibility: hidden;
 }
 #subject-list, #class-list{
-  margin: 1rem 0;
   padding: 0;
   list-style-type: none;
   overflow-y: auto;
 }
+#subject-list {
+  margin: 0.7rem 0;
+}
+#class-list {
+  margin: 1rem 0;
 #class-list::-webkit-scrollbar{
   width: 0.5rem;
   background-color: transparent;
@@ -123,17 +127,9 @@ body{
   opacity: 1;
   visibility: visible;
   z-index: 15;
-}
-#subject-checkbox:checked ~ .shadow-list {
-  max-height: 11rem;
-}
-#class-checkbox:checked ~ .shadow-list{
   max-height: 12.9rem;
 }
 @media (orientation: portrait) {
-  #subject-checkbox:checked ~ .shadow-list {
-    max-height: 11rem;
-  }
   #subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list{
     max-height: 11.8rem;
   }
