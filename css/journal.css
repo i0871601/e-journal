@@ -125,6 +125,11 @@ body{
   max-height: 12.9rem;
   z-index: 15;
 }
+@media (orientation: portrait) {
+  #subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list{
+    max-height: 11.8rem;
+  }
+}
 #subject-checkbox:checked ~ #button-select-subject, #class-checkbox:checked ~ #button-select-class{
   border-color: var(--color-accent);
   box-shadow: 0 0 0.5vmin var(--color-accent);
