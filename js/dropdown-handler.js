@@ -220,7 +220,7 @@ export function initDropdown() {
                             
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response, updateGradeCallback); 
-                        setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);
+                        //setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);
                     } else {
                         console.error("Помилка при отриманні журналу:", response.message);
                     }
