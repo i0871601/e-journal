@@ -216,11 +216,11 @@ export function initDropdown() {
                         console.log("Відправка до API:", payload);
                         console.log(`Відповідь:`, response);
                         /*const addLesson = document.querySelector('.add-grade-container');
-                        if (addLesson) { addLesson.style.opacity = '1';}
+                        if (addLesson) { addLesson.style.opacity = '1';}*/
                             
                         const updateGradeCallback = createUpdateGradeCallback(selectedSubjectForTeacher, className);
                         displayFullJournal(response, updateGradeCallback); 
-                        setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);*/
+                        setupAddLessonForm(selectedSubjectForTeacher, className, response, refreshJournal);
                     } else {
                         console.error("Помилка при отриманні журналу:", response.message);
                     }
