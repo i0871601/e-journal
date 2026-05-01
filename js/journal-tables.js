@@ -1,7 +1,7 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 export function displayGrades(journalData, name) {
-    const tablejournalOp = document.querySelector(".TabletJournal");
-    tablejournalOp.style.opacity = '0';
+    const tableShadow = document.querySelector(".TabletJournal");
+    tableShadow.style.opacity = '0';
     const tableContainer = document.querySelector(".journal-content");
     if (!tableContainer) {
         console.error("Елемент з класом '.journal-content' не знайдено.");
@@ -15,7 +15,6 @@ export function displayGrades(journalData, name) {
 
     if ((!lessons || lessons.length === 0) || (!grades || grades.length === 0)) {
         tableContainer.innerHTML = '<p>Журнал пустий. Немає записів та оцінок в журналі.</p>';
-        tablejournalOp.style.opacity = '1';
         return;
     }
     const table = document.createElement('table');
@@ -85,7 +84,7 @@ export function displayGrades(journalData, name) {
     
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
-    tablejournalOp.style.opacity = '1';
+    tableShadow.style.opacity = '1';
 
     document.querySelectorAll('thead th').forEach(headerCell => {
         if (headerCell.dataset.lessonNumber) {
@@ -107,8 +106,8 @@ export function displayGrades(journalData, name) {
     });
 }
 export function displayFullJournal(journalData, updateGradeCallback) {
-    const tablejournalOp = document.querySelector(".TabletJournal");
-    tablejournalOp.style.opacity = '0';
+    const tableShadow = document.querySelector(".TabletJournal");
+    tableShadow.style.opacity = '0';
     const tableContainer = document.querySelector(".journal-content");
     if (!tableContainer) {
         console.error("Елемент з класом '.journal-content' не знайдено.");
@@ -123,7 +122,6 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
     if (!students || students.length === 0) {
         tableContainer.innerHTML = '<p>Журнал пустий. Немає учнів в класі.</p>';
-        tablejournalOp.style.opacity = '1';
         return;
     }
 
@@ -217,7 +215,7 @@ export function displayFullJournal(journalData, updateGradeCallback) {
 
     table.appendChild(tableBody);
     tableContainer.appendChild(table);
-    tablejournalOp.style.opacity = '1';
+    tableShadow.style.opacity = '1';
 
     document.querySelectorAll('.grade-input').forEach(input => {
         input.addEventListener('change', (event) => {
