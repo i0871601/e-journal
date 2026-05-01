@@ -35,6 +35,7 @@ body{
   aspect-ratio: 1/1;
   right: 0;
   margin-right: 0.5rem;
+  background-color: var(--fon-color);
 }
 .journal-content{
   overflow: auto;
