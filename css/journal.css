@@ -26,6 +26,9 @@ body{
   opacity: 0;
   transition: opacity 0.65s ease-in-out;
 }
+.gradeButton{
+  position: absolute;
+}
 .journal-content{
   overflow: auto;
   margin: 0.7rem 0;
