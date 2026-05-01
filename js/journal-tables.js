@@ -103,9 +103,9 @@ export function displayGrades(journalData, name) {
     });
 }
 export function displayFullJournal(journalData, updateGradeCallback) {
-    const tableContainer = document.querySelector(".TabletJournal");
+    const tableContainer = document.querySelector(".journal-content");
     if (!tableContainer) {
-        console.error("Елемент з класом '.TabletJournal' не знайдено.");
+        console.error("Елемент з класом '.journal-content' не знайдено.");
         return;
     }
 
