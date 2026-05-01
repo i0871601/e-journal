@@ -24,6 +24,7 @@ body{
   box-shadow: 0 0 0.5vmin var(--text-color);
   position: relative;
   opacity: 0;
+  transition: opacity 0.65s ease-in-out;
 }
 .journal-content{
   overflow: auto;
