@@ -7,6 +7,7 @@
   --color1: #1b1b1e;
   --color2: #262626;
   --text-color: #878787;
+  --text-color-shadow: rgba(135, 135, 135, 0.5);
   --text-color-accent: rgba(245, 110, 15, 0.7);
 }
 body{
@@ -209,7 +210,7 @@ body{
 }
 .journal-table th,
 .journal-table td {
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--text-color-shadow);
   padding: 8px;
   text-align: center;
 }
