@@ -83,7 +83,6 @@ body{
   display:flex;
   align-items: center;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 5%;
 }
 #subject-checkbox, #class-checkbox{
@@ -92,7 +91,6 @@ body{
 #CustomSelectSubject, #CustomSelectClassTeacher {
   font-family: 'SourceSans3';
   position: relative;
-  margin-top: 0.5rem;
 }
 #button-select-subject, #button-select-class{
   display: flex;
