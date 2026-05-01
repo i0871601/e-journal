@@ -1,8 +1,8 @@
 // Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.
 export function displayGrades(journalData, name) {
-    const tableContainer = document.querySelector(".TabletJournal");
+    const tableContainer = document.querySelector(".journal-content");
     if (!tableContainer) {
-        console.error("Елемент з класом '.TabletJournal' не знайдено.");
+        console.error("Елемент з класом '.journal-content' не знайдено.");
         return;
     }
     tableContainer.innerHTML = '';
