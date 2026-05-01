@@ -14,12 +14,12 @@ body{
   user-select: none;
 }
 .TabletJournal{
-  overflow-y: auto;
-  flex-grow: 1;
-  padding-left: 3%;
-  padding-left: 3%;
-  padding-right: 3%;
-  padding-bottom: 2.9%;
+  overflow: auto;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 2.9%;
+  border-radiud: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
 }
 .TabletJournal::-webkit-scrollbar{
   width: 0.5rem;
@@ -154,7 +154,7 @@ body{
     background-color: var(--color-accent);
 }
 
-.Title{
+/*.Title{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -165,10 +165,11 @@ body{
 
 #ClassTeacher{
   display: none;
-}
+}*/
 
 .journal-table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 .journal-table thead {
   position: sticky;
