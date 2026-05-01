@@ -45,8 +45,8 @@ body{
   background-color: transparent;
 }
 .journal-content::-webkit-scrollbar-track {
-    background: transparent; /* Робимо трек прозорим, щоб не було білої смуги */
-    margin: 0.5rem 0; /* Важливо! Відступи зверху і знизу, щоб скрол не доходив до заокруглень */
+    background: transparent;
+    margin: 0.83rem 0;
 }
 .journal-content::-webkit-scrollbar-thumb{
   background-color: var(--text-color);
