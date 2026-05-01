@@ -25,6 +25,7 @@ body{
   box-shadow: 0 0 0.5vmin var(--text-color);
   position: relative;
   opacity: 0;
+  overflow: hidden;
   transition: opacity 0.65s ease-in-out;
 }
 .gradeButton{
@@ -36,7 +37,7 @@ body{
 }
 .journal-content{
   overflow: auto;
-  margin: 0.83rem 0;
+  /*margin: 0.83rem 0;*/
 }
 .journal-content::-webkit-scrollbar{
   width: 0.5rem;
