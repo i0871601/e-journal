@@ -42,11 +42,12 @@ body{
 }
 .journal-content::-webkit-scrollbar{
   width: 0.5rem;
+  height: 0.5rem;
   background-color: transparent;
 }
 .journal-content::-webkit-scrollbar-track {
-    background: transparent;
-    margin: 0.83rem 0;
+  background: transparent;
+  margin: 0.83rem 0.83rem;
 }
 .journal-content::-webkit-scrollbar-thumb{
   background-color: var(--text-color);
