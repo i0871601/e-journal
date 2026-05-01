@@ -215,6 +215,8 @@ body{
 }
 
 .journal-table thead th:first-child {
-  border-top: none;
   z-index: 13;
+}
+.journal-table thead th {
+  border-top: none;
 }
