@@ -194,30 +194,28 @@ body{
   border-collapse: separate;
   border-spacing: 0;
 }
-.journal-table thead {
+.journal-table thead, .journal-table th:first-child, .journal-table td:first-child {
   position: sticky;
-  top: 0;
   background-color: var(--fon-color-2);
+}
+.journal-table thead {
+  top: 0;
   z-index: 10;
 }
 .journal-table th:first-child,
 .journal-table td:first-child {
-  position: sticky;
   left: 0;
-  background-color: var(--fon-color-2);
   z-index: 5;
-  border-left: none;
 }
 .journal-table th,
 .journal-table td {
   border: 1px solid var(--text-color-shadow);
   padding: 8px;
   text-align: center;
+  border-top: none;
+  border-left: none;
 }
 
 .journal-table thead th:first-child {
   z-index: 13;
-}
-.journal-table thead th {
-  border-top: none;
 }
