@@ -32,7 +32,7 @@ body{
 .gradeButton{
   position: absolute;
   height: 30%;
-  aspect-radio: 1/1;
+  aspect-ratio: 1/1;
   right: 0;
   margin-right: 0.5rem;
 }
