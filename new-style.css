@@ -145,9 +145,17 @@ body {
     position: absolute;
     visibility: hidden;
     top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: calc(100% - 1.7vmin);
     border: 0.07rem solid transparent;
+    border-radius: 1rem;
     box-shadow: 0 0 0.5vmin transparent;
+    padding: 0.3vmin 0 0.3vmin 1.5vmin;
+    font-family: 'SourceSans3';
+    color: transparent;
+    cursor: pointer;
     transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
 
