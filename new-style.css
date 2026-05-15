@@ -234,6 +234,13 @@ body {
     opacity: 1;
     visibility: visible;
 }
+#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime label:not(:first-child) {
+    visibility: hidden;
+}
+#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime #DaysList{
+    opacity: 0;
+    visibility: hidden;
+}
 
 @font-face{
     font-family: 'Aristotelica';
