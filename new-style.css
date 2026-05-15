@@ -224,7 +224,7 @@ body {
 }
 
 #timeTable:checked ~ #time-button {
-    left: 34.5%;
+    left: 35%;
 }
 
 #timeTable:checked ~ #content-timetable #contentTime {
@@ -274,7 +274,7 @@ body {
         background-color: var(--fon-color-2);
         box-shadow: 0 0 1vmin var(--text-color);
     }
-    #timeTable:checked ~ #time-button::after{
+    #timeTable:checked ~ #time-button #time-icon::after{
         background-color: var(--fon-color-2);
         opacity: 1;
     }
