@@ -30,6 +30,7 @@ const messageBoxStyles = `
     opacity: 0;
     transition: max-width 0.7s ease-in-out, opacity 0.7s ease-in-out;
     overflow: hidden;
+    pointer-events: none;
     z-index: 100;
   }
   #message-text{
