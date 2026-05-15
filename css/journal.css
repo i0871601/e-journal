@@ -1,0 +1,536 @@
+/*Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.*/
+:root {
+  --fon-color: #151419;
+  --fon-color-2: #fbfbfb;
+  --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.25);
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
+  --text-color-shadow: rgba(135, 135, 135, 0.5);
+  --text-color-accent: rgba(245, 110, 15, 0.7);
+}
+body {
+  position: relative;
+  user-select: none;
+}
+
+.journal-content {
+  overflow: auto;
+}
+.journal-content::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: transparent;
+}
+.journal-content::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0.83rem 0.83rem;
+}
+.journal-content::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 25px;
+}
+.journal-content::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-accent);
+}
+.contentJournal {
+  display: flex;
+  flex-direction: column;
+  gap: 3vmin;
+  width: 95%;
+  height: 100%;
+  font-family: 'SourceSans3';
+  flex-grow: 1;
+}
+.contentJournal h2 {
+  margin-bottom: 0;
+  padding-left: 3%;
+}
+
+#GradeOfJournal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 5vmin;
+  padding-left: 3%;
+  padding-right: 3%;
+  position: relative;
+}
+#customSelect {
+  width: 95vw;
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.checkbox {
+  display: none;
+}
+#CustomSelectSubject, #CustomSelectClassTeacher {
+  font-family: 'SourceSans3';
+  position: relative;
+  margin: 0 3% 3% 0;
+}
+
+#button-select-subject, #button-select-class {
+  display: flex;
+  justify-content: space-between;
+  width: clamp(150px, 30vmin, 300px);
+  border: 0.07rem solid transparent;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  padding: 0.3vmin 1.5vmin;
+  color: var(--text-color);
+  transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
+}
+#button-select-subject .first-option, #button-select-class .first-option {
+  margin: 0;
+  white-space: nowrap;
+  color: var(--text-color);
+}
+.shadow-list {
+  width: 100%;
+  margin: 1.5vmin 0 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--fon-color-2);
+  color: var(--text-color);
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  position: absolute;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
+  visibility: hidden;
+}
+#subject-list, #class-list {
+  padding: 0;
+  list-style-type: none;
+  overflow-y: auto;
+}
+#subject-list {
+  margin: 0;
+}
+#class-list {
+  margin: 0.7rem 0;
+}
+#class-list::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
+}
+#class-list::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 25px;
+}
+#class-list::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-accent);
+}
+#subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list {
+  opacity: 1;
+  visibility: visible;
+  z-index: 25;
+  max-height: 12.3rem;
+}
+#subject-checkbox:checked ~ #button-select-subject, #class-checkbox:checked ~ #button-select-class {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
+#subject-checkbox:checked ~ #button-select-subject #select-arrow::after,  #class-checkbox:checked ~ #button-select-class #select-arrow::after {
+  content: '-';
+  padding-bottom: 5%;
+}
+
+.dropdown-list li {
+  padding: 1vmin 1vmin 1vmin 2.5vmin;;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dropdown-list li:hover {
+  color: var(--fon-color-2);
+  background-color: var(--color-accent);
+}
+
+.TabletJournal {
+  min-height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 3% 2.9% 3%;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  position: relative;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.65s ease-in-out;
+}
+#infoLesson, #formAdd {
+  width: 0;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  pointer-events: none;
+  background-color: var(--fon-color);
+  border-radius: 1rem;
+  right: 0.5rem;
+  overflow: visible;
+  visibility: hidden;
+  transition: width 0.5s ease-in-out, visibility 0.5s ease-in-out, right 0.5s ease-in-out;
+}
+#infoLesson {
+  right: 0;
+  overflow: hidden;
+  z-index: 21;
+  justify-content: center;
+}
+#infoLesson::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: transparent;
+}
+#formAdd {
+  right: 0.5rem;
+  z-index: 20;
+}
+#checked-infoLesson:checked ~ #infoLesson {
+  width: 50%;
+  visibility: visible;
+  pointer-events: auto;
+
+}
+#button-off-infoLesson, #button-addLesson{
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  width: 3.5rem;
+  aspect-ratio: 1 / 1;
+  left: calc(-3.5rem / 2);
+  cursor: pointer;
+  pointer-events: auto;
+  position: absolute;
+  visibility: visible;
+  z-index: 15;
+  transition: background-color 0.5s ease-in-out;
+}
+#button-off-infoLesson {
+  flex-direction: row-reverse;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
+#button-addLesson {
+  flex-direction: row;
+  clip-path: inset(-7% 50% -7% -7%);
+  background-color: var(--color2);
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  transition: box-shadow 0.5s ease-in-out, clip-path 0.5s ease-in-out;
+}
+
+#infoLesson .arrow, #button-addLesson .arrow{
+  width: 50%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  color: var(--fon-color-2);
+}
+#infoLesson .arrow{
+  margin: 0;
+  padding-right: 0.1rem;
+  font-size: 2.5rem;
+  justify-content: center;
+}
+
+#textInfoLesson {
+  width: calc(100% - 5rem);
+  height: calc(100% - 4rem);
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+  transition-delay: 0s;
+}
+#checked-infoLesson:checked ~ #infoLesson #textInfoLesson {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 0.5s;
+}
+
+#textInfoLesson div {
+  display: flex;
+  width: 100%;
+}
+#textInfoLesson div p {
+  margin: 0;
+}
+#textInfoLesson .title {
+  width: 50%;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+#textInfoLesson .text-info {
+  width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  hyphens: auto;
+  font-size: 1rem;
+  color: var(--fon-color-2);
+}
+#infoData {
+  flex-direction: row;
+}
+#infoTopic{
+  margin: 1rem 0;
+  flex-direction: column;
+}
+#infoHomework {
+  flex-direction: column;
+}
+#infoHomework .text-info{
+  text-overflow: unset;
+}
+
+#textInfoLesson #infoData .text-info {
+  width: calc(50% - 0.5rem);
+  text-align: end;
+}
+#textInfoLesson #infoTopic .text-info {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  width: calc(100% - 0.5rem);
+}
+#infoHomework .link-info {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--color-accent);
+}
+
+#button-addLesson .arrow {
+  margin-left: 12%;
+}
+#button-addLesson .arrow::after {
+  position: absolute;
+  font-size: 2rem;
+}
+#button-addLesson #add::after {
+  content: '+';
+}
+#button-addLesson #avoid::after {
+  content: '-';
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
+}
+@media (hover: hover) {
+  #button-addLesson:hover {
+    background-color: var(--color-accent);
+    box-shadow: 0 0 0.5vmin var(--color-accent);
+  }
+}
+#addLesson-checkbox:checked ~ #formAdd {
+  opacity: 1;
+  pointer-events: auto;
+  width: 100%;
+  visibility: visible;
+  right: 0;
+}
+#addLesson-checkbox:checked ~ #formAdd #button-addLesson {
+  clip-path: inset(-7% -7% -7% 50%);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0.5vmin var(--color-accent);
+}
+
+#formAddLesson {
+  /*width: calc(100% - 2 * 9vmin);*/
+  width: 75vmin;;
+  height: 90%;
+  max-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0 2.3rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease-in-out, visibility 0.3s ease-in-out;
+  transition-delay: 0s;
+}
+
+#addLesson-checkbox:checked ~ #formAdd #formAddLesson  {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.07s ease-in-out;
+  transition-delay: 0.5s;
+}
+.inputField {
+  width: 100%;
+  padding: 1.25vmin 3.7%;
+  border-radius: calc(1.25vmin + 1rem);
+  border: 0.2vmin solid var(--color1);
+  background-color: var(--fon-color-2);
+  color: var(--color2);
+  outline: none;
+  overflow-y: auto;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: 'SourceSans3';
+  transition: all 0.3s ease-in-out;
+}
+#topic {
+  min-height: auto;
+  max-height: calc(3lh + 2 * 1.3vmin);
+  margin-top: 3%;
+}
+#topic:empty:before {
+  content: "Тема уроку...";
+  color: var(--text-color);
+}
+.inputField::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: transparent;
+}
+.inputField::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0.83rem 0.83rem;
+}
+.inputField::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 25px;
+}
+.inputField::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-accent);
+}
+
+#typeLesson {
+  width: 100%;
+  height: calc(1lh + 3vmin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3%;
+  background-color: var(--fon-color-2);
+  padding: 0 3.7%;
+  border: 0.2vmin solid var(--color1);
+  box-sizing: border-box;
+  border-radius: calc(1.25vmin + 1rem);
+  position: relative;
+}
+#typeLesson p {
+  margin: 0;
+  padding: 0;
+  color: var(--color2);
+}
+#typeLesson #shadow{
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-left: 0.5vmin;
+}
+#button-type-lesson {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 1rem);
+  height: 100%;
+  padding: 0 0.5rem;
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+}
+#button-type-lesson #select-arrow {
+  color: var(--text-color);
+}
+.shadow-list-lesson {
+  position: absolute;
+  right: 0;
+  bottom: -1.5rem;
+  width: 50%;
+  overflow: hidden;
+  background-color: var(--fon-color-2);
+  color: var(--color2);
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5vmin var(--text-color);
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.65s ease-in-out, opacity 0.65s ease-in-out;
+  visibility: hidden;
+}
+#typeLesson-checkbox:checked ~ .shadow-list-lesson {
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+  z-index: 25;
+  max-height: 10rem;
+}
+
+#homework {
+  margin: 3% 0;
+  min-height: calc(5lh + 2 * 1.3vmin);
+  max-height: calc(5lh + 2 * 1.3vmin);
+}
+#homework:empty:before {
+  content: "Домашня робота...";
+  color: var(--text-color);
+}
+
+.journal-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.journal-table thead, .journal-table th:first-child, .journal-table td:first-child {
+  position: sticky;
+  background-color: var(--fon-color-2);
+}
+.journal-table thead {
+  top: 0;
+  z-index: 10;
+}
+.journal-table th:first-child,
+.journal-table td:first-child {
+  left: 0;
+  z-index: 5;
+}
+.journal-table th,
+.journal-table td {
+  border: 1px solid var(--text-color-shadow);
+  padding: 8px;
+  text-align: center;
+  border-top: none;
+  border-left: none;
+}
+.journal-table thead th:not(:first-child) {
+  cursor: pointer;
+}
+
+.journal-table thead th:first-child {
+  z-index: 13;
+}
+
+@media (orientation: portrait) {
+  #subject-checkbox:checked ~ .shadow-list, #class-checkbox:checked ~ .shadow-list {
+    max-height: 11.4rem;
+  }
+  #checked-infoLesson:checked ~ #infoLesson {
+    width: 100%;
+  }
+  #formAddLesson {
+    max-width: 90%;
+  }
+  #topic {
+    max-height: calc(2lh + 2 * 1.3vmin);
+  }
+  #homework {
+    min-height: calc(3lh + 2 * 1.3vmin);
+    max-height: calc(5lh + 2 * 1.3vmin);
+  }
+}
