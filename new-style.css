@@ -105,14 +105,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background-color: var(--color1);
     box-shadow: 0 0 1.5vmin var(--color1);
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
     width: 80%;
-    height: 80%;
+    height: calc(100% - 11%);
     visibility: hidden;
     opacity: 0;
     display: flex;
@@ -146,6 +146,9 @@ body {
     visibility: hidden;
     top: 0;
     width: calc(100% - 1.7vmin);
+    border: 0.07rem solid transparent;
+    box-shadow: 0 0 0.5vmin transparent;
+    transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
 
 .first-option {
@@ -206,10 +209,11 @@ body {
 #time-button:hover #time-icon::after {
     opacity: 1;
 }
-#CustomSelectTime label {
+#CustomSelectTime label:hover {
     border-color: var(--color-accent);
     box-shadow: 0 0 0.5vmin var(--color-accent);
 }
+
 
 /*зміна при взаємодії з інпут*/
 #timeTable:checked ~ #Journal #content-timetable {
