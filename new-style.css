@@ -110,10 +110,14 @@ body {
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
+    height: 80%;
     visibility: hidden;
     opacity: 0;
+    display: flex;
+    flex-direction: column;
     pointer-events: none;
-    transition: visibility 0.7s ease-in-out, opacity 0.7s ease-in-out;
+    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition-delay: 0.5s;
 }
 
 /*ефекти наведення*/
@@ -133,7 +137,7 @@ body {
     left: 34.5%;
 }
 
-#timeTable:checked ~ #content-timetable #contentTime {
+#timeTable:checked ~ #Journal #content-timetable #contentTime {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
