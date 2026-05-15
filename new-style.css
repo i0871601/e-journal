@@ -137,13 +137,13 @@ body {
     cursor: pointer;
     transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
-#CustomSelectTime label:first-child {
+#CustomSelectTime .select-on {
     background-color: var(--color2);
     width: calc(100% - 1.7vmin);
     box-shadow: 0 0 0.5vmin var(--text-color);
     color: var(--text-color);
 }
-#CustomSelectTime label:not(:first-child) {
+#CustomSelectTime .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
@@ -234,7 +234,7 @@ body {
     transition-delay: 0.5s;
 }
 
-#time:checked ~ #CustomSelectTime label:not(:first-child) {
+#time:checked ~ #CustomSelectTime .select-off {
     visibility: visible;
 }
 #time:checked ~ #DaysList{
@@ -246,7 +246,7 @@ body {
     padding-bottom: 5%;
 }
 
-#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime label:not(:first-child) {
+#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime .select-off {
     visibility: hidden;
 }
 #reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime #DaysList{
