@@ -51,7 +51,7 @@ body {
     top: 0;
     padding: 0 0.5rem 0 0.5rem;
     border-radius: 0 1rem 1rem 0;
-    background: var(--color1);
+    background-color: var(--color1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -270,7 +270,13 @@ body {
     #timeTable:checked ~ #time-button {
         left: calc(100% - 3rem);
         z-index: 11;
-        border-radius: 0 1rem 1rem 1.1rem;
+        transform: scaleX(-1);
+        background-color: var(--fon-color-2);
+        box-shadow: 0 0 1vmin var(--text-color);
+    }
+    #timeTable:checked ~ #time-button::after{
+        background-color: var(--fon-color-2);
+        opacity: 1;
     }
 }
 @font-face{
