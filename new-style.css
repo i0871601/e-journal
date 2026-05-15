@@ -41,10 +41,10 @@ body {
 /*Стилі чекбокс для часу уроків*/
 #content-timetable {
     position: absolute;
-    left: 0;
+    left: -1%;
     z-index: 30;
     width: 0;
-    height: 100%;
+    height: 102%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,7 +112,6 @@ body {
 
 #timeTable:checked ~ #Journal #content-timetable {
     width: 35%;
-    clip-path: inset(0.1% -4rem 0.1% 0.5%);
 }
 
 #timeTable:checked ~ #content-timetable #time-button {
