@@ -1,0 +1,144 @@
+/*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
+:root {
+  --fon-color: #151419;
+  --fon-color-2: #fbfbfb;
+  --color-accent: #f56e0f;
+  --color-accent-shadow: rgba(245, 110, 15, 0.25);
+  --color1: #1b1b1e;
+  --color2: #262626;
+  --text-color: #878787;
+  --text-color-shadow: rgba(135, 135, 135, 0.5);
+  --text-color-accent: rgba(245, 110, 15, 0.7);
+}
+body {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--fon-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    user-select: none;
+    font-family: 'SourceSans3';
+}
+
+.input {
+    display: none;
+}
+
+#Journal {
+    position: relative;
+    width: 95%;
+    height: 95%;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    /*box-shadow: inset 0 0 1.7vmin var(--color1);*/
+    background-color: var(--color2);
+}
+/*Стилі чекбокс для часу уроків*/
+#content-timetable {
+    position: absolute;
+    left: 0;
+    z-index: 30;
+    width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color1);
+    box-shadow: 0 0 1.5vmin var(--text-color);
+    transition: width 0.5s ease-in-out;
+}
+
+#time-button {
+    position: absolute;
+    width: 2rem;
+    right: -3rem;
+    height: 11%;
+    top: -0.05rem;
+    padding: 0 0.5rem 0 1rem;
+    border-radius: 0 1rem 1rem 0;
+    background: var(--color1);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    clip-path: inset(1% -11% -11% 0.48rem);
+    box-shadow: 0 0 1vmin var(--text-color);
+    transition: 0.5s ease-in-out;
+}
+#time-button::after {
+    content: "";
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+}
+
+#time-icon {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    background-image: url(./image/time2.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+}
+#time-icon::after {
+    content: "";
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    background-image: url(./image/time.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--color1);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+#time-icon:hover{
+    transform: scale(1.05);
+}
+#time-button:hover #time-icon::after {
+    opacity: 1;
+}
+
+#timeTable:checked ~ #Journal #content-timetable {
+    width: 35%;
+}
+
+#timeTable:checked ~ #content-timetable #time-button {
+    /*right: 0;*/
+}
+
+/*Стилі змісту контенту для часу уроків*/
+#contentTime{
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: visibility 0.7s ease-in-out, opacity 0.7s ease-in-out;
+}
+#timeTable:checked ~ #content-timetable #contentTime {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@font-face{
+    font-family: 'Aristotelica';
+    src: url('./fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'SourceSans3';
+    src: url('./fonts/SourceSans3-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}

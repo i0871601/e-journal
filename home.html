@@ -1,0 +1,42 @@
+<!--Авторське право (c) травень 2026 рік Сікан Іван Валерійович.!-->
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="./new-style.css">
+        <!--<script src="./js/toggle-checkbox.js" defer></script>!-->
+    </head>
+
+    <body>
+        <input type="checkbox" id="timeTable" class="input">
+        <input type="radio" name="selectTime" class="input">
+        <input type="radio" name="trigger" id="reset" class="input" checked>
+        <input type="radio" name="trigger" id="subject" class="input">
+        <input type="radio" name="trigger" id="class" class="input">
+        <input type="checkbox" id="loading" class="input">
+        <input type="checkbox" id="add" class="input">
+        <input type="checkbox" id="info" class="input">
+
+        <main id="Journal">
+            <div id="content-timetable">
+                <div id="contentTime">
+                    <h2 id="TitleTime" class="title-content">Розклад</h2>
+                    <div id="CustomSelectTime">
+                        <label for="selectTime">
+                            <p id="first-option">Виберіть день уроків</p>                                <span id="select-arrow"></span>
+                        </label>
+                        <ul id="DaysList"></ul>
+                    </div>
+                    <div id="wrapper-text-container">
+                        <div></div>
+                    </div>
+                </div>
+                <label for="timeTable" id="time-button">
+                    <div id="time-icon"></div>
+                </label>
+            </div>
+        </main>
+    </body>
+</html>
