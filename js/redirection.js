@@ -14,20 +14,20 @@ import { initScheduleLogic } from './schedule.js';
 import { initDropdown } from './dropdown-handler.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
+    //const allCheckboxes = document.querySelectorAll('.toggle-checkbox');
 
-    allCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', (event) => {
-            if (event.target.checked) {
-                if (event.target.id === 'toggle-schedule') {
+    //allCheckboxes.forEach(checkbox => {
+        //checkbox.addEventListener('change', (event) => {
+            //if (event.target.checked) {
+                //if (event.target.id === 'toggle-schedule') {
                     initScheduleLogic();
-                }
-                if (event.target.id ==='toggle-journal') {
-                    initDropdown();
-                }
-            }
-        });
-    });
+                //}
+                //if (event.target.id ==='toggle-journal') {
+                  //  initDropdown();
+                //}
+            //}
+        //});
+    //});
 });
 
 
