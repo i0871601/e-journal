@@ -100,7 +100,7 @@ body {
 }
 #contentTime {
     width: clamp(230px, 80%, 330px);
-    height: calc(100% - 11%);
+    height: calc(100% - 12%);
     visibility: hidden;
     opacity: 0;
     display: flex;
