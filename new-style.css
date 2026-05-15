@@ -93,7 +93,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    background-color: var(--fon-color-2);
+    background-color: var(--color1);
     box-shadow: 0 0 1.5vmin var(--color1);
     transition: width 0.5s ease-in-out;
 }
@@ -125,7 +125,6 @@ body {
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 #CustomSelectTime .select-on {
-    background-color: var(--fon-color-2);
     width: calc(100% - 1.7vmin);
     box-shadow: 0 0 0.5vmin var(--text-color);
     color: var(--text-color);
@@ -165,7 +164,7 @@ body {
     height: 50vmin;
     border-radius: 1rem;
     box-shadow: 0 0 0.5vmin var(--text-color);
-    background-color: var(--fon-color-2);
+    background-color: var(--color1);
     list-style: none;
     padding: 0;
     margin: 1.5vmin 0 0 0;
@@ -240,7 +239,7 @@ body {
     visibility: visible;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
-#time:checked ~ .select-arrow::after {
+#time:checked ~ .select-on .select-arrow::after {
     content: '-';
     padding-bottom: 5%;
 }
@@ -256,8 +255,14 @@ body {
 
 
 @media (orientation: portrait) {
+    #content-timetable {
+        background-color: var(--fon-color-2);
+    }
     #contentTime {
         width: clamp(230px, calc(80% - 7rem), 330px);
+    }
+    #DaysList {
+        background-color: var(--fon-color-2);
     }
     #timeTable:checked ~ #content-timetable {
         width: 100%;
