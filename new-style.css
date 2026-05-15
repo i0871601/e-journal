@@ -135,7 +135,7 @@ body {
     padding: 0.3vmin 0 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     cursor: pointer;
-    transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
+    transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 #CustomSelectTime .select-on {
     background-color: var(--color2);
@@ -169,7 +169,7 @@ body {
     content: '+';
     position: absolute;
     font-size: 1.3rem;
-    transition: content 0.65s ease-in-out;
+    transition: content 0.5s ease-in-out;
 }
 
 #DaysList {
@@ -185,7 +185,7 @@ body {
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
-    transition: opacity 0.65s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 #DaysList li {
     padding: 1vmin 1vmin 1vmin 3.7%;
@@ -230,7 +230,7 @@ body {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    transition: visibility 0.7s ease-in-out, opacity 0.5s ease-in-out;
+    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transition-delay: 0.5s;
 }
 
