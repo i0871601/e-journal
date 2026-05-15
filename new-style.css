@@ -185,7 +185,7 @@ body {
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.3s ease-in-out;
 }
 #DaysList li {
     padding: 1vmin 1vmin 1vmin 3.7%;
@@ -230,7 +230,7 @@ body {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: visibility 0.3s ease-in-out, opacity 0.5s ease-in-out;
     transition-delay: 0.5s;
 }
 
