@@ -234,7 +234,7 @@ body {
     transition-delay: 0.5s;
 }
 
-#time:checked ~ #CustomSelectTime .select-off {
+#time:checked ~ .select-off {
     visibility: visible;
 }
 #time:checked ~ #DaysList{
