@@ -271,6 +271,18 @@ export const initScheduleLogic = async () => {
             return;
         }
         setupDaySelector(groupedByDay, userData.role);
+        const days = Object.keys(groupedByDay); // Отримуємо список назв днів
+        if (days.length > 0) {
+            const firstDay = days[0]; // Беремо перший день (наприклад, "Понеділок")
+            
+            // Оновлюємо текст у "кнопці" вибору
+            if (selectedTextContainer) {
+                selectedTextContainer.textContent = firstDay;
+            }
+            
+            // Відображаємо розклад для цього дня
+            displaySchedule(groupedByDay, userData.role, firstDay);
+        }
         setScheduleLoadedState();
     } catch (err) {
         console.error('Помилка запиту:', err);
