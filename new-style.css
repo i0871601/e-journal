@@ -218,28 +218,34 @@ body {
 
 
 /*зміна при взаємодії з інпут*/
-#timeTable:checked ~ #Journal #content-timetable {
+#timeTable:checked ~ #content-timetable {
     width: 35%;
 }
 
-#timeTable:checked ~ #Journal #time-button {
+#timeTable:checked ~ #time-button {
     left: 34.5%;
 }
 
-#timeTable:checked ~ #Journal #content-timetable #contentTime {
+#timeTable:checked ~ #content-timetable #contentTime {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
     transition: visibility 0.7s ease-in-out, opacity 0.5s ease-in-out;
     transition-delay: 0.5s;
 }
-#time:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime label:not(:first-child) {
+
+#time:checked ~ #CustomSelectTime label:not(:first-child) {
     visibility: visible;
 }
-#time:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime #DaysList{
+#time:checked ~ #DaysList{
     opacity: 1;
     visibility: visible;
 }
+#time:checked ~ .select-arrow::after {
+    content: '-';
+    padding-bottom: 5%;
+}
+
 #reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime label:not(:first-child) {
     visibility: hidden;
 }
