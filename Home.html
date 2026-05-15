@@ -1,0 +1,124 @@
+<!--Авторське право (c) серпень 2025 рік Сікан Іван Валерійович.!-->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/style-home.css">
+    <link rel="stylesheet" href="./css/schedule.css">
+    <link rel="stylesheet" href="./css/journal.css">
+    <script src="./js/toggle-checkbox.js" defer></script>
+</head>
+<body>
+    <input type="checkbox" id="toggle-schedule" class="toggle-checkbox">
+    <input type="checkbox" id="toggle-journal" class="toggle-checkbox">
+    <main id="Body">
+        <nav id="Menu">
+            <div id="button-container">
+                <label for="toggle-schedule" class="button" role="tab" id="button-schedule"></label>
+                <label for="toggle-journal" class="button" role="tab" id="button-journal"></label>
+            </div>
+            <p id="copyright">&copy; 2025, Сікан І.В.</p>
+        </nav>
+        <div id="MainContent">
+            <section id="Schedule" class="Content">зшивання
+                <div id="ScheduleContent">
+                    <h2 id="TitleSchedule" class="title-content">Розклад</h2>
+                    <div id="CustomSelectSchedule">
+                        <input type="checkbox" id="days-checkbox"></input>
+                        <label for="days-checkbox" id="button-select-schedule">
+                            <p id="first-option">Виберіть день уроків</p>
+                            <span id="select-arrow"></span>
+                        </label>
+                        <ul id="DaysList"></ul>
+                    </div>
+                    <div id="wrapper-text-container"><div id="text-container-schedule"></div></div>
+                </div>
+            </section>
+            <section id="Journal" class="Content">
+                <div class="contentJournal">
+                    <h2>Журнал</h2>
+                    <div class="GradeOfJournal" id="GradeOfJournal">
+                        <div id="customSelect">
+                            <div id="CustomSelectSubject">
+                                <input type="checkbox" id="subject-checkbox" class="checkbox"></input>
+                                <label for="subject-checkbox" id="button-select-subject">
+                                    <p class="first-option">Виберіть предмет</p>
+                                    <span id="select-arrow"></span>
+                                </label>
+                                <div class="shadow-list">
+                                    <ul id="subject-list" class="dropdown-list"></ul>
+                                </div>
+                            </div>
+                            <div id="CustomSelectClassTeacher">
+                                <input type="checkbox" id="class-checkbox" class="checkbox"></input>
+                                <label for="class-checkbox" id="button-select-class">
+                                    <p class="first-option">Виберіть клас</p>
+                                    <span id="select-arrow"></span>
+                                </label>
+                                <div class="shadow-list">
+                                    <ul id="class-list" class="dropdown-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TabletJournal">
+                        <input type="checkbox" id="addLesson-checkbox" class="checkbox"></input>
+                        <input type="checkbox" id="checked-infoLesson" class="checkbox"></input>
+                        <div id="infoLesson">
+                            <label for="checked-infoLesson" id="button-off-infoLesson">
+                                <span class="arrow" id="arrow">-</span>
+                            </label>
+                            <div id="textInfoLesson">
+                                <div id="infoData">
+                                    <p class="title">Дата:</p>
+                                    <p class="text-info">08.05.2026</p>
+                                </div>
+                                <div id="infoTopic">
+                                    <p class="title">Тема:</p>
+                                    <p class="text-info">Інструктаж з БЖД. Ідентифікація та аутентифікація користувачів</p>
+                                </div>
+                                <div id="infoHomework">
+                                    <p class="title">Домашня:</p>
+                                    <p class="text-info"> Знайти інформацію про методи криптографічного захисту інформації uvghv cttt cc jbjj hvhghvg vgcfc cgghvh  hgvhcvg kjhb kbkh  vgc</p>
+                                    <a class="link-info" target="_blank" href="https://teach-inf.com.ua/load/kalendarni_plani/5_klas/168">https://teach-inf.com.ua/load/kalendarni_plani/5_klas/168</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="formAdd">
+                            <label for="addLesson-checkbox" id="button-addLesson">
+                                <span class="arrow" id="add"></span>
+                                <span class="arrow" id="avoid"></span>
+                            </label>
+                            <div id="formAddLesson">
+                                <div contenteditable="true" id="topic" class="inputField"></div>
+                                <div id="typeLesson">
+                                    <p>Тип уроку:</p>
+                                    <input type="checkbox" id="typeLesson-checkbox" class="checkbox"></input>
+                                    <div id="shadow">
+                                        <label for="typeLesson-checkbox" id="button-type-lesson">
+                                            <p class="first-option">...</p>
+                                            <span id="select-arrow"></span>
+                                        </label>
+                                    </div>
+                                    <div class="shadow-list-lesson">
+                                        <ul id="typeLesson-list" class="dropdown-list-type"></ul>
+                                    </div>
+                                </div>
+                                <div contenteditable="true" id="homework" class="inputField"></div>
+                            </div>
+                        </div>
+                        <div class="journal-content"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="./messageBox.js" type="module"></script>
+    <script src="./js/redirection.js" type="module"></script>
+</body>
+
+</html>
+
+
