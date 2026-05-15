@@ -246,10 +246,10 @@ body {
     padding-bottom: 5%;
 }
 
-#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime .select-off {
+#reset:checked ~ #content-timetable #contentTime #CustomSelectTime .select-off {
     visibility: hidden;
 }
-#reset:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime #DaysList{
+#reset:checked ~ #content-timetable #contentTime #CustomSelectTime #DaysList{
     opacity: 0;
     visibility: hidden;
 }
