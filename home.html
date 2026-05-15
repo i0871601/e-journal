@@ -10,7 +10,7 @@
 
     <body>
         <input type="checkbox" id="timeTable" class="input">
-        <input type="radio" name="selectTime" class="input">
+        <input type="radio" name="trigger" id="time" class="input">
         <input type="radio" name="trigger" id="reset" class="input" checked>
         <input type="radio" name="trigger" id="subject" class="input">
         <input type="radio" name="trigger" id="class" class="input">
@@ -25,9 +25,11 @@
             <div id="content-timetable">
                 <div id="contentTime">
                     <div id="CustomSelectTime">
-                        <label for="selectTime">
-                            <p id="first-option">Виберіть день уроків</p>                                <span id="select-arrow"></span>
+                        <label for="time">
+                            <p class="first-option">Виберіть день уроків</p>
+                            <span class="select-arrow"></span>
                         </label>
+                        <label for="reset"></label>
                         <ul id="DaysList"></ul>
                     </div>
                     <div id="wrapper-text-container">

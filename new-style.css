@@ -111,22 +111,104 @@ body {
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
+    width: 80%;
     height: 80%;
     visibility: hidden;
     opacity: 0;
     display: flex;
     flex-direction: column;
     pointer-events: none;
-    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transition-delay: 0.5s;
+    transition: visibility 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    transition-delay: 0s;
 }
 
+#CustomSelectTime {
+    position: relative;
+}
+
+#CustomSelectTime label:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color2);
+    width: calc(100% - 1.7vmin);
+    border: 0.07rem solid transparent;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5vmin var(--text-color);
+    padding: 0.3vmin 0 0.3vmin 1.5vmin;
+    font-family: 'SourceSans3';
+    color: var(--text-color);
+    cursor: pointer;
+    transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
+}
+#CustomSelectTime label:not(:first-child) {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    width: calc(100% - 1.7vmin);
+}
+
+.first-option {
+    margin: 0;
+}
+.select-arrow {
+    position: relative;
+    width: 1.4rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-arrow::after {
+    content: '+';
+    position: absolute;
+    font-size: 1.3rem;
+    transition: content 0.65s ease-in-out;
+}
+
+#DaysList {
+    position: absolute;
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5vmin var(--text-color);
+    background-color: var(--fon-color-2);
+    list-style: none;
+    padding: 0;
+    margin: 1.5vmin 0 0 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: opacity 0.65s ease-in-out;
+}
+#DaysList li {
+    padding: 1vmin 1vmin 1vmin 3.7%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    color: var(--text-color);
+}
+
+/*#wrapper-text-container {
+    overflow-y: auto;
+}
+#text-container-shedule {
+    position: relative;
+    padding-left: 7%;
+    padding-right: 3%;
+}*/
+
+
 /*ефекти наведення*/
-#time-icon:hover{
+#time-icon:hover {
     transform: scale(1.05);
 }
 #time-button:hover #time-icon::after {
     opacity: 1;
+}
+#CustomSelectTime label {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
 /*зміна при взаємодії з інпут*/
@@ -142,8 +224,15 @@ body {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out;
-    transition-delay: 0s;
+    transition: visibility 0.7s ease-in-out, opacity 0.5s ease-in-out;
+    transition-delay: 0.5s;
+}
+#time:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime label:not(:first-child) {
+    visibility: visible;
+}
+#time:checked ~ #Journal #content-timetable #contentTime #CustomSelectTime #DaysList{
+    opacity: 1;
+    visibility: visible;
 }
 
 @font-face{
