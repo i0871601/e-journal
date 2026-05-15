@@ -263,6 +263,9 @@ body {
 
 
 @media (orientation: portrait) {
+    #contentTime {
+        width: calc(100% - 8rem);
+    }
     #timeTable:checked ~ #content-timetable {
         width: 100%;
         z-index: 5;
