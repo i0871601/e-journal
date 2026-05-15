@@ -271,11 +271,10 @@ export const initScheduleLogic = async () => {
             return;
         }
         setupDaySelector(groupedByDay, userData.role);
-        const days = Object.keys(groupedByDay); // Отримуємо список назв днів
+        const days = Object.keys(groupedByDay);
         if (days.length > 0) {
-            const firstDay = days[0]; // Беремо перший день (наприклад, "Понеділок")
+            const firstDay = days.includes('Понеділок') ? 'Понеділок' : days[0];
             
-            // Оновлюємо текст у "кнопці" вибору
             if (selectedTextContainer) {
                 selectedTextContainer.textContent = firstDay;
             }
