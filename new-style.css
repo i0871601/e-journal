@@ -126,37 +126,31 @@ body {
     position: relative;
 }
 
-#CustomSelectTime label:first-child {
+#CustomSelectTime label{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--color2);
-    width: calc(100% - 1.7vmin);
     border: 0.07rem solid transparent;
     border-radius: 1rem;
-    box-shadow: 0 0 0.5vmin var(--text-color);
     padding: 0.3vmin 0 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
-    color: var(--text-color);
     cursor: pointer;
     transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
+}
+#CustomSelectTime label:first-child {
+    background-color: var(--color2);
+    width: calc(100% - 1.7vmin);
+    box-shadow: 0 0 0.5vmin var(--text-color);
+    color: var(--text-color);
 }
 #CustomSelectTime label:not(:first-child) {
     position: absolute;
     visibility: hidden;
     top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: calc(100% - 1.7vmin);
-    border: 0.07rem solid transparent;
-    border-radius: 1rem;
     box-shadow: 0 0 0.5vmin transparent;
     padding: 0.3vmin 0 0.3vmin 1.5vmin;
-    font-family: 'SourceSans3';
     color: transparent;
-    cursor: pointer;
-    transition: box-shadow 0.65s ease-in-out, border-color 0.65s ease-in-out;
 }
 
 .first-option {
