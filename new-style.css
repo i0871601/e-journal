@@ -40,21 +40,9 @@ body {
     display: flex;
     align-items: center;
 }
-/*Стилі чекбокс для часу уроків*/
-#content-timetable {
-    position: absolute;
-    left: -0.5%;
-    z-index: 30;
-    width: 0;
-    height: 100.5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color1);
-    box-shadow: 0 0 1.5vmin var(--color1);
-    transition: width 0.5s ease-in-out;
-}
 
+/*Стилі чекбокс для часу уроків*/
+/*Для псевдокнопки */
 #time-button {
     position: absolute;
     width: 2rem;
@@ -69,7 +57,6 @@ body {
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    /*clip-path: inset(0 -11% -11% 0);*/
     box-shadow: 0 0 1vmin var(--color1);
     transition: all 0.5s ease-in-out;
 }
@@ -93,6 +80,7 @@ body {
     background-position: center;
     transition: all 0.3s ease-in-out;
 }
+
 #time-icon::after {
     content: "";
     position: absolute;
@@ -106,6 +94,29 @@ body {
     opacity: 0;
     transition: all 0.3s ease-in-out;
 }
+
+/*Контейнером змісту*/
+#content-timetable {
+    position: absolute;
+    left: 0;
+    z-index: 30;
+    width: 0;
+    height: 100.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color1);
+    box-shadow: 0 0 1.5vmin var(--color1);
+    transition: width 0.5s ease-in-out;
+}
+#contentTime {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: visibility 0.7s ease-in-out, opacity 0.7s ease-in-out;
+}
+
+/*ефекти наведення*/
 #time-icon:hover{
     transform: scale(1.05);
 }
@@ -113,6 +124,7 @@ body {
     opacity: 1;
 }
 
+/*зміна при взаємодії з інпут*/
 #timeTable:checked ~ #Journal #content-timetable {
     width: 35%;
 }
@@ -121,13 +133,6 @@ body {
     left: 34.5%;
 }
 
-/*Стилі змісту контенту для часу уроків*/
-#contentTime{
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: visibility 0.7s ease-in-out, opacity 0.7s ease-in-out;
-}
 #timeTable:checked ~ #content-timetable #contentTime {
     visibility: visible;
     opacity: 1;
