@@ -50,6 +50,7 @@ body {
     height: 11%;
     left: 0;
     top: 0;
+    z-index: 7;
     padding: 0 0.5rem 0 0.5rem;
     border-radius: 0 1rem 1rem 0;
     background-color: var(--color1);
@@ -86,7 +87,7 @@ body {
 #content-timetable {
     position: absolute;
     left: 0;
-    z-index: 30;
+    z-index: 5;
     width: 0;
     height: 100.5%;
     display: flex;
@@ -257,6 +258,7 @@ body {
 @media (orientation: portrait) {
     #content-timetable {
         background-color: var(--fon-color-2);
+
     }
     #contentTime {
         width: clamp(230px, calc(80% - 7rem), 330px);
@@ -266,7 +268,6 @@ body {
     }
     #timeTable:checked ~ #content-timetable {
         width: 100%;
-        z-index: 5;
     }
     #timeTable:checked ~ #time-button {
         left: calc(100% - 3rem);
