@@ -67,8 +67,10 @@ export const getCurrentDay = (listDay) => {
     return null;
 };
 
-export const handleDayClick = (selectedDay) => {
+export const handleDayClick = (selectedDay, currentDay) => {
     console.log(`Ви обрали день: ${selectedDay}`);
+    const inputReset = document.getElementById('reset');
+    inputReset.checked = true;
     
 };
 
@@ -92,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(currentDay);
 
     if (currentDay != null) {
-        handleDayClick(currentDay);
+        handleDayClick(currentDay, currentDay);
     }
 
 
@@ -102,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (clickedLi) {
             const dayValue = clickedLi.textContent;
             
-            handleDayClick(dayValue);
+            handleDayClick(dayValue, currentDay);
         }
     });
 
