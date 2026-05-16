@@ -76,8 +76,7 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
     const inputReset = document.getElementById('reset');
     inputReset.checked = true;
     console.log(filteredLessons);
-    
-    return;
+
 };
 
 
