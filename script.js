@@ -48,6 +48,24 @@ export const renderDaysList = (listDay) => {
     });
 };
 
+export const getCurrentDay = (listDay) => {
+    if (!Array.isArray(listDay) || listDay.length === 0) {
+        return null; 
+    }
+
+    //Отримуємо поточний день тижня
+    const formatter = new Intl.DateTimeFormat('uk-UA', { weekday: 'long' });
+    let current = formatter.format(new Date());
+
+    //Робимо першу літеру великою, щоб збігалося з масивом
+    current = current.charAt(0).toUpperCase() + current.slice(1);
+
+    //Перевіряємо, чи є цей день у списку listDay
+    if (listDay.includes(current)) {
+        return сurrent;
+    }
+    return null;
+};
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -63,4 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Унікальні дні тижня:", listDay);
 
     renderDaysList(listDay);
+
+    const currentDay = getCurrentDay(listDay);
+    console.log(currentDay);
 });
