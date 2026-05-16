@@ -12,12 +12,30 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
+export const createListDay = (routine) => {
+    if (!Array.isArray(routine) || routine.length === 0) {
+        return [];
+    }
+    const dayOrder = ["Понеділок", "Вівторок", "Середа", "Четверг", "П'ятниця"];
+
+    //Витягуємо всі дні та прибираємо дублікати
+    const uniqueDays = [...new Set(routine.map(item => item.Day))];
+
+    //Сортуємо отримані дні відповідно до dayOrder
+    return uniqueDays.sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+};
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
 
-    const routine = userData.data.routine;
-    console.log("Ось ваш масив routine:", routine);
+    let routine = [];
+    if (userData && userData.data.routine) {
+        routine = userData.data.routine;
+        console.log("Ось ваш масив routine:", routine);
+    }
+
+    const listDay = createListDay(routine); 
+    console.log("Унікальні дні тижня:", listDay);
 });
