@@ -67,9 +67,15 @@ export const getCurrentDay = (listDay) => {
     return null;
 };
 
+export const handleDayClick = (selectedDay) => {
+    console.log(`Ви обрали день: ${selectedDay}`);
+    
+};
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
+    const daysListContainer = document.getElementById('DaysList');
 
     let routine = [];
     if (userData && userData.data.routine) {
@@ -84,4 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentDay = getCurrentDay(listDay);
     console.log(currentDay);
+
+    if (currentDay != null) {
+        handleDayClick(currentDay);
+    }
+
+
+    daysListContainer.addEventListener('click', (event) => {
+        const clickedLi = event.target.closest('li');
+        
+        if (clickedLi) {
+            const dayValue = clickedLi.textContent;
+            
+            handleDayClick(dayValue);
+        }
+    });
+
 });
