@@ -99,7 +99,7 @@ body {
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
-    width: clamp(230px, 80%, 330px);
+    width: clamp(300px, 85%, 330px);
     height: calc(100% - 12%);
     visibility: hidden;
     opacity: 0;
@@ -213,11 +213,11 @@ body {
 
 /*зміна при взаємодії з інпут*/
 #timeTable:checked ~ #content-timetable {
-    width: 35%;
+    width: clamp(330px, 50vmin, 400px);
 }
 
 #timeTable:checked ~ #time-button {
-    left: 35%;
+    left: clamp(330px, 50vmin, 400px);
 }
 
 #timeTable:checked ~ #content-timetable #contentTime {
@@ -261,7 +261,7 @@ body {
 
     }
     #contentTime {
-        width: clamp(230px, calc(80% - 7rem), 330px);
+        width: clamp(300px, calc(100% - 7rem), 330px);
     }
     #DaysList {
         background-color: var(--fon-color-2);
