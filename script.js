@@ -1,5 +1,5 @@
 // Авторське право (c) травень 2026 рік Сікан Іван Валерійович.
-import { request, getUserData } from './config.js';
+import { request, getUserData } from './js/config.js';
 
 if (sessionStorage.length === 0) {
     window.location.href = '../index.html';
