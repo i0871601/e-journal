@@ -18,6 +18,6 @@ window.addEventListener('pageshow', (event) => {
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
 
-    const routine = userData.routine;
+    const routine = userData.data.routine;
     console.log("Ось ваш масив routine:", routine);
 });
