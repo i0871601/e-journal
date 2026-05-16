@@ -62,16 +62,22 @@ export const getCurrentDay = (listDay) => {
 
     //Перевіряємо, чи є цей день у списку listDay
     if (listDay.includes(current)) {
-        return сurrent;
+        return current;
     }
     return null;
 };
 
-export const handleDayClick = (selectedDay, currentDay) => {
+export const handleDayClick = (selectedDay, currentDay, routine) => {
     console.log(`Ви обрали день: ${selectedDay}`);
+
+    const filteredLessons = routine.filter(item => item.Day === selectedDay);
+    filteredLessons.sort((a, b) => Number(a.LessonNumber) - Number(b.LessonNumber));
+
     const inputReset = document.getElementById('reset');
     inputReset.checked = true;
+    console.log(filteredLessons);
     
+    return;
 };
 
 
@@ -94,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(currentDay);
 
     if (currentDay != null) {
-        handleDayClick(currentDay, currentDay);
+        handleDayClick(currentDay, currentDay, routine);
     }
 
 
@@ -104,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (clickedLi) {
             const dayValue = clickedLi.textContent;
             
-            handleDayClick(dayValue, currentDay);
+            handleDayClick(dayValue, currentDay, routine);
         }
     });
 
