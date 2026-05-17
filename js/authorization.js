@@ -118,7 +118,7 @@ async function handleLogin(lastName, password) {
             MessageText(messages.newPassword);
         } else {
             saveSessionData(data);
-            window.location.href = "Home.html";
+            window.location.href = "home.html";
         }
     } catch (error) {
         MessageText(messages.loginError);
