@@ -183,12 +183,6 @@ body {
     color: var(--text-color);
 }
 
-#DaysList li:hover {
-    background-color: var(--color-accent);
-    color: var(--fon-color-2);
-}
-
-
 #wrapper-text-container {
     margin: 2rem 0;
     overflow-y: auto;
@@ -214,7 +208,7 @@ body {
     padding-right: 3%;
 }
 
-.routime-entry::before {
+#text-container-routine::before {
     content: '';
     position: absolute;
     top: 0;
@@ -247,7 +241,7 @@ body {
 
 .status-icon {
     position: absolute;
-    left: 0.43rem;
+    left: 2%;
     width: 1.1rem;
     aspect-ratio: 1/1;
     border-radius: 50%;
@@ -322,6 +316,11 @@ body {
     box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
+#DaysList li:hover {
+    background-color: var(--color-accent);
+    color: var(--fon-color-2);
+}
+
 
 /*зміна при взаємодії з інпут*/
 #timeTable:checked ~ #content-timetable {
@@ -387,6 +386,9 @@ body {
         transform: scaleX(-1);
         background-color: var(--fon-color-2);
         box-shadow: 0 0 1vmin var(--text-color);
+    }
+    .status-icon { 
+        background-color: var(--fon-color-2);
     }
 }
 @font-face{
