@@ -71,45 +71,12 @@ export const getCurrentDay = (listDay) => {
     }
     return null;
 };
-function getNextUpdateTime(routineLesson) {
-    const now = new Date();
-    const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
-    let nextEventTotalMinutes = Infinity;
-    let maxTotalMinutes = null;
 
-    const timeToMinutes = (timeStr) =>{
-        const [h, m] = timeStr.split(':').map(Number);
-        return h * 60 + m;
-    }
-    routineLesson.forEach(item =>{
-        const [startTimeStr, endTimeStr] = item.Time.split('-');
-        const startMinutes = timeToMinutes(startTimeStr);
-        const endMinutes = timeToMinutes(endTimeStr);
 
-        maxTotalMinutes = Math.max(maxTotalMinutes, endMinutes);
-
-        if (startMinutes > currentTotalMinutes){
-            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, startMinutes);
-        }
-
-        if (endMinutes > currentTotalMinutes){
-            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, endMinutes);
-        }
-    });
-    if (nextEventTotalMinutes === Infinity){
-        const finalCheckTime = maxTotalMinutes + 30;
-        if(currentTotalMinutes < finalCheckTime){
-            nextEventTotalMinutes = finalCheckTime;
-        } else {return -1;}
-    }
-    const delayMinutes = nextEventTotalMinutes - currentTotalMinutes;
-    let delay = delayMinutes * 60 * 1000;
-    const secondsToWait = 60 - now.getSeconds();
-    delay -= now.getMilliseconds();
-    delay += secondsToWait * 1000;
-    if(delay <2000){delay=2000;}
-    return delay;
-}
+const timeToMinutes = (timeStr) => {
+    const [h, m] = timeStr.split(':').map(Number);
+    return h * 60 + m;
+};
 
 function TimeNow (lessonList){
     const entries = contentRoutine.querySelectorAll('.routime-entry');
@@ -118,64 +85,71 @@ function TimeNow (lessonList){
         entry.querySelector('.status-icon').classList.remove('current', 'passed');
     });
 
-    const maxTime = lessonList.length > 0 ? lessonList[lessonList.length - 1].Time.split('-')[1] : null;
-    let maxTotalMinutes = maxTime ? maxTime.split(':').map(Number).reduce((h, m) => h * 60 + m) : null;
+    const now = new Date();
+    const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const delayMinutes = null;
     
     entries.forEach((entryArticle, index) => {
         const item = lessonList[index];
         const statusIcon = entryArticle.querySelector('.status-icon');
-        const [startTime, endTime] = item.Time.split('-');
+        const [startTimeStr, endTimeStr] = item.Time.split('-');
 
-        const now = new Data();
-        const currentHours = now.getHours();
-        const currentMinutes = now.getMinutes();
-        const [startHours, startMinutes] = startTime.split(':').map(Number);
-        const [endHours, endMinutes] = endTime.split(':').map(Number);
-        const nextStartTime = (index + 1 < lessonList.length) ? lessonList[index + 1].Time.split('-')[0] : null;
-
-        const currentTotalMinutes = currentHours * 60 + currentMinutes;
-        const startTotalMinutes = startHours * 60 + startMinutes;
-        const endTotalMinutes = endHours * 60 + endMinutes;
-
-        let nextTotalMinutes = nextStartTime ? nextStartTime.split(':').map(Number).reduce((h, m) => h * 60 + m) : null;
+        const startTotalMinutes = timeToMinutes(startTimeStr);
+        const endTotalMinutes = timeToMinutes(endTimeStr);
+        
+        const nextStartTime = (index + 1 <lessonList.length) ? lessonList[index + 1].Time.split('-')[0] : null;
+        let nextTotalMinutes = nextStartTime ? timeToMinutes(nextStartTime) : null;
 
         //Зараз триває урок
         if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes) {
             entryArticle.classList.add('current');
             statusIcon.classList.add('current');
+
+            delayMinutes = endTotalMinutes - currentTotalMinutes;
         }
 
         //Перерва
         else if (nextTotalMinutes !== null && currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes) {
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
+
+            delayMinutes = nextTotalMinutes - currentTotalMinutes;
         }
 
         //Пройшов/давно пройшов
         else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30)) {
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
+
+            if (index === lessonList.length -1 && currentTotalMinutes < endTotalMinutes + 30) {
+                delayMinutes = (endTotalMinutes + 30) - currentTotalMinutes;
+            }
         }
     });
-}
-function updateLessonStatus(routineLesson) {
-    TimeNow(routineLesson);
-    setStatusLesson(routineLesson);
-}
+    if (delayMinutes === null) return -1;
+
+    let delay = delayMinutes * 60 * 1000;
+    const secondsToWait = 60 - now.getSeconds();
+    delay = delay - now.getMilliseconds() + (secondsToWait * 1000);
+
+    return Math.max(delay, 2000);
+};
+
 function setStatusLesson(routineLesson) {
     if(lessonUpdateTime) {
         clearTimeout(lessonUpdateTime);
         lessonUpdateTime = null;
     }
 
-    const delay = getNextUpdateTime(routineLesson);
+    const delay = TimeNow(routineLesson);
     if (delay === -1) { console.log("Уроки закінчилися"); return;}
     const delayMinutes = delay / (60 * 1000);
     console.log(`Наступне оновлення через ${delayMinutes.toFixed(2)} хвилин`);
     lessonUpdateTime = setTimeout(() => {
-        updateLessonStatus(routineLesson);
+        setStatusLesson(routineLesson);
     }, delay );
-}
+};
 
 export const handleDayClick = (selectedDay, currentDay, routine) => {
     console.log(`Ви обрали день: ${selectedDay}`);
@@ -245,7 +219,6 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
             contentRoutine.appendChild(entryArticle);
         });
         if (selectedDay === currentDay){
-            TimeNow(filteredLessons);
             setStatusLesson(filteredLessons);
         }
     } else {
