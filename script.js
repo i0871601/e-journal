@@ -164,7 +164,7 @@ function updateLessonStatus(routineLesson) {
 }
 function setStatusLesson(routineLesson) {
     if(lessonUpdateTime) {
-        //clearTimeout(lessonUpdateTime);
+        clearTimeout(lessonUpdateTime);
         lessonUpdateTime = null;
     }
 
@@ -186,7 +186,7 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
     console.log(filteredLessons);
 
     if(lessonUpdateTime) {
-        //clearTimeout(lessonUpdateTime);
+        clearTimeout(lessonUpdateTime);
         lessonUpdateTime = null;
     }
 
