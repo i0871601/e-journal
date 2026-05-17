@@ -214,7 +214,7 @@ body {
     padding-right: 3%;
 }
 
-#text-container-routine::before {
+.routime-entry::before {
     content: '';
     position: absolute;
     top: 0;
@@ -222,6 +222,7 @@ body {
     height: 100%;
     width: 0.1rem;
     background-color: var(--text-color);
+    opacity: 0.5;
 }
 
 .routime-entry {
@@ -242,7 +243,6 @@ body {
 
 .routime-entry.passed {
     box-shadow: 0 0 0.5vmin var(--color-passed);
-    border: 0.07rem solid var(--color-passed);
 }
 
 .status-icon {
