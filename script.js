@@ -88,7 +88,7 @@ function TimeNow (lessonList){
     const now = new Date();
     const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
 
-    const delayMinutes = null;
+    let delayMinutes = null;
     
     entries.forEach((entryArticle, index) => {
         const item = lessonList[index];
