@@ -16,6 +16,7 @@ const daysListContainer = document.getElementById('DaysList');
 const contentRoutine = document.getElementById('text-container-routine');
 const selectTextDay = document.getElementById('select-text-day');
 const inputReset = document.getElementById('reset');
+let lessonUpdateTime = null;
 
 export const createListDay = (routine) => {
     if (!Array.isArray(routine) || routine.length === 0) {
@@ -70,6 +71,111 @@ export const getCurrentDay = (listDay) => {
     }
     return null;
 };
+function getNextUpdateTime(routineLesson) {
+    const now = new Date();
+    const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
+    let nextEventTotalMinutes = Infinity;
+    let maxTotalMinutes = null;
+
+    const timeToMinutes = (timeStr) =>{
+        const [h, m] = timeStr.split(':').map(Number);
+        return h * 60 + m;
+    }
+    routineLesson.forEach(item =>{
+        const [startTimeStr, endTimeStr] = item.Time.split('-');
+        const startMinutes = timeToMinutes(startTimeStr);
+        const endMinutes = timeToMinutes(endTimeStr);
+
+        maxTotalMinutes = Math.max(maxTotalMinutes, endMinutes);
+
+        if (startMinutes > currentTotalMinutes){
+            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, startMinutes);
+        }
+
+        if (endMinutes > currentTotalMinutes){
+            nextEventTotalMinutes = Math.min(nextEventTotalMinutes, endMinutes);
+        }
+    });
+    if (nextEventTotalMinutes === Infinity){
+        const finalCheckTime = maxTotalMinutes + 30;
+        if(currentTotalMinutes < finalCheckTime){
+            nextEventTotalMinutes = finalCheckTime;
+        } else {return -1;}
+    }
+    const delayMinutes = nextEventTotalMinutes - currentTotalMinutes;
+    let delay = delayMinutes * 60 * 1000;
+    const secondsToWait = 60 - now.getSeconds();
+    delay -= now.getMilliseconds();
+    delay += secondsToWait * 1000;
+    if(delay <2000){delay=2000;}
+    return delay;
+}
+
+function TimeNow (lessonList){
+    const entries = contentRoutine.querySelectorAll('.routime-entry');
+    entries.forEach(entry => {
+        entry.classList.remove('current', 'passed');
+        entry.querySelector('.status-icon').classList.remove('current', 'passed');
+    });
+
+    const maxTime = lessonList.length > 0 ? lessonList[lessonList.length - 1].Time.split('-')[1] : null;
+    let maxTotalMinutes = maxTime ? maxTime.split(':').map(Number).reduce((h, m) => h * 60 + m) : null;
+    
+    entries.forEach((entryArticle, index) => {
+        const item = lessonList[index];
+        const statusIcon = entryArticle.querySelector('.status-icon');
+        const [startTime, endTime] = item.Time.split('-');
+
+        const now = new Data();
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const [startHours, startMinutes] = startTime.split(':').map(Number);
+        const [endHours, endMinutes] = endTime.split(':').map(Number);
+        const nextStartTime = (index + 1 < lessonList.length) ? lessonList[index + 1].Time.split('-')[0] : null;
+
+        const currentTotalMinutes = currentHours * 60 + currentMinutes;
+        const startTotalMinutes = startHours * 60 + startMinutes;
+        const endTotalMinutes = endHours * 60 + endMinutes;
+
+        let nextTotalMinutes = nextStartTime ? nextStartTime.split(':').map(Number).reduce((h, m) => h * 60 + m) : null;
+
+        //Зараз триває урок
+        if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes) {
+            entryArticle.classList.add('current');
+            statusIcon.classList.add('current');
+        }
+
+        //Перерва
+        else if (nextTotalMinutes !== null && currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes) {
+            entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
+        }
+
+        //Пройшов/давно пройшов
+        else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30)) {
+            entryArticle.classList.add('passed');
+            statusIcon.classList.add('passed');
+        }
+    });
+}
+function updateLessonStatus(routineLesson) {
+    TimeNow(routineLesson);
+    setStatusLesson(routineLesson);
+}
+function setStatusLesson(routineLesson) {
+    if(lessonUpdateTime) {
+        //clearTimeout(lessonUpdateTime);
+        lessonUpdateTime = null;
+    }
+
+    const delay = getNextUpdateTime(routineLesson);
+    if (delay === -1) { console.log("Уроки закінчилися"); return;}
+    const delayMinutes = delay / (60 * 1000);
+    console.log(`Наступне оновлення через ${delayMinutes.toFixed(2)} хвилин`);
+    lessonUpdateTime = setTimeout(() => {
+        updateLessonStatus(routineLesson);
+    }, delay );
+}
 
 export const handleDayClick = (selectedDay, currentDay, routine) => {
     console.log(`Ви обрали день: ${selectedDay}`);
@@ -77,9 +183,12 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
     const filteredLessons = routine.filter(item => item.Day === selectedDay);
     filteredLessons.sort((a, b) => Number(a.LessonNumber) - Number(b.LessonNumber));
 
-    const inputReset = document.getElementById('reset');
-    inputReset.checked = true;
     console.log(filteredLessons);
+
+    if(lessonUpdateTime) {
+        //clearTimeout(lessonUpdateTime);
+        lessonUpdateTime = null;
+    }
 
     contentRoutine.innerHTML = '';
 
@@ -135,9 +244,14 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
 
             contentRoutine.appendChild(entryArticle);
         });
+        if (selectedDay === currentDay){
+            TimeNow(filteredLessons);
+            setStatusLesson(filteredLessons);
+        }
     } else {
         contentRoutine.textContent = "На цей день уроки відсутні";
     }
+
     selectTextDay.textContent = selectedDay;
     inputReset.checked = true;
 };
