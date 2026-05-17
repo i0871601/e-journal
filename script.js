@@ -81,6 +81,8 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
     inputReset.checked = true;
     console.log(filteredLessons);
 
+    contentRoutine.innerHTML = '';
+
     if (filteredLessons && filteredLessons.length > 0) {
         filteredLessons.forEach(el =>{
             const entryArticle = document.createElement('article');
