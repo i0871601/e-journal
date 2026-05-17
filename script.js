@@ -118,11 +118,11 @@ function TimeNow (lessonList){
         }
 
         //Пройшов/давно пройшов
-        else if (currentTotalMinutes >= endTotalMinutes) {
+        else if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < (endTotalMinutes + 30)) {
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
 
-            if (index === lessonList.length -1 && currentTotalMinutes < endTotalMinutes + 30) {
+            if (index === lessonList.length - 1 && currentTotalMinutes < endTotalMinutes + 30) {
                 delayMinutes = (endTotalMinutes + 30) - currentTotalMinutes;
             }
         }
