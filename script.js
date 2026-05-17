@@ -12,6 +12,11 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
+const daysListContainer = document.getElementById('DaysList');
+const contentRoutine = document.getElementById('text-container-routine');
+const selectTextDay = document.getElementById('select-text-day');
+const inputReset = document.getElementById('reset');
+
 export const createListDay = (routine) => {
     if (!Array.isArray(routine) || routine.length === 0) {
         return [];
@@ -27,7 +32,6 @@ export const createListDay = (routine) => {
 
 export const renderDaysList = (listDay) => {
     //Знаходимо список ul на сторінці
-    const daysListContainer = document.getElementById('DaysList');
     
     if (!daysListContainer) {
         console.error("Елемент <ul id='DaysList'> не знайдено на сторінці!");
@@ -77,12 +81,68 @@ export const handleDayClick = (selectedDay, currentDay, routine) => {
     inputReset.checked = true;
     console.log(filteredLessons);
 
+    if (filteredLessons && filteredLessons.length > 0) {
+        filteredLessons.forEach(el =>{
+            const entryArticle = document.createElement('article');
+            entryArticle.classList.add('routime-entry');
+
+            const statusIcon = document.createElement('span');
+            statusIcon.classList.add('status-icon');
+
+            const timeContainer = document.createElement('div');
+            timeContainer.classList.add('time-lesson');
+
+            const [startTime, endTime] = el.Time.split('-');
+            
+            const startTimeElement = document.createElement('p');
+            startTimeElement.classList.add('start-time-lesson');
+            startTimeElement.textContent = startTime;
+
+            const endTimeElement = document.createElement('p');
+            endTimeElement.classList.add('end-time-lesson');
+            endTimeElement.textContent = endTime;
+
+            timeContainer.appendChild(startTimeElement);
+            timeContainer.appendChild(endTimeElement);
+
+            const infoBlock = document.createElement('div');
+            infoBlock.classList.add('info-block-lesson');
+
+            const titleElement = document.createElement('h3');
+            titleElement.classList.add('title-lesson');
+            titleElement.textContent = el.Subject;
+
+            const tagElement = document.createElement('p');
+            tagElement.classList.add('tag');
+            tagElement.textContent = el.Class;
+
+            infoBlock.appendChild(titleElement);
+            infoBlock.appendChild(tagElement);
+
+            if(el.Link) {
+                const linkElement = document.createElement('a');
+                linkElement.href = el.Link;
+                linkElement.target = '_blank';
+                linkElement.textContent = 'Посилання';
+                infoBlock.appendChild(linkElement);
+            }
+
+            entryArticle.appendChild(statusIcon);
+            entryArticle.appendChild(timeContainer);
+            entryArticle.appendChild(infoBlock);
+
+            contentRoutine.appendChild(entryArticle);
+        });
+    } else {
+        contentRoutine.textContent = "На цей день уроки відсутні";
+    }
+    selectTextDay.textContent = selectedDay;
+    inputReset.checked = true;
 };
 
 
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
-    const daysListContainer = document.getElementById('DaysList');
 
     let routine = [];
     if (userData && userData.data.routine) {
