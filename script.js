@@ -118,7 +118,7 @@ function TimeNow (lessonList){
         }
 
         //Пройшов/давно пройшов
-        else if (currentTotalMinutes >= endTotalMinutes && (maxTotalMinutes === null || currentTotalMinutes <= maxTotalMinutes + 30)) {
+        else if (currentTotalMinutes >= endTotalMinutes) {
             entryArticle.classList.add('passed');
             statusIcon.classList.add('passed');
 
