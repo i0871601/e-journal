@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderDaysList(listDay);
 
-    const currentDay = 'Понеділок';//getCurrentDay(listDay);
+    const currentDay = getCurrentDay(listDay);
     console.log(currentDay);
 
     if (currentDay != null) {
