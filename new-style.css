@@ -189,7 +189,7 @@ body {
 
 
 #wrapper-text-container {
-    margin-bottom: calc(2rem + 2.1vh - 5vmin);
+    margin: 2rem 0;
     overflow-y: auto;
 }
 
@@ -202,9 +202,9 @@ body {
     background-color: var(--text-color);
     border-radius: 25px;
 }
-
-#wrapper-text-container::-webkit-scrollbar-thumb:focus, #wrapper-text-container::-webkit-scrollbar-thumb:active{
-    background-color: var(--color-accent);
+#wrapper-text-container::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0.5rem 0.5rem;
 }
 
 #text-container-routine {
