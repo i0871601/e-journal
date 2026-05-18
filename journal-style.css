@@ -67,12 +67,12 @@
 }
 
 @media (orientation: portrait) {
-    .select-nav:first-child label {
-        width: clamp(120px, 30vmin, 300px);
+    #Subject label {
+        width: clamp(100px, 35vmin, 300px);
     }
 
-    .select-nav:not(:first-child) label {
-        width: clamp(80px, 30vmin, 300px);
+    #Class label {
+        width: clamp(100px, 25vmin, 300px);
     }
 }
 
