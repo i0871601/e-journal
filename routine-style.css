@@ -391,6 +391,8 @@ body {
         background-color: var(--fon-color-2);
     }
 }
+
+
 @font-face{
     font-family: 'Aristotelica';
     src: url('./fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');

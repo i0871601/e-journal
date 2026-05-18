@@ -18,4 +18,31 @@
     margin-left: 1rem;
     /* background-color: var(--fon-color-2); */
     box-shadow: 0 0 1.5vmin var(--color1);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+
+#table {
+    background-color: var(--fon-color-2);
+    width: 100%;
+    height: calc(100% - 11%);
+}
+
+
+
+@font-face{
+    font-family: 'Aristotelica';
+    src: url('./fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'SourceSans3';
+    src: url('./fonts/SourceSans3-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
