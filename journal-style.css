@@ -43,10 +43,10 @@
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 #Subject label {
-    width: clamp(100px, 35vmin, 300px);
+    width: clamp(100px, 30vmin, 300px);
 }
 #Class label {
-    width: clamp(100px, 25vmin, 280px);
+    width: clamp(80px, 23vmin, 280px);
 }
 .select-nav .select-on {
     color: var(--color2);
@@ -72,13 +72,7 @@
 }
 
 @media (orientation: portrait) {
-    #Subject label {
-        width: clamp(100px, 35vmin, 300px);
-    }
 
-    #Class label {
-        width: clamp(80px, 25vmin, 300px);
-    }
 }
 
 @font-face{
