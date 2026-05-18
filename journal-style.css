@@ -34,7 +34,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 0.07rem - 0.3vmin);
     width: clamp(100px, 30vmin, 300px);
     border: 0.07rem solid transparent;
     border-radius: 0.5rem;
