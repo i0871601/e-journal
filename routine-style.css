@@ -52,7 +52,7 @@ body {
     left: 0;
     top: 0;
     z-index: 7;
-    padding: 0 0.9rem 0 0.9rem;
+    padding: 0 0.7rem 0 0.7rem;
     border-radius: 0 1rem 1rem 0;
     background-color: var(--color1);
     display: flex;
@@ -116,18 +116,18 @@ body {
 }
 
 #CustomSelectTime label{
+    width: calc(100% - 3.2vmin);
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 0.07rem solid transparent;
     border-radius: 1rem;
-    padding: 0.3vmin 0 0.3vmin 1.5vmin;
+    padding: 0.3vmin 1.5vmin;
     font-family: 'SourceSans3';
     cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 #CustomSelectTime .select-on {
-    width: calc(100% - 1.7vmin);
     box-shadow: 0 0 0.5vmin var(--text-color);
     color: var(--text-color);
 }
@@ -135,9 +135,7 @@ body {
     position: absolute;
     visibility: hidden;
     top: 0;
-    width: calc(100% - 1.7vmin);
     box-shadow: 0 0 0.5vmin transparent;
-    padding: 0.3vmin 0 0.3vmin 1.5vmin;
     color: transparent;
 }
 
