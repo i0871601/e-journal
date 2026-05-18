@@ -66,7 +66,15 @@
     height: calc(100% - 11%);
 }
 
+@media (orientation: portrait) {
+    .select-nav:first-child label {
+        width: clamp(120px, 30vmin, 300px);
+    }
 
+    .select-nav:not(:first-child) label {
+        width: clamp(80px, 30vmin, 300px);
+    }
+}
 
 @font-face{
     font-family: 'Aristotelica';
