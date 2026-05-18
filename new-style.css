@@ -261,7 +261,7 @@ body {
   border: 0;
 }
 
-.routime-entry.current .time-lesson p, .routime-entry.current .info-block-lesson h3, .routime-entry.current .info-blockinfo-block-lesson p, .routime-entry.current .info-block-lesson a{
+.routime-entry.current .time-lesson p, .routime-entry.current .info-block-lesson h3, .routime-entry.current .info-block-lesson p, .routime-entry.current .info-block-lesson a{
   color: var(--fon-color-2);
 }
 .routime-entry.passed .time-lesson p, .routime-entry.passed .info-block-lesson h3, .routime-entry.passed .info-block-lesson p, .routime-entry.passed .info-block-lesson a{
