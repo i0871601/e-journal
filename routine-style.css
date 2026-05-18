@@ -370,7 +370,7 @@ body {
         width: 100%;
     }
     #timeTable:checked ~ #time-button {
-        left: calc(100% - 3.4rem);
+        left: calc(100% - 3.39rem);
         z-index: 11;
         transform: scaleX(-1);
         background-color: var(--fon-color-2);
