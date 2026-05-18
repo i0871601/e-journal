@@ -14,6 +14,7 @@
 
 #SelectNav {
     width: calc(100% - 1rem);
+    min-width: 50vh;
     height: 11%;
     margin-left: 1rem;
     /* background-color: var(--fon-color-2); */
@@ -34,8 +35,8 @@
     justify-content: space-between;
     align-items: center;
     border: 0.07rem transparent;
-    border-radius: 1rem;
-    padding: 0.3vmin 0 0.3vmin 1.5vmin;
+    border-radius: 0.5rem;
+    padding: 10% 0 10% 1.5vmin;
     font-family: 'SourceSans3';
     cursor: pointer;
     background-color: var(--text-color);
@@ -49,7 +50,8 @@
     top: 0;
     width: 100%;
     box-shadow: 0 0 0.5vmin transparent;
-    padding: 0.3vmin 0 0.3vmin 1.5vmin;
+    border-radius: 0.5rem;
+    padding: 10% 0 10% 1.5vmin;
     color: transparent;
 }
 
@@ -59,7 +61,7 @@
 
 
 #table {
-    background-color: var(--fon-color-2);
+    /*background-color: var(--fon-color-2);*/
     width: 100%;
     height: calc(100% - 11%);
 }
