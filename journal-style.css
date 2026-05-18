@@ -25,21 +25,20 @@
     align-items: center;
 }
 .select-nav {
-    margin: 0 2.5% 0 2.5%;
+    margin: 0 3% 3% 0;
     position: relative;
 }
 
 .select-nav .select-on {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border: 0.07rem transparent;
+    width: clamp(100px, 30vmin, 300px);
+    border: 0.07rem solid transparent;
     border-radius: 0.3rem;
-    padding: 5% 0 5% 1.5vmin;
-    font-family: 'SourceSans3';
-    cursor: pointer;
-    background-color: var(--text-color);
+    box-shadow: 0 0 0.5vmin transparent;
+    padding: 0.3vmin 1.5vmin;
     color: var(--color2);
+    background-color: var(--text-color);
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
@@ -47,10 +46,10 @@
     position: absolute;
     visibility: hidden;
     top: 0;
-    width: calc(100% - 1.5vmin);
+    width: clamp(100px, 30vmin, 300px);
     box-shadow: 0 0 0.5vmin transparent;
     border-radius: 0.3rem;
-    padding: 5% 0 5% 1.5vmin;
+    padding: 0.3vmin 1.5vmin;
     color: transparent;
 }
 
