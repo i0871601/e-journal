@@ -142,11 +142,7 @@ function TimeNow (lessonList){
 
     if (delayMinutes === null) return -1;
 
-    let delay = delayMinutes * 60 * 1000;
-    const secondsToWait = 60 - now.getSeconds();
-    delay = delay - now.getMilliseconds() + (secondsToWait * 1000);
-
-    return Math.max(delay, 2000);
+    return delayMinutes * 60 * 1000;
 };
 
 function setStatusLesson(routineLesson) {
