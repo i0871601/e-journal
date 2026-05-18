@@ -126,12 +126,12 @@ body {
     cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
-#CustomSelectTime #select-on {
+#CustomSelectTime .select-on {
     width: calc(100% - 1.7vmin);
     box-shadow: 0 0 0.5vmin var(--text-color);
     color: var(--text-color);
 }
-#CustomSelectTime #select-off {
+#CustomSelectTime .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
