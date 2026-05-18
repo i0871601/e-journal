@@ -35,12 +35,12 @@
     justify-content: space-between;
     align-items: center;
     border: 0.07rem transparent;
-    border-radius: 0.5rem;
-    padding: 10% 0 10% 1.5vmin;
+    border-radius: 0.3rem;
+    padding: 5% 0 5% 1.5vmin;
     font-family: 'SourceSans3';
     cursor: pointer;
     background-color: var(--text-color);
-    color: var(--fon-color-2);
+    color: var(--color2);
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
@@ -48,10 +48,10 @@
     position: absolute;
     visibility: hidden;
     top: 0;
-    width: 100%;
+    width: calc(100% - 1.5vmin);
     box-shadow: 0 0 0.5vmin transparent;
-    border-radius: 0.5rem;
-    padding: 10% 0 10% 1.5vmin;
+    border-radius: 0.3rem;
+    padding: 5% 0 5% 1.5vmin;
     color: transparent;
 }
 
