@@ -37,7 +37,7 @@
     height: 100%;
     width: clamp(100px, 30vmin, 300px);
     border: 0.07rem solid transparent;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin transparent;
     padding: 0.3vmin 1.5vmin;
     cursor: pointer;
