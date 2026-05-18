@@ -72,7 +72,7 @@
     }
 
     #Class label {
-        width: clamp(100px, 25vmin, 300px);
+        width: clamp(80px, 25vmin, 300px);
     }
 }
 
