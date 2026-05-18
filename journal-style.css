@@ -40,6 +40,7 @@
     border-radius: 0.3rem;
     box-shadow: 0 0 0.5vmin transparent;
     padding: 0.3vmin 1.5vmin;
+    cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 .select-nav .select-on {
