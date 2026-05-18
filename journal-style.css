@@ -25,31 +25,32 @@
     align-items: center;
 }
 .select-nav {
-    margin: 0 3% 3% 0;
+    height: 50%;
+    margin: 0 3% 0 0;
     position: relative;
 }
 
-.select-nav .select-on {
+.select-nav label {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 100%;
     width: clamp(100px, 30vmin, 300px);
     border: 0.07rem solid transparent;
     border-radius: 0.3rem;
     box-shadow: 0 0 0.5vmin transparent;
     padding: 0.3vmin 1.5vmin;
+    transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+.select-nav .select-on {
     color: var(--color2);
     background-color: var(--text-color);
-    transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
 .select-nav .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
-    width: clamp(100px, 30vmin, 300px);
-    box-shadow: 0 0 0.5vmin transparent;
-    border-radius: 0.3rem;
-    padding: 0.3vmin 1.5vmin;
     color: transparent;
 }
 
