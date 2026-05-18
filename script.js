@@ -87,46 +87,59 @@ function TimeNow (lessonList){
 
     const now = new Date();
     const currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
+    const StartTime = lessonList[0].Time.split('-')[0];
+    const EndTime = lessonList[lessonList.length - 1].Time.split('-')[1];
+
+    const startLesson = timeToMinutes(StartTime);
+    const endLesson = timeToMinutes(EndTime);
 
     let delayMinutes = null;
+
+    if (currentTotalMinutes < startLesson) {
+        delayMinutes = startLesson - currentTotalMinutes;
+    }
     
-    entries.forEach((entryArticle, index) => {
-        const item = lessonList[index];
-        const statusIcon = entryArticle.querySelector('.status-icon');
-        const [startTimeStr, endTimeStr] = item.Time.split('-');
-
-        const startTotalMinutes = timeToMinutes(startTimeStr);
-        const endTotalMinutes = timeToMinutes(endTimeStr);
-        
-        const nextStartTime = (index + 1 <lessonList.length) ? lessonList[index + 1].Time.split('-')[0] : null;
-        let nextTotalMinutes = nextStartTime ? timeToMinutes(nextStartTime) : null;
-
-        //Зараз триває урок
-        if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes) {
-            entryArticle.classList.add('current');
-            statusIcon.classList.add('current');
-
-            delayMinutes = endTotalMinutes - currentTotalMinutes;
-        }
-
-        //Перерва
-        else if (nextTotalMinutes !== null && currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes) {
-            entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
-
-            delayMinutes = nextTotalMinutes - currentTotalMinutes;
-        }
-
-        //Пройшов/давно пройшов
-        else if (currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < (endTotalMinutes + 30)) {
-            entryArticle.classList.add('passed');
-            statusIcon.classList.add('passed');
-
-            if (index === lessonList.length - 1 && currentTotalMinutes < endTotalMinutes + 30) {
-                delayMinutes = (endTotalMinutes + 30) - currentTotalMinutes;
+    else if (currentTotalMinutes >= startLesson && currentTotalMinutes < endLesson + 30) {
+        entries.forEach((entryArticle, index) => {
+            const item = lessonList[index];
+            const statusIcon = entryArticle.querySelector('.status-icon');
+            const [startTimeStr, endTimeStr] = item.Time.split('-');
+            
+            const startTotalMinutes = timeToMinutes(startTimeStr);
+            const endTotalMinutes = timeToMinutes(endTimeStr);
+            
+            const nextStartTime = (index + 1 <lessonList.length) ? lessonList[index + 1].Time.split('-')[0] : null;
+            let nextTotalMinutes = nextStartTime ? timeToMinutes(nextStartTime) : null;
+            
+            //Зараз триває урок
+            if (currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes) {
+                entryArticle.classList.add('current');
+                statusIcon.classList.add('current');
+                
+                delayMinutes = endTotalMinutes - currentTotalMinutes;
             }
-        }
-    });
+            
+            //Перерва
+            else if (nextTotalMinutes !== null && currentTotalMinutes >= endTotalMinutes && currentTotalMinutes < nextTotalMinutes) {
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+                
+                delayMinutes = nextTotalMinutes - currentTotalMinutes;
+            }
+            
+            //Пройшов
+            else if (currentTotalMinutes >= endTotalMinutes) {
+                entryArticle.classList.add('passed');
+                statusIcon.classList.add('passed');
+
+                //Останій урок
+                if (index === lessonList.length - 1 && currentTotalMinutes < endLesson + 30) {
+                    delayMinutes = (endTotalMinutes + 30) - currentTotalMinutes;
+                }
+            }
+        });
+    }
+
     if (delayMinutes === null) return -1;
 
     let delay = delayMinutes * 60 * 1000;
