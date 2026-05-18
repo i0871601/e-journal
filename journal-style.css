@@ -35,13 +35,18 @@
     justify-content: space-between;
     align-items: center;
     height: calc(100% - 0.07rem - 0.3vmin);
-    width: clamp(100px, 30vmin, 300px);
     border: 0.07rem solid transparent;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin transparent;
     padding: 0.3vmin 1.5vmin;
     cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+#Subject label {
+    width: clamp(100px, 35vmin, 300px);
+}
+#Class label {
+    width: clamp(100px, 25vmin, 280px);
 }
 .select-nav .select-on {
     color: var(--color2);
