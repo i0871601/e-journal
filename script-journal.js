@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         test = userData.data.classes;
         console.log("Ось ваш масив:", test);
 
-        const subjectsCount = Object.keys(test).length;
+        const subjectsCount = test.length;
 
         // Перевіряємо кількість елементів
         if (subjectsCount === 1) {
