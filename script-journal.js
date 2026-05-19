@@ -20,5 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userData && userData.data.classes) {
         test = userData.data.classes;
         console.log("Ось ваш масив:", test);
+
+        const subjectsCount = Object.keys(test).length;
+
+        // Перевіряємо кількість елементів
+        if (subjectsCount === 1) {
+            console.log("У вас один предмет");
+        } else if (subjectsCount > 1) {
+            console.log(`Кількість предметів: ${subjectsCount}`);
+        } else {
+            console.log("Даних про предмети немає");
+        }
     }
+    
 });
