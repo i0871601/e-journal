@@ -29,24 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const subjectsCount = test.length;
 
-        if (subjectsCount > 1) {
-            if (userData.role === 'teacher') {
-                offSubjectOn.checked = false;
-                offClassOn.checked = false;
-
-            }
-            if (userData.role === 'student') {
-                offSubjectOn.checked = false;
-            }
+        if (userData.role === 'teacher' && subjectsCount > 1) {
+            offSubjectOn.checked = false;
+            offClassOn.checked = false;
         }
-        else if (subjectsCount === 1) {
-            if (userData.role === 'teacher') {
-                offClassOn.checked = false;
-
-            }
-            if (userData.role === 'student') {
-                
-            }
+        else if (subjectsCount === 1 || userData.role === 'student') {
+            const buttonVisibility = null;
+            if (subjectsCount === 1) buttonVisibility = 'student' ? [null] : [offClassOn];
+            else buttonVisibility = 'student' ? [offSubjectOn] : [null];
+            buttonVisibility.checked = false;
 
         }
     }
