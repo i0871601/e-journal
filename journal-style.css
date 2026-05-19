@@ -59,7 +59,12 @@
     top: 0;
     color: transparent;
 }
-
+#off-class-on:checked ~ #Class {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
 .content-select-nav {
     
 }

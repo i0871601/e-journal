@@ -12,6 +12,8 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
+const offClassOn = document.getElementById('off-class-on');
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
@@ -23,13 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const subjectsCount = test.length;
 
-        // Перевіряємо кількість елементів
-        if (subjectsCount === 1) {
-            console.log("У вас один предмет");
-        } else if (subjectsCount > 1) {
-            console.log(`Кількість предметів: ${subjectsCount}`);
-        } else {
-            console.log("Даних про предмети немає");
+        if (userData.role === 'teacher') {
+            if (subjectsCount > 1) offClassOn.checked = false;
         }
     }
     
