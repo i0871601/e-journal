@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             offClassOn.checked = false;
         }
         else if (subjectsCount === 1 || userData.role === 'student') {
-            const buttonVisibility = null;
+            let buttonVisibility = null;
             if (subjectsCount === 1) buttonVisibility = (userData.role === 'student') ? [null] : [offClassOn];
             else buttonVisibility = (userData.role === 'student') ? [offSubjectOn] : [null];
             buttonVisibility.checked = false;
