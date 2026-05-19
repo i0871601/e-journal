@@ -59,12 +59,24 @@
     top: 0;
     color: transparent;
 }
+
+
+/*зміна при взаємодії з інпут*/
 #off-class-on:checked ~ #Class {
     display: none;
     visibility: hidden;
     overflow: hidden;
     transition: all 0.5s ease-in-out;
 }
+#off-subject-on:checked ~ #Subject {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+    transform: all 0.5s ease-in-out;
+}
+
+
+
 .content-select-nav {
     
 }

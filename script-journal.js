@@ -12,8 +12,12 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
+const offSubjectOn = document.getElementById('off-subject-on');
 const offClassOn = document.getElementById('off-class-on');
 
+export const fillingSubject = () => {
+
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
@@ -25,8 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const subjectsCount = test.length;
 
-        if (userData.role === 'teacher') {
-            if (subjectsCount > 1) offClassOn.checked = false;
+        if (subjectsCount > 1) {
+            if (userData.role === 'teacher') {
+                offSubjectOn.checked = false;
+                offClassOn.checked = false;
+
+            }
+            if (userData.role === 'student') {
+                offSubjectOn.checked = false;
+            }
+        }
+        else if (subjectsCount === 1) {
+            if (userData.role === 'teacher') {
+                offClassOn.checked = false;
+
+            }
+            if (userData.role === 'student') {
+                
+            }
+
         }
     }
     
