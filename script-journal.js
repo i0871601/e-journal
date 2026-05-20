@@ -14,11 +14,19 @@ window.addEventListener('pageshow', (event) => {
 
 const offSubjectOn = document.getElementById('off-subject-on');
 const offClassOn = document.getElementById('off-class-on');
+const divSubject = document.getElementById('Subject');
+const divClass = document.getElementById('Class');
+
 let electSubject = null;
 let electClass = null;
 
 export const selectSubject = (map) => {
     console.log("Ось ваш масив:", map);
+    map.forEach(el => {
+        const liElement = document.createElement('li');
+        liElement.textContent = el.Subject;
+        divSubject.appendChild(liElement);
+    });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
