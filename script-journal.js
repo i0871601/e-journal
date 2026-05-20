@@ -14,8 +14,8 @@ window.addEventListener('pageshow', (event) => {
 
 const offSubjectOn = document.getElementById('off-subject-on');
 const offClassOn = document.getElementById('off-class-on');
-const divSubject = document.getElementById('Subject');
-const divClass = document.getElementById('Class');
+const divSubject = document.querySelector('#Subject .content-select-nav');
+const divClass = document.querySelector('#Class .content-select-nav');
 
 let electSubject = null;
 let electClass = null;
