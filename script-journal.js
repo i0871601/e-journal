@@ -14,6 +14,8 @@ window.addEventListener('pageshow', (event) => {
 
 const offSubjectOn = document.getElementById('off-subject-on');
 const offClassOn = document.getElementById('off-class-on');
+let electSubject = null;
+let electClass = null;
 
 export const fillingSubject = () => {
 
@@ -23,23 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
 
     let test = [];
+    let buttonVisibility = null;
     if (userData && userData.data.classes) {
         test = userData.data.classes;
         console.log("Ось ваш масив:", test);
 
-        const subjectsCount = test.length;
+        const record = test.length;
 
-        if (userData.role === 'teacher' && subjectsCount > 1) {
-            offSubjectOn.checked = false;
-            offClassOn.checked = false;
+        if (userData.role === 'teacher' && record > 1) {
+            buttonVisibility = [offSubjectOn, offClassOn];
         }
-        else if (subjectsCount === 1 || userData.role === 'student') {
-            let buttonVisibility = null;
-            if (subjectsCount === 1) buttonVisibility = (userData.role === 'student') ? [null] : [offClassOn];
-            else buttonVisibility = (userData.role === 'student') ? offSubjectOn : null;
-            buttonVisibility.checked = false;
+        else if (userData.role === 'teacher' && record === 1) {
+            buttonVisibility = [offClassOn];
+        }
+        else if (userData.role === 'student' && record > 1) {
+            buttonVisibility = [offSubjectOn];
+        }
 
-        }
+        buttonVisibility.forEach(el => {
+            el.checked = false;
+        });
     }
     
 });
