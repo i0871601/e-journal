@@ -17,8 +17,8 @@ const offClassOn = document.getElementById('off-class-on');
 let electSubject = null;
 let electClass = null;
 
-export const fillingSubject = () => {
-
+export const selectSubject = (map) => {
+    console.log("Ось ваш масив:", map);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,24 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let test = [];
     let buttonVisibility = null;
+    let functionMap = null;
     if (userData && userData.data.classes) {
         test = userData.data.classes;
-        console.log("Ось ваш масив:", test);
 
         const record = test.length;
 
         if (userData.role === 'teacher' && record > 1) {
             buttonVisibility = [offSubjectOn, offClassOn];
+            functionMap = [selectSubject(test)]
         }
         else if (userData.role === 'teacher' && record === 1) {
             buttonVisibility = [offClassOn];
+
         }
         else if (userData.role === 'student' && record > 1) {
             buttonVisibility = [offSubjectOn];
+            functionMap = [selectSubject(test)]
         }
 
         buttonVisibility.forEach(el => {
             el.checked = false;
+        });
+
+        functionMap.forEach(el => {
+            el;
         });
     }
     
