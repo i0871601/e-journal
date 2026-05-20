@@ -17,6 +17,7 @@ const offClassOn = document.getElementById('off-class-on');
 const divSubject = document.querySelector('#Subject .content-select-nav');
 const divClass = document.querySelector('#Class .content-select-nav');
 const textSelectSubject = document.getElementById('select-text-subject');
+const textSelectClass = document.getElementById('select-text-class');
 
 let electSubject = null;
 let electClass = null;
@@ -50,7 +51,7 @@ export const handClass = (electSubject, userData, map) => {
     if (currentRecord && currentRecord.Class && userData.classOrsubject) {
         const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
         const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
-        const classes = subjectClasses.filter(className => studentClasses.includes(className));
+        const matchedClass = subjectClasses.find(className => studentClasses.includes(className));
         return classes;
     }
 }
@@ -122,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(clickedLi) {
                 electClass = clickedLi.textContent;
+                textSelectClass.textContent = electClass;
             }
         });
     }
