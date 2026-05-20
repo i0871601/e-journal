@@ -45,6 +45,16 @@ export const handSubjectClick = (subjectValue, test) => {
     }
 };
 
+export const handClass = (electSubject, userData, map) => {
+    const currentRecord = map.find(el => el.Subject === electSubject);
+    if (currentRecord && currentRecord.Class && userData.classOrsubject) {
+        const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
+        const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
+        const classes = subjectClasses.filter(className => studentClasses.includes(className));
+        return classes;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
 
@@ -59,18 +69,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (userData.role === 'teacher' && record > 1) {
             buttonVisibility = [offSubjectOn, offClassOn];
-            functionMap = [() => selectSubject(test)];
+            functionMap = [
+                () => selectSubject(test)
+            ];
 
         }
         else if (userData.role === 'teacher' && record === 1) {
             buttonVisibility = [offClassOn];
             electSubject = test.Subject;
-            functionMap = [() => handSubjectClick(electSubject, test)];
+            functionMap = [
+                () => handSubjectClick(electSubject, test)
+            ];
         }
         else if (userData.role === 'student' && record > 1) {
             buttonVisibility = [offSubjectOn];
-            functionMap = [() => selectSubject(test)];
+            functionMap = [
+                () => selectSubject(test)
+
+            ];
         }
+        
     }
     if(buttonVisibility) {
         buttonVisibility.forEach(el => {
@@ -89,7 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (clickedLi) {
                 electSubject = clickedLi.textContent;
-                handSubjectClick(electSubject, test);
+                if (userData.role === 'teacher') handSubjectClick(electSubject, test);
+                if (userData.role === 'student') {
+                    electClass = handClass(electSubject, userData, test);
+                    console.log(electClass);
+                }
+            }
+        });
+    }
+
+    if (offClassOn.checked === false) {
+        divClass.addEventListener('click', (event) => {
+            const clickedLi = event.target.closest('li');
+
+            if(clickedLi) {
+                electClass = clickedLi.textContent;
             }
         });
     }
