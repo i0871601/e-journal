@@ -22,7 +22,7 @@ let electSubject = null;
 let electClass = null;
 
 export const selectSubject = (map) => {
-    console.log("Ось ваш масив:", map);
+    console.log("Ось масив:", map);
     map.forEach(el => {
         const liElement = document.createElement('li');
         liElement.textContent = el.Subject;
@@ -32,6 +32,17 @@ export const selectSubject = (map) => {
 
 export const handSubjectClick = (subjectValue, test) => {
     textSelectSubject.textContent = subjectValue;
+    divClass.innerHTML = '';
+
+    const currentRecord = test.find(el => el.Subject === subjectValue);
+    if (currentRecord && currentRecord.Class) {
+        const classesArray = currentRecord.Class.split(',').map(c => c.trim());
+        classesArray.forEach(className => {
+            const liElement = document.createElement('li');
+            liElement.textContent = className;
+            divClass.appendChild(liElement);
+        });
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let test = [];
     let buttonVisibility = null;
-    let functionMap = null;
+    let functionMap = [];
+
     if (userData && userData.data.classes) {
         test = userData.data.classes;
 
@@ -47,33 +59,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (userData.role === 'teacher' && record > 1) {
             buttonVisibility = [offSubjectOn, offClassOn];
-            functionMap = [selectSubject(test)];
+            functionMap = [() => selectSubject(test)];
 
         }
         else if (userData.role === 'teacher' && record === 1) {
             buttonVisibility = [offClassOn];
-
+            electSubject = test.Subject;
+            functionMap = [() => handSubjectClick(electSubject, test)];
         }
         else if (userData.role === 'student' && record > 1) {
             buttonVisibility = [offSubjectOn];
-            functionMap = [selectSubject(test)];
+            functionMap = [() => selectSubject(test)];
         }
-
+    }
+    if(buttonVisibility) {
         buttonVisibility.forEach(el => {
             el.checked = false;
         });
-
-        functionMap.forEach(el => {
-            el;
+    }
+    if(functionMap) {
+        functionMap.forEach(fn => {
+            fn();
         });
     }
+
     if (offSubjectOn.checked === false){
         divSubject.addEventListener('click', (event) => { 
             const clickedLi = event.target.closest('li');
             
             if (clickedLi) {
-                const subjectValue = clickedLi.textContent;
-                handSubjectClick(subjectValue, test);
+                electSubject = clickedLi.textContent;
+                handSubjectClick(electSubject, test);
             }
         });
     }
