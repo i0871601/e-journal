@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (userData.role === 'student') {
                     electClass = handClass(electSubject, userData, test);
                     console.log(electClass);
+                    //можливо зразу відправка на воркер щоб, там вже на основі інформації 
                 }
             }
         });
