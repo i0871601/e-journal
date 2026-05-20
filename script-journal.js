@@ -51,7 +51,7 @@ export const handClass = (electSubject, userData, map) => {
     if (currentRecord && currentRecord.Class && userData.classOrsubject) {
         const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
         const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
-        const matchedClass = subjectClasses.find(className => studentClasses.includes(className));
+        const classes = subjectClasses.find(className => studentClasses.includes(className));
         return classes;
     }
 }
