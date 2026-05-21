@@ -60,7 +60,7 @@
 .content-select-nav {
     position: absolute;
     width: 100%;
-    max-height: 12.3rem;
+    max-height: 11.7rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin var(--color1);
     background-color: var(--color1);
@@ -135,7 +135,9 @@
 }
 
 @media (orientation: portrait) {
-
+    #table {
+        background-color: var(--fon-color-2);
+    }
 }
 
 @font-face{
