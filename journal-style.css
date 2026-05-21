@@ -102,6 +102,7 @@
         background-color: var(--color-accent);
         color: var(--color1);
     }
+    
 }
 
 /*зміна при взаємодії з інпут*/
@@ -135,8 +136,12 @@
 }
 
 @media (orientation: portrait) {
-    #table {
-        background-color: var(--fon-color-2);
+    #SelectNav {
+        width: 100%;
+        margin-left: 0;
+    }
+    .select-nav {
+        height: 60%;
     }
 }
 

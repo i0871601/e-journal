@@ -1,12 +1,19 @@
 /*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
 :root {
   --fon-color: #151419;
-  --fon-color-2: #fbfbfb;
+  --content-color: #262626;
+  --additional-color: #1b1b1e;
   --color-accent: #f56e0f;
-  --color1: #1b1b1e;
-  --color2: #262626;
-  --text-color: #878787;
   --color-passed: #447542;
+  --text-color: #878787;
+}
+@media (orientation: portrait) {
+    :root {
+        --fon-color: #fbfbfb;
+        --content-color: #fbfbfb;
+        --additional-color: #fbfbfb;
+        --color-accent: #fbfbfb;
+    }
 }
 body {
     height: 100dvh;
@@ -33,8 +40,7 @@ body {
     border-radius: 1rem;
     overflow: hidden;
     box-sizing: border-box;
-    /*box-shadow: inset 0 0 1.7vmin var(--color1);*/
-    background-color: var(--color2);
+    background-color: var(--content-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,13 +58,13 @@ body {
     z-index: 7;
     padding: 0 0.7rem 0 0.7rem;
     border-radius: 0 1rem 1rem 0;
-    background-color: var(--color1);
+    background-color: var(--additional-color);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 0 1vmin var(--color1);
+    box-shadow: 0 0 1vmin var(--additional-color);
     transition: all 0.5s ease-in-out;
 }
 #time-button::after {
@@ -93,8 +99,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    background-color: var(--color1);
-    box-shadow: 0 0 1.5vmin var(--color1);
+    background-color: var(--additional-color);
+    box-shadow: 0 0 1.5vmin var(--additional-color);
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
@@ -161,7 +167,7 @@ body {
     width: 100%;
     border-radius: 1rem;
     box-shadow: 0 0 0.5vmin var(--text-color);
-    background-color: var(--color1);
+    background-color: var(--additional-color);
     list-style: none;
     padding: 0;
     margin: 1rem 0 0 0;
@@ -226,7 +232,7 @@ body {
 }
 
 .routime-entry.current {
-    background-color: var(--color-accent);
+    background-color: var(--additional-color);
     box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
@@ -241,7 +247,7 @@ body {
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 0.1rem solid var(--text-color);
-    background-color: var(--color1);
+    background-color: var(--additional-color);
 }
 
 .status-icon.current {
@@ -257,7 +263,7 @@ body {
 }
 
 .routime-entry.current .time-lesson p, .routime-entry.current .info-block-lesson h3, .routime-entry.current .info-block-lesson p, .routime-entry.current .info-block-lesson a{
-  color: var(--fon-color-2);
+  color: var(--color-accent);
 }
 .routime-entry.passed .time-lesson p, .routime-entry.passed .info-block-lesson h3, .routime-entry.passed .info-block-lesson p, .routime-entry.passed .info-block-lesson a{
   color: var(--color-passed);
@@ -305,7 +311,7 @@ body {
     
     #DaysList li:hover {
         background-color: var(--color-accent);
-        color: var(--fon-color-2);
+        color: var(--additional-color);
     }
 }
 
@@ -350,15 +356,9 @@ body {
         height: 100%;
         border-radius: 0;
     }
-    #content-timetable {
-        background-color: var(--fon-color-2);
-
-    }
+    
     #contentTime {
         width: clamp(300px, calc(100% - 7rem), 330px);
-    }
-    #DaysList {
-        background-color: var(--fon-color-2);
     }
     #timeTable:checked ~ #content-timetable {
         width: 100%;
@@ -367,11 +367,6 @@ body {
         left: calc(100% - 3.39rem);
         z-index: 11;
         transform: scaleX(-1);
-        background-color: var(--fon-color-2);
-        box-shadow: 0 0 1vmin var(--text-color);
-    }
-    .status-icon { 
-        background-color: var(--fon-color-2);
     }
 }
 
