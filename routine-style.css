@@ -5,7 +5,8 @@
   --additional-color: #1b1b1e;
   --color-shadow: #1b1b1b;
   --color-accent: #f56e0f;
-  --color-current: #1b1b1b;
+  --fon-current: #1b1b1b;
+  --text-current: #f56e0f;
   --color-passed: #447542;
   --text-color: #878787;
 }
@@ -15,8 +16,8 @@
         --content-color: #fbfbfb;
         --additional-color: #fbfbfb;
         --color-shadow: #262626;
-        --color-accent: #f56e0f;
-        --color-current: #f56e0f;
+        --fon-current: #f56e0f;
+        --text-current: #fbfbfb;
     }
 }
 body {
@@ -236,7 +237,7 @@ body {
 }
 
 .routime-entry.current {
-    background-color: var(--color-current);
+    background-color: var(--fon-current);
     box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
@@ -267,7 +268,7 @@ body {
 }
 
 .routime-entry.current .time-lesson p, .routime-entry.current .info-block-lesson h3, .routime-entry.current .info-block-lesson p, .routime-entry.current .info-block-lesson a{
-  color: var(--color-accent);
+  color: var(--text-current);
 }
 .routime-entry.passed .time-lesson p, .routime-entry.passed .info-block-lesson h3, .routime-entry.passed .info-block-lesson p, .routime-entry.passed .info-block-lesson a{
   color: var(--color-passed);
