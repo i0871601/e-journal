@@ -91,10 +91,12 @@
 }
 .content-select-nav li {
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-    margin-right: 0.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     color: var(--color2);
+}
+#Class .content-select-nav li {
+    margin-right: 0.1rem;
 }
 
 /*ефекти наведення*/
