@@ -4,6 +4,7 @@
   --content-color: #262626;
   --additional-color: #1b1b1e;
   --color-accent: #f56e0f;
+  --color-current: #1b1b1b;
   --color-passed: #447542;
   --text-color: #878787;
 }
@@ -13,6 +14,7 @@
         --content-color: #fbfbfb;
         --additional-color: #fbfbfb;
         --color-accent: #fbfbfb;
+        --color-current: #f56e0f;
     }
 }
 body {
@@ -232,7 +234,7 @@ body {
 }
 
 .routime-entry.current {
-    background-color: var(--additional-color);
+    background-color: var(--color-current);
     box-shadow: 0 0 0.5vmin var(--color-accent);
 }
 
