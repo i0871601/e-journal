@@ -14,7 +14,8 @@
         --fon-color: #fbfbfb;
         --content-color: #fbfbfb;
         --additional-color: #fbfbfb;
-        --color-accent: #fbfbfb;
+        --color-shadow: #262626;
+        --color-accent: #f56e0f;
         --color-current: #f56e0f;
     }
 }
