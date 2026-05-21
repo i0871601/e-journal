@@ -22,7 +22,7 @@ export const createListDay = (routine) => {
     if (!Array.isArray(routine) || routine.length === 0) {
         return [];
     }
-    const dayOrder = ["Понеділок", "Вівторок", "Середа", "Четверг", "П'ятниця"];
+    const dayOrder = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"];
 
     //Витягуємо всі дні та прибираємо дублікати
     const uniqueDays = [...new Set(routine.map(item => item.Day))];
