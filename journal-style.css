@@ -63,6 +63,8 @@
 .content-select-nav {
     position: absolute;
     width: 100%;
+    max-height: 12.3rem;
+    overflow-y: auto;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin var(--color1);
     background-color: var(--text-color);
