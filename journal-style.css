@@ -1,20 +1,30 @@
 /*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
 :root {
   --fon-color: #151419;
-  --fon-color-2: #fbfbfb;
+  --content-color: #262626;
+  --additional-color: #1b1b1e;
+  --color-shadow: #1b1b1b;
+  
   --color-accent: #f56e0f;
+  --text-color: #878787;
+
+  --fon-color-2: #fbfbfb;
   --color1: #1b1b1e;
   --color2: #262626;
-  --text-color: #878787;
-  --color-passed: #447542;
+}
+@media (orientation: portrait) {
+    :root {
+        --fon-color: #fbfbfb;
+        --content-color: #fbfbfb;
+        --color-shadow: #878787;
+    }
 }
 
 #SelectNav {
     width: calc(100% - 1rem);
     height: 11%;
     margin-left: 1rem;
-    /* background-color: var(--fon-color-2); */
-    box-shadow: 0 0 1.5vmin var(--color1);
+    box-shadow: 0 0 1.5vmin var(--color-shadow);
     z-index: 4;
     display: flex;
     flex-direction: row;
@@ -47,7 +57,7 @@
 }
 .select-nav .select-on {
     color: var(--text-color);
-    background-color: var(--color1);
+    background-color: var(--additional-color);
 }
 
 .select-nav .select-off {
@@ -62,8 +72,8 @@
     width: 100%;
     max-height: 11.7rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5vmin var(--color1);
-    background-color: var(--color1);
+    box-shadow: 0 0 0.5vmin var(--color-shadow);
+    background-color: var(--additional-color);
     list-style: none;
     padding: 0;
     margin: 1rem 0 0 0;
@@ -100,7 +110,7 @@
 @media (hover: hover) {
     .content-select-nav li:hover {
         background-color: var(--color-accent);
-        color: var(--color1);
+        color: var(--additional-color);
     }
     
 }
