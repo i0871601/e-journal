@@ -25,6 +25,7 @@ const inputReset = document.getElementById('reset');
 
 let electSubject = null;
 let electClass = null;
+let teacherLastName = null;
 
 export const selectSubject = (map) => {
     console.log("Ось масив:", map);
@@ -57,7 +58,7 @@ export const handClass = (electSubject, userData, map) => {
         const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
         const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
         const classes = subjectClasses.find(className => studentClasses.includes(className));
-        return classes, currentRecord.Teacher_LastName;
+        return [classes, currentRecord.Teacher_LastName];
     }
 }
 
