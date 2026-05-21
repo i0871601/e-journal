@@ -100,8 +100,10 @@
 }
 
 /*ефекти наведення*/
-.content-select-nav li:hover {
-    background-color: var(--color-accent);
+@media (hover: hover) {
+    .content-select-nav li:hover {
+        background-color: var(--color-accent);
+    }
 }
 
 /*зміна при взаємодії з інпут*/

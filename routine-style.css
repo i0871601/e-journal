@@ -296,20 +296,21 @@ body {
 }
 
 /*ефекти наведення*/
-#time-icon:hover {
-    transform: scale(1.05);
+@media (hover: hover) {
+    #time-icon:hover {
+        transform: scale(1.05);
+    }
+    
+    #CustomSelectTime .select-on:hover {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0.5vmin var(--color-accent);
+    }
+    
+    #DaysList li:hover {
+        background-color: var(--color-accent);
+        color: var(--fon-color-2);
+    }
 }
-
-#CustomSelectTime .select-on:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0.5vmin var(--color-accent);
-}
-
-#DaysList li:hover {
-    background-color: var(--color-accent);
-    color: var(--fon-color-2);
-}
-
 
 /*зміна при взаємодії з інпут*/
 #timeTable:checked ~ #content-timetable {
