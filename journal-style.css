@@ -90,7 +90,7 @@
   margin: 0.5rem 0.5rem;
 }
 .content-select-nav li {
-    padding: 1vmin 1vmin 1vmin 3.7%;
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     color: var(--color2);

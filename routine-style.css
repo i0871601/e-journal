@@ -162,7 +162,7 @@ body {
 #DaysList {
     position: absolute;
     width: 100%;
-    max-height: 12.3rem;
+    height: 50vmin;
     border-radius: 1rem;
     box-shadow: 0 0 0.5vmin var(--text-color);
     background-color: var(--color1);
@@ -176,7 +176,7 @@ body {
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
 }
 #DaysList li {
-    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    padding: 1vmin 1vmin 1vmin 3.7%;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     color: var(--text-color);
