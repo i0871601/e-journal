@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (offSubjectOn.checked === false){
-        divSubject.addEventListener('click', (event) => { 
+        divSubject.addEventListener('click', async (event) => { 
             const clickedLi = event.target.closest('li');
             
             if (clickedLi) {
@@ -125,16 +125,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         teacherLastName: teacherLastName,
                         className: electClass
                     };
-                    const response = request(payload);
-                    console.log("Відправка до API:", payload);
-                    console.log(`Відповідь:`, response);
+                    
+                    const response = await request(payload);
+                    console.log(`Повна відповідь:`, response);
                 }
             }
         });
     }
 
     if (offClassOn.checked === false) {
-        divClass.addEventListener('click', (event) => {
+        divClass.addEventListener('click', async (event) => {
             const clickedLi = event.target.closest('li');
 
             if(clickedLi) {
@@ -147,9 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     teacherLastName: userData.lastName,
                     className: electClass
                 };
-                const response = request(payload);
-                console.log("Відправка до API:", payload);
-                console.log(`Відповідь:`, response);
+                const response = await request(payload);
+                console.log(`Повна відповідь:`, response);
             }
         });
     }
