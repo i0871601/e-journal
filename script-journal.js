@@ -14,10 +14,14 @@ window.addEventListener('pageshow', (event) => {
 
 const offSubjectOn = document.getElementById('off-subject-on');
 const offClassOn = document.getElementById('off-class-on');
+
 const divSubject = document.querySelector('#Subject .content-select-nav');
 const divClass = document.querySelector('#Class .content-select-nav');
+
 const textSelectSubject = document.getElementById('select-text-subject');
 const textSelectClass = document.getElementById('select-text-class');
+
+const inputReset = document.getElementById('reset');
 
 let electSubject = null;
 let electClass = null;
@@ -44,6 +48,7 @@ export const handSubjectClick = (subjectValue, test) => {
             divClass.appendChild(liElement);
         });
     }
+
 };
 
 export const handClass = (electSubject, userData, map) => {
@@ -108,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (clickedLi) {
                 electSubject = clickedLi.textContent;
+                inputReset.checked = true;
                 if (userData.role === 'teacher') handSubjectClick(electSubject, test);
                 if (userData.role === 'student') {
                     electClass = handClass(electSubject, userData, test);
@@ -125,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(clickedLi) {
                 electClass = clickedLi.textContent;
                 textSelectClass.textContent = electClass;
+                inputReset.checked = true;
             }
         });
     }
