@@ -46,7 +46,7 @@
     width: clamp(130px, 27vmin, 300px);
 }
 #Class label {
-    width: clamp(80px, 20vmin, 280px);
+    width: clamp(90px, 20vmin, 280px);
 }
 .select-nav .select-on {
     color: var(--color2);
