@@ -57,7 +57,7 @@ export const handClass = (electSubject, userData, map) => {
         const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
         const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
         const classes = subjectClasses.find(className => studentClasses.includes(className));
-        return classes;
+        return classes, currentRecord.Teacher_LastName;
     }
 }
 
@@ -117,9 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputReset.checked = true;
                 if (userData.role === 'teacher') handSubjectClick(electSubject, test);
                 if (userData.role === 'student') {
-                    electClass = handClass(electSubject, userData, test);
+                    [electClass, teacherLastName] = handClass(electSubject, userData, test);
                     console.log(electClass);
-                    //можливо зразу відправка на воркер щоб, там вже на основі інформації 
+                    const payload = {
+                        action: 'journal',
+                        subject: electSubject,
+                        teacherLastName: teacherLastName,
+                        className: electClass
+                    };
+                    const response = request(payload);
+                    console.log("Відправка до API:", payload);
+                    console.log(`Відповідь:`, response);
                 }
             }
         });
@@ -133,6 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 electClass = clickedLi.textContent;
                 textSelectClass.textContent = electClass;
                 inputReset.checked = true;
+                const payload = {
+                    action: 'journal',
+                    subject: electSubject,
+                    teacherLastName: userData.lastName,
+                    className: electClass
+                };
+                const response = request(payload);
+                console.log("Відправка до API:", payload);
+                console.log(`Відповідь:`, response);
             }
         });
     }
