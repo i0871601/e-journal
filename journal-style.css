@@ -82,15 +82,16 @@
 }
 
 .content-select-nav::-webkit-scrollbar-thumb{
-    background-color: var(--color1);
+    background-color: var(--color-accent);
     border-radius: 25px;
 }
 .content-select-nav::-webkit-scrollbar-track {
-  background: transparent;
-  margin: 0.5rem 0.5rem;
+    background: transparent;
+    margin: 0.25rem 0.25rem;
 }
 .content-select-nav li {
-    padding: 0.25rem 0.5rem 0.25rem 1rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    margin-right: 0.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     color: var(--color2);
