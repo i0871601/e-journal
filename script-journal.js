@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     className: electClass
                 };
                 const response = await request(payload);
-                console.log(`Повна відповідь:`, response);
+                console.log(`Повна відповідь:`, response.grades);
             }
         });
     }
