@@ -168,7 +168,7 @@ body {
     background-color: var(--color1);
     list-style: none;
     padding: 0;
-    margin: 1.5vmin 0 0 0;
+    margin: 1rem 0 0 0;
     z-index: 100;
     opacity: 0;
     visibility: hidden;

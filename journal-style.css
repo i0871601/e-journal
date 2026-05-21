@@ -60,8 +60,29 @@
     color: transparent;
 }
 
+.content-select-nav {
+    position: absolute;
+    width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5vmin var(--color1);
+    background-color: var(--text-color);
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
+}
+
 
 /*зміна при взаємодії з інпут*/
+#reset:checked ~ #SelectNav #Subject .content-select-nav {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
+}
 #off-class-on:checked ~ #Class {
     display: none;
     visibility: hidden;
@@ -74,12 +95,12 @@
     overflow: hidden;
     transform: all 0.5s ease-in-out;
 }
-
-
-
-.content-select-nav {
-    
+#subject:checked ~ #Subject .content-select-nav {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
+
 
 
 #table {
