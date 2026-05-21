@@ -64,7 +64,6 @@
     position: absolute;
     width: 100%;
     max-height: 12.3rem;
-    overflow-y: auto;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin var(--color1);
     background-color: var(--text-color);
@@ -90,35 +89,26 @@
 }
 
 /*зміна при взаємодії з інпут*/
-#off-class-on:checked ~ #Class {
+#off-class-on:checked ~ #Class,
+#off-subject-on:checked ~ #Subject {
     display: none;
     visibility: hidden;
     overflow: hidden;
     transition: all 0.5s ease-in-out;
 }
-#off-subject-on:checked ~ #Subject {
-    display: none;
-    visibility: hidden;
-    overflow: hidden;
-    transform: all 0.5s ease-in-out;
-}
-#subject:checked ~ #Subject .content-select-nav {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
-}
-#subject:checked ~ #Subject .select-off {
-    visibility: visible;
-}
 
+#subject:checked ~ #Subject .content-select-nav,
 #class:checked ~ #Class .content-select-nav {
     opacity: 1;
     visibility: visible;
+    overflow-y: auto;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
+#subject:checked ~ #Subject .select-off,
 #class:checked ~ #Class .select-off {
     visibility: visible;
 }
+
 
 
 
