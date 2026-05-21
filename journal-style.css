@@ -100,6 +100,9 @@
     visibility: visible;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
+#subject:checked ~ #Subject .select-off {
+    visibility: visible;
+}
 
 
 
