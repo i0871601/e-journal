@@ -99,6 +99,15 @@
     visibility: visible;
 }
 
+#class:checked ~ #Class .content-select-nav {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
+}
+#class:checked ~ #Class .select-off {
+    visibility: visible;
+}
+
 
 
 #table {
