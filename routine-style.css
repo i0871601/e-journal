@@ -10,16 +10,7 @@
   --color-passed: #447542;
   --text-color: #878787;
 }
-@media (orientation: portrait) {
-    :root {
-        --fon-color: #fbfbfb;
-        --content-color: #fbfbfb;
-        --additional-color: #fbfbfb;
-        --color-shadow: #878787;
-        --fon-current: #f56e0f;
-        --text-current: #fbfbfb;
-    }
-}
+
 body {
     height: 100dvh;
     margin: 0;

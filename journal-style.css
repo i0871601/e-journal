@@ -119,7 +119,6 @@
 
 
 #table {
-    /*background-color: var(--fon-color-2);*/
     width: 100%;
     height: calc(100% - 11%);
 }
