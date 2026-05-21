@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (clickedLi) {
                 electSubject = clickedLi.textContent;
+                textSelectClass.textContent = 'Клас';
                 inputReset.checked = true;
                 if (userData.role === 'teacher') handSubjectClick(electSubject, test);
                 if (userData.role === 'student') {
