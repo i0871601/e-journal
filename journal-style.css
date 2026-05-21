@@ -82,6 +82,10 @@
     color: var(--color2);
 }
 
+/*ефекти наведення*/
+.content-select-nav li:hover {
+    background-color: var(--color-accent);
+}
 
 /*зміна при взаємодії з інпут*/
 #off-class-on:checked ~ #Class {
