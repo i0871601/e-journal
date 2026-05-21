@@ -3,6 +3,7 @@
   --fon-color: #151419;
   --content-color: #262626;
   --additional-color: #1b1b1e;
+  --color-shadow: #1b1b1b;
   --color-accent: #f56e0f;
   --color-current: #1b1b1b;
   --color-passed: #447542;
@@ -66,7 +67,7 @@ body {
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 0 1vmin var(--additional-color);
+    box-shadow: 0 0 1vmin var(--color-shadow);
     transition: all 0.5s ease-in-out;
 }
 #time-button::after {
@@ -102,7 +103,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     background-color: var(--additional-color);
-    box-shadow: 0 0 1.5vmin var(--additional-color);
+    box-shadow: 0 0 1.5vmin var(--color-shadow);
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
