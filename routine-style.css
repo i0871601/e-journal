@@ -346,15 +346,6 @@ body {
     padding-bottom: 5%;
 }
 
-#reset:checked ~ #content-timetable #contentTime #CustomSelectTime .select-off {
-    visibility: hidden;
-}
-#reset:checked ~ #content-timetable #contentTime #CustomSelectTime #DaysList {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
-}
-
 
 @media (orientation: portrait) {
     #content-timetable {
