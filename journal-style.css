@@ -112,6 +112,12 @@
     visibility: visible;
 }
 
+#subject:checked ~ #Subject .select-on::after,
+#class:checked ~ #Class .select-on::after {
+    content: '-';
+    padding-bottom: 5%;
+}
+
 
 
 
