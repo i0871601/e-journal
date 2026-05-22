@@ -92,6 +92,7 @@
 
 #table::-webkit-scrollbar{
     width: 0.5rem;
+    height: 0.5rem;
     background-color: transparent;
 }
 
@@ -101,6 +102,7 @@
 }
 #table::-webkit-scrollbar-track {
     background: transparent;
+    margin-top: 2.7125rem;
 }
 
 #contentJournal {
@@ -158,6 +160,7 @@
     z-index: 3;
     text-align: left;
     padding-right: 3rem;
+    padding-left: 0;
 }
 #contentJournal th:not(:first-child),
 #contentJournal td:not(:first-child) {
