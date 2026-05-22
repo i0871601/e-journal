@@ -86,7 +86,7 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         const target = event.target;
         if (target.dataset.lessonIndex !== undefined) {
             const index = Number(target.dataset.lessonIndex);
-            const lessonInfo = mapLessons[index];
+            const lessonInfo = map.lessons[index];
             console.log(lessonInfo);
         }
     });
