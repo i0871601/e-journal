@@ -139,7 +139,7 @@ function TimeNow (lessonList){
     }
 
     if (delayMinutes === null) return -1;
-    if (delayMinutes > 1) delayMinutes = delayMinutes - 1;
+    if (delayMinutes > 1) delayMinutes = delayMinutes - 0.5;
 
     return delayMinutes * 60 * 1000;
 };
