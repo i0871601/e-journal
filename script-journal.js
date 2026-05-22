@@ -1,7 +1,7 @@
 const divJournal = document.getElementById('contentJournal');
 const checkedContentJournal = document.getElementById('off-ContentJournal-on');
 
-function renderTable(mapLessons, mapStudents, mapRecords) {
+function renderTable(mapLessons, mapStudents, mapRecords, role) {
     if (checkedContentJournal.checked) {
         divJournal.innerHTML = '';
         checkedContentJournal.checked = false;
@@ -39,6 +39,17 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
             const score = studentGrades ? studentGrades[lesson.lessonNumber] : '';
             
             scoreCell.textContent = score !== undefined ? score : ''; 
+
+            if (role === 'teacher') {
+                scoreCell.contentEditable = true;
+                scoreCell.dataset.student = el.lastName;
+                scoreCell.dataset.lesson = lesson.lessonNumber;
+                // Тут можна додати твій клас для підсвічування чи стилів редагованої комірки
+                scoreCell.classList.add('editable-cell'); 
+            } else {
+                // Для учнів комірка просто для читання
+                scoreCell.contentEditable = false;
+            }
         });
     });
 
@@ -51,11 +62,38 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
 export function renderLog(role, subject, classes, teacherLastName, map) {
     const mapRecords = {};
     
-    if(map.students.length === 0) { console.log("Не має учнів"); return};
+    if(map.students.length === 0) { 
+        console.log("Не має учнів"); 
+        divJournal.innerHTML = '';
+        checkedContentJournal.checked = false;
+        return
+    }
 
     map.grades.forEach(el => {
         if(!mapRecords[el.lastName]) mapRecords[el.lastName] = {};
         mapRecords[el.lastName][el.lessonNumber] = el.rating
     });
-    renderTable(map.lessons, map.students, mapRecords);
+    renderTable(map.lessons, map.students, mapRecords, role);
+
+    if (role === 'teacher') {
+        divJournal.addEventListener('focus', function(event) {
+            const cell = event.target;
+            if (cell.dataset.student && cell.dataset.lesson) cell._oldValue = cell.textContent.trim();
+        }, true);
+
+        divJournal.addEventListener('blur', function(event) {
+            const cell = event.target;
+            
+            // Перевіряємо, що це саме комірка з атрибутами
+            if (cell.dataset.student && cell.dataset.lesson) {
+                const oldValue = cell._oldValue;
+                const newScore = cell.textContent.trim();
+                
+                // Якщо оцінка та ж сама — просто ігноруємо і нічого не шлемо в D1
+                if (oldValue === newScore) return; 
+                const student = cell.dataset.student;
+                const lesson = cell.dataset.lesson;
+            }
+        }, true);
+}
 };
