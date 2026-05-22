@@ -64,14 +64,10 @@ export const getCurrentDay = (listDay) => {
 
     //Робимо першу літеру великою, щоб збігалося з масивом
     current = current.charAt(0).toUpperCase() + current.slice(1);
-    current = current.replace(/\u2019/g, "'");
-    console.log(current);
+    const collator = new Intl.Collator('uk-UA', {sensitivity: 'base'});
 
-    //Перевіряємо, чи є цей день у списку listDay
-    if (listDay.includes(current)) {
-        return current;
-    }
-    return null;
+    const foundDay = listDay.find(day => collator.compare(day, current) === 0);
+    return foundDay || null;
 };
 
 
