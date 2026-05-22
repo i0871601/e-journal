@@ -132,15 +132,20 @@
 #contentJournal th,
 #contentJournal td {
     padding: 8px;
-    background-color: var(--additional-color);
-    border-radius: 0.8rem;
-    border: 0.3rem solid var(--content-color);
-    
+    white-space: nowrap;
+    overflow: hidden;   
+}
+#contentJournal td[contenteditable="true"] {
+  min-width: 2rem;
 }
 #contentJournal th:not(:first-child),
 #contentJournal td:not(:first-child) {
-    text-align: center;
-    
+    text-align: center;   
+}
+#contentJournal td:not(:first-child){
+    background-color: var(--additional-color);
+    border-radius: 0.8rem;
+    border: 0.3rem solid var(--content-color);
 }
 #contentJournal thead th:not(:first-child) {
     cursor: pointer;
