@@ -85,8 +85,7 @@
 
 #table {
     width: calc(100% - 1rem);
-    /* height: calc(100% - 11%); */
-    height: 50vmin;
+    height: calc(100% - 11%);
     overflow: auto;
     margin: 1rem 0 1rem 1rem;
 }
