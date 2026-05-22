@@ -62,6 +62,19 @@ export const handClass = (electSubject, userData, map) => {
     }
 }
 
+async function formationRequests(role, subject, teacherLastName, classes) {
+    const payload = {
+        action: 'journal',
+        subject: subject,
+        teacherLastName: teacherLastName,
+        className: classes
+    };
+                    
+    const response = await request(payload);
+    console.log(`Повна відповідь:`, response);
+
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const userData = getUserData();
 
@@ -80,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (userData.role === 'teacher' && record === 1) {
             buttonVisibility = [offClassOn];
             electSubject = test.Subject;
+            console.log(electSubject);
             handSubjectClick(electSubject, test);
         }
         else if (userData.role === 'student' && record > 1) {
@@ -95,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (offSubjectOn.checked === false){
-        divSubject.addEventListener('click', async (event) => { 
+        divSubject.addEventListener('click', (event) => { 
             const clickedLi = event.target.closest('li');
             
             if (clickedLi) {
@@ -105,38 +119,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (userData.role === 'teacher') handSubjectClick(electSubject, test);
                 if (userData.role === 'student') {
                     [electClass, teacherLastName] = handClass(electSubject, userData, test);
-                    console.log(electClass);
-                    const payload = {
-                        action: 'journal',
-                        subject: electSubject,
-                        teacherLastName: teacherLastName,
-                        className: electClass
-                    };
-                    
-                    const response = await request(payload);
-                    console.log(`Повна відповідь:`, response);
-                    
+                    formationRequests(userData.role, electSubject, teacherLastName, electClass);                    
                 }
             }
         });
     }
 
     if (offClassOn.checked === false) {
-        divClass.addEventListener('click', async (event) => {
+        divClass.addEventListener('click', (event) => {
             const clickedLi = event.target.closest('li');
 
             if(clickedLi) {
                 electClass = clickedLi.textContent;
                 textSelectClass.textContent = electClass;
                 inputReset.checked = true;
-                const payload = {
-                    action: 'journal',
-                    subject: electSubject,
-                    teacherLastName: userData.lastName,
-                    className: electClass
-                };
-                const response = await request(payload);
-                console.log(`Повна відповідь:`, response.grades);
+                formationRequests(userData.role, electSubject, userData.lastName, electClass);
             }
         });
     }
