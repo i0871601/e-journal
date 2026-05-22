@@ -10,6 +10,15 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
     const studentHeader = document.createElement('th');
     studentHeader.textContent = "Учень";
     headerRow.appendChild(studentHeader);
+
+    /*mapLessons.forEach(lesson => {
+        const th = document.createElement('th');
+        th.textContent = `${lesson.})`;
+        headerRow.appendChild(th);
+    });*/
+    console.log(mapLessons);
+    console.log(mapStudents);
+    console.log(mapRecords);
 };
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
