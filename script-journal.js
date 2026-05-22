@@ -58,7 +58,7 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
 export function renderLog(role, subject, classes, teacherLastName, map) {
     const mapRecords = {};
     
-    if(map.students.length === 0 || mapRecords.length === 0) { 
+    if(map.students.length === 0 || (role === 'student' && map.lessons.length === 0)) { 
         console.log("Не має учнів"); 
         divJournal.innerHTML = '';
         checkedContentJournal.checked = false;
