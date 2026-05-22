@@ -64,6 +64,7 @@ export const getCurrentDay = (listDay) => {
 
     //Робимо першу літеру великою, щоб збігалося з масивом
     current = current.charAt(0).toUpperCase() + current.slice(1);
+    current = current.replace(/\u2019/g, "'");
     console.log(current);
 
     //Перевіряємо, чи є цей день у списку listDay
