@@ -57,17 +57,17 @@ export const getCurrentDay = (listDay) => {
     if (!Array.isArray(listDay) || listDay.length === 0) {
         return null; 
     }
-
-    //Отримуємо поточний день тижня
-    const formatter = new Intl.DateTimeFormat('uk-UA', { weekday: 'long' });
-    console.log(formatter);
-    let current = formatter.format(new Date());
+    const dayOrder = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"];
+    const todayIndex = new Data().getDay(); 
+    
+    let current = dayOrder[todayIndex - 1];
     console.log(current);
 
-    const collator = new Intl.Collator('uk-UA', {sensitivity: 'base'});
-
-    const foundDay = listDay.find(day => collator.compare(day, current) === 0);
-    return foundDay || null;
+    //Перевіряємо, чи є цей день у списку listDay
+    if (listDay.includes(current)) {
+        return current;
+    }
+    return null;
 };
 
 
