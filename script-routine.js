@@ -58,7 +58,7 @@ export const getCurrentDay = (listDay) => {
         return null; 
     }
     const dayOrder = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"];
-    const todayIndex = new Data().getDay(); 
+    const todayIndex = new Date().getDay(); 
     
     let current = dayOrder[todayIndex - 1];
     console.log(current);
