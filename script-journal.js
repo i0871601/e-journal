@@ -16,9 +16,20 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
 
     mapLessons.forEach((lesson, index) => {
         const th = document.createElement('th');
+
         const shortDate = lesson.Date ? lesson.Date.slice(0, 5) : '??.??';
         th.textContent = shortDate;
 
+        //th.textContent = `${lesson.lessonNumber}`;
+        /*if (lesson.Date && lesson.Date.length >= 5) {
+            const day = lesson.Date.slice(0, 2);   // Витягуємо "21"
+            const month = lesson.Date.slice(3, 5); // Витягуємо "05"
+            
+            // Використовуємо innerHTML, щоб браузер зчитав тег <br> як перенос
+            th.innerHTML = `${day}<br><small>${month}</small>`;
+        } else {
+            th.innerHTML = '??<br>??';
+        }*/
         th.dataset.lessonIndex = index;
         headerRow.appendChild(th);
     });
@@ -59,7 +70,7 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
     const mapRecords = {};
     
     if(map.students.length === 0 || (role === 'student' && map.lessons.length === 0)) { 
-        console.log("Не має учнів"); 
+        console.log("Не має учнів/уроків"); 
         divJournal.innerHTML = '';
         checkedContentJournal.checked = false;
         return
