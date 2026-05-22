@@ -108,9 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (offSubjectOn.checked === false){
-        if(offSubjectOn.checked) return;
-
+    if (!offSubjectOn.checked){
         divSubject.addEventListener('click', (event) => { 
             const clickedLi = event.target.closest('li');
             
@@ -127,9 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (offClassOn.checked === false) {
-        if(offClassOn.checked) return;
-
+    if (!offClassOn.checked) {
         divClass.addEventListener('click', (event) => {
             const clickedLi = event.target.closest('li');
 
