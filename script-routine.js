@@ -60,7 +60,9 @@ export const getCurrentDay = (listDay) => {
 
     //Отримуємо поточний день тижня
     const formatter = new Intl.DateTimeFormat('uk-UA', { weekday: 'long' });
+    console.log(formatter);
     let current = formatter.format(new Date());
+    console.log(current);
 
     const collator = new Intl.Collator('uk-UA', {sensitivity: 'base'});
 
