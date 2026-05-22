@@ -16,7 +16,8 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
 
     mapLessons.forEach(lesson => {
         const th = document.createElement('th');
-        th.textContent = `${lesson.lessonNumber}`;
+        const shortDate = lesson.Date ? lesson.Date.slice(0, 5) : '??.??';
+        th.textContent = shortDate;
         headerRow.appendChild(th);
     });
 
