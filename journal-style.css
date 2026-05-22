@@ -101,7 +101,6 @@
 }
 #table::-webkit-scrollbar-track {
     background: transparent;
-    margin: 0.25rem 0.25rem;
 }
 
 #contentJournal {
