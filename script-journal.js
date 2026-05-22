@@ -28,15 +28,12 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
     mapStudents.forEach(student => {
         const row = tbody.insertRow();
         
-        // Перша комірка — ім'я учня
         const nameCell = row.insertCell();
         nameCell.textContent = `${student.lastName}`;
         
-        // Наступні комірки — оцінки під кожен урок із заголовка
         mapLessons.forEach(lesson => {
             const scoreCell = row.insertCell();
             
-            // Просто беремо оцінку з нашої мапи за прізвищем та номером уроку
             const studentGrades = mapRecords[student.lastName];
             const score = studentGrades ? studentGrades[lesson.lessonNumber] : '';
             
@@ -46,10 +43,7 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
                 scoreCell.contentEditable = true;
                 scoreCell.dataset.student = student.lastName;
                 scoreCell.dataset.lesson = lesson.lessonNumber;
-                // Тут можна додати твій клас для підсвічування чи стилів редагованої комірки
-                scoreCell.classList.add('editable-cell'); 
             } else {
-                // Для учнів комірка просто для читання
                 scoreCell.contentEditable = false;
             }
         });
@@ -95,12 +89,10 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         divJournal.addEventListener('blur', function(event) {
             const cell = event.target;
             
-            // Перевіряємо, що це саме комірка з атрибутами
             if (cell.dataset.student && cell.dataset.lesson) {
                 const oldValue = cell._oldValue;
                 const newScore = cell.textContent.trim();
                 
-                // Якщо оцінка та ж сама — просто ігноруємо і нічого не шлемо в D1
                 if (oldValue === newScore) return; 
                 const student = cell.dataset.student;
                 const lesson = cell.dataset.lesson;
