@@ -8,4 +8,5 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         mapRecords[el.lastName][el.lessonNumber] = el.rating
     });
     console.log(mapRecords);
+    //
 };
