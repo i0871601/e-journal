@@ -50,6 +50,8 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
     const mapRecords = {};
+    
+    if(map.students.length === 0) { console.log("Не має учнів"); return};
 
     map.grades.forEach(el => {
         if(!mapRecords[el.lastName]) mapRecords[el.lastName] = {};
