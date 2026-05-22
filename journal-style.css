@@ -149,7 +149,13 @@
     text-align: center;   
 }
 #contentJournal td[contenteditable="true"] {
-  min-width: 2rem;
+    min-width: 2rem;
+    outline: none;
+}
+#contentJournal td[contenteditable="true"]:focus {
+    outline: 0.05rem solid #ff7a00;
+    opacity: 0.8;
+    outline-offset: -0.3rem;
 }
 
 #contentJournal td:not(:first-child){
