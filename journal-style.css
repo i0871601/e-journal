@@ -124,6 +124,10 @@
     top: 0;
     z-index: 4;
 }
+#contentJournal thead th {
+    padding-bottom: 1rem;
+    border-bottom: 0.05rem solid var(--text-color);
+}
 #contentJournal thead th:first-child {
     z-index: 5;
 }
@@ -142,6 +146,7 @@
     left: 0;
     z-index: 3;
     text-align: left;
+    padding-right: 3rem;
 }
 #contentJournal th:not(:first-child),
 #contentJournal td:not(:first-child) {
@@ -149,7 +154,9 @@
 }
 #contentJournal td[contenteditable="true"] {
     min-width: 2rem;
-    outline: none;
+    outline: 0.05rem solid transparent;
+    outline-offset: -0.3rem;
+    transition: outline-color 0.5s ease-in-out;
 }
 #contentJournal td[contenteditable="true"]:focus {
     outline: 0.05rem solid #ff7a00;
