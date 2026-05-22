@@ -57,8 +57,8 @@ export const handClass = (electSubject, userData, map) => {
     if (currentRecord && currentRecord.Class && userData.classOrsubject) {
         const subjectClasses = currentRecord.Class.split(',').map(c => c.trim());
         const studentClasses = userData.classOrsubject.split(',').map(c => c.trim());
-        const classes = subjectClasses.find(className => studentClasses.includes(className));
-        return [classes, currentRecord.Teacher_LastName];
+        electClass = subjectClasses.find(className => studentClasses.includes(className));
+        return currentRecord.Teacher_LastName;
     }
 }
 
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputReset.checked = true;
                 if (userData.role === 'teacher') handSubjectClick(electSubject, test);
                 if (userData.role === 'student') {
-                    [electClass, teacherLastName] = handClass(electSubject, userData, test);
+                    teacherLastName = handClass(electSubject, userData, test);
                     formationRequests(userData.role, electSubject, teacherLastName, electClass);                    
                 }
             }
