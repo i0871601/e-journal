@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!offSubjectOn.checked){
+        console.log("Слухач на предмети");
         divSubject.addEventListener('click', (event) => { 
             const clickedLi = event.target.closest('li');
             
