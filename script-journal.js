@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let test = [];
     let buttonVisibility = null;
-    let functionMap = [];
 
     if (userData && userData.data.classes) {
         test = userData.data.classes;
@@ -76,35 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (userData.role === 'teacher' && record > 1) {
             buttonVisibility = [offSubjectOn, offClassOn];
-            functionMap = [
-                () => selectSubject(test)
-            ];
-
+            selectSubject(test);
         }
         else if (userData.role === 'teacher' && record === 1) {
             buttonVisibility = [offClassOn];
             electSubject = test.Subject;
-            functionMap = [
-                () => handSubjectClick(electSubject, test)
-            ];
+            handSubjectClick(electSubject, test);
         }
         else if (userData.role === 'student' && record > 1) {
             buttonVisibility = [offSubjectOn];
-            functionMap = [
-                () => selectSubject(test)
-
-            ];
+            selectSubject(test);
         }
         
     }
     if(buttonVisibility) {
         buttonVisibility.forEach(el => {
             el.checked = false;
-        });
-    }
-    if(functionMap) {
-        functionMap.forEach(fn => {
-            fn();
         });
     }
 
@@ -129,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     const response = await request(payload);
                     console.log(`Повна відповідь:`, response);
+                    
                 }
             }
         });
