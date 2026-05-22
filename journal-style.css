@@ -124,37 +124,39 @@
     top: 0;
     z-index: 4;
 }
-#contentJournal th:first-child,
-#contentJournal td:first-child {
-    left: 0;
-    z-index: 3;
-}
-#contentJournal th,
-#contentJournal td {
-    padding: 8px;
-    white-space: nowrap;
-    overflow: hidden;   
-}
-#contentJournal td[contenteditable="true"] {
-  min-width: 2rem;
-}
-#contentJournal th:not(:first-child),
-#contentJournal td:not(:first-child) {
-    text-align: center;   
-}
-#contentJournal td:not(:first-child){
-    background-color: var(--additional-color);
-    border-radius: 0.8rem;
-    border: 0.3rem solid var(--content-color);
+#contentJournal thead th:first-child {
+    z-index: 5;
 }
 #contentJournal thead th:not(:first-child) {
     cursor: pointer;
 }
 
-#contentJournal thead th:first-child {
-    text-align: left;
-    z-index: 5;
+#contentJournal th,
+#contentJournal td {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;   
 }
+#contentJournal th:first-child,
+#contentJournal td:first-child {
+    left: 0;
+    z-index: 3;
+    text-align: left;
+}
+#contentJournal th:not(:first-child),
+#contentJournal td:not(:first-child) {
+    text-align: center;   
+}
+#contentJournal td[contenteditable="true"] {
+  min-width: 2rem;
+}
+
+#contentJournal td:not(:first-child){
+    background-color: var(--additional-color);
+    border-radius: 0.8rem;
+    border: 0.3rem solid var(--content-color);
+}
+
 
 /*ефекти наведення*/
 @media (hover: hover) {
