@@ -1,4 +1,12 @@
+const divJournal = document.getElementById('contentJournal');
+const checkedContentJournal = document.getElementById('off-ContentJournal-on');
 
+function renderTable(mapLessons, mapStudents, mapRecords) {
+    checkedContentJournal.checked = true;
+    
+    const thead = divJournal.createTHead();
+    const headerRow = thead.insertRow();
+};
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
     const mapRecords = {};
@@ -7,6 +15,5 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         if(!mapRecords[el.lastName]) mapRecords[el.lastName] = {};
         mapRecords[el.lastName][el.lessonNumber] = el.rating
     });
-    console.log(mapRecords);
-    //
+    renderTable(map.lessons, map.students, mapRecords);
 };
