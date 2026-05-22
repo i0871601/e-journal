@@ -6,6 +6,10 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
     
     const thead = divJournal.createTHead();
     const headerRow = thead.insertRow();
+
+    const studentHeader = document.createElement('th');
+    studentHeader.textContent = "Учень";
+    headerRow.appendChild(studentHeader);
 };
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
