@@ -11,30 +11,30 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
     const headerRow = thead.insertRow();
 
     const studentHeader = document.createElement('th');
-    studentHeader.textContent = "Учень";
+    studentHeader.textContent = "Прізвище";
     headerRow.appendChild(studentHeader);
 
     mapLessons.forEach(lesson => {
         const th = document.createElement('th');
-        th.textContent = `${lesson.lessonNumber})`;
+        th.textContent = `${lesson.lessonNumber}`;
         headerRow.appendChild(th);
     });
 
     const tbody = divJournal.createTBody();
   
-    mapStudents.forEach(el => {
+    mapStudents.forEach(student => {
         const row = tbody.insertRow();
         
         // Перша комірка — ім'я учня
         const nameCell = row.insertCell();
-        nameCell.textContent = el.lastName;
+        nameCell.textContent = `${student.lastName}`;
         
         // Наступні комірки — оцінки під кожен урок із заголовка
         mapLessons.forEach(lesson => {
             const scoreCell = row.insertCell();
             
             // Просто беремо оцінку з нашої мапи за прізвищем та номером уроку
-            const studentGrades = mapRecords[el.lastName];
+            const studentGrades = mapRecords[student.lastName];
             const score = studentGrades ? studentGrades[lesson.lessonNumber] : '';
             
             scoreCell.textContent = score !== undefined ? score : ''; 
