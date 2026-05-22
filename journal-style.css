@@ -85,8 +85,25 @@
 
 #table {
     width: 100%;
-    height: calc(100% - 11%);
+    /*height: calc(100% - 11%);*/
+    height: 50vmin;
+    overflow: auto;
 }
+
+#table::-webkit-scrollbar{
+    width: 0.5rem;
+    background-color: transparent;
+}
+
+#table::-webkit-scrollbar-thumb{
+    background-color: var(--color-accent);
+    border-radius: 25px;
+}
+#table::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0.25rem 0.25rem;
+}
+
 #contentJournal {
     opacity: 0;
     visibility: hidden;
