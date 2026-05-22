@@ -3,12 +3,9 @@ const checkedContentJournal = document.getElementById('off-ContentJournal-on');
 
 function renderTable(mapLessons, mapStudents, mapRecords) {
     if (checkedContentJournal.checked) {
-        setTimeout(() => {
-            checkedContentJournal.checked = false;
-            divJournal.innerHTML = '';
-        }, 1000);
+        divJournal.innerHTML = '';
+        checkedContentJournal.checked = false;
     }
-    checkedContentJournal.checked = true;
     
     const thead = divJournal.createTHead();
     const headerRow = thead.insertRow();
@@ -30,15 +27,15 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
         
         // Перша комірка — ім'я учня
         const nameCell = row.insertCell();
-        nameCell.textContent = mapStudents.lastName;
+        nameCell.textContent = el.lastName;
         
         // Наступні комірки — оцінки під кожен урок із заголовка
         mapLessons.forEach(lesson => {
             const scoreCell = row.insertCell();
             
             // Просто беремо оцінку з нашої мапи за прізвищем та номером уроку
-            const studentGrades = mapRecords[el];
-            const score = studentGrades ? studentGrades[mapLessons.lessonNumber] : '';
+            const studentGrades = mapRecords[el.lastName];
+            const score = studentGrades ? studentGrades[lesson.lessonNumber] : '';
             
             scoreCell.textContent = score !== undefined ? score : ''; 
         });
@@ -47,6 +44,7 @@ function renderTable(mapLessons, mapStudents, mapRecords) {
     console.log(mapLessons);
     console.log(mapStudents);
     console.log(mapRecords);
+    checkedContentJournal.checked = true;
 };
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
