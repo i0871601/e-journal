@@ -124,7 +124,11 @@
     top: 0;
     z-index: 4;
 }
+#contentJournal thead::after {
+    content: '';
+}
 #contentJournal thead th {
+    opacity: 0.5;
     padding-bottom: 1rem;
     border-bottom: 0.05rem solid var(--text-color);
 }
