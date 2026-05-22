@@ -62,8 +62,6 @@ export const getCurrentDay = (listDay) => {
     const formatter = new Intl.DateTimeFormat('uk-UA', { weekday: 'long' });
     let current = formatter.format(new Date());
 
-    //Робимо першу літеру великою, щоб збігалося з масивом
-    current = current.charAt(0).toUpperCase() + current.slice(1);
     const collator = new Intl.Collator('uk-UA', {sensitivity: 'base'});
 
     const foundDay = listDay.find(day => collator.compare(day, current) === 0);
