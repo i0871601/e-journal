@@ -14,10 +14,12 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
     studentHeader.textContent = "Прізвище";
     headerRow.appendChild(studentHeader);
 
-    mapLessons.forEach(lesson => {
+    mapLessons.forEach((lesson, index) => {
         const th = document.createElement('th');
         const shortDate = lesson.Date ? lesson.Date.slice(0, 5) : '??.??';
         th.textContent = shortDate;
+
+        th.dataset.lessonIndex = index;
         headerRow.appendChild(th);
     });
 
@@ -74,6 +76,15 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         mapRecords[el.lastName][el.lessonNumber] = el.rating
     });
     renderTable(map.lessons, map.students, mapRecords, role);
+
+    divJournal.addEventListener('click', function(event) {
+        const target = event.target;
+        if (target.dataset.lessonIndex !== undefined) {
+            const index = Number(target.dataset.lessonIndex);
+            const lessonInfo = mapLessons[index];
+            console.log(lessonInfo);
+        }
+    });
 
     if (role === 'teacher') {
         divJournal.addEventListener('focus', function(event) {
