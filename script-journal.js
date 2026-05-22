@@ -42,7 +42,7 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
 
             if (role === 'teacher') {
                 scoreCell.contentEditable = true;
-                scoreCell.dataset.student = el.lastName;
+                scoreCell.dataset.student = student.lastName;
                 scoreCell.dataset.lesson = lesson.lessonNumber;
                 // Тут можна додати твій клас для підсвічування чи стилів редагованої комірки
                 scoreCell.classList.add('editable-cell'); 
