@@ -160,11 +160,37 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
             }
         });
 
+        //для мобільних пристроїв
+        divJournal.addEventListener('input', function(event) {
+            const cell = event.target;
+            if (!cell.dataset.student || !cell.dataset.lesson) return;
+
+            //Видаляємо пробіл та переноси рядків
+            let text = cell.textContent.replace(/\s+/g, '');
+
+            if (text.length > 2) {
+                text = text.slice(0, 2);
+            }
+
+            // Якщо текст змінився після очищення — оновлюємо комірку і повертаємо курсор
+            if (cell.textContent !== text) {
+                cell.textContent = text;
+
+                const range = document.createRange();
+                const sel = window.getSelection();
+                range.selectNodeContents(cell);
+                range.collapse(false);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        });
+
         divJournal.addEventListener('blur', function(event) {
             const cell = event.target;
             
             if (cell.dataset.student && cell.dataset.lesson) {
                 const oldValue = cell._oldValue;
+                //const newScore = cell.textContent.replace(/\s+/g, '');
                 const newScore = cell.textContent.trim();
                 
                 if (oldValue === newScore) return; 
