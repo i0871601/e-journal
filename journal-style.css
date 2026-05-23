@@ -84,10 +84,10 @@
 
 
 #table {
-    width: calc(100% - 1rem - 5px);
+    width: calc(100% - 1.5rem - 5px);
     height: calc(100% - 11%);
     overflow: auto;
-    margin: 1rem 0 1rem calc(1rem + 5px);
+    margin: 1rem 0 1rem calc(1.5rem + 5px);
 }
 
 #table::-webkit-scrollbar{
