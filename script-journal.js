@@ -170,6 +170,8 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
                 if (oldValue === newScore) return; 
                 const student = cell.dataset.student;
                 const lesson = cell.dataset.lesson;
+
+                console.log(newScore);
             }
         }, true);
 }
