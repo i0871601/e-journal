@@ -108,13 +108,42 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
                 return;
             }
 
-            // Дозволяємо системні клавіші для керування (Backspace, Delete, стрілочки, Tab)
-            const isControlKey = event.key === 'Backspace' || 
-                                 event.key === 'Delete' || 
-                                 event.key.startsWith('Arrow') || 
-                                 event.key === 'Tab';
-
+            const isControlKey = event.key === 'Backspace' || event.key === 'Delete' || event.key === 'Tab';
+                     
             if (isControlKey) return;
+            
+            //Навігація стрілочка між комірками
+            if (event.key.startsWith('Arrow')) {
+                event.preventDefault();
+                
+                const currentCell = cell;
+                const currentRow = currentCell.parentElement;
+                const cellIndex = currentCell.cellIndex;
+                
+                let targetCell = null;
+                
+                if (event.key === 'ArrowRight') targetCell = currentCell.nextElementSibling; // Наступна комірка в цьому ж рядку
+                else if (event.key === 'ArrowLeft') targetCell = currentCell.previousElementSibling; // Попередня комірка в цьому ж рядку
+                else if (event.key === 'ArrowDown') { // Комірка знизу (наступний рядок, той самий стовпчик)
+                    const nextRow = currentRow.nextElementSibling;
+                    if (nextRow) targetCell = nextRow.cells[cellIndex];
+                } else if (event.key === 'ArrowUp') { // Комірка зверху (попередній рядок, той самий стовпчик)
+                    const prevRow = currentRow.previousElementSibling;
+                    if (prevRow) targetCell = prevRow.cells[cellIndex];
+                }
+                
+                // Якщо є куди переходити і ця комірка теж редагується
+                if (targetCell && targetCell.dataset.student) {
+                    targetCell.focus();
+                    // Виділяємо весь текст в новій комірці
+                    const range = document.createRange();
+                    const sel = window.getSelection();
+                    range.selectNodeContents(targetCell);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
+                return;
+            }
 
             //Обмежуємо довжину: якщо вже є 2 символи і виділеного тексту немає — блокуємо введення
             const selectedTextLength = window.getSelection().toString().length;
