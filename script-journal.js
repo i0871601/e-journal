@@ -164,14 +164,10 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         divJournal.addEventListener('input', function(event) {
             const cell = event.target;
             if (!cell.dataset.student || !cell.dataset.lesson) return;
-
             //Видаляємо пробіл та переноси рядків
             let text = cell.textContent.replace(/\s+/g, '');
 
-            if (text.length > 2) {
-                text = text.slice(0, 2);
-            }
-
+            if (text.length > 2) text = text.slice(0, 2);
             // Якщо текст змінився після очищення — оновлюємо комірку і повертаємо курсор
             if (cell.textContent !== text) {
                 cell.textContent = text;
