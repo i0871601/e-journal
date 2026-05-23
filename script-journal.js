@@ -97,6 +97,40 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
             if (cell.dataset.student && cell.dataset.lesson) cell._oldValue = cell.textContent.trim();
         }, true);
 
+        divJournal.addEventListener('keydown', function(event) {
+            const cell = event.target;
+            if (!cell.dataset.student || !cell.dataset.lesson) return;
+            
+            //Заборона Enter
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                cell.blur();
+                return;
+            }
+
+            // Дозволяємо системні клавіші для керування (Backspace, Delete, стрілочки, Tab)
+            const isControlKey = event.key === 'Backspace' || 
+                                 event.key === 'Delete' || 
+                                 event.key.startsWith('Arrow') || 
+                                 event.key === 'Tab';
+
+            if (isControlKey) return;
+
+            //Обмежуємо довжину: якщо вже є 2 символи і виділеного тексту немає — блокуємо введення
+            const selectedTextLength = window.getSelection().toString().length;
+            if (cell.textContent.length >= 2 && selectedTextLength === 0) {
+                event.preventDefault();
+            }
+        });
+
+        // Забороняємо копіювання та вставлення
+        divJournal.addEventListener('paste', function(event) {
+            const cell = event.target;
+            if (cell.dataset.student && cell.dataset.lesson) {
+                event.preventDefault();
+            }
+        });
+
         divJournal.addEventListener('blur', function(event) {
             const cell = event.target;
             
