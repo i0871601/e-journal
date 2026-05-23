@@ -164,7 +164,9 @@
 }
 #contentJournal th:not(:first-child),
 #contentJournal td:not(:first-child) {
-    text-align: center;   
+    text-align: center; 
+    width: 2rem;
+    height: 1.3rem;
 }
 #contentJournal td[contenteditable="true"] {
     min-width: 2rem;
