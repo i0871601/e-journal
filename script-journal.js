@@ -1,3 +1,5 @@
+import { request } from './js/config.js';
+
 const divJournal = document.getElementById('contentJournal');
 const checkedContentJournal = document.getElementById('off-ContentJournal-on');
 
@@ -181,20 +183,38 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
             }
         });
 
-        divJournal.addEventListener('blur', function(event) {
+        divJournal.addEventListener('blur', async function(event) {
             const cell = event.target;
             
             if (cell.dataset.student && cell.dataset.lesson) {
                 const oldValue = cell._oldValue;
-                //const newScore = cell.textContent.replace(/\s+/g, '');
-                const newScore = cell.textContent.trim();
+                //const newRating = cell.textContent.replace(/\s+/g, '');
+                const newRating = cell.textContent.trim();
                 
-                if (oldValue === newScore) return; 
+                if (oldValue === newRating) return; 
                 const student = cell.dataset.student;
                 const lesson = cell.dataset.lesson;
 
-                console.log(newScore);
+                const payload = {
+                    action: 'updateRecord',
+                    numberLesson: lesson,
+                    rating: newRating,
+                    subject: subject,
+                    className: classes,
+                    lastName: student
+                };
+                try {
+                    const response = await request(payload);
+                    console.log("Відповідь сервера:", response);
+                    
+                    cell._oldValue = newRating;
+                    
+                } catch (error) {
+                    console.error("Помилка при збереженні оцінки:", error);
+                    alert("Не вдалося зберегти оцінку. Перевірте з'єднання.");
+                    cell.textContent = oldValue;
+                }
             }
         }, true);
-}
+    }
 };
