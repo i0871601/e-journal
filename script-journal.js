@@ -94,6 +94,7 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
             setTimeout(() => {
                 checkedInfoDiv.checked = true;
                 checkedInfoDiv.disable = false;
+                console.log(lessonInfo);
             }, 1000);
         }
     });
