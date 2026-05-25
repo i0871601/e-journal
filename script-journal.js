@@ -111,7 +111,7 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
 
                 checkedInfoDiv.checked = true;
                 checkedInfoDiv.disable = false;
-            }, 1000);
+            }, 500);
         }
     });
 
