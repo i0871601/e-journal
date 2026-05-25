@@ -187,6 +187,13 @@
 }
 
 
+/*Стилі контейнера під інформацію*/
+#infoDiv {
+    height: 100%;
+    position: absolute;
+    background-color: var(--text-color);
+}
+
 /*ефекти наведення*/
 @media (hover: hover) {
     .content-select-nav li:hover {
@@ -228,6 +235,10 @@
     visibility: visible;
     overflow: visible;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
+}
+
+#checkbox-info-div:checked ~ #infoDiv {
+    
 }
 
 @media (orientation: portrait) {
