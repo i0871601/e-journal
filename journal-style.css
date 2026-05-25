@@ -263,7 +263,7 @@
 }
 
 #info-div:checked ~ #infoDiv {
-    opacity: 0;
+    opacity: 1;
     width: 50%;
     visibility: visible;
 }
