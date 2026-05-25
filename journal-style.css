@@ -189,9 +189,18 @@
 
 /*Стилі контейнера під інформацію*/
 #infoDiv {
-    height: 100%;
+    max-width: 0;
+    width: 50%;
+    height: calc(100% - 10.5%);
+    right: 0;
+    bottom: 0;
     position: absolute;
-    background-color: var(--text-color);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    background-color: var(--additional-color);
+    box-shadow: 0 0 1.5vmin var(--additional-color);
+    clip-path: inset(0 0 0 -1.5vmin);
 }
 
 /*ефекти наведення*/
@@ -237,8 +246,11 @@
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
 
-#checkbox-info-div:checked ~ #infoDiv {
-    
+#info-div:checked ~ #infoDiv {
+    max-width: 50%;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
 }
 
 @media (orientation: portrait) {
