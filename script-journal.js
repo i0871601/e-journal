@@ -2,7 +2,12 @@ import { request } from './js/config.js';
 
 const divJournal = document.getElementById('contentJournal');
 const checkedContentJournal = document.getElementById('off-ContentJournal-on');
+
 const checkedInfoDiv = document.getElementById('info-div');
+
+const dataText = document.querySelector('#infoData .text-info');
+const topicText = document.querySelector('#infoTopic .text-info');
+const homeworkText = document.querySelector('#infoHomework .text-info');
 
 function renderTable(mapLessons, mapStudents, mapRecords, role) {
     if (checkedContentJournal.checked) {
@@ -92,11 +97,20 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
             checkedInfoDiv.disable = true;
 
             setTimeout(() => {
-                checkedInfoDiv.checked = true;
-                checkedInfoDiv.disable = false;
+                dataText.textContent = '';
+                topicText.textContent = '';
+                homeworkText.textContent = '';
+                
                 console.log(lessonInfo.Date);
                 console.log(lessonInfo.Topic);
                 console.log(lessonInfo.homeWork);
+
+                dataText.textContent = lessonInfo.Date;
+                topicText.textContent = lessonInfo.Topic;
+                homeworkText.textContent = lessonInfo.homeWork;
+
+                checkedInfoDiv.checked = true;
+                checkedInfoDiv.disable = false;
             }, 1000);
         }
     });
