@@ -2,6 +2,7 @@ import { request } from './js/config.js';
 
 const divJournal = document.getElementById('contentJournal');
 const checkedContentJournal = document.getElementById('off-ContentJournal-on');
+const checkedInfoDiv = document.getElementById('info-div');
 
 function renderTable(mapLessons, mapStudents, mapRecords, role) {
     if (checkedContentJournal.checked) {
@@ -62,9 +63,6 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
         });
     });
 
-    console.log(mapLessons);
-    console.log(mapStudents);
-    console.log(mapRecords);
     checkedContentJournal.checked = true;
 };
 
@@ -89,7 +87,14 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
         if (target.dataset.lessonIndex !== undefined) {
             const index = Number(target.dataset.lessonIndex);
             const lessonInfo = map.lessons[index];
-            console.log(lessonInfo);
+
+            if (checkedInfoDiv.checked) checkedInfoDiv.checked = false;
+            checkedInfoDiv.disable = true;
+
+            setTimeout(() => {
+                checkedInfoDiv.checked = true;
+                checkedInfoDiv.disable = false;
+            }, 1000);
         }
     });
 
