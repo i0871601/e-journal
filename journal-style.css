@@ -217,6 +217,7 @@
 }
 #textInfoLesson {
     width: calc(100% - 5rem);
+    height: calc(100% - 5rem);
     transition: opacity 0.1s ease-in-out;
     transition-delay: 0s;
 }
@@ -227,30 +228,50 @@
     justify-content: space-between;
     align-items: center;
 }
-#infoData p {
-    margin: 0;
-    color: var(--color-accent);
+#infoTopic {
+    margin: 1rem 0;
 }
-#infoData p:first-child {
+
+#textInfoLesson div p  {
+    margin: 0;
     color: var(--text-color);
 }
 
-#infoTopic p{
-    margin: 0;
-    color: var(--color-accent);
-}
-#infoTopic p:first-child {
-    color: var(--text-color);
+#textInfoLesson .title {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
 }
 
-#infoHomework p {
-    margin: 0;
-    color: var(--color-accent);
+#textInfoLesson .text-info {
+    width: 100%;
+    overflow: hidden;
+    white-space: normal;
+    hyphens: auto;
+    font-size: 1rem;
 }
 
-#infoHomework p:first-child {
-    color: var(--text-color);
+#textInfoLesson .title, #infoHomework a {
+    color: var(--text-current);
 }
+
+#infoTopic .text-info {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  width: calc(100% - 0.5rem);
+}
+
+#infoHomework .text-info{
+  text-overflow: unset;
+}
+
+#infoHomework .link-info {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 /*ефекти наведення*/
 @media (hover: hover) {
     .content-select-nav li:hover {
