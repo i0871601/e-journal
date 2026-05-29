@@ -216,10 +216,41 @@
     transition: background-color 0.5s ease-in-out;
 }
 #textInfoLesson {
+    width: calc(100% - 5rem);
     transition: opacity 0.1s ease-in-out;
     transition-delay: 0s;
 }
 
+#infoData {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#infoData p {
+    margin: 0;
+    color: var(--color-accent);
+}
+#infoData p:first-child {
+    color: var(--text-color);
+}
+
+#infoTopic p{
+    margin: 0;
+    color: var(--color-accent);
+}
+#infoTopic p:first-child {
+    color: var(--text-color);
+}
+
+#infoHomework p {
+    margin: 0;
+    color: var(--color-accent);
+}
+
+#infoHomework p:first-child {
+    color: var(--text-color);
+}
 /*ефекти наведення*/
 @media (hover: hover) {
     .content-select-nav li:hover {
