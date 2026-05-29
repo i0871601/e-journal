@@ -238,12 +238,10 @@
 }
 
 #textInfoLesson .title {
-    margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
 
 #textInfoLesson .text-info {
-    width: 100%;
     overflow: hidden;
     white-space: normal;
     hyphens: auto;
