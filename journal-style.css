@@ -315,6 +315,10 @@
         background-color: var(--color-accent);
         color: var(--fon-color-2);
     }
+
+    #button-off-infoLesson {
+        background-color: var(--color-accent);
+    }
     
 }
 
