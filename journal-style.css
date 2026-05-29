@@ -262,12 +262,14 @@
 
 #infoHomework .text-info{
   text-overflow: unset;
+  
 }
 
 #infoHomework .link-info {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /*ефекти наведення*/
