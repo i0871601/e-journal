@@ -36,7 +36,7 @@
 }
 .select-nav .select-on {
     color: var(--text-color);
-    background-color: var(--additional-color);
+    background-color: var(--fon-color-2);
 }
 
 .select-nav .select-off {
@@ -52,7 +52,7 @@
     max-height: 11.7rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5vmin var(--color-shadow);
-    background-color: var(--additional-color);
+    background-color: var(--fon-color-2);
     list-style: none;
     padding: 0;
     margin: 1rem 0 0 0;
@@ -120,7 +120,7 @@
 #contentJournal th:first-child, 
 #contentJournal td:first-child {
     position: sticky;
-    background-color: var(--content-color);
+    background-color: var(--fon-color-1);
 }
 #contentJournal thead {
     top: 0;
@@ -175,15 +175,15 @@
     transition: outline-color 0.5s ease-in-out;
 }
 #contentJournal td[contenteditable="true"]:focus {
-    outline: 0.05rem solid #ff7a00;
+    outline: 0.05rem solid var(--color-accent);
     opacity: 0.8;
     outline-offset: -0.3rem;
 }
 
 #contentJournal td:not(:first-child){
-    background-color: var(--additional-color);
+    background-color: var(--fon-color-2);
     border-radius: 0.8rem;
-    border: 0.3rem solid var(--content-color);
+    border: 0.3rem solid var(--fon-color-1);
 }
 
 
@@ -199,8 +199,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--additional-color);
-    box-shadow: 0 0 1.5vmin var(--additional-color);
+    background-color: var(--fon-color-2);
+    box-shadow: 0 0 1.5vmin var(--fon-color-2);
     transition: width 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
@@ -255,7 +255,7 @@
 @media (hover: hover) {
     .content-select-nav li:hover {
         background-color: var(--color-accent);
-        color: var(--additional-color);
+        color: var(--fon-color-2);
     }
     
 }
