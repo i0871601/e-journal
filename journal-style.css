@@ -195,6 +195,7 @@
     right: 0;
     bottom: 0;
     position: absolute;
+    z-index: 4;
     visibility: hidden;
     display: flex;
     align-items: center;
@@ -222,14 +223,33 @@
     width: 1rem;
     height: 0.3rem;
     border-radius: 1rem;
-    margin-right: 0.5rem;
+    margin-right: 0.55rem;
     background-color: var(--fon-color-1);
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    position: relative;
 }
 #arrow::after {
     content: '';
+    width: 70%;
+    height: 100%;
+    border-radius: 1rem;
+    position: absolute;
+    transform: rotate(45deg);
+    background-color: var(--fon-color-1);
+    top: -0.25rem;
 }
 #arrow::before {
     content: '';
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    border-radius: 1rem;
+    position: absolute;
+    transform: rotate(-45deg);
+    background-color: var(--fon-color-1);
+    bottom: -0.25rem;
 }
 
 #textInfoLesson {
