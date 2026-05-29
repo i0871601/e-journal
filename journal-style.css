@@ -230,26 +230,21 @@
     flex-direction: row;
     position: relative;
 }
-#arrow::after {
+#arrow::after, #arrow::before {
     content: '';
     width: 70%;
     height: 100%;
     border-radius: 1rem;
     position: absolute;
-    transform: rotate(45deg);
     background-color: var(--fon-color-1);
-    top: -0.25rem;
+}
+#arrow::after {
+    transform: rotate(45deg);
+    top: -0.2rem;
 }
 #arrow::before {
-    content: '';
-    width: 70%;
-    height: 100%;
-    position: absolute;
-    border-radius: 1rem;
-    position: absolute;
     transform: rotate(-45deg);
-    background-color: var(--fon-color-1);
-    bottom: -0.25rem;
+    bottom: -0.2rem;
 }
 
 #textInfoLesson {
