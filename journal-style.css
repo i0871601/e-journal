@@ -311,7 +311,7 @@
         color: var(--fon-color-2);
     }
 
-    #button-off-infoLesson {
+    #button-off-infoLesson:hover {
         background-color: var(--color-accent);
     }
     
