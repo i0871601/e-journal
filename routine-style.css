@@ -59,7 +59,7 @@ body {
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 0 1vmin var(--color-shadow);
+    box-shadow: 0 0 0.3rem var(--color-shadow);
     transition: all 0.5s ease-in-out;
 }
 #time-button::after {
@@ -95,7 +95,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     background-color: var(--fon-color-2);
-    box-shadow: 0 0 1.5vmin var(--color-shadow);
+    box-shadow: 0 0 0.3rem var(--color-shadow);
     transition: width 0.5s ease-in-out;
 }
 #contentTime {
@@ -127,14 +127,14 @@ body {
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 #CustomSelectTime .select-on {
-    box-shadow: 0 0 0.3vmin var(--text-color);
+    box-shadow: 0 0 0.1rem var(--text-color);
     color: var(--text-color);
 }
 #CustomSelectTime .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
-    box-shadow: 0 0 0.3vmin transparent;
+    box-shadow: 0 0 0.1rem transparent;
     color: transparent;
 }
 
@@ -161,7 +161,7 @@ body {
     position: absolute;
     width: 100%;
     border-radius: 1rem;
-    box-shadow: 0 0 0.3vmin var(--text-color);
+    box-shadow: 0 0 0.1rem var(--text-color);
     background-color: var(--fon-color-2);
     list-style: none;
     padding: 0;
@@ -173,7 +173,7 @@ body {
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
 }
 #DaysList li {
-    padding: 1vmin 1vmin 1vmin 3.7%;
+    padding: 0.37rem 0.37rem 0.37rem 3.7%;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     color: var(--text-color);
@@ -223,16 +223,16 @@ body {
     margin: 0.5vmin 0 2.1vh 5%;
     gap: 5%;
     border-radius: 1rem;
-    box-shadow: 0 0 0.3vmin var(--text-color);
+    box-shadow: 0 0 0.1rem var(--text-color);
 }
 
 .routime-entry.current {
     background-color: var(--fon-color-2);
-    box-shadow: 0 0 0.3vmin var(--color-accent);
+    box-shadow: 0 0 0.1rem var(--color-accent);
 }
 
 .routime-entry.passed {
-    box-shadow: 0 0 0.3vmin var(--color-passed);
+    box-shadow: 0 0 0.1rem var(--color-passed);
 }
 
 .status-icon {
@@ -301,7 +301,7 @@ body {
     
     #CustomSelectTime .select-on:hover {
         border-color: var(--color-accent);
-        box-shadow: 0 0 0.3vmin var(--color-accent);
+        box-shadow: 0 0 0.1rem var(--color-accent);
     }
     
     #DaysList li:hover {
@@ -332,7 +332,7 @@ body {
 }
 #time:checked ~ .select-on {
     border-color: var(--color-accent);
-    box-shadow: 0 0 0.3vmin var(--color-accent);
+    box-shadow: 0 0 0.1rem var(--color-accent);
 }
 #time:checked ~ #DaysList {
     opacity: 1;

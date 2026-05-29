@@ -3,7 +3,7 @@
     width: calc(100% - 1rem);
     height: 11%;
     margin-left: 1rem;
-    box-shadow: 0 0 1.5vmin var(--color-shadow);
+    box-shadow: 0 0 0.3rem var(--color-shadow);
     z-index: 4;
     display: flex;
     flex-direction: row;
@@ -23,7 +23,7 @@
     height: calc(100% - 0.07rem - 0.3vmin);
     border: 0.07rem solid transparent;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5vmin transparent;
+    box-shadow: 0 0 0.3rem transparent;
     padding: 0.3vmin 1.5vmin;
     cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
@@ -51,7 +51,7 @@
     width: 100%;
     max-height: 11.7rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5vmin var(--color-shadow);
+    box-shadow: 0 0 0.3rem var(--color-shadow);
     background-color: var(--fon-color-2);
     list-style: none;
     padding: 0;
@@ -191,7 +191,7 @@
 #infoDiv {
     width: 0;
     height: calc(100% - 10.5%);
-    clip-path: inset(0 0 0 -1.5vmin);
+    clip-path: inset(0 0 0 -0.3rem);
     right: 0;
     bottom: 0;
     position: absolute;
@@ -200,7 +200,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--fon-color-2);
-    box-shadow: 0 0 1.5vmin var(--fon-color-2);
+    box-shadow: 0 0 0.3rem var(--fon-color-2);
     transition: width 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
