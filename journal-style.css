@@ -353,7 +353,7 @@
 
 #info-div:checked ~ #infoDiv {
     opacity: 1;
-    width: 50%;
+    width: 30%;
     visibility: visible;
 }
 #info-div:checked ~ #infoDiv #textInfoLesson {
