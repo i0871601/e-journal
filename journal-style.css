@@ -334,11 +334,16 @@
 #button-add-lesson label {
     width: 50%;
     height: 100%;
-    background-color: var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+#button-on-add-lesson {
+    background-color: var(--text-color);
+}
+#button-off-add-lesson {
+    background-color: var(--color-accent);
 }
 
 #addlesson {
