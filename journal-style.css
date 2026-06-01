@@ -88,6 +88,8 @@
     height: calc(100% - 11%);
     overflow: auto;
     margin: 1rem 0 1rem calc(1.5rem + 5px);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
 #table::-webkit-scrollbar{
@@ -340,6 +342,14 @@
     justify-content: center;
     cursor: pointer;
 }
+
+#addlesson {
+    margin-left: 0.05rem;
+}
+#offlesson {
+    margin-right: 0.05rem;
+}
+
 #addlesson::after {
     content: '';
     width: 100%;
@@ -348,9 +358,6 @@
     border-radius: 1rem;
     background-color: var(--fon-color-1);
     transform: rotate(90deg);
-}
-#offlesson::after {
-    content: '';
 }
 
 /*ефекти наведення*/
@@ -415,7 +422,10 @@
     width: 70%;
 }
 #add-lesson:checked ~ #AddLesson #button-add-lesson {
-    clip-path: inset(0 2rem 0 0);
+    clip-path: inset(0 0 0 2rem);
+}
+#add-lesson:checked ~ #table {
+    opacity: 0.5;
 }
 
 @media (orientation: portrait) {
