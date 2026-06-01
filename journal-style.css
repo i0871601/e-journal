@@ -422,7 +422,7 @@
 }
 
 #add-lesson:checked ~ #AddLesson {
-    width: 70%;
+    width: 50%;
     right: 0;
 }
 #add-lesson:checked ~ #AddLesson #button-add-lesson {
