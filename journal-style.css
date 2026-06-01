@@ -425,6 +425,7 @@
 }
 #add-lesson:checked ~ #table #contentJournal{
     opacity: 0.5;
+    pointer-events: none;
 }
 
 @media (orientation: portrait) {
