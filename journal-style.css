@@ -219,16 +219,18 @@
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
-#arrow {
+.arrow {
     width: 1rem;
     height: 0.3rem;
     border-radius: 1rem;
-    margin-right: 0.55rem;
     background-color: var(--fon-color-1);
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
     position: relative;
+}
+#arrow {
+    margin-right: 0.55rem;
 }
 #arrow::after, #arrow::before {
     content: '';
@@ -329,10 +331,20 @@
     align-items: center;
     overflow: hidden;
 }
-#button-on-add-lesson {
+#button-add-lesson label {
     width: 50%;
     height: 100%;
+    margin-left: 0.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+}
+#addlesson::after {
+    content: '';
+}
+#offlesson::after {
+    content: '';
 }
 
 /*ефекти наведення*/
