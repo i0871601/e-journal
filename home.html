@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home</title>
-        <link rel="stylesheet" href="./schedule-style.css">
+        <link rel="stylesheet" href="./time-style.css">
         <link rel="stylesheet" href="./menu-style.css">
         <link rel="stylesheet" href="./journal-style.css">
         <link rel="stylesheet" href="./info-style.css">
@@ -16,31 +16,39 @@
         <input type="checkbox" id="loading" class="input">
 
         <main id="Journal">
-            <input type="checkbox" id="timeTable" class="input">
             <input type="radio" name="trigger" id="reset" class="input" checked>
+
+            <input type="checkbox" id="time" class="input">
+
             <input type="radio" name="trigger" id="info-div" class="input">
             <input type="radio" name="trigger" id="add-lesson" class="input">
-            <label for="timeTable" id="time-button">
+
+            <!--кнопка розкладу-->
+            <label for="time" id="time-button">
                 <div id="time-icon"></div>
             </label>
-            <div id="content-timetable">
-                <div id="contentTime">
-                    <div id="CustomSelectTime">
-                        <input type="radio" name="trigger" id="time" class="input">
-                        <label for="time" class="select-on">
+            <!--Контейнер розкладу-->
+            <div id="frame-timetable">
+                <div id="content-time">
+                    <div id="custom-select-time">
+                        <input type="radio" name="trigger" id="input-time" class="input">
+                        <label for="input-time" class="select-on">
                             <p id="select-text-day" class="first-option">Виберіть день уроків</p>
                             <span class="select-arrow"></span>
                         </label>
                         <label for="reset" class="select-off">
                             <p class="first-option">закрити</p>
                         </label>
+
                         <ul id="DaysList"></ul>
                     </div>
+
                     <div id="wrapper-text-container">
-                        <div id="text-container-routine"></div>
+                        <div id="text-container"></div>
                     </div>
                 </div>
             </div>
+            
             <nav id="SelectNav">
                 <input type="radio" name="trigger" id="subject" class="input">
                 <input type="radio" name="trigger" id="class" class="input">

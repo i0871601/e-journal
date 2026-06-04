@@ -50,7 +50,7 @@ body {
     height: 11%;
     left: 0;
     top: 0;
-    z-index: 7;
+    z-index: 11;
     padding: 0 0.7rem 0 0.7rem;
     border-radius: 0 1rem 1rem 0;
     background-color: var(--fon-color-2);
@@ -62,6 +62,7 @@ body {
     box-shadow: 0 0 0.3rem var(--color-shadow);
     transition: all 0.5s ease-in-out;
 }
+
 #time-button::after {
     content: "";
     position: absolute;
@@ -84,10 +85,10 @@ body {
 }
 
 /*Контейнером змісту*/
-#content-timetable {
+#frame-timetable {
     position: absolute;
     left: 0;
-    z-index: 5;
+    z-index: 7;
     width: 0;
     height: 100.5%;
     display: flex;
@@ -98,7 +99,8 @@ body {
     box-shadow: 0 0 0.3rem var(--color-shadow);
     transition: width 0.5s ease-in-out;
 }
-#contentTime {
+
+#content-time {
     width: clamp(300px, 85%, 330px);
     height: calc(100% - 12%);
     visibility: hidden;
@@ -110,11 +112,11 @@ body {
     transition-delay: 0s;
 }
 
-#CustomSelectTime {
+#custom-select-time {
     position: relative;
 }
 
-#CustomSelectTime label{
+#custom-select-time label{
     width: calc(100% - 3.2vmin);
     display: flex;
     justify-content: space-between;
@@ -126,11 +128,11 @@ body {
     cursor: pointer;
     transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
-#CustomSelectTime .select-on {
+#custom-select-time .select-on {
     box-shadow: 0 0 0.1rem var(--text-color);
     color: var(--text-color);
 }
-#CustomSelectTime .select-off {
+#custom-select-time .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
@@ -198,13 +200,13 @@ body {
   margin: 0.5rem 0.5rem;
 }
 
-#text-container-routine {
+#text-container {
     position: relative;
     padding-left: 7%;
     padding-right: 3%;
 }
 
-#text-container-routine::before {
+#text-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -299,7 +301,7 @@ body {
         transform: scale(1.05);
     }
     
-    #CustomSelectTime .select-on:hover {
+    #custom-select-time .select-on:hover {
         border-color: var(--color-accent);
         box-shadow: 0 0 0.1rem var(--color-accent);
     }
@@ -315,31 +317,36 @@ body {
     width: clamp(330px, 50vmin, 400px);
 }
 
-#timeTable:checked ~ #time-button {
+#time:checked ~ #time-button {
     left: clamp(330px, 50vmin, 400px);
 }
 
-#timeTable:checked ~ #content-timetable #contentTime {
+#time:checked ~ #frame-timetable #content-time {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
     transition: visibility 0.3s ease-in-out, opacity 0.5s ease-in-out;
     transition-delay: 0.5s;
 }
+#time:checked ~ #table #contentJournal {
+    opacity: 0.7;
+    pointer-events: none;
+    filter: blur(0.05rem);
+}
 
-#time:checked ~ .select-off {
+#input-time:checked ~ .select-off {
     visibility: visible;
 }
-#time:checked ~ .select-on {
+#input-time:checked ~ .select-on {
     border-color: var(--color-accent);
     box-shadow: 0 0 0.1rem var(--color-accent);
 }
-#time:checked ~ #DaysList {
+#input-time:checked ~ #DaysList {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
-#time:checked ~ .select-on .select-arrow::after {
+#input-time:checked ~ .select-on .select-arrow::after {
     content: '-';
     padding-bottom: 5%;
 }
@@ -352,15 +359,14 @@ body {
         border-radius: 0;
     }
     
-    #contentTime {
+    #content-time {
         width: clamp(300px, calc(100% - 7rem), 330px);
     }
-    #timeTable:checked ~ #content-timetable {
+    #time:checked ~ #frame-timetable {
         width: 100%;
     }
-    #timeTable:checked ~ #time-button {
+    #time:checked ~ #time-button {
         left: calc(100% - 3.39rem);
-        z-index: 11;
         transform: scaleX(-1);
     }
 }

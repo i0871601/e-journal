@@ -13,7 +13,7 @@ window.addEventListener('pageshow', (event) => {
 });
 
 const daysListContainer = document.getElementById('DaysList');
-const contentRoutine = document.getElementById('text-container-routine');
+const contentRoutine = document.getElementById('text-container');
 const selectTextDay = document.getElementById('select-text-day');
 const inputReset = document.getElementById('reset');
 let lessonUpdateTime = null;
