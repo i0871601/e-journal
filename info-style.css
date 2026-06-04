@@ -1,0 +1,118 @@
+/*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
+#infoDiv {
+    width: 0;
+    height: calc(100% - 10.5%);
+    clip-path: inset(0 0 0 -0.3rem);
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 4;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--fon-color-2);
+    box-shadow: 0 0 0.3rem var(--fon-color-2);
+    transition: width 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#button-off-infoLesson {
+    position: absolute;
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+    background-color: var(--text-color);
+    border-radius: 3rem;
+    clip-path: inset(0 0 0 2rem);
+    left: -2rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+.arrow {
+    width: 1rem;
+    height: 0.3rem;
+    border-radius: 1rem;
+    background-color: var(--fon-color-1);
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    position: relative;
+}
+#arrow {
+    margin-right: 0.55rem;
+}
+#arrow::after, #arrow::before {
+    content: '';
+    width: 70%;
+    height: 100%;
+    border-radius: 1rem;
+    position: absolute;
+    background-color: var(--fon-color-1);
+}
+#arrow::after {
+    transform: rotate(45deg);
+    top: -0.2rem;
+}
+#arrow::before {
+    transform: rotate(-45deg);
+    bottom: -0.2rem;
+}
+
+#textInfoLesson {
+    width: calc(100% - 5rem);
+    height: calc(100% - 5rem);
+    transition: opacity 0.1s ease-in-out;
+    transition-delay: 0s;
+}
+
+#infoData {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#infoTopic {
+    margin: 1rem 0;
+}
+
+#textInfoLesson div p  {
+    margin: 0;
+    color: var(--text-color);
+}
+
+#textInfoLesson .title {
+    font-size: 1.1rem;
+}
+
+#textInfoLesson .text-info {
+    overflow: hidden;
+    white-space: normal;
+    hyphens: auto;
+    font-size: 1rem;
+}
+
+#textInfoLesson .title, #infoHomework a {
+    color: var(--text-current);
+}
+
+#infoTopic .text-info {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  width: calc(100% - 0.5rem);
+}
+
+#infoHomework .text-info{
+  text-overflow: unset;
+  
+}
+
+#infoHomework .link-info {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

@@ -1,0 +1,83 @@
+/*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
+#SelectNav {
+    width: calc(100% - 1rem);
+    height: 11%;
+    margin-left: 1rem;
+    box-shadow: 0 0 0.3rem var(--color-shadow);
+    z-index: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.select-nav {
+    height: 50%;
+    margin: 0 3% 0 0;
+    position: relative;
+}
+
+.select-nav label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100% - 0.07rem - 0.3vmin);
+    border: 0.07rem solid transparent;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.3rem transparent;
+    padding: 0.3vmin 1.5vmin;
+    cursor: pointer;
+    transition: box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+#Subject label {
+    width: clamp(130px, 27vmin, 300px);
+}
+#Class label {
+    width: clamp(90px, 20vmin, 280px);
+}
+.select-nav .select-on {
+    color: var(--text-color);
+    background-color: var(--fon-color-2);
+}
+
+.select-nav .select-off {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    color: transparent;
+}
+
+.content-select-nav {
+    position: absolute;
+    width: 100%;
+    max-height: 11.7rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.3rem var(--color-shadow);
+    background-color: var(--fon-color-2);
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
+}
+.content-select-nav::-webkit-scrollbar{
+    width: 0.5rem;
+    background-color: transparent;
+}
+
+.content-select-nav::-webkit-scrollbar-thumb{
+    background-color: var(--color-accent);
+    border-radius: 25px;
+}
+.content-select-nav::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0.25rem 0.25rem;
+}
+.content-select-nav li {
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
