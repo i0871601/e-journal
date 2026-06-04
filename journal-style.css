@@ -347,10 +347,10 @@
 }
 
 #addlesson {
-    margin-left: 0.05rem;
+    margin-left: 0.3rem;
 }
 #offlesson {
-    margin-right: 0.05rem;
+    margin-right: 0.15rem;
 }
 
 #addlesson::after {
