@@ -48,42 +48,51 @@
                     </div>
                 </div>
             </div>
-            
-            <nav id="SelectNav">
-                <input type="radio" name="trigger" id="subject" class="input">
-                <input type="radio" name="trigger" id="class" class="input">
-                <input type="checkbox" id="off-class-on" class="input" checked> 
-                <input type="checkbox" id="off-subject-on" class="input" checked> 
+            <!--Контейнер для стрічки навігації-->
+            <nav id="main-bar">
+                <input type="checkbox" id="off-on-class" class="input" checked> 
+                <input type="checkbox" id="off-on-subject" class="input" checked>
 
-                <div id="Subject" class="select-nav">
+                <input type="radio" name="trigger" id="subject" class="input">
+                <input type="radio" name="trigger" id="class" class="input"> 
+
+                <!--Кнопка вибору предмета-->
+                <div id="Subject" class="select">
+                    <!--Сама кнопка-->
                     <label for="subject" class="select-on">
                         <p id="select-text-subject" class="first-option">Предмет</p>
                         <span class="select-arrow"></span>
                     </label>
+                    <!--Кнопка закриття-->
                     <label for="reset" class="select-off">
                         <p class="first-option">закрити</p>
                     </label>
-                    <ul class="content-select-nav">
-                        
-                    </ul>
+                    <!--Вікно з предметами-->
+                    <ul class="content-select"></ul>
                 </div>
-                <div id="Class" class="select-nav">
+                <!--Кнопка вибору класу-->
+                <div id="Class" class="select">
+                    <!--Сама кнопка-->
                     <label for="class" class="select-on">
                         <p id="select-text-class" class="first-option">Клас</p>
                         <span class="select-arrow"></span>
                     </label>
+                    <!--Кнопка закриття-->
                     <label for="reset" class="select-off">
                         <p class="first-option">закрити</p>
                     </label>
-                    <ul class="content-select-nav">
-                        
-                    </ul>
+                     <!--Вікно з класами-->
+                    <ul class="content-select"></ul>
                 </div>
             </nav>
+
+            <!--Контейнер журналу-->
             <div id="table">
-                <input type="checkbox" id="off-ContentJournal-on" class="input">
-                <table id="contentJournal"></table>
+                <input type="checkbox" id="off-on-journal" class="input">
+                <table id="content-journal"></table>
             </div>
+
+            <!--Блок інформаці про урок-->
             <div id="infoDiv">
                 <label for="reset" id="button-off-infoLesson">
                     <span id="arrow" class="arrow"></span>

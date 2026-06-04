@@ -1,5 +1,5 @@
 /*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
-#SelectNav {
+#main-bar {
     width: calc(100% - 1rem);
     height: 11%;
     margin-left: 1rem;
@@ -10,13 +10,13 @@
     justify-content: flex-end;
     align-items: center;
 }
-.select-nav {
+.select {
     height: 50%;
     margin: 0 3% 0 0;
     position: relative;
 }
 
-.select-nav label {
+.select label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,19 +34,19 @@
 #Class label {
     width: clamp(90px, 20vmin, 280px);
 }
-.select-nav .select-on {
+.select .select-on {
     color: var(--text-color);
     background-color: var(--fon-color-2);
 }
 
-.select-nav .select-off {
+.select .select-off {
     position: absolute;
     visibility: hidden;
     top: 0;
     color: transparent;
 }
 
-.content-select-nav {
+.content-select {
     position: absolute;
     width: 100%;
     max-height: 11.7rem;
@@ -62,22 +62,67 @@
     overflow: hidden;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0.6s;
 }
-.content-select-nav::-webkit-scrollbar{
+.content-select::-webkit-scrollbar{
     width: 0.5rem;
     background-color: transparent;
 }
 
-.content-select-nav::-webkit-scrollbar-thumb{
+.content-select::-webkit-scrollbar-thumb{
     background-color: var(--color-accent);
     border-radius: 25px;
 }
-.content-select-nav::-webkit-scrollbar-track {
+.content-select::-webkit-scrollbar-track {
     background: transparent;
     margin: 0.25rem 0.25rem;
 }
-.content-select-nav li {
+.content-select li {
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
     cursor: pointer;
     color: var(--text-color);
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+/*ефекти наведення*/
+@media (hover: hover) {
+    .content-select li:hover {
+        background-color: var(--color-accent);
+        color: var(--fon-color-2);
+    }
+}
+
+/*зміна при взаємодії з інпут*/
+#off-on-class:checked ~ #Class,
+#off-on-subject:checked ~ #Subject {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+#subject:checked ~ #Subject .content-select,
+#class:checked ~ #Class .content-select {
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+    transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
+}
+
+#subject:checked ~ #Subject .select-off,
+#class:checked ~ #Class .select-off {
+    visibility: visible;
+}
+
+#subject:checked ~ #Subject .select-on .select-arrow::after,
+#class:checked ~ #Class .select-on .select-arrow::after {
+    content: '-';
+    padding-bottom: 5%;
+}
+
+@media (orientation: portrait) {
+    #main-bar {
+        width: 100%;
+        margin-left: 0;
+    }
+    .select {
+        height: 60%;
+    }
 }

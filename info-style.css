@@ -116,3 +116,22 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+#info-div:checked ~ #infoDiv {
+    opacity: 1;
+    width: 35%;
+    visibility: visible;
+}
+#info-div:checked ~ #infoDiv #textInfoLesson {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    transition-delay: 0.5s;
+}
+
+/*ефекти наведення*/
+@media (hover: hover) {
+    #button-off-infoLesson:hover {
+        background-color: var(--color-accent);
+    }
+    
+}

@@ -13,11 +13,11 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
-const offSubjectOn = document.getElementById('off-subject-on');
-const offClassOn = document.getElementById('off-class-on');
+const offSubjectOn = document.getElementById('off-on-subject');
+const offClassOn = document.getElementById('off-on-class');
 
-const divSubject = document.querySelector('#Subject .content-select-nav');
-const divClass = document.querySelector('#Class .content-select-nav');
+const divSubject = document.querySelector('#Subject .content-select');
+const divClass = document.querySelector('#Class .content-select');
 
 const textSelectSubject = document.getElementById('select-text-subject');
 const textSelectClass = document.getElementById('select-text-class');

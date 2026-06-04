@@ -55,3 +55,14 @@
     background-color: var(--fon-color-1);
     transform: rotate(90deg);
 }
+#add-lesson:checked ~ #AddLesson {
+    width: 50%;
+    right: 0;
+}
+#add-lesson:checked ~ #AddLesson #button-add-lesson {
+    clip-path: inset(0 0 0 2rem);
+}
+#add-lesson:checked ~ #table #contentJournal{
+    opacity: 0.5;
+    pointer-events: none;
+}
