@@ -313,7 +313,7 @@ body {
 }
 
 /*зміна при взаємодії з інпут*/
-#timeTable:checked ~ #content-timetable {
+#timeTable:checked ~ #frame-timetable {
     width: clamp(330px, 50vmin, 400px);
 }
 
