@@ -1,7 +1,7 @@
 import { request } from './js/config.js';
 
-const divJournal = document.getElementById('contentJournal');
-const checkedContentJournal = document.getElementById('off-ContentJournal-on');
+const divJournal = document.getElementById('content-journal');
+const checkedContentJournal = document.getElementById('off-on-journal');
 
 const checkedInfoDiv = document.getElementById('info-div');
 
