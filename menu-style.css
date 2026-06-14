@@ -1,8 +1,7 @@
 /*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
 #main-bar {
-    width: calc(100% - 1rem);
+    width: 100%;
     height: 11%;
-    margin-left: 1rem;
     box-shadow: 0 0 0.3rem var(--color-shadow);
     z-index: 4;
     display: flex;
