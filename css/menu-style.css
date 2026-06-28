@@ -96,21 +96,21 @@
     transition: all 0.5s ease-in-out;
 }
 
-#subject:checked ~ #Subject .content-select,
-#class:checked ~ #Class .content-select {
+#subject:checked ~ #main-bar #Subject .content-select,
+#class:checked ~ #main-bar #Class .content-select {
     opacity: 1;
     visibility: visible;
     overflow-y: auto;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
 
-#subject:checked ~ #Subject .select-off,
-#class:checked ~ #Class .select-off {
+#subject:checked ~ #main-bar #Subject .select-off,
+#class:checked ~ #main-bar #Class .select-off {
     visibility: visible;
 }
 
-#subject:checked ~ #Subject .select-on .select-arrow::after,
-#class:checked ~ #Class .select-on .select-arrow::after {
+#subject:checked ~ #main-bar #Subject .select-on .select-arrow::after,
+#class:checked ~ #main-bar #Class .select-on .select-arrow::after {
     content: '-';
     padding-bottom: 5%;
 }

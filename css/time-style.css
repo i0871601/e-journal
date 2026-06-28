@@ -329,6 +329,8 @@ body {
     transition-delay: 0.5s;
 }
 #time:checked ~ #table #content-journal,
+#subject:checked ~ #table #content-journal,
+#class:checked ~ #table #content-journal,
 #info-div:checked ~ #table #content-journal,
 #add-lesson:checked ~ #table #content-journal {
     opacity: 0.7;
