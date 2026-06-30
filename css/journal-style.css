@@ -81,6 +81,19 @@
     padding-right: 3rem;
     padding-left: 0;
 }
+
+#content-journal th:first-child::after,
+#content-journal td:first-child::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.05rem;
+    background-color: var(--text-color);
+    bottom: 0.5rem;
+    opacity: 0.5;
+    z-index: 5;
+}
+
 #content-journal th:not(:first-child),
 #content-journal td:not(:first-child) {
     text-align: center; 
