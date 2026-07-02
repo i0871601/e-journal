@@ -4,6 +4,7 @@ const divJournal = document.getElementById('content-journal');
 const checkedContentJournal = document.getElementById('off-on-journal');
 
 const checkedInfoDiv = document.getElementById('info-div');
+const checkedAddLesson = document.getElementById('off-on-add-lesson');
 
 const dataText = document.querySelector('#infoData .text-info');
 const topicText = document.querySelector('#infoTopic .text-info');
@@ -69,6 +70,7 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
     });
 
     checkedContentJournal.checked = true;
+    checkedAddLesson.checked = true;
 };
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
@@ -77,7 +79,9 @@ export function renderLog(role, subject, classes, teacherLastName, map) {
     if(map.students.length === 0 || (role === 'student' && map.lessons.length === 0)) { 
         console.log("Не має учнів/уроків"); 
         divJournal.innerHTML = '';
+        checkedAddLesson.checked = false;
         checkedContentJournal.checked = false;
+
         return
     }
 
