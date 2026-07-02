@@ -98,6 +98,7 @@
 #content-journal td[contenteditable="true"]:focus {
     outline: 0.05rem solid var(--color-accent);
     opacity: 0.8;
+    border:0cap;
     outline-offset: -0.3rem;
 }
 
