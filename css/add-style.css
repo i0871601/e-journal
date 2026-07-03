@@ -76,6 +76,5 @@
 #off-on-add-lesson:checked ~ #button-add-lesson {
     opacity: 1;
     visibility: visible;
-    overflow: visible;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
