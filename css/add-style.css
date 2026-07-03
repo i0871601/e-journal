@@ -22,9 +22,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    overflow: hidden;
-}
-#button-add-lesson {
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
