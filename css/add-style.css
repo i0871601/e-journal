@@ -64,7 +64,7 @@
     right: 0;
 }
 #add-lesson:checked ~ #AddLesson #button-add-lesson {
-    clip-path: inset(0 0 0 2rem);
+    clip-path: inset(0 -0.1rem 0 2.05rem);
 }
 #add-lesson:checked ~ #table #contentJournal{
     opacity: 0.5;
