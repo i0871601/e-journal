@@ -64,10 +64,40 @@
 #add-form-lesson {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: calc(100% - 4rem - 2rem);
+    height: calc(100% - 4rem);
+    gap: 1rem;
 }
 .input-field {
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'SourceSans3';
+    font-weight: 400;
+    font-size: 1rem;
+    background-color: var(--fon-color-1);
+    border: 0.07rem solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.3vmin 1.5vmin;
+    color: var(--text-color);
+}
 
+#type-lesson {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'SourceSans3';
+    font-weight: 400;
+    font-size: 1rem;
+    background-color: var(--fon-color-1);
+    border: 0.07rem solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.3vmin 1.5vmin;
+    color: var(--text-color);
+}
+#type-lesson p {
+    margin: 0;
+}
+#add-button .default-text {
+    color: var(--text-current);
 }
 
 #add-lesson:checked ~ #AddLesson {
