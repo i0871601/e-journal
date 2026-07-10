@@ -9,6 +9,7 @@
     right: 0.5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     transition: width 0.5s ease-in-out, right 0.1s ease-in-out;
 }
 
@@ -60,8 +61,13 @@
     transform: rotate(90deg);
 }
 
+#add-form-lesson {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
 .input-field {
-    
+
 }
 
 #add-lesson:checked ~ #AddLesson {
