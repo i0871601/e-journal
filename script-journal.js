@@ -70,7 +70,7 @@ function renderTable(mapLessons, mapStudents, mapRecords, role) {
     });
 
     checkedContentJournal.checked = true;
-    checkedAddLesson.checked = true;
+    if (role === 'teacher') checkedAddLesson.checked = true;
 };
 
 export function renderLog(role, subject, classes, teacherLastName, map) {
