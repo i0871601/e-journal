@@ -59,6 +59,11 @@
     background-color: var(--fon-color-1);
     transform: rotate(90deg);
 }
+
+.input-field {
+    
+}
+
 #add-lesson:checked ~ #AddLesson {
     width: 50%;
     right: 0;
