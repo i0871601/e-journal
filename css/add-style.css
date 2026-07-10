@@ -107,7 +107,7 @@
     width: 50%;
     right: 0;
 }
-#add-lesson:checked ~ #AddLesson #button-add-lesson #add-form-lesson {
+#add-lesson:checked ~ #AddLesson #add-form-lesson {
     visibility: visible;
     opacity: 1;
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
