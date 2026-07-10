@@ -128,7 +128,14 @@
                     <form class="add-form-lesson" id="add-form-lesson">
                         <input type="text" id="date" placeholder="01.09.2026" />
                         <input type="text" id="topic" placeholder="Тема урока" />
-                        <input type="text" id="type-lesson" placeholder="Тип уроку" />
+                        <div id="type-lesson">
+                            <input type="checkbox" class="input" id="type-lesson-on-off">
+                            <p>Тип уроку</p>
+                            <label for="type-lesson-on-off">
+                                <p>Звичайний</p>
+                            </label>
+                            <ul class="content-select"></ul>
+                        </div>
                         <input type="text" id="home-work" placeholder="Домашня робота" />
                         <input type="url" id="link" />
                         <button type="submit" id="add-button">
