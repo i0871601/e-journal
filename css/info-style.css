@@ -117,12 +117,12 @@
     overflow: hidden;
 }
 
-#info-div:checked ~ #table #infoDiv {
+#info-div:checked ~ #infoDiv {
     opacity: 1;
     width: 35%;
     visibility: visible;
 }
-#info-div:checked ~ #table #infoDiv #textInfoLesson {
+#info-div:checked ~ #infoDiv #textInfoLesson {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
     transition-delay: 0.5s;
