@@ -1,11 +1,10 @@
 /*Авторське право (c) травень 2026 рік Сікан Іван Валерійович.*/
 #infoDiv {
     width: 0;
-    height: calc(100% - 10.5% - 1.5rem);
+    height: calc(100% - 10.5%);
     clip-path: inset(0 0 0 -0.3rem);
     right: 0;
     bottom: 0;
-    top: 10.5%;
     position: absolute;
     z-index: 4;
     visibility: hidden;
