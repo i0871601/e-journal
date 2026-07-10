@@ -72,6 +72,7 @@ async function formationRequests(role, subject, teacherLastName, classes) {
     };
                     
     const response = await request(payload);
+    console.log(response);
     renderLog(role, subject, classes, teacherLastName, response);
 };
 
