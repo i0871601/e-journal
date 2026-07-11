@@ -82,8 +82,7 @@
     border-radius: 0.5rem;
     padding: 0.3vmin 1.5vmin;
     color: var(--text-color);
-    min-height: 1lh;
-    max-height: 3lh;
+    
 }
 
 #type-lesson {
@@ -127,10 +126,10 @@
     transition: opacity 0.5s ease-in-out, visibility 0s linear 0s;
 }
 
-#input-field:hover {
+.input-field:hover {
     border: 0.07rem solid var(--color-accent);
 }
-#input-field:focus {
+.input-field:focus {
     color: var(--color-accent);
     caret-color: var(--color-accent);
 }
